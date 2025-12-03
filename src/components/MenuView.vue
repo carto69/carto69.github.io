@@ -1,24 +1,27 @@
 <template>
   <main class="menu-landing">
-    <div class="hero">
-      <h1 class="brand">carto69</h1>
-      <p class="tagline">Cartographie interactive & visualisations géospatiales</p>
-    </div>
+    <div class="map-background"></div>
+    <div class="content-overlay">
+      <div class="hero">
+        <h1 class="brand">carto69</h1>
+        <p class="tagline">Cartographie interactive & visualisations géospatiales</p>
+      </div>
 
-    <div class="project-grid">
-      <article class="project-tile" @click="$emit('open', 'italie2')" role="button" tabindex="0">
-        <div class="project-icon">🗺️</div>
-        <h2>Italie 2</h2>
-        <p>Plan interactif du centre commercial multi-étages</p>
-        <div class="project-cta">Explorer →</div>
-      </article>
+      <div class="project-grid">
+        <article class="project-tile" @click="$emit('open', 'italie2')" role="button" tabindex="0">
+          <div class="project-icon">🗺️</div>
+          <h2>Italie 2</h2>
+          <p>Plan interactif du centre commercial multi-étages</p>
+          <div class="project-cta">Explorer →</div>
+        </article>
 
-      <article class="project-tile coming">
-        <div class="project-icon">🚀</div>
-        <h2>Nouveaux projets</h2>
-        <p>Bientôt disponible</p>
-        <div class="project-cta disabled">À venir</div>
-      </article>
+        <article class="project-tile coming">
+          <div class="project-icon">🚀</div>
+          <h2>Nouveaux projets</h2>
+          <p>Bientôt disponible</p>
+          <div class="project-cta disabled">À venir</div>
+        </article>
+      </div>
     </div>
   </main>
 </template>
@@ -32,7 +35,37 @@ export default {
 <style scoped>
 .menu-landing {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.map-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/2.3522,48.8566,12,0/1280x800@2x?access_token=pk.eyJ1IjoiZWxpYTY5IiwiYSI6ImNtaWZ0MzVvbjAwc3AzZnM5ZXI3aXMxYXEifQ.VWi_BgyZgOYqHgGSi8rGeA');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(0.3) brightness(0.7);
+  opacity: 0.4;
+}
+
+.map-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
+}
+
+.content-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,13 +89,15 @@ export default {
   margin: 0;
   letter-spacing: -2px;
   text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
 }
 
 .tagline {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.95);
   font-size: 18px;
   margin-top: 12px;
   font-weight: 300;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .project-grid {
@@ -74,13 +109,13 @@ export default {
 }
 
 .project-tile {
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.4);
   padding: 32px;
   border-radius: 16px;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -90,7 +125,7 @@ export default {
 
 .project-tile:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.2);
 }
 
 .project-tile.coming {
