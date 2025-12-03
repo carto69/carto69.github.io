@@ -48,18 +48,6 @@ export default {
   background-image: url('/vintage-map.jpg');
   background-size: cover;
   background-position: center;
-  filter: sepia(0.15) brightness(0.9);
-  opacity: 0.6;
-}
-
-.map-background::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
 }
 
 .content-overlay {
