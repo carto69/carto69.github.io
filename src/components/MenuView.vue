@@ -1,5 +1,6 @@
 <template>
   <main class="menu">
+    <div class="credits-top">Elia Terragni</div>
     <div class="hero">
       <h1 class="title">carto69</h1>
       <div class="tiles">
@@ -23,6 +24,7 @@
         </article>
       </div>
     </div>
+    <div class="credits-bottom">Kunyu Wanguo Quantu, Matteo Ricci, 1602.</div>
   </main>
 </template>
 
@@ -40,6 +42,35 @@ export default { name: 'MenuView' }
   background-position: center 20%;
 }
 
+.credits-top {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  color: #000;
+  font-size: 0.95rem;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 8px 14px;
+  border-radius: 4px;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.credits-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  color: #000;
+  font-size: 0.9rem;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 8px 14px;
+  border-radius: 4px;
+  z-index: 100;
+  max-width: 250px;
+  text-align: right;
+}
+
 .hero {
   position: relative;
   z-index: 2;
@@ -51,40 +82,10 @@ export default { name: 'MenuView' }
   padding: 40px 20px;
 }
 
-.hero::before {
-  content: 'E. Terragni';
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #000;
-  font-size: 0.9rem;
-  font-weight: 400;
-  text-shadow: none;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 6px 12px;
-  border-radius: 4px;
-  z-index: 10;
-}
-
-.hero::after {
-  content: 'Kunyu Wanguo Quantu, Matteo Ricci, 1602.';
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  color: #000;
-  font-size: 0.85rem;
-  font-style: italic;
-  text-shadow: none;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 6px 12px;
-  border-radius: 4px;
-  z-index: 10;
-}
-
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #4CAF50;
+  color: #4A7C7E;
   text-shadow: none;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
@@ -93,22 +94,22 @@ export default { name: 'MenuView' }
 
 .tiles {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 
 .tile {
   position: relative;
-  padding: 24px 20px;
+  padding: 20px 18px;
   border-radius: 12px;
-  background: rgba(56, 142, 60, 0.65);
+  background: rgba(74, 124, 126, 0.55);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 240px;
-  max-width: 280px;
+  min-width: 200px;
+  max-width: 240px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -116,41 +117,41 @@ export default { name: 'MenuView' }
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(56, 142, 60, 0.8);
+  background: rgba(74, 124, 126, 0.75);
 }
 
 .tile-icon {
-  font-size: 2.5rem;
-  margin-bottom: 8px;
+  font-size: 2.2rem;
+  margin-bottom: 6px;
   text-align: center;
 }
 
 .tile h2 {
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   color: rgba(255, 255, 255, 0.95);
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: 12px;
+  line-height: 1.3;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .tile-btn {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: rgba(255, 255, 255, 0.9);
   color: #2C5F2D;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -172,8 +173,8 @@ export default { name: 'MenuView' }
   .tile {
     max-width: 100%;
   }
-  .hero::before,
-  .hero::after {
+  .credits-top,
+  .credits-bottom {
     font-size: 0.8rem;
     right: 15px;
   }
