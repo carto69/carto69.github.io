@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl'
+const mapboxgl = window.mapboxgl
 import { createHeatmapData, createRoutesData } from '../utils/heatmap'
 
 export default {

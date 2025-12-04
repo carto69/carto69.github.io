@@ -5,15 +5,5 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: true
-  },
-  build: {
-    rollupOptions: {
-      external: ['mapbox-gl'],
-      output: {
-        globals: {
-          'mapbox-gl': 'mapboxgl'
-        }
-      }
-    }
   }
 })
