@@ -1,0 +1,59 @@
+[
+  {
+    "id": "demo1",
+    "startTime": "2024-12-01T10:00:00Z",
+    "endTime": "2024-12-01T10:15:00Z",
+    "duration": 15,
+    "bikeType": "classic",
+    "startStation": {
+      "id": "1001",
+      "name": "Bellecour",
+      "lat": 45.7579,
+      "lng": 4.8320
+    },
+    "endStation": {
+      "id": "1002",
+      "name": "Hôtel de Ville",
+      "lat": 45.7676,
+      "lng": 4.8351
+    }
+  },
+  {
+    "id": "demo2",
+    "startTime": "2024-12-02T14:30:00Z",
+    "endTime": "2024-12-02T14:50:00Z",
+    "duration": 20,
+    "bikeType": "electric",
+    "startStation": {
+      "id": "1002",
+      "name": "Hôtel de Ville",
+      "lat": 45.7676,
+      "lng": 4.8351
+    },
+    "endStation": {
+      "id": "1003",
+      "name": "Part-Dieu",
+      "lat": 45.7610,
+      "lng": 4.8590
+    }
+  },
+  {
+    "id": "demo3",
+    "startTime": "2024-12-03T16:00:00Z",
+    "endTime": "2024-12-03T16:25:00Z",
+    "duration": 25,
+    "bikeType": "classic",
+    "startStation": {
+      "id": "1003",
+      "name": "Part-Dieu",
+      "lat": 45.7610,
+      "lng": 4.8590
+    },
+    "endStation": {
+      "id": "1001",
+      "name": "Bellecour",
+      "lat": 45.7579,
+      "lng": 4.8320
+    }
+  }
+]

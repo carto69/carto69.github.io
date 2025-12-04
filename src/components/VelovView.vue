@@ -4,35 +4,15 @@
       <button class="back" @click="$emit('back')">← Retour</button>
       <h1>69 en velo'v</h1>
       
-      <div v-if="!isAuthenticated" class="auth-form">
-        <input 
-          v-model="email" 
-          type="email" 
-          name="email"
-          placeholder="Email" 
-          class="input"
-          @keyup.enter="login"
-        />
-        <input 
-          v-model="password" 
-          type="password" 
-          name="password"
-          placeholder="Mot de passe" 
-          class="input"
-          @keyup.enter="login"
-        />
-        <button @click="login" :disabled="isLoading" class="btn btn-primary">
-          {{ isLoading ? 'Chargement...' : 'Se connecter' }}
-        </button>
-        <div v-if="error" class="error">{{ error }}</div>
+      <div v-if="isLoading" class="loading">
+        <p>Chargement des trajets...</p>
+      </div>
+
+      <div v-else-if="error" class="error">
+        {{ error }}
       </div>
 
       <div v-else class="controls">
-        <div class="user-info">
-          <p>Connecté en tant que: <strong>{{ email }}</strong></p>
-          <button @click="logout" class="btn btn-small">Déconnecter</button>
-        </div>
-
         <hr />
 
         <div class="trip-stats">
@@ -110,10 +90,7 @@ export default {
   data() {
     return {
       map: null,
-      email: '',
-      password: '',
-      isAuthenticated: false,
-      isLoading: false,
+      isLoading: true,
       error: null,
       trips: [],
       selectedTrip: null,
@@ -149,15 +126,8 @@ export default {
       this.initMap()
     }
     
-    // Auto-login avec les identifiants de l'environnement
-    const velovEmail = import.meta.env.VITE_VELOV_EMAIL
-    const velovPassword = import.meta.env.VITE_VELOV_PASSWORD
-    
-    if (velovEmail && velovPassword) {
-      this.email = velovEmail
-      this.password = velovPassword
-      this.login()
-    }
+    // Charger les données depuis le fichier JSON
+    this.loadTrips()
   },
   beforeUnmount() {
     if (this.map) {
@@ -165,49 +135,30 @@ export default {
     }
   },
   methods: {
-    async login() {
-      if (!this.email || !this.password) {
-        this.error = 'Veuillez entrer votre email et mot de passe'
-        return
-      }
-
+    async loadTrips() {
       this.isLoading = true
       this.error = null
 
       try {
-        const response = await fetch('/api/trips', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password
-          })
-        })
-
+        const response = await fetch('/velov-trips.json')
+        
         if (!response.ok) {
-          const data = await response.json()
-          throw new Error(data.error || 'Erreur d\'authentification')
+          throw new Error('Impossible de charger les données VeloV')
         }
 
-        const data = await response.json()
-        this.trips = data.trips || []
-        this.isAuthenticated = true
-        this.updateMap()
+        this.trips = await response.json()
+        
+        if (this.trips.length === 0) {
+          this.error = 'Aucun trajet trouvé. Utilisez export-velov.html pour exporter vos données.'
+        } else {
+          this.updateMap()
+        }
       } catch (error) {
         this.error = error.message
-        console.error('Login error:', error)
+        console.error('Load error:', error)
       } finally {
         this.isLoading = false
       }
-    },
-
-    logout() {
-      this.isAuthenticated = false
-      this.email = ''
-      this.password = ''
-      this.trips = []
-      this.selectedTrip = null
-      this.clearMap()
     },
 
     initMap() {
