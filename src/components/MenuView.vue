@@ -39,7 +39,7 @@ export default { name: 'MenuView' }
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center 20%;
+  background-position: center center;
 }
 
 .credits-top {
@@ -67,7 +67,7 @@ export default { name: 'MenuView' }
   padding: 8px 14px;
   border-radius: 4px;
   z-index: 100;
-  max-width: 250px;
+  white-space: nowrap;
   text-align: right;
 }
 
