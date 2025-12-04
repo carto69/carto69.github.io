@@ -9,16 +9,16 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
+        'mapbox-gl',
         'mapbox-gl/dist/mapbox-gl.css'
       ],
       output: {
-        // Ignore unresolved external modules
         globals: {
+          'mapbox-gl': 'mapboxgl',
           'mapbox-gl/dist/mapbox-gl.css': 'mapboxGlCss'
         }
       }
     },
-    // Suppress warnings for external modules
     commonjsOptions: {
       include: [/node_modules/]
     }
