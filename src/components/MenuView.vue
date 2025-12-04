@@ -39,7 +39,7 @@ export default { name: 'MenuView' }
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center 55%;
+  background-position: center 70%;
 }
 
 .credits-top {
@@ -104,7 +104,7 @@ export default { name: 'MenuView' }
   position: relative;
   padding: 20px 18px;
   border-radius: 12px;
-  background: rgba(74, 124, 126, 0.4);
+  background: rgba(74, 124, 126, 0.25);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
@@ -117,7 +117,7 @@ export default { name: 'MenuView' }
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(74, 124, 126, 0.65);
+  background: rgba(74, 124, 126, 0.5);
 }
 
 .tile-icon {
