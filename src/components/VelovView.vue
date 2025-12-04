@@ -146,6 +146,16 @@ export default {
       mapboxgl.accessToken = token
       this.initMap()
     }
+    
+    // Auto-login avec les identifiants de l'environnement
+    const velovEmail = import.meta.env.VITE_VELOV_EMAIL
+    const velovPassword = import.meta.env.VITE_VELOV_PASSWORD
+    
+    if (velovEmail && velovPassword) {
+      this.email = velovEmail
+      this.password = velovPassword
+      this.login()
+    }
   },
   beforeUnmount() {
     if (this.map) {
