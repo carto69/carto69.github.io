@@ -8,6 +8,7 @@
         <input 
           v-model="email" 
           type="email" 
+          name="email"
           placeholder="Email" 
           class="input"
           @keyup.enter="login"
@@ -15,6 +16,7 @@
         <input 
           v-model="password" 
           type="password" 
+          name="password"
           placeholder="Mot de passe" 
           class="input"
           @keyup.enter="login"
