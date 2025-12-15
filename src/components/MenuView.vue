@@ -100,22 +100,22 @@ export default { name: 'MenuView' }
 
 .tiles {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .tile {
   position: relative;
-  padding: 20px 18px;
-  border-radius: 12px;
+  padding: 16px 14px;
+  border-radius: 10px;
   background: rgba(74, 124, 126, 0.25);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 200px;
-  max-width: 240px;
+  min-width: 170px;
+  max-width: 200px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -127,24 +127,24 @@ export default { name: 'MenuView' }
 }
 
 .tile-icon {
-  font-size: 2.2rem;
-  margin-bottom: 6px;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
   text-align: center;
 }
 
 .tile h2 {
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
   color: rgba(255, 255, 255, 0.95);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.3;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -152,12 +152,12 @@ export default { name: 'MenuView' }
 
 .tile-btn {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   background: rgba(255, 255, 255, 0.9);
   color: #2C5F2D;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;

@@ -259,7 +259,7 @@ export default {
         container: this.$refs.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [2.3522, 48.8566], // Paris
-        zoom: 12
+        zoom: 11
       })
 
       this.map.on('load', () => {
