@@ -2,6 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/import-velov.html", "destination": "/import-velov.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
