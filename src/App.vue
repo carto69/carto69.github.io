@@ -11,6 +11,9 @@
       <div v-if="activeTab === 'velib'" class="scene">
         <VelibView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'mapelia'" class="scene">
+        <MapeliaView @back="goHome" />
+      </div>
     </main>
   </div>
 </template>
@@ -20,9 +23,10 @@ import MenuView from './components/MenuView.vue'
 import MapView from './components/MapView.vue'
 import VelovView from './components/VelovView.vue'
 import VelibView from './components/VelibView.vue'
+import MapeliaView from './components/MapeliaView.vue'
 
 export default {
-  components: { MenuView, MapView, VelovView, VelibView },
+  components: { MenuView, MapView, VelovView, VelibView, MapeliaView },
   data() {
     return {
       activeTab: 'home'
@@ -30,7 +34,7 @@ export default {
   },
   methods: {
     openTab(tab) {
-      if (tab === 'italie2' || tab === 'velov' || tab === 'velib') {
+      if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia') {
         this.activeTab = tab
       } else {
         this.activeTab = 'home'

@@ -22,6 +22,12 @@
           <p>Carte de mes itinéraires Vélib' à Paris</p>
           <button class="tile-btn">Explorer →</button>
         </article>
+        <article class="tile" @click="$emit('open', 'mapelia')">
+          <div class="tile-icon">🗺️</div>
+          <h2>Mapelia</h2>
+          <p>Carte interactive avec marqueurs personnalisables</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
         <article class="tile" @click="$emit('open', 'zonzon')">
           <div class="tile-icon">🌍</div>
           <h2>zonzon</h2>
