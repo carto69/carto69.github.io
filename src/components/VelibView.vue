@@ -414,7 +414,7 @@ export default {
 }
 
 .back {
-  background: #2171b5;
+  background: #1a1a1a;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -425,7 +425,7 @@ export default {
 }
 
 .back:hover {
-  background: #1a5a8e;
+  background: #000;
 }
 
 h1 {

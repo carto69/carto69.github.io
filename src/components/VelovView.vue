@@ -443,7 +443,7 @@ export default {
   position: static;
   top: auto;
   right: auto;
-  background: #2171b5;
+  background: #1a1a1a;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -453,6 +453,10 @@ export default {
   z-index: 10;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.back:hover {
+  background: #000;
 }
 
 h1 {

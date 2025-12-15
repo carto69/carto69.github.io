@@ -2,7 +2,7 @@
   <div class="femmes-quais-page">
     <aside class="text-panel">
       <button class="back" @click="$emit('back')">← Retour</button>
-      <h1>Les femmes sur les quais du Rhône</h1>
+      <h1>Femmes sur les quais du Rhône</h1>
       
       <div class="text-content">
         <textarea 
@@ -153,7 +153,7 @@ export default {
 }
 
 .back {
-  background: #2171b5;
+  background: #1a1a1a;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -165,7 +165,7 @@ export default {
 }
 
 .back:hover {
-  background: #1a5a8e;
+  background: #000;
 }
 
 h1 {

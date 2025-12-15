@@ -30,14 +30,14 @@
         </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
           <div class="tile-icon">👩</div>
-          <h2>Les femmes sur les quais du Rhône</h2>
+          <h2>Femmes sur les quais du Rhône</h2>
           <p>Cartes sensibles et sources méthodologie</p>
           <button class="tile-btn">Explorer →</button>
         </article>
-        <article class="tile" @click="$emit('open', 'zonzon')">
-          <div class="tile-icon">🌍</div>
-          <h2>zonzon</h2>
-          <p>Carte mondiale en projection Equal Earth</p>
+        <article class="tile" @click="$emit('open', 'autres-projets')">
+          <div class="tile-icon">📦</div>
+          <h2>Autres projets</h2>
+          <p>Découvrez d'autres projets cartographiques</p>
           <button class="tile-btn">Explorer →</button>
         </article>
       </div>
@@ -120,14 +120,14 @@ export default { name: 'MenuView' }
 
 .tile {
   position: relative;
-  padding: 16px 14px;
-  border-radius: 10px;
+  padding: 12px 10px;
+  border-radius: 8px;
   background: rgba(74, 124, 126, 0.15);
   backdrop-filter: blur(8px);
   border: none;
   cursor: pointer;
-  min-width: 170px;
-  max-width: 200px;
+  min-width: 150px;
+  max-width: 180px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -139,24 +139,24 @@ export default { name: 'MenuView' }
 }
 
 .tile-icon {
-  font-size: 1.8rem;
-  margin-bottom: 4px;
+  font-size: 1.5rem;
+  margin-bottom: 3px;
   text-align: center;
 }
 
 .tile h2 {
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   color: white;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   color: rgba(255, 255, 255, 0.95);
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.3;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -164,12 +164,12 @@ export default { name: 'MenuView' }
 
 .tile-btn {
   width: 100%;
-  padding: 8px;
+  padding: 6px;
   background: rgba(255, 255, 255, 0.9);
   color: #2C5F2D;
   border: none;
-  border-radius: 6px;
-  font-size: 13px;
+  border-radius: 5px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
