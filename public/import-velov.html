@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Import Velo'v → velov-trips.json</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; margin: 0; padding: 24px; line-height: 1.4; }
+      h1 { margin: 0 0 12px; font-size: 20px; }
+      .wrap { max-width: 960px; margin: 0 auto; }
+      textarea { width: 100%; min-height: 260px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      button { padding: 10px 14px; border-radius: 6px; border: 1px solid #ccc; cursor: pointer; font-weight: 600; background: #fff; }
+      button.primary { background: #2171b5; border-color: #2171b5; color: #fff; }
+      .muted { color: #666; font-size: 13px; }
+      .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fafafa; }
+      pre { background: #1111; padding: 10px; border-radius: 6px; overflow: auto; }
+      .ok { color: #0a7a2e; }
+      .err { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Importer vos trajets Velo'v (API) et générer <code>velov-trips.json</code></h1>
+      <p class="muted">Collez ici la réponse JSON de l'API Cyclocity (<code>/contracts/lyon/accounts/.../trips</code>). Aucun appel réseau n'est fait depuis cette page.</p>
+
+      <div class="card">
+        <div class="row" style="justify-content: space-between;">
+          <div>
+            <button id="btn-parse" class="primary">1) Analyser et convertir</button>
+            <button id="btn-download" disabled>2) Télécharger velov-trips.json</button>
+          </div>
+          <div class="muted" id="status">En attente de JSON…</div>
+        </div>
+        <textarea id="input" placeholder='Collez ici le JSON brut ([] ou { data: [...] })'></textarea>
+      </div>
+
+      <div id="preview" class="card" style="margin-top:12px; display:none;">
+        <strong>Prévisualisation (premiers éléments):</strong>
+        <pre id="preview-json"></pre>
+      </div>
+    </div>
+
+    <script>
+      function get(obj, path, dflt) {
+        try {
+          return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj) ?? dflt;
+        } catch { return dflt; }
+      }
+
+      function pickLatLng(station) {
+        if (!station) return null;
+        // Essayer plusieurs structures possibles
+        const lat = station.lat ?? station.latitude ?? get(station, 'position.lat') ?? get(station, 'position.latitude') ?? get(station, 'location.lat') ?? get(station, 'location.latitude');
+        const lng = station.lng ?? station.lon ?? station.long ?? station.longitude ?? get(station, 'position.lng') ?? get(station, 'position.lon') ?? get(station, 'position.longitude') ?? get(station, 'location.lng') ?? get(station, 'location.longitude');
+        const name = station.name ?? station.label ?? station.stationName ?? station.title ?? 'Station';
+        if (lat != null && lng != null) {
+          return { name, lat: Number(lat), lng: Number(lng) };
+        }
+        return { name, lat: null, lng: null };
+      }
+
+      function minutesFrom(msOrMin) {
+        if (msOrMin == null) return 0;
+        // Certaines API renvoient des minutes entières, d'autres des ms
+        const n = Number(msOrMin);
+        if (!Number.isFinite(n)) return 0;
+        return n > 10000 ? Math.round(n / 60000) : Math.round(n);
+      }
+
+      function normalizeTrips(raw) {
+        const arr = Array.isArray(raw) ? raw : (Array.isArray(raw?.data) ? raw.data : []);
+        return arr.map((t, i) => {
+          const start = pickLatLng(t.startStation || t.start || t.fromStation || t.origin);
+          const end = pickLatLng(t.endStation || t.end || t.toStation || t.destination);
+          return {
+            id: t.id ?? t.tripId ?? `trip-${i}`,
+            startTime: t.startTime ?? t.start_date ?? t.start ?? t.startedAt ?? t.beginDate ?? null,
+            endTime: t.endTime ?? t.end_date ?? t.end ?? t.endedAt ?? t.endDate ?? null,
+            duration: minutesFrom(t.duration ?? t.durationMinutes ?? t.duration_ms ?? t.durationMillis),
+            bikeType: t.bikeType ?? t.bike_type ?? t.vehicleType ?? 'classic',
+            startStation: start,
+            endStation: end,
+            geometry: t.geometry ?? null
+          };
+        });
+      }
+
+      function downloadFile(name, dataObj) {
+        const blob = new Blob([JSON.stringify(dataObj, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      const $input = document.getElementById('input');
+      const $status = document.getElementById('status');
+      const $btnParse = document.getElementById('btn-parse');
+      const $btnDownload = document.getElementById('btn-download');
+      const $preview = document.getElementById('preview');
+      const $previewJson = document.getElementById('preview-json');
+
+      let converted = [];
+
+      $btnParse.addEventListener('click', () => {
+        try {
+          const text = $input.value.trim();
+          if (!text) throw new Error('Veuillez coller le JSON des trajets.');
+          const raw = JSON.parse(text);
+          converted = normalizeTrips(raw);
+          const sample = converted.slice(0, 5);
+          $previewJson.textContent = JSON.stringify(sample, null, 2);
+          $preview.style.display = 'block';
+          $status.textContent = `✅ ${converted.length} trajets convertis`;
+          $status.className = 'ok';
+          $btnDownload.disabled = converted.length === 0;
+        } catch (e) {
+          $status.textContent = `Erreur: ${e.message}`;
+          $status.className = 'err';
+        }
+      });
+
+      $btnDownload.addEventListener('click', () => {
+        if (!converted?.length) return;
+        downloadFile('velov-trips.json', converted);
+      });
+    </script>
+  </body>
+  </html>
