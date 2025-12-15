@@ -328,6 +328,7 @@ export default {
         })
 
         this.map.addControl(new mapboxgl.NavigationControl())
+        this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-right')
         
         this.updateMap()
       })

@@ -116,8 +116,8 @@ export default { name: 'MenuView' }
   position: relative;
   padding: 16px 14px;
   border-radius: 10px;
-  background: rgba(74, 124, 126, 0.25);
-  backdrop-filter: blur(10px);
+  background: rgba(74, 124, 126, 0.15);
+  backdrop-filter: blur(8px);
   border: none;
   cursor: pointer;
   min-width: 170px;
@@ -129,7 +129,7 @@ export default { name: 'MenuView' }
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(74, 124, 126, 0.5);
+  background: rgba(74, 124, 126, 0.35);
 }
 
 .tile-icon {

@@ -4,7 +4,22 @@
       <button class="back" @click="$emit('back')">← Retour</button>
       <h1>Mapelia</h1>
       
-      <div class="controls">
+      <div v-if="isLocked" class="lock-screen">
+        <div class="lock-icon">🔒</div>
+        <p>Cette carte est protégée par mot de passe</p>
+        <form @submit.prevent="unlock">
+          <input 
+            type="password" 
+            v-model="passwordInput" 
+            placeholder="Mot de passe"
+            class="password-input"
+            autofocus
+          />
+          <button type="submit" class="btn">Déverrouiller</button>
+        </form>
+      </div>
+
+      <div v-else class="controls">
         <hr />
 
         <div class="marker-tools">
@@ -99,7 +114,13 @@
       </div>
     </aside>
 
-    <div ref="mapContainer" class="map-container"></div>
+    <div ref="mapContainer" class="map-container" v-show="!isLocked"></div>
+    <div v-if="isLocked" class="map-placeholder">
+      <div class="placeholder-content">
+        <div class="lock-icon-large">🔒</div>
+        <p>Entrez le mot de passe pour accéder à la carte</p>
+      </div>
+    </div>
 
     <!-- Modal d'édition -->
     <div v-if="editingMarker" class="modal-overlay" @click.self="cancelEdit">
@@ -160,6 +181,8 @@ export default {
   name: 'MapeliaView',
   data() {
     return {
+      isLocked: true,
+      passwordInput: '',
       map: null,
       markers: [],
       mapMarkers: [], // Instances Mapbox des marqueurs
@@ -174,12 +197,19 @@ export default {
     }
   },
   mounted() {
+    // Vérifier si déjà déverrouillé dans la session
+    if (sessionStorage.getItem('mapeliaUnlocked') === 'true') {
+      this.isLocked = false
+    }
+    
     const token = import.meta.env.VITE_MAPBOX_TOKEN
-    if (token) {
+    if (token && !this.isLocked) {
       mapboxgl.accessToken = token
       this.initMap()
     }
-    this.loadMarkers()
+    if (!this.isLocked) {
+      this.loadMarkers()
+    }
   },
   beforeUnmount() {
     if (this.map) {
@@ -190,16 +220,13 @@ export default {
     initMap() {
       this.map = new mapboxgl.Map({
         container: this.$refs.mapContainer,
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         projection: 'equalEarth', // Projection Equal Earth (proche authalic)
         center: [8.5, 45.5], // Entre France et Italie (Alpes)
         zoom: 5
       })
 
       this.map.on('load', () => {
-        // Ajouter un style noir pour les bordures
-        this.map.setPaintProperty('land', 'background-color', '#000')
-        
         // Gestionnaire de clic pour ajouter des marqueurs
         this.map.on('click', (e) => {
           this.addMarker(e.lngLat)
@@ -210,6 +237,7 @@ export default {
       })
 
       this.map.addControl(new mapboxgl.NavigationControl())
+      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-right')
     },
 
     addMarker(lngLat) {
@@ -398,6 +426,24 @@ export default {
 
     truncate(text, length) {
       return text.length > length ? text.substring(0, length) + '...' : text
+    },
+
+    unlock() {
+      if (this.passwordInput === '1612') {
+        this.isLocked = false
+        sessionStorage.setItem('mapeliaUnlocked', 'true')
+        this.$nextTick(() => {
+          const token = import.meta.env.VITE_MAPBOX_TOKEN
+          if (token) {
+            mapboxgl.accessToken = token
+            this.initMap()
+          }
+          this.loadMarkers()
+        })
+      } else {
+        alert('Mot de passe incorrect')
+        this.passwordInput = ''
+      }
     }
   }
 }
@@ -408,26 +454,27 @@ export default {
   display: flex;
   width: 100%;
   height: 100vh;
-  background: #000;
+  background: #f5f5f5;
 }
 
 .mapelia-controls {
   width: 360px;
   height: 100%;
-  background: #1a1a1a;
-  border-right: 2px solid #000;
+  background: #fff;
+  border-right: 2px solid #ddd;
   overflow-y: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: #fff;
+  color: #333;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
 }
 
 .back {
-  background: #333;
+  background: #2171b5;
   color: white;
-  border: 2px solid #000;
+  border: none;
   padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -436,19 +483,61 @@ export default {
 }
 
 .back:hover {
-  background: #444;
+  background: #1a5a8e;
+}
+
+.lock-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.lock-icon {
+  font-size: 4rem;
+}
+
+.lock-screen p {
+  color: #666;
+  margin: 0;
+}
+
+.lock-screen form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 250px;
+}
+
+.password-input {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: center;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #2171b5;
 }
 
 h1 {
   font-size: 1.8rem;
   font-weight: 700;
   margin: 0 0 10px 0;
-  color: #fff;
+  color: #333;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #333;
+  border-top: 1px solid #e0e0e0;
   margin: 10px 0;
 }
 
@@ -461,12 +550,12 @@ hr {
 h3 {
   font-size: 1rem;
   margin: 0 0 8px 0;
-  color: #bbb;
+  color: #555;
 }
 
 .instruction {
   font-size: 0.85rem;
-  color: #888;
+  color: #666;
   margin: 0 0 10px 0;
 }
 
@@ -481,7 +570,7 @@ label {
   flex-direction: column;
   gap: 5px;
   font-size: 0.9rem;
-  color: #ccc;
+  color: #555;
 }
 
 input[type="text"],
@@ -489,12 +578,20 @@ input[type="color"],
 select,
 textarea {
   padding: 8px;
-  border: 1px solid #333;
+  border: 2px solid #ddd;
   border-radius: 4px;
-  background: #222;
-  color: #fff;
+  background: #f9f9f9;
+  color: #333;
   font-size: 0.9rem;
   font-family: inherit;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2171b5;
+  background: #fff;
 }
 
 input[type="color"] {
@@ -522,21 +619,22 @@ textarea {
 }
 
 .marker-item {
-  background: #222;
+  background: #f9f9f9;
   padding: 10px;
   border-radius: 6px;
-  border: 2px solid transparent;
+  border: 2px solid #e0e0e0;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .marker-item:hover {
-  border-color: #555;
+  border-color: #2171b5;
+  background: #fff;
 }
 
 .marker-item.active {
-  background: #2a2a2a;
-  border-color: #666;
+  background: #e3f2fd;
+  border-color: #2171b5;
 }
 
 .marker-header {
@@ -552,7 +650,7 @@ textarea {
 
 .marker-comment {
   display: block;
-  color: #888;
+  color: #666;
   font-size: 0.85rem;
   margin-top: 4px;
 }
@@ -584,9 +682,9 @@ textarea {
 }
 
 .btn {
-  background: #333;
+  background: #2171b5;
   color: white;
-  border: 2px solid #000;
+  border: none;
   padding: 10px 12px;
   border-radius: 4px;
   cursor: pointer;
@@ -595,23 +693,23 @@ textarea {
 }
 
 .btn:hover {
-  background: #444;
+  background: #1a5a8e;
 }
 
 .btn-secondary {
-  background: #555;
+  background: #757575;
 }
 
 .btn-secondary:hover {
-  background: #666;
+  background: #616161;
 }
 
 .btn-danger {
-  background: #8b0000;
+  background: #d32f2f;
 }
 
 .btn-danger:hover {
-  background: #a00000;
+  background: #b71c1c;
 }
 
 .file-label {
@@ -630,7 +728,31 @@ textarea {
 .map-container {
   flex: 1;
   position: relative;
-  border: 3px solid #000;
+  border: 3px solid #333;
+}
+
+.map-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border: 3px solid #333;
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #999;
+}
+
+.lock-icon-large {
+  font-size: 6rem;
+  margin-bottom: 20px;
+}
+
+.placeholder-content p {
+  font-size: 1.1rem;
+  color: #666;
 }
 
 .modal-overlay {
@@ -647,20 +769,21 @@ textarea {
 }
 
 .modal {
-  background: #1a1a1a;
-  border: 2px solid #000;
+  background: #fff;
+  border: 2px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   max-width: 500px;
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
-  color: #fff;
+  color: #333;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .modal h2 {
   margin: 0 0 15px 0;
-  color: #fff;
+  color: #333;
 }
 
 .modal label {
@@ -690,15 +813,15 @@ textarea {
 }
 
 .scroll-container::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f5f5f5;
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #ccc;
   border-radius: 4px;
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: #aaa;
 }
 </style>
