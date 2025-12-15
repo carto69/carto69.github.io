@@ -187,12 +187,11 @@
             status.textContent = '⏳ Récupération de tes trajets...';
             
             try {
-                // Essayer directement sans CORS
+                // Utiliser le proxy local Vite
                 const response = await fetch(
-                    'https://api.cyclocity.fr/contracts/lyon/accounts/17b0ba03-3184-4c02-89f1-51e8bb7a7d43/trips',
+                    '/api-proxy/contracts/lyon/accounts/17b0ba03-3184-4c02-89f1-51e8bb7a7d43/trips',
                     {
                         method: 'GET',
-                        credentials: 'include',
                         headers: {
                             'Accept': 'application/vnd.trip.v5+json'
                         }

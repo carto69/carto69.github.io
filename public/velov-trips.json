@@ -19,7 +19,19 @@
       "commune": "Lyon 4e Arrondissement",
       "address": "25, Rue Chazière"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.81788993,
+          45.77542247
+        ]
+      ]
+    }
   },
   {
     "id": "f654dd1c-6347-4351-a25a-0e3fcdf98e11",
@@ -28,20 +40,32 @@
     "duration": 12,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76369570578669,
+      "lng": 4.836605295037804,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76373054664099,
+      "lng": 4.836172984160351,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836605295037804,
+          45.76369570578669
+        ],
+        [
+          4.836172984160351,
+          45.76373054664099
+        ]
+      ]
+    }
   },
   {
     "id": "55dda495-a4e2-45fa-a11a-105429f697ff",
@@ -50,20 +74,32 @@
     "duration": 20,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763885412349005,
+      "lng": 4.834389790004837,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.7640182753961,
+      "lng": 4.835874879821529,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.834389790004837,
+          45.763885412349005
+        ],
+        [
+          4.835874879821529,
+          45.7640182753961
+        ]
+      ]
+    }
   },
   {
     "id": "8af73f95-38c9-44ba-8f36-fc991e3fedaa",
@@ -85,7 +121,19 @@
       "commune": "Lyon 3e Arrondissement",
       "address": "Face 3, Quai Victor Augagneur"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.84231795,
+          45.76937306
+        ],
+        [
+          4.84105343,
+          45.76196513
+        ]
+      ]
+    }
   },
   {
     "id": "d45267ea-b096-4e0c-a26b-f74676a16792",
@@ -107,7 +155,19 @@
       "commune": "Lyon 6e Arrondissement",
       "address": "5, Place Maréchal Lyautey"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.84231795,
+          45.76937306
+        ],
+        [
+          4.84231795,
+          45.76937306
+        ]
+      ]
+    }
   },
   {
     "id": "a89de5f6-1d93-4935-9233-a682cf3e9b97",
@@ -116,20 +176,32 @@
     "duration": 6,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76408026957972,
+      "lng": 4.836153618057899,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763736501019764,
+      "lng": 4.834994580674039,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836153618057899,
+          45.76408026957972
+        ],
+        [
+          4.834994580674039,
+          45.763736501019764
+        ]
+      ]
+    }
   },
   {
     "id": "69e5fa19-2471-41ff-902f-feeaa6fdc18f",
@@ -138,20 +210,32 @@
     "duration": 2,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763867903963664,
+      "lng": 4.83600859973629,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76406759146906,
+      "lng": 4.835738521270693,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83600859973629,
+          45.763867903963664
+        ],
+        [
+          4.835738521270693,
+          45.76406759146906
+        ]
+      ]
+    }
   },
   {
     "id": "41f3d3a2-7c3e-4815-9f0f-8553b77208aa",
@@ -160,20 +244,32 @@
     "duration": 10,
     "bikeType": "electric",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764373572964004,
+      "lng": 4.835771582906662,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763998370924504,
+      "lng": 4.835704106209424,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835771582906662,
+          45.764373572964004
+        ],
+        [
+          4.835704106209424,
+          45.763998370924504
+        ]
+      ]
+    }
   },
   {
     "id": "01715bf2-bfe9-4a75-8f93-0211ba058f88",
@@ -182,20 +278,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76395568809817,
+      "lng": 4.83680007810516,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76464246892154,
+      "lng": 4.834995687847033,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83680007810516,
+          45.76395568809817
+        ],
+        [
+          4.834995687847033,
+          45.76464246892154
+        ]
+      ]
+    }
   },
   {
     "id": "8aef40a4-e0e7-4ef5-8542-c0b9aaeb6d1e",
@@ -204,20 +312,32 @@
     "duration": 9,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76402657446755,
+      "lng": 4.835704680328623,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76366816637098,
+      "lng": 4.83557373447806,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835704680328623,
+          45.76402657446755
+        ],
+        [
+          4.83557373447806,
+          45.76366816637098
+        ]
+      ]
+    }
   },
   {
     "id": "70d2bb41-80ae-4277-a38a-881c1dc920fa",
@@ -226,20 +346,32 @@
     "duration": 8,
     "bikeType": "electric",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764223529682106,
+      "lng": 4.8363576703962945,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76360391530745,
+      "lng": 4.835293544310217,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8363576703962945,
+          45.764223529682106
+        ],
+        [
+          4.835293544310217,
+          45.76360391530745
+        ]
+      ]
+    }
   },
   {
     "id": "dc7e578b-1f57-47f2-a484-2a6b0202bfc5",
@@ -248,20 +380,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764009194812736,
+      "lng": 4.835746706000915,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764078396639896,
+      "lng": 4.834331149756047,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835746706000915,
+          45.764009194812736
+        ],
+        [
+          4.834331149756047,
+          45.764078396639896
+        ]
+      ]
+    }
   },
   {
     "id": "07750169-6522-4f96-8476-b8369f346697",
@@ -283,7 +427,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "3, Quai André Lassagne"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.81788993,
+          45.77542247
+        ],
+        [
+          4.83791179,
+          45.77220147
+        ]
+      ]
+    }
   },
   {
     "id": "42bc366e-fa7a-488a-865b-ab1c53cd8470",
@@ -292,20 +448,32 @@
     "duration": 16,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763470732269084,
+      "lng": 4.835339472783226,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76403813646958,
+      "lng": 4.835942539730086,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835339472783226,
+          45.763470732269084
+        ],
+        [
+          4.835942539730086,
+          45.76403813646958
+        ]
+      ]
+    }
   },
   {
     "id": "e7769fc4-4e03-4646-b3a1-ac7dc440d767",
@@ -314,20 +482,32 @@
     "duration": 7,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76416436588502,
+      "lng": 4.836641331906971,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76416636913241,
+      "lng": 4.83561079863021,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836641331906971,
+          45.76416436588502
+        ],
+        [
+          4.83561079863021,
+          45.76416636913241
+        ]
+      ]
+    }
   },
   {
     "id": "1b8a4a4f-ae79-44e9-a7c6-a568568f2c46",
@@ -336,20 +516,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.7638546997723,
+      "lng": 4.835280159620128,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76395821588474,
+      "lng": 4.83564200163912,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835280159620128,
+          45.7638546997723
+        ],
+        [
+          4.83564200163912,
+          45.76395821588474
+        ]
+      ]
+    }
   },
   {
     "id": "e39ba74a-4fa3-4f7c-a2c9-efef75d3e545",
@@ -358,20 +550,32 @@
     "duration": 7,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76405807074581,
+      "lng": 4.835371989057626,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76380111707412,
+      "lng": 4.83445132416087,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835371989057626,
+          45.76405807074581
+        ],
+        [
+          4.83445132416087,
+          45.76380111707412
+        ]
+      ]
+    }
   },
   {
     "id": "9f2cc8c7-c04c-438f-8d91-97688414d90b",
@@ -380,20 +584,32 @@
     "duration": 8,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763868940917284,
+      "lng": 4.835595402469914,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76348330064176,
+      "lng": 4.836219374332213,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835595402469914,
+          45.763868940917284
+        ],
+        [
+          4.836219374332213,
+          45.76348330064176
+        ]
+      ]
+    }
   },
   {
     "id": "e0d820ed-2f41-4809-906b-53e6dca11a89",
@@ -402,20 +618,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76423613355932,
+      "lng": 4.836735401739535,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76419185771424,
+      "lng": 4.835901268063706,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836735401739535,
+          45.76423613355932
+        ],
+        [
+          4.835901268063706,
+          45.76419185771424
+        ]
+      ]
+    }
   },
   {
     "id": "0424598a-a0a1-4fd4-876b-17621e9d2cec",
@@ -424,20 +652,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76384146248468,
+      "lng": 4.835792856377294,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76400741196401,
+      "lng": 4.8342346447537246,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835792856377294,
+          45.76384146248468
+        ],
+        [
+          4.8342346447537246,
+          45.76400741196401
+        ]
+      ]
+    }
   },
   {
     "id": "bfc2980b-28fd-4f80-8d07-4a7f765d0d8b",
@@ -446,20 +686,32 @@
     "duration": 8,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76336969766822,
+      "lng": 4.835311219229518,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76429777650789,
+      "lng": 4.836585487858845,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835311219229518,
+          45.76336969766822
+        ],
+        [
+          4.836585487858845,
+          45.76429777650789
+        ]
+      ]
+    }
   },
   {
     "id": "3d17c033-7b02-46a8-b77a-e28224180f35",
@@ -468,20 +720,32 @@
     "duration": 7,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764321694894015,
+      "lng": 4.836584704012536,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76375355372521,
+      "lng": 4.835255177864401,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836584704012536,
+          45.764321694894015
+        ],
+        [
+          4.835255177864401,
+          45.76375355372521
+        ]
+      ]
+    }
   },
   {
     "id": "c16b56de-7cd5-4a65-bc90-64579b7e52e4",
@@ -490,20 +754,32 @@
     "duration": 6,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76394165778905,
+      "lng": 4.8358361020284875,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76421311077199,
+      "lng": 4.834646545968155,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8358361020284875,
+          45.76394165778905
+        ],
+        [
+          4.834646545968155,
+          45.76421311077199
+        ]
+      ]
+    }
   },
   {
     "id": "35fca3a7-a09c-4847-bd3c-ea3e8871fad1",
@@ -512,20 +788,32 @@
     "duration": 10,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764256747654464,
+      "lng": 4.835020980175273,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76365136321093,
+      "lng": 4.835254168366653,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835020980175273,
+          45.764256747654464
+        ],
+        [
+          4.835254168366653,
+          45.76365136321093
+        ]
+      ]
+    }
   },
   {
     "id": "c8523a22-72cd-4f26-a4f4-a434a55113aa",
@@ -547,7 +835,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "3, Quai André Lassagne"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83551245,
+          45.77504524
+        ],
+        [
+          4.83791179,
+          45.77220147
+        ]
+      ]
+    }
   },
   {
     "id": "bb911f37-e762-4fee-af68-abbe9cddbdaf",
@@ -556,20 +856,32 @@
     "duration": 7,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76465969907702,
+      "lng": 4.83627339911041,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76400081954219,
+      "lng": 4.835635913656766,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83627339911041,
+          45.76465969907702
+        ],
+        [
+          4.835635913656766,
+          45.76400081954219
+        ]
+      ]
+    }
   },
   {
     "id": "a4b084c8-9125-42b6-9ba8-59e9f2ef5b5e",
@@ -578,20 +890,32 @@
     "duration": 16,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76383310909525,
+      "lng": 4.834244140180318,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76443899024239,
+      "lng": 4.835288525766358,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.834244140180318,
+          45.76383310909525
+        ],
+        [
+          4.835288525766358,
+          45.76443899024239
+        ]
+      ]
+    }
   },
   {
     "id": "055f71e4-7fdb-4331-a614-dbb81058cda4",
@@ -600,20 +924,32 @@
     "duration": 14,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76395347421138,
+      "lng": 4.834258629073228,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76456620693187,
+      "lng": 4.835187012495212,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.834258629073228,
+          45.76395347421138
+        ],
+        [
+          4.835187012495212,
+          45.76456620693187
+        ]
+      ]
+    }
   },
   {
     "id": "348a3ff7-ee3e-4698-b89f-880d5b2a2254",
@@ -622,20 +958,32 @@
     "duration": 11,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76415766017023,
+      "lng": 4.8353028210604885,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76386398175405,
+      "lng": 4.837091456672958,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8353028210604885,
+          45.76415766017023
+        ],
+        [
+          4.837091456672958,
+          45.76386398175405
+        ]
+      ]
+    }
   },
   {
     "id": "8f4e7f10-60f6-4b15-b7be-e5cb1e6b7e47",
@@ -644,20 +992,32 @@
     "duration": 4,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764171124518235,
+      "lng": 4.835743226608267,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76406686832805,
+      "lng": 4.835166759363475,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835743226608267,
+          45.764171124518235
+        ],
+        [
+          4.835166759363475,
+          45.76406686832805
+        ]
+      ]
+    }
   },
   {
     "id": "bb519ed6-a5d8-4732-ab20-bc75285ede27",
@@ -679,7 +1039,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "160, Boulevard de la Croix-Rousse"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.81788993,
+          45.77542247
+        ],
+        [
+          4.83281501,
+          45.77437162
+        ]
+      ]
+    }
   },
   {
     "id": "496dab43-0845-45cd-b5c7-00ad73f90773",
@@ -688,20 +1060,32 @@
     "duration": 6,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76390503448937,
+      "lng": 4.83483690015852,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763496044553186,
+      "lng": 4.8364993492747335,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83483690015852,
+          45.76390503448937
+        ],
+        [
+          4.8364993492747335,
+          45.763496044553186
+        ]
+      ]
+    }
   },
   {
     "id": "5cb11e5c-059d-4777-9aa0-4219603f7525",
@@ -710,20 +1094,32 @@
     "duration": 9,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76442999547706,
+      "lng": 4.836385052755647,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76421739170487,
+      "lng": 4.834393215117963,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836385052755647,
+          45.76442999547706
+        ],
+        [
+          4.834393215117963,
+          45.76421739170487
+        ]
+      ]
+    }
   },
   {
     "id": "4891cc41-8761-4d8d-ad46-b73849c74dbf",
@@ -732,20 +1128,32 @@
     "duration": 12,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764377504669696,
+      "lng": 4.835913606627964,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76401567589824,
+      "lng": 4.836091172090128,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835913606627964,
+          45.764377504669696
+        ],
+        [
+          4.836091172090128,
+          45.76401567589824
+        ]
+      ]
+    }
   },
   {
     "id": "d7c76cb1-67d2-49e9-9380-e4cd6e441777",
@@ -754,20 +1162,32 @@
     "duration": 8,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.7643430074754,
+      "lng": 4.835562783671226,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763599762035966,
+      "lng": 4.834993418384048,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835562783671226,
+          45.7643430074754
+        ],
+        [
+          4.834993418384048,
+          45.763599762035966
+        ]
+      ]
+    }
   },
   {
     "id": "e7bec13c-4373-4346-b313-48611feb71f8",
@@ -776,20 +1196,32 @@
     "duration": 6,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76412058495103,
+      "lng": 4.835844286165122,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76392346331278,
+      "lng": 4.834851417706062,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835844286165122,
+          45.76412058495103
+        ],
+        [
+          4.834851417706062,
+          45.76392346331278
+        ]
+      ]
+    }
   },
   {
     "id": "381ad67a-8b5c-487c-a3d0-eb2a90a40cad",
@@ -811,7 +1243,19 @@
       "commune": "Lyon 4e Arrondissement",
       "address": "Face 27, Rue Denfert-Rochereau"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.81788993,
+          45.77542247
+        ],
+        [
+          4.82537896,
+          45.77589951
+        ]
+      ]
+    }
   },
   {
     "id": "f415cb5d-be74-44aa-ab7a-8850ad780476",
@@ -820,20 +1264,32 @@
     "duration": 9,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76462016060624,
+      "lng": 4.836159197474432,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763845635120596,
+      "lng": 4.836417530561502,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.836159197474432,
+          45.76462016060624
+        ],
+        [
+          4.836417530561502,
+          45.763845635120596
+        ]
+      ]
+    }
   },
   {
     "id": "eddea58f-1ead-4eb0-86dc-eeef67b0b7bb",
@@ -842,20 +1298,32 @@
     "duration": 13,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.763795986385674,
+      "lng": 4.835869195311725,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76459203002322,
+      "lng": 4.836071351983463,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835869195311725,
+          45.763795986385674
+        ],
+        [
+          4.836071351983463,
+          45.76459203002322
+        ]
+      ]
+    }
   },
   {
     "id": "55b4a26d-6d91-4f45-9e89-a58693230ae4",
@@ -864,20 +1332,32 @@
     "duration": 17,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76444387256348,
+      "lng": 4.834950567937911,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76362619506388,
+      "lng": 4.836717726156798,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.834950567937911,
+          45.76444387256348
+        ],
+        [
+          4.836717726156798,
+          45.76362619506388
+        ]
+      ]
+    }
   },
   {
     "id": "10e3d5d8-ae7c-4708-ba67-af815a8b941b",
@@ -886,20 +1366,32 @@
     "duration": 4,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76340378986152,
+      "lng": 4.8355477783544405,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.764035812261376,
+      "lng": 4.835842353447569,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8355477783544405,
+          45.76340378986152
+        ],
+        [
+          4.835842353447569,
+          45.764035812261376
+        ]
+      ]
+    }
   },
   {
     "id": "535ff4ae-d2fc-4573-ae11-39e21edb7c20",
@@ -921,7 +1413,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "Quai André Lasagne"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83174125,
+          45.76802361
+        ],
+        [
+          4.83726954,
+          45.77292662
+        ]
+      ]
+    }
   },
   {
     "id": "affa71d4-7af1-4b65-b466-afd656279e23",
@@ -943,7 +1447,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "Place de la Paix"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83174125,
+          45.76802361
+        ],
+        [
+          4.83174125,
+          45.76802361
+        ]
+      ]
+    }
   },
   {
     "id": "8c213593-35c5-4755-8caf-47a5122a7335",
@@ -965,7 +1481,19 @@
       "commune": "Lyon 1er Arrondissement",
       "address": "Quai André Lasagne"
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.82929778,
+          45.77002124
+        ],
+        [
+          4.83726954,
+          45.77292662
+        ]
+      ]
+    }
   },
   {
     "id": "05e0f14f-d154-42ca-849a-1f99420c01d9",
@@ -974,19 +1502,31 @@
     "duration": 9,
     "bikeType": "classic",
     "startStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76458787293466,
+      "lng": 4.835234748195122,
+      "name": "Départ",
+      "commune": "Lyon",
       "address": ""
     },
     "endStation": {
-      "name": "Inconnue",
-      "lat": null,
-      "lng": null,
-      "commune": "",
+      "lat": 45.76403423813881,
+      "lng": 4.8346785097565395,
+      "name": "Arrivée",
+      "commune": "Lyon",
       "address": ""
     },
-    "geometry": null
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.835234748195122,
+          45.76458787293466
+        ],
+        [
+          4.8346785097565395,
+          45.76403423813881
+        ]
+      ]
+    }
   }
 ]
