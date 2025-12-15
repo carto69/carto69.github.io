@@ -28,6 +28,12 @@
           <p>Carte interactive avec marqueurs personnalisables</p>
           <button class="tile-btn">Explorer →</button>
         </article>
+        <article class="tile" @click="$emit('open', 'femmes-quais')">
+          <div class="tile-icon">👩</div>
+          <h2>Les femmes sur les quais du Rhône</h2>
+          <p>Cartes sensibles et sources méthodologie</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
         <article class="tile" @click="$emit('open', 'zonzon')">
           <div class="tile-icon">🌍</div>
           <h2>zonzon</h2>

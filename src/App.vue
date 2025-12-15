@@ -14,6 +14,9 @@
       <div v-if="activeTab === 'mapelia'" class="scene">
         <MapeliaView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'femmes-quais'" class="scene">
+        <FemmesQuaisView @back="goHome" />
+      </div>
     </main>
   </div>
 </template>
@@ -24,9 +27,10 @@ import MapView from './components/MapView.vue'
 import VelovView from './components/VelovView.vue'
 import VelibView from './components/VelibView.vue'
 import MapeliaView from './components/MapeliaView.vue'
+import FemmesQuaisView from './components/FemmesQuaisView.vue'
 
 export default {
-  components: { MenuView, MapView, VelovView, VelibView, MapeliaView },
+  components: { MenuView, MapView, VelovView, VelibView, MapeliaView, FemmesQuaisView },
   data() {
     return {
       activeTab: 'home'
@@ -35,7 +39,7 @@ export default {
   mounted() {
     // Restaurer l'état depuis l'URL au chargement
     const hash = window.location.hash.slice(1)
-    if (hash && ['italie2', 'velov', 'velib', 'mapelia'].includes(hash)) {
+    if (hash && ['italie2', 'velov', 'velib', 'mapelia', 'femmes-quais'].includes(hash)) {
       this.activeTab = hash
     }
 
@@ -47,7 +51,7 @@ export default {
   },
   methods: {
     openTab(tab) {
-      if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia') {
+      if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia' || tab === 'femmes-quais') {
         this.activeTab = tab
         window.history.pushState({ tab }, '', `#${tab}`)
       } else {
@@ -62,7 +66,7 @@ export default {
     handlePopState(event) {
       // Gérer le bouton retour du navigateur
       const hash = window.location.hash.slice(1)
-      if (hash && ['italie2', 'velov', 'velib', 'mapelia'].includes(hash)) {
+      if (hash && ['italie2', 'velov', 'velib', 'mapelia', 'femmes-quais'].includes(hash)) {
         this.activeTab = hash
       } else {
         this.activeTab = 'home'
