@@ -51,7 +51,7 @@ export default { name: 'MenuView' }
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center 70%;
+  background-position: center 40%;
 }
 
 .credits-top {

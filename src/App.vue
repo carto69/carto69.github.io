@@ -32,16 +32,41 @@ export default {
       activeTab: 'home'
     }
   },
+  mounted() {
+    // Restaurer l'état depuis l'URL au chargement
+    const hash = window.location.hash.slice(1)
+    if (hash && ['italie2', 'velov', 'velib', 'mapelia'].includes(hash)) {
+      this.activeTab = hash
+    }
+
+    // Écouter les changements d'historique (bouton retour)
+    window.addEventListener('popstate', this.handlePopState)
+  },
+  beforeUnmount() {
+    window.removeEventListener('popstate', this.handlePopState)
+  },
   methods: {
     openTab(tab) {
       if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia') {
         this.activeTab = tab
+        window.history.pushState({ tab }, '', `#${tab}`)
       } else {
         this.activeTab = 'home'
+        window.history.pushState({ tab: 'home' }, '', '#')
       }
     },
     goHome() {
       this.activeTab = 'home'
+      window.history.pushState({ tab: 'home' }, '', '#')
+    },
+    handlePopState(event) {
+      // Gérer le bouton retour du navigateur
+      const hash = window.location.hash.slice(1)
+      if (hash && ['italie2', 'velov', 'velib', 'mapelia'].includes(hash)) {
+        this.activeTab = hash
+      } else {
+        this.activeTab = 'home'
+      }
     }
   }
 }
