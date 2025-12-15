@@ -1,59 +1,812 @@
 [
   {
-    "id": "demo1",
-    "startTime": "2024-12-01T10:00:00Z",
-    "endTime": "2024-12-01T10:15:00Z",
-    "duration": 15,
+    "id": "78d650a0-61cd-4c47-b2e4-f41f55f2e0d4",
+    "startTime": "2025-12-15T06:38:46",
+    "endTime": "2025-12-15T06:49:41",
+    "duration": 11,
     "bikeType": "classic",
     "startStation": {
-      "id": "1001",
-      "name": "Bellecour",
-      "lat": 45.7579,
-      "lng": 4.8320
+      "name": "1037 - CHAZETTE LASSAGNE",
+      "lng": 45.77291,
+      "lat": 4.837315
     },
     "endStation": {
-      "id": "1002",
-      "name": "Hôtel de Ville",
-      "lat": 45.7676,
-      "lng": 4.8351
-    }
+      "name": "4025 - CHAZIÈRE",
+      "lng": 45.775425,
+      "lat": 4.817888
+    },
+    "geometry": null
   },
   {
-    "id": "demo2",
-    "startTime": "2024-12-02T14:30:00Z",
-    "endTime": "2024-12-02T14:50:00Z",
+    "id": "f654dd1c-6347-4351-a25a-0e3fcdf98e11",
+    "startTime": "2025-12-14T13:29:33",
+    "endTime": "2025-12-14T13:40:42",
+    "duration": 12,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "55dda495-a4e2-45fa-a11a-105429f697ff",
+    "startTime": "2025-12-14T00:38:08",
+    "endTime": "2025-12-14T00:57:40",
     "duration": 20,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "8af73f95-38c9-44ba-8f36-fc991e3fedaa",
+    "startTime": "2025-12-13T03:58:08",
+    "endTime": "2025-12-13T04:03:10",
+    "duration": 6,
     "bikeType": "electric",
     "startStation": {
-      "id": "1002",
-      "name": "Hôtel de Ville",
-      "lat": 45.7676,
-      "lng": 4.8351
+      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
+      "lng": 45.769383,
+      "lat": 4.842364
     },
     "endStation": {
-      "id": "1003",
-      "name": "Part-Dieu",
-      "lat": 45.7610,
-      "lng": 4.8590
-    }
+      "name": "3044 - QUAI AUGAGNEUR",
+      "lng": 45.762023,
+      "lat": 4.841053
+    },
+    "geometry": null
   },
   {
-    "id": "demo3",
-    "startTime": "2024-12-03T16:00:00Z",
-    "endTime": "2024-12-03T16:25:00Z",
-    "duration": 25,
+    "id": "d45267ea-b096-4e0c-a26b-f74676a16792",
+    "startTime": "2025-12-13T03:54:23",
+    "endTime": "2025-12-13T03:55:48",
+    "duration": 2,
     "bikeType": "classic",
     "startStation": {
-      "id": "1003",
-      "name": "Part-Dieu",
-      "lat": 45.7610,
-      "lng": 4.8590
+      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
+      "lng": 45.769383,
+      "lat": 4.842364
     },
     "endStation": {
-      "id": "1001",
-      "name": "Bellecour",
-      "lat": 45.7579,
-      "lng": 4.8320
-    }
+      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
+      "lng": 45.769383,
+      "lat": 4.842364
+    },
+    "geometry": null
+  },
+  {
+    "id": "a89de5f6-1d93-4935-9233-a682cf3e9b97",
+    "startTime": "2025-12-12T19:31:23",
+    "endTime": "2025-12-12T19:37:11",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "69e5fa19-2471-41ff-902f-feeaa6fdc18f",
+    "startTime": "2025-12-12T13:31:50",
+    "endTime": "2025-12-12T13:33:39",
+    "duration": 2,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "41f3d3a2-7c3e-4815-9f0f-8553b77208aa",
+    "startTime": "2025-12-11T13:35:55",
+    "endTime": "2025-12-11T13:45:04",
+    "duration": 10,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "01715bf2-bfe9-4a75-8f93-0211ba058f88",
+    "startTime": "2025-12-11T07:05:39",
+    "endTime": "2025-12-11T07:14:52",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "8aef40a4-e0e7-4ef5-8542-c0b9aaeb6d1e",
+    "startTime": "2025-12-10T16:59:18",
+    "endTime": "2025-12-10T17:08:09",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "70d2bb41-80ae-4277-a38a-881c1dc920fa",
+    "startTime": "2025-12-10T07:10:32",
+    "endTime": "2025-12-10T07:17:51",
+    "duration": 8,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "dc7e578b-1f57-47f2-a484-2a6b0202bfc5",
+    "startTime": "2025-12-09T16:25:34",
+    "endTime": "2025-12-09T16:35:19",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "07750169-6522-4f96-8476-b8369f346697",
+    "startTime": "2025-12-08T16:54:58",
+    "endTime": "2025-12-08T17:13:16",
+    "duration": 19,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "4025 - CHAZIÈRE",
+      "lng": 45.775425,
+      "lat": 4.817888
+    },
+    "endStation": {
+      "name": "1035 - QUAI LASSAGNE",
+      "lng": 45.772191,
+      "lat": 4.837917
+    },
+    "geometry": null
+  },
+  {
+    "id": "42bc366e-fa7a-488a-865b-ab1c53cd8470",
+    "startTime": "2025-12-04T16:18:07",
+    "endTime": "2025-12-04T16:33:31",
+    "duration": 16,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "e7769fc4-4e03-4646-b3a1-ac7dc440d767",
+    "startTime": "2025-11-26T17:00:57",
+    "endTime": "2025-11-26T17:07:36",
+    "duration": 7,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "1b8a4a4f-ae79-44e9-a7c6-a568568f2c46",
+    "startTime": "2025-11-26T07:26:40",
+    "endTime": "2025-11-26T07:35:58",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "e39ba74a-4fa3-4f7c-a2c9-efef75d3e545",
+    "startTime": "2025-11-25T16:30:54",
+    "endTime": "2025-11-25T16:37:15",
+    "duration": 7,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "9f2cc8c7-c04c-438f-8d91-97688414d90b",
+    "startTime": "2025-11-25T16:07:42",
+    "endTime": "2025-11-25T16:14:48",
+    "duration": 8,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "e0d820ed-2f41-4809-906b-53e6dca11a89",
+    "startTime": "2025-11-20T17:06:30",
+    "endTime": "2025-11-20T17:15:54",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "0424598a-a0a1-4fd4-876b-17621e9d2cec",
+    "startTime": "2025-11-20T06:51:25",
+    "endTime": "2025-11-20T07:01:10",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "bfc2980b-28fd-4f80-8d07-4a7f765d0d8b",
+    "startTime": "2025-11-19T17:32:18",
+    "endTime": "2025-11-19T17:39:41",
+    "duration": 8,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "3d17c033-7b02-46a8-b77a-e28224180f35",
+    "startTime": "2025-11-18T17:29:45",
+    "endTime": "2025-11-18T17:35:53",
+    "duration": 7,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "c16b56de-7cd5-4a65-bc90-64579b7e52e4",
+    "startTime": "2025-11-18T17:11:57",
+    "endTime": "2025-11-18T17:17:47",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "35fca3a7-a09c-4847-bd3c-ea3e8871fad1",
+    "startTime": "2025-11-18T07:17:42",
+    "endTime": "2025-11-18T07:27:08",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "c8523a22-72cd-4f26-a4f4-a434a55113aa",
+    "startTime": "2025-11-17T17:32:54",
+    "endTime": "2025-11-17T17:38:00",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "4041 - BOUSSANGES / AUSTERLITZ",
+      "lng": 45.775071,
+      "lat": 4.835499
+    },
+    "endStation": {
+      "name": "1035 - QUAI LASSAGNE",
+      "lng": 45.772191,
+      "lat": 4.837917
+    },
+    "geometry": null
+  },
+  {
+    "id": "bb911f37-e762-4fee-af68-abbe9cddbdaf",
+    "startTime": "2025-11-17T17:15:00",
+    "endTime": "2025-11-17T17:21:03",
+    "duration": 7,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "a4b084c8-9125-42b6-9ba8-59e9f2ef5b5e",
+    "startTime": "2025-11-16T12:27:24",
+    "endTime": "2025-11-16T12:42:36",
+    "duration": 16,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "055f71e4-7fdb-4331-a614-dbb81058cda4",
+    "startTime": "2025-11-16T12:04:44",
+    "endTime": "2025-11-16T12:18:42",
+    "duration": 14,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "348a3ff7-ee3e-4698-b89f-880d5b2a2254",
+    "startTime": "2025-11-14T07:31:24",
+    "endTime": "2025-11-14T07:42:09",
+    "duration": 11,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "8f4e7f10-60f6-4b15-b7be-e5cb1e6b7e47",
+    "startTime": "2025-11-12T11:21:52",
+    "endTime": "2025-11-12T11:25:24",
+    "duration": 4,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "bb519ed6-a5d8-4732-ab20-bc75285ede27",
+    "startTime": "2025-11-12T10:54:38",
+    "endTime": "2025-11-12T11:05:03",
+    "duration": 11,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "4025 - CHAZIÈRE",
+      "lng": 45.775425,
+      "lat": 4.817888
+    },
+    "endStation": {
+      "name": "1036 - AVEYRON",
+      "lng": 45.774366,
+      "lat": 4.832716
+    },
+    "geometry": null
+  },
+  {
+    "id": "496dab43-0845-45cd-b5c7-00ad73f90773",
+    "startTime": "2025-11-12T07:46:09",
+    "endTime": "2025-11-12T07:51:44",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "5cb11e5c-059d-4777-9aa0-4219603f7525",
+    "startTime": "2025-11-05T16:55:36",
+    "endTime": "2025-11-05T17:03:56",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "4891cc41-8761-4d8d-ad46-b73849c74dbf",
+    "startTime": "2025-11-05T07:22:37",
+    "endTime": "2025-11-05T07:33:43",
+    "duration": 12,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "d7c76cb1-67d2-49e9-9380-e4cd6e441777",
+    "startTime": "2025-11-04T17:08:39",
+    "endTime": "2025-11-04T17:16:18",
+    "duration": 8,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "e7bec13c-4373-4346-b313-48611feb71f8",
+    "startTime": "2025-11-03T17:01:30",
+    "endTime": "2025-11-03T17:07:06",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "381ad67a-8b5c-487c-a3d0-eb2a90a40cad",
+    "startTime": "2025-11-03T16:45:50",
+    "endTime": "2025-11-03T16:49:13",
+    "duration": 4,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "4025 - CHAZIÈRE",
+      "lng": 45.775425,
+      "lat": 4.817888
+    },
+    "endStation": {
+      "name": "4009 - JACQUARD / DENFERT-ROCHEREAU",
+      "lng": 45.77591,
+      "lat": 4.825394
+    },
+    "geometry": null
+  },
+  {
+    "id": "f415cb5d-be74-44aa-ab7a-8850ad780476",
+    "startTime": "2025-11-03T15:52:30",
+    "endTime": "2025-11-03T16:01:26",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "eddea58f-1ead-4eb0-86dc-eeef67b0b7bb",
+    "startTime": "2025-11-03T15:17:00",
+    "endTime": "2025-11-03T15:29:36",
+    "duration": 13,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "55b4a26d-6d91-4f45-9e89-a58693230ae4",
+    "startTime": "2025-11-03T12:29:04",
+    "endTime": "2025-11-03T12:45:21",
+    "duration": 17,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "10e3d5d8-ae7c-4708-ba67-af815a8b941b",
+    "startTime": "2025-11-03T12:24:23",
+    "endTime": "2025-11-03T12:28:11",
+    "duration": 4,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
+  },
+  {
+    "id": "535ff4ae-d2fc-4573-ae11-39e21edb7c20",
+    "startTime": "2025-11-01T11:01:53",
+    "endTime": "2025-11-01T11:09:50",
+    "duration": 8,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "1031 - PLACE DE LA PAIX",
+      "lng": 45.768023,
+      "lat": 4.831733
+    },
+    "endStation": {
+      "name": "1037 - CHAZETTE LASSAGNE",
+      "lng": 45.77291,
+      "lat": 4.837315
+    },
+    "geometry": null
+  },
+  {
+    "id": "affa71d4-7af1-4b65-b466-afd656279e23",
+    "startTime": "2025-11-01T11:00:56",
+    "endTime": "2025-11-01T11:01:34",
+    "duration": 1,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "1031 - PLACE DE LA PAIX",
+      "lng": 45.768023,
+      "lat": 4.831733
+    },
+    "endStation": {
+      "name": "1031 - PLACE DE LA PAIX",
+      "lng": 45.768023,
+      "lat": 4.831733
+    },
+    "geometry": null
+  },
+  {
+    "id": "8c213593-35c5-4755-8caf-47a5122a7335",
+    "startTime": "2025-10-31T21:35:33",
+    "endTime": "2025-10-31T21:41:42",
+    "duration": 7,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "1034 - CARMÉLITES",
+      "lng": 45.770006,
+      "lat": 4.829274
+    },
+    "endStation": {
+      "name": "1037 - CHAZETTE LASSAGNE",
+      "lng": 45.77291,
+      "lat": 4.837315
+    },
+    "geometry": null
+  },
+  {
+    "id": "05e0f14f-d154-42ca-849a-1f99420c01d9",
+    "startTime": "2025-10-31T11:51:59",
+    "endTime": "2025-10-31T12:00:14",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "endStation": {
+      "name": "Inconnue",
+      "lat": null,
+      "lng": null
+    },
+    "geometry": null
   }
 ]

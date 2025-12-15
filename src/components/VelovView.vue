@@ -28,6 +28,24 @@
 
         <hr />
 
+        <div class="data-tools">
+          <h3>Données</h3>
+          <div class="data-actions">
+            <button class="btn btn-small" @click="openImportTool">Ouvrir l'outil d'import</button>
+            <label class="btn btn-small file-label">
+              Charger un JSON
+              <input type="file" accept="application/json" @change="onFileSelected" />
+            </label>
+          </div>
+          <div class="muted" v-if="localTripsMeta">
+            Données locales: {{ localTripsMeta.count }} trajets — {{ formatDate(localTripsMeta.updatedAt) }}
+            <div class="data-actions-inline">
+              <button class="btn btn-small" @click="useLocalTrips" :disabled="isUsingLocal">Utiliser</button>
+              <button class="btn btn-small" @click="clearLocalTrips" :disabled="!isUsingLocal">Réinitialiser</button>
+            </div>
+          </div>
+        </div>
+
         <div class="visualization-controls">
           <h3>Visualisation</h3>
           <label class="checkbox-label">
@@ -95,10 +113,20 @@ export default {
       trips: [],
       selectedTrip: null,
       showRoutes: true,
-      showHeatmap: false
+      showHeatmap: false,
+      isUsingLocal: false
     }
   },
   computed: {
+    localTripsMeta() {
+      try {
+        const raw = localStorage.getItem('velovTrips')
+        if (!raw) return null
+        const parsed = JSON.parse(raw)
+        if (!parsed || !Array.isArray(parsed.trips)) return null
+        return { count: parsed.count ?? parsed.trips.length, updatedAt: parsed.updatedAt }
+      } catch { return null }
+    },
     totalDistance() {
       // Approximation: distance entre stations (Haversine)
       return this.trips.reduce((sum, trip) => {
@@ -140,6 +168,16 @@ export default {
       this.error = null
 
       try {
+        // 1) Préférer les données locales si présentes
+        const local = this.getLocalTrips()
+        if (local) {
+          this.trips = local
+          this.isUsingLocal = true
+          this.updateMap()
+          return
+        }
+
+        // 2) Sinon, charger le fichier embarqué
         const response = await fetch('/velov-trips.json')
         
         if (!response.ok) {
@@ -159,6 +197,66 @@ export default {
       } finally {
         this.isLoading = false
       }
+    },
+
+    openImportTool() {
+      window.open('/import-velov.html', '_blank')
+    },
+
+    onFileSelected(e) {
+      const file = e.target.files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = () => {
+        try {
+          const text = String(reader.result || '')
+          const json = JSON.parse(text)
+          if (!Array.isArray(json)) throw new Error('Fichier invalide: attendu un tableau de trajets')
+          this.trips = json
+          this.isUsingLocal = true
+          this.saveLocalTrips(json)
+          this.updateMap()
+        } catch (err) {
+          this.error = 'Fichier JSON invalide'
+          console.error(err)
+        }
+      }
+      reader.readAsText(file)
+      // reset input for re-selecting the same file later
+      e.target.value = ''
+    },
+
+    saveLocalTrips(trips) {
+      try {
+        const payload = { updatedAt: new Date().toISOString(), count: trips.length, trips }
+        localStorage.setItem('velovTrips', JSON.stringify(payload))
+      } catch {}
+    },
+
+    getLocalTrips() {
+      try {
+        const raw = localStorage.getItem('velovTrips')
+        if (!raw) return null
+        const parsed = JSON.parse(raw)
+        if (!parsed || !Array.isArray(parsed.trips)) return null
+        return parsed.trips
+      } catch { return null }
+    },
+
+    useLocalTrips() {
+      const local = this.getLocalTrips()
+      if (local) {
+        this.trips = local
+        this.isUsingLocal = true
+        this.updateMap()
+      }
+    },
+
+    clearLocalTrips() {
+      try { localStorage.removeItem('velovTrips') } catch {}
+      this.isUsingLocal = false
+      // Recharger depuis le fichier embarqué
+      this.loadTrips()
     },
 
     initMap() {
@@ -414,6 +512,12 @@ h1 {
   flex-direction: column;
   gap: 16px;
 }
+
+.data-tools .data-actions { display: flex; gap: 8px; margin: 6px 0; }
+.data-tools .data-actions-inline { display: flex; gap: 8px; margin-top: 8px; }
+.file-label { position: relative; overflow: hidden; }
+.file-label input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.muted { color: #666; font-size: 12px; }
 
 .user-info {
   background: #f0f0f0;
