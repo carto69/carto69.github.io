@@ -6,14 +6,18 @@
     "duration": 11,
     "bikeType": "classic",
     "startStation": {
-      "name": "1037 - CHAZETTE LASSAGNE",
-      "lng": 45.77291,
-      "lat": 4.837315
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
     },
     "endStation": {
-      "name": "4025 - CHAZIÈRE",
-      "lng": 45.775425,
-      "lat": 4.817888
+      "name": "Chazière",
+      "lng": 4.81788993,
+      "lat": 45.77542247,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "25, Rue Chazière"
     },
     "geometry": null
   },
@@ -26,12 +30,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -44,12 +52,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -60,14 +72,18 @@
     "duration": 6,
     "bikeType": "electric",
     "startStation": {
-      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
-      "lng": 45.769383,
-      "lat": 4.842364
+      "name": "Place Maréchal Lyautey",
+      "lng": 4.84231795,
+      "lat": 45.76937306,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "5, Place Maréchal Lyautey"
     },
     "endStation": {
-      "name": "3044 - QUAI AUGAGNEUR",
-      "lng": 45.762023,
-      "lat": 4.841053
+      "name": "Quai Augagneur",
+      "lng": 4.84105343,
+      "lat": 45.76196513,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "Face 3, Quai Victor Augagneur"
     },
     "geometry": null
   },
@@ -78,14 +94,18 @@
     "duration": 2,
     "bikeType": "classic",
     "startStation": {
-      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
-      "lng": 45.769383,
-      "lat": 4.842364
+      "name": "Place Maréchal Lyautey",
+      "lng": 4.84231795,
+      "lat": 45.76937306,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "5, Place Maréchal Lyautey"
     },
     "endStation": {
-      "name": "6022 - PLACE MARÉCHAL LYAUTEY",
-      "lng": 45.769383,
-      "lat": 4.842364
+      "name": "Place Maréchal Lyautey",
+      "lng": 4.84231795,
+      "lat": 45.76937306,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "5, Place Maréchal Lyautey"
     },
     "geometry": null
   },
@@ -98,12 +118,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -116,12 +140,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -134,12 +162,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -152,12 +184,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -170,12 +206,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -188,12 +228,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -206,12 +250,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -222,14 +270,18 @@
     "duration": 19,
     "bikeType": "classic",
     "startStation": {
-      "name": "4025 - CHAZIÈRE",
-      "lng": 45.775425,
-      "lat": 4.817888
+      "name": "Chazière",
+      "lng": 4.81788993,
+      "lat": 45.77542247,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "25, Rue Chazière"
     },
     "endStation": {
-      "name": "1035 - QUAI LASSAGNE",
-      "lng": 45.772191,
-      "lat": 4.837917
+      "name": "Quai Lassagne",
+      "lng": 4.83791179,
+      "lat": 45.77220147,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "3, Quai André Lassagne"
     },
     "geometry": null
   },
@@ -242,12 +294,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -260,12 +316,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -278,12 +338,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -296,12 +360,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -314,12 +382,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -332,12 +404,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -350,12 +426,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -368,12 +448,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -386,12 +470,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -404,12 +492,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -422,12 +514,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -438,14 +534,18 @@
     "duration": 6,
     "bikeType": "classic",
     "startStation": {
-      "name": "4041 - BOUSSANGES / AUSTERLITZ",
-      "lng": 45.775071,
-      "lat": 4.835499
+      "name": "Boussanges / Austerlitz",
+      "lng": 4.83551245,
+      "lat": 45.77504524,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "25, Rue d'Austerlitz"
     },
     "endStation": {
-      "name": "1035 - QUAI LASSAGNE",
-      "lng": 45.772191,
-      "lat": 4.837917
+      "name": "Quai Lassagne",
+      "lng": 4.83791179,
+      "lat": 45.77220147,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "3, Quai André Lassagne"
     },
     "geometry": null
   },
@@ -458,12 +558,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -476,12 +580,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -494,12 +602,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -512,12 +624,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -530,12 +646,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -546,14 +666,18 @@
     "duration": 11,
     "bikeType": "classic",
     "startStation": {
-      "name": "4025 - CHAZIÈRE",
-      "lng": 45.775425,
-      "lat": 4.817888
+      "name": "Chazière",
+      "lng": 4.81788993,
+      "lat": 45.77542247,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "25, Rue Chazière"
     },
     "endStation": {
-      "name": "1036 - AVEYRON",
-      "lng": 45.774366,
-      "lat": 4.832716
+      "name": "Aveyron",
+      "lng": 4.83281501,
+      "lat": 45.77437162,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "160, Boulevard de la Croix-Rousse"
     },
     "geometry": null
   },
@@ -566,12 +690,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -584,12 +712,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -602,12 +734,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -620,12 +756,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -638,12 +778,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -654,14 +798,18 @@
     "duration": 4,
     "bikeType": "classic",
     "startStation": {
-      "name": "4025 - CHAZIÈRE",
-      "lng": 45.775425,
-      "lat": 4.817888
+      "name": "Chazière",
+      "lng": 4.81788993,
+      "lat": 45.77542247,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "25, Rue Chazière"
     },
     "endStation": {
-      "name": "4009 - JACQUARD / DENFERT-ROCHEREAU",
-      "lng": 45.77591,
-      "lat": 4.825394
+      "name": "Jacquart / Denfert-Rochereau",
+      "lng": 4.82537896,
+      "lat": 45.77589951,
+      "commune": "Lyon 4e Arrondissement",
+      "address": "Face 27, Rue Denfert-Rochereau"
     },
     "geometry": null
   },
@@ -674,12 +822,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -692,12 +844,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -710,12 +866,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -728,12 +888,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   },
@@ -744,14 +908,18 @@
     "duration": 8,
     "bikeType": "classic",
     "startStation": {
-      "name": "1031 - PLACE DE LA PAIX",
-      "lng": 45.768023,
-      "lat": 4.831733
+      "name": "Place de la Paix",
+      "lng": 4.83174125,
+      "lat": 45.76802361,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Place de la Paix"
     },
     "endStation": {
-      "name": "1037 - CHAZETTE LASSAGNE",
-      "lng": 45.77291,
-      "lat": 4.837315
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
     },
     "geometry": null
   },
@@ -762,14 +930,18 @@
     "duration": 1,
     "bikeType": "classic",
     "startStation": {
-      "name": "1031 - PLACE DE LA PAIX",
-      "lng": 45.768023,
-      "lat": 4.831733
+      "name": "Place de la Paix",
+      "lng": 4.83174125,
+      "lat": 45.76802361,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Place de la Paix"
     },
     "endStation": {
-      "name": "1031 - PLACE DE LA PAIX",
-      "lng": 45.768023,
-      "lat": 4.831733
+      "name": "Place de la Paix",
+      "lng": 4.83174125,
+      "lat": 45.76802361,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Place de la Paix"
     },
     "geometry": null
   },
@@ -780,14 +952,18 @@
     "duration": 7,
     "bikeType": "classic",
     "startStation": {
-      "name": "1034 - CARMÉLITES",
-      "lng": 45.770006,
-      "lat": 4.829274
+      "name": "Carmélites",
+      "lng": 4.82929778,
+      "lat": 45.77002124,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Face 30, Montée des Carmélites"
     },
     "endStation": {
-      "name": "1037 - CHAZETTE LASSAGNE",
-      "lng": 45.77291,
-      "lat": 4.837315
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
     },
     "geometry": null
   },
@@ -800,12 +976,16 @@
     "startStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "endStation": {
       "name": "Inconnue",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "commune": "",
+      "address": ""
     },
     "geometry": null
   }
