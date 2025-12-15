@@ -12,8 +12,14 @@
         </article>
         <article class="tile" @click="$emit('open', 'velov')">
           <div class="tile-icon">🚴</div>
-          <h2>69 en velo'v</h2>
+          <h2>69 en vélo'v</h2>
           <p>Carte de mes itinéraires Vélo'V à Lyon</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
+        <article class="tile" @click="$emit('open', 'velib')">
+          <div class="tile-icon">🚲</div>
+          <h2>75 en vélib'</h2>
+          <p>Carte de mes itinéraires Vélib' à Paris</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'zonzon')">
