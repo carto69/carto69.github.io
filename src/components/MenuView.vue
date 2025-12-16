@@ -22,6 +22,7 @@
           <p>Portfolio de cartes et projets cartographiques</p>
           <button class="tile-btn">Explorer →</button>
         </article>
+        <div class="tile-break"></div>
         <article class="tile" @click="$emit('open', 'italie2')">
           <div class="tile-icon">🗺️</div>
           <h2>Italie 2</h2>
@@ -134,7 +135,13 @@ export default {
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 780px;
+  max-width: 900px;
+}
+
+.tile-break {
+  width: 100%;
+  flex-basis: 100%;
+  height: 0;
 }
 
 .tile {
