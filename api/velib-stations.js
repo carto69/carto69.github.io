@@ -1,6 +1,4 @@
-const fetch = require('node-fetch')
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   try {
     const limit = 500
     let offset = 0

@@ -53,6 +53,7 @@
 <script>
 export default {
   name: 'MenuView',
+  emits: ['open'],
   methods: {
     openMapelia() {
       const code = prompt('Code d\'accès requis :')

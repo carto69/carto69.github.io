@@ -1,6 +1,4 @@
-const fetch = require('node-fetch')
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   try {
     const gbfsUrl = 'https://velib-metropole-opendata.smoove.pro/gbfs/2/fr/station_information.json'
     const r = await fetch(gbfsUrl)
