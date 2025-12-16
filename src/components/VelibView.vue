@@ -43,72 +43,11 @@ export default {
     },
     async loadStations() {
       try {
-        // Charge toutes les stations en plusieurs pages pour ne pas rater de codes
-        const limit = 500
-        let offset = 0
-        let hasMore = true
-
-        while (hasMore) {
-          const url = `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/velib-disponibilite-en-temps-reel/records?limit=${limit}&offset=${offset}`
-          const response = await fetch(url)
-          const data = await response.json()
-          const results = data?.results || []
-
-          results.forEach(station => {
-            // Mapping principal: stationcode
-            this.stations[station.stationcode] = {
-              name: station.name,
-              coords: [station.coordonnees_geo.lon, station.coordonnees_geo.lat]
-            }
-            // Fallbacks possibles: certains IDs de trajets peuvent référencer d'autres champs
-            if (station.station_id) {
-              this.stations[station.station_id] = {
-                name: station.name,
-                coords: [station.coordonnees_geo.lon, station.coordonnees_geo.lat]
-              }
-            }
-          })
-
-          hasMore = results.length === limit
-          offset += limit
-        }
-
-        // Second dataset fallback: géolocalisation des stations (si différents IDs)
-        try {
-          const url2 = `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/velib-stations/records?limit=${limit}`
-          const response2 = await fetch(url2)
-          const data2 = await response2.json()
-          const results2 = data2?.results || []
-
-          results2.forEach(s => {
-            const code = s.stationcode || s.station_id || s.code || s.id
-            const lon = s?.coord?.lon || s?.geo_point_2d?.lon || s?.geometry?.coordinates?.[0]
-            const lat = s?.coord?.lat || s?.geo_point_2d?.lat || s?.geometry?.coordinates?.[1]
-            if (code && lon != null && lat != null && !this.stations[code]) {
-              this.stations[code] = { name: s?.name || s?.station_name || 'Station', coords: [lon, lat] }
-            }
-          })
-        } catch (e2) {
-          console.warn('Fallback velib-stations indisponible:', e2)
-        }
-
-        // GBFS officiel Velib Métropole: station_information avec station_id
-        try {
-          const gbfsUrl = 'https://velib-metropole-opendata.smoove.pro/gbfs/2/fr/station_information.json'
-          const gbfsResp = await fetch(gbfsUrl)
-          const gbfsData = await gbfsResp.json()
-          const stationsInfo = gbfsData?.data?.stations || []
-          stationsInfo.forEach(s => {
-            const code = s.station_id || s.external_id || s.name
-            if (code && s.lat != null && s.lon != null && !this.stations[code]) {
-              this.stations[code] = { name: s.name, coords: [s.lon, s.lat] }
-            }
-          })
-        } catch (e3) {
-          console.warn('Fallback GBFS station_information indisponible:', e3)
-        }
+        const response = await fetch('/api/velib-stations')
+        const data = await response.json()
+        this.stations = data?.stations || {}
       } catch (error) {
-        console.error('Erreur chargement stations:', error)
+        console.error('Erreur chargement stations (proxy):', error)
       }
     },
     initMap() {
