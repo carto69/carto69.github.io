@@ -12,22 +12,68 @@ const mapboxgl = window.mapboxgl
 
 export default {
   name: 'VelibView',
+  data() {
+    return {
+      trips: [],
+      stations: {}
+    }
+  },
   mounted() {
-    this.initMap()
+    this.loadTrips()
   },
   methods: {
+    async loadTrips() {
+      try {
+        const response = await fetch('/velib-trips.json')
+        const data = await response.json()
+        this.trips = data.walletOperations || []
+        await this.loadStations()
+        this.initMap()
+      } catch (error) {
+        console.error('Erreur chargement trajets:', error)
+        this.initMap()
+      }
+    },
+    async loadStations() {
+      // Récupère les infos des stations depuis l'API Vélib' (si besoin)
+      // Pour l'instant on utilisera les IDs de stations du JSON
+      const stationIds = new Set()
+      this.trips.forEach(trip => {
+        if (trip.parameter3) {
+          stationIds.add(trip.parameter3.departureStationId)
+          stationIds.add(trip.parameter3.arrivalStationId)
+        }
+      })
+    },
     initMap() {
       mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
       
       this.map = new mapboxgl.Map({
         container: 'velib-map',
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [2.3522, 48.8566], // Paris
-        zoom: 12
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [2.3522, 48.8566],
+        zoom: 11
       })
 
       this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
       this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+
+      this.map.on('load', () => {
+        this.displayTrips()
+      })
+    },
+    displayTrips() {
+      if (!this.trips.length) return
+
+      // Affiche les statistiques
+      const totalDistance = this.trips.reduce((sum, t) => 
+        sum + (parseFloat(t.parameter3?.DISTANCE) || 0), 0
+      )
+      const totalCO2 = this.trips.reduce((sum, t) => 
+        sum + (parseFloat(t.parameter3?.SAVED_CARBON_DIOXIDE) || 0), 0
+      )
+      
+      console.log(`${this.trips.length} trajets | ${(totalDistance/1000).toFixed(1)} km | ${totalCO2.toFixed(0)}g CO2 économisés`)
     }
   },
   beforeUnmount() {
