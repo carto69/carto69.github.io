@@ -1,99 +1,109 @@
 <template>
-  <div class="velov-page">
-    <aside class="velov-controls">
-      <button class="back" @click="$emit('back')">← Retour</button>
-      <h1>69 en velo'v</h1>
+  <div class="velov-container">
+    <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
+    <div id="velov-map" class="map-canvas"></div>
+    <div class="map-title">Lyon en Vélo'v</div>
+    
+    <!-- Barre latérale des statistiques -->
+    <div class="stats-sidebar">
+      <h2>Mes trajets</h2>
       
-      <div v-if="isLoading" class="loading">
-        <p>Chargement des trajets...</p>
+      <!-- Stats globales -->
+      <div class="stat-item">
+        <span class="stat-label">Trajets</span>
+        <span class="stat-value">{{ stats.countTrips }}</span>
       </div>
-
-      <div v-else-if="error" class="error">
-        {{ error }}
+      <div class="stat-item">
+        <span class="stat-label">Distance</span>
+        <span class="stat-value">{{ stats.kmTotal }} km</span>
       </div>
-
-      <div v-else class="controls">
-        <hr />
-
-        <div class="trip-stats">
-          <h3>Statistiques</h3>
-          <p>Trajets total: <strong>{{ trips.length }}</strong></p>
-          <p v-if="trips.length > 0">
-            Distance totale: <strong>{{ totalDistance.toFixed(1) }} km</strong>
-          </p>
-          <p v-if="trips.length > 0">
-            Temps total: <strong>{{ totalDuration }}</strong>
-          </p>
-        </div>
-
-        <hr />
-
-        <div class="data-tools">
-          <h3>Données</h3>
-          <div class="data-actions">
-            <button class="btn btn-small" @click="openImportTool">Ouvrir l'outil d'import</button>
-            <label class="btn btn-small file-label">
-              Charger un JSON
-              <input type="file" accept="application/json" @change="onFileSelected" />
-            </label>
+      <div class="stat-item">
+        <span class="stat-label">CO₂ économisé</span>
+        <span class="stat-value">{{ stats.co2Total }} kg</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Vitesse moyenne</span>
+        <span class="stat-value">{{ stats.avgSpeed }} km/h</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Segments tracés</span>
+        <span class="stat-value">{{ stats.countFeatures }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Durée moyenne</span>
+        <span class="stat-value">{{ stats.avgDuration }}</span>
+      </div>
+      
+      <!-- Options de la carte -->
+      <hr class="sidebar-divider" />
+      <div class="map-controls">
+        <label>
+          <input type="checkbox" v-model="showStations" @change="toggleStations" />
+          Stations
+        </label>
+      </div>
+      
+      <!-- Sélecteur de trajet -->
+      <hr class="sidebar-divider" />
+      <div class="trajet-selector">
+        <label>Analyser un trajet:</label>
+        <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
+          <option :value="-1">-- Sélectionner --</option>
+          <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
+            {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
+          </option>
+        </select>
+      </div>
+      
+      <!-- Détails du trajet sélectionné -->
+      <div v-if="selectedTripIndex >= 0" class="trip-details">
+        <div class="detail-section">
+          <h3>📍 Départ</h3>
+          <div class="detail-row">
+            <span class="label">Station:</span>
+            <span class="value">{{ selectedTrip.depName }}</span>
           </div>
-          <div class="muted" v-if="localTripsMeta">
-            Données locales: {{ localTripsMeta.count }} trajets — {{ formatDate(localTripsMeta.updatedAt) }}
-            <div class="data-actions-inline">
-              <button class="btn btn-small" @click="useLocalTrips" :disabled="isUsingLocal">Utiliser</button>
-              <button class="btn btn-small" @click="clearLocalTrips" :disabled="!isUsingLocal">Réinitialiser</button>
-            </div>
+          <div class="detail-row">
+            <span class="label">ID:</span>
+            <span class="value small">{{ selectedTrip.depId }}</span>
           </div>
-        </div>
-
-        <div class="visualization-controls">
-          <h3>Visualisation</h3>
-          <label class="checkbox-label">
-            <input 
-              v-model="showRoutes" 
-              type="checkbox"
-              @change="updateMap"
-            />
-            Trajets individuels
-          </label>
-          <label class="checkbox-label">
-            <input 
-              v-model="showHeatmap" 
-              type="checkbox"
-              @change="updateMap"
-            />
-            Heatmap
-          </label>
-        </div>
-
-        <div v-if="trips.length > 0" class="trip-list">
-          <h3>Trajets</h3>
-          <div class="scroll-container">
-            <div 
-              v-for="trip in trips" 
-              :key="trip.id"
-              class="trip-item"
-              @click="selectTrip(trip)"
-              :class="{ active: selectedTrip?.id === trip.id }"
-            >
-              <strong>{{ trip.startStation?.name }}</strong>
-              <span class="arrow">→</span>
-              <strong>{{ trip.endStation?.name }}</strong>
-              <br />
-              <small>{{ formatDate(trip.startTime) }}</small>
-            </div>
+          <div class="detail-row">
+            <span class="label">Coords:</span>
+            <span class="value small mono">{{ selectedTrip.depCoords }}</span>
           </div>
         </div>
-      </div>
-    </aside>
-
-    <div ref="mapContainer" class="map-container">
-      <div v-if="selectedTrip && isAuthenticated" class="trip-popup">
-        <strong>{{ selectedTrip.startStation?.name }}</strong>
-        <span class="arrow">→</span>
-        <strong>{{ selectedTrip.endStation?.name }}</strong>
-        <p>Durée: {{ formatDuration(selectedTrip.duration) }}</p>
-        <p>Type: {{ selectedTrip.bikeType }}</p>
+        
+        <div class="detail-section">
+          <h3>🎯 Arrivée</h3>
+          <div class="detail-row">
+            <span class="label">Station:</span>
+            <span class="value">{{ selectedTrip.arrName }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">ID:</span>
+            <span class="value small">{{ selectedTrip.arrId }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Coords:</span>
+            <span class="value small mono">{{ selectedTrip.arrCoords }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-section">
+          <h3>📊 Trajet</h3>
+          <div class="detail-row">
+            <span class="label">Distance:</span>
+            <span class="value">{{ (selectedTrip.distance / 1000).toFixed(2) }} km</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Vitesse moy:</span>
+            <span class="value">{{ selectedTrip.speed }} km/h</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Date:</span>
+            <span class="value small">{{ new Date(selectedTrip.date).toLocaleDateString('fr-FR') }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -101,514 +111,725 @@
 
 <script>
 const mapboxgl = window.mapboxgl
-import { createHeatmapData, createRoutesData } from '../utils/heatmap'
 
 export default {
   name: 'VelovView',
   data() {
     return {
-      map: null,
-      isLoading: true,
-      error: null,
       trips: [],
-      selectedTrip: null,
-      showRoutes: true,
-      showHeatmap: false,
-      isUsingLocal: false
-    }
-  },
-  computed: {
-    localTripsMeta() {
-      try {
-        const raw = localStorage.getItem('velovTrips')
-        if (!raw) return null
-        const parsed = JSON.parse(raw)
-        if (!parsed || !Array.isArray(parsed.trips)) return null
-        return { count: parsed.count ?? parsed.trips.length, updatedAt: parsed.updatedAt }
-      } catch { return null }
-    },
-    totalDistance() {
-      // Approximation: distance entre stations (Haversine)
-      return this.trips.reduce((sum, trip) => {
-        if (!trip.startStation || !trip.endStation) return sum
-        const dist = this.haversineDistance(
-          trip.startStation.lat,
-          trip.startStation.lng,
-          trip.endStation.lat,
-          trip.endStation.lng
-        )
-        return sum + dist
-      }, 0)
-    },
-    totalDuration() {
-      const minutes = this.trips.reduce((sum, trip) => sum + (trip.duration || 0), 0)
-      const hours = Math.floor(minutes / 60)
-      const mins = minutes % 60
-      return `${hours}h ${mins}m`
+      stations: {},
+      displayedTrips: [],
+      selectedTripIndex: -1,
+      showStations: true,
+      stats: {
+        countTrips: 0,
+        countFeatures: 0,
+        kmTotal: 0,
+        co2Total: 0,
+        avgSpeed: 0,
+        avgDuration: '0 min'
+      },
+      loading: true,
+      error: null,
+      map: null
     }
   },
   mounted() {
-    const token = import.meta.env.VITE_MAPBOX_TOKEN
-    if (token) {
-      mapboxgl.accessToken = token
-      this.initMap()
-    }
-    
-    // Charger les données depuis le fichier JSON
     this.loadTrips()
+  },
+  methods: {
+    resolveStation(id) {
+      if (!id) return null
+      const sId = String(id).trim()
+      
+      if (this.stations[sId]) {
+        return this.stations[sId]
+      }
+      
+      if (!this.stations[sId]) {
+        console.warn(`✗ Station ${sId} NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
+      }
+      
+      return null
+    },
+    async loadTrips() {
+      try {
+        const response = await fetch('/velov-trips.json')
+        const data = await response.json()
+        this.trips = data.walletOperations || []
+        console.log(`📍 ${this.trips.length} trajets chargés`)
+        
+        const stationIds = new Set()
+        this.trips.forEach(trip => {
+          const depId = String(trip.parameter3?.departureStationId || '')
+          const arrId = String(trip.parameter3?.arrivalStationId || '')
+          if (depId) stationIds.add(depId)
+          if (arrId) stationIds.add(arrId)
+        })
+        console.log(`🏢 ${stationIds.size} stations uniques identifiées`)
+        
+        await this.loadStations()
+        this.initMap()
+      } catch (error) {
+        console.error('Erreur chargement trajets:', error)
+        this.error = 'Impossible de charger les trajets'
+        this.initMap()
+      }
+    },
+    async loadStations() {
+      try {
+        let stationsComplete = {}
+        try {
+          const respComplete = await fetch('/velov-stations.json', { cache: 'no-store' })
+          if (respComplete.ok) {
+            const dataComplete = await respComplete.json()
+            if (Array.isArray(dataComplete)) {
+              dataComplete.forEach(s => {
+                const id = String(s.id || '').trim()
+                const coords = s.coords || []
+                if (id && coords.length === 2) {
+                  const lon = coords[0]
+                  const lat = coords[1]
+                  
+                  let finalCoords = [lon, lat]
+                  if (lon > 100 && lat > 100) {
+                    console.warn(`⚠️ Coords Lambert 93 détectées: [${lon}, ${lat}] pour ${s.name}`)
+                  }
+                  
+                  stationsComplete[id] = { 
+                    name: s.name || `Station ${id}`, 
+                    coords: finalCoords
+                  }
+                }
+              })
+            }
+            console.log('✓ Stations complètes chargées:', Object.keys(stationsComplete).length)
+          }
+        } catch (e) {
+          console.warn('Fichier stations complet inaccessible:', e.message)
+        }
+
+        this.stations = stationsComplete
+        const count = Object.keys(this.stations).length
+        
+        if (count === 0) {
+          this.error = 'Aucune donnée de stations disponible.'
+          console.error(this.error)
+        } else {
+          console.log(`✓ Total: ${count} stations disponibles`)
+        }
+      } catch (error) {
+        console.error('Erreur chargement stations:', error)
+        this.error = 'Erreur chargement des stations'
+      }
+    },
+    initMap() {
+      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
+      
+      this.map = new mapboxgl.Map({
+        container: 'velov-map',
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [4.8357, 45.7640],
+        zoom: 12
+      })
+
+      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
+      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+
+      this.map.on('load', () => {
+        this.displayTrips()
+        this.displayStations()
+        this.addTripClickHandler()
+        this.loading = false
+      })
+    },
+    displayTrips() {
+      if (!this.trips.length) {
+        this.stats = { countTrips: 0, countFeatures: 0, kmTotal: 0, co2Total: 0, avgSpeed: 0, avgDuration: '0 min' }
+        console.warn('Aucun trajet à afficher')
+        return
+      }
+
+      let totalDistance = 0
+      let totalCO2 = 0
+      let totalDuration = 0
+      let totalSpeeds = []
+      let validTripsCount = 0
+      
+      this.trips.forEach(trip => {
+        const depStation = this.resolveStation(trip.parameter3?.departureStationId)
+        const arrStation = this.resolveStation(trip.parameter3?.arrivalStationId)
+        
+        if (depStation && arrStation && trip.parameter3?.departureStationId !== trip.parameter3?.arrivalStationId) {
+          validTripsCount++
+          totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
+          totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
+          totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
+          
+          const start = new Date(trip.startDate)
+          const end = new Date(trip.endDate)
+          totalDuration += (end - start) / 1000
+        }
+      })
+      
+      const avgSpeed = totalSpeeds.length > 0 
+        ? (totalSpeeds.reduce((a, b) => a + b, 0) / totalSpeeds.length).toFixed(1)
+        : 0
+
+      const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
+      const avgDurationMin = Math.round(avgDurationSeconds / 60)
+      
+      const resolved = {}
+      const unresolved = {}
+      
+      this.trips.forEach(trip => {
+        const depId = String(trip.parameter3?.departureStationId || '')
+        const arrId = String(trip.parameter3?.arrivalStationId || '')
+        
+        const depStation = this.resolveStation(depId)
+        const arrStation = this.resolveStation(arrId)
+        
+        if (depStation) resolved[depId] = true
+        else if (depId) unresolved[depId] = true
+        
+        if (arrStation) resolved[arrId] = true
+        else if (arrId) unresolved[arrId] = true
+      })
+      
+      console.log(`✅ ${Object.keys(resolved).length} stations résolues | ⚠️ ${Object.keys(unresolved).length} non-résolues`)
+
+      const features = []
+      this.displayedTrips = []
+      
+      console.group('🗺️ VELOV MAP DEBUG')
+      console.log(`Nombre total de trajets: ${this.trips.length}`)
+      console.log(`Nombre total de stations disponibles: ${Object.keys(this.stations).length}`)
+      
+      this.trips.forEach((trip, idx) => {
+        const depId = trip.parameter3?.departureStationId
+        const arrId = trip.parameter3?.arrivalStationId
+        
+        const depStation = this.resolveStation(depId)
+        const arrStation = this.resolveStation(arrId)
+        
+        if (depStation && arrStation && depId !== arrId) {
+          const displayTrip = {
+            idx: idx,
+            depId: String(depId),
+            arrId: String(arrId),
+            depName: depStation.name,
+            arrName: arrStation.name,
+            depCoords: depStation.coords.join(', '),
+            arrCoords: arrStation.coords.join(', '),
+            distance: parseFloat(trip.parameter3.DISTANCE),
+            speed: trip.parameter3.AVERAGE_SPEED,
+            date: trip.startDate,
+            co2: trip.parameter3.SAVED_CARBON_DIOXIDE
+          }
+          
+          this.displayedTrips.push(displayTrip)
+          
+          features.push({
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: [depStation.coords, arrStation.coords]
+            },
+            properties: {
+              distance: trip.parameter3.DISTANCE,
+              date: trip.startDate,
+              speed: trip.parameter3.AVERAGE_SPEED,
+              depName: depStation.name,
+              arrName: arrStation.name
+            }
+          })
+        }
+      })
+      
+      console.log(`\n✅ ${features.length} features créées`)
+      if (features.length > 0) {
+        console.log(`Premier segment GeoJSON:`, features[0])
+      }
+      console.groupEnd()
+
+      this.stats = {
+        countTrips: this.trips.length,
+        countFeatures: features.length,
+        kmTotal: (totalDistance / 1000).toFixed(1),
+        co2Total: (totalCO2 / 1000).toFixed(2),
+        avgSpeed: avgSpeed,
+        avgDuration: `${avgDurationMin} min`
+      }
+
+      console.log(`📊 ${features.length}/${this.trips.length} trajets valides | ${this.stats.kmTotal}km | ${this.stats.co2Total}kg CO₂`)
+
+      if (features.length > 0) {
+        this.map.addSource('trips', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features }
+        })
+
+        this.map.addLayer({
+          id: 'trips-layer',
+          type: 'line',
+          source: 'trips',
+          paint: {
+            'line-color': '#22C55E',
+            'line-width': 3,
+            'line-opacity': 0.8
+          }
+        })
+        
+        console.log(`✓ ${features.length} trajets affichés sur la carte`)
+      } else {
+        console.warn('⚠️ Aucun segment valide')
+      }
+
+      const coords = []
+      features.forEach(f => {
+        f.geometry.coordinates.forEach(c => coords.push(c))
+      })
+      
+      if (coords.length > 0) {
+        const lons = coords.map(c => c[0])
+        const lats = coords.map(c => c[1])
+        const bounds = [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]]
+        this.map.fitBounds(bounds, { padding: 120, maxZoom: 13, duration: 1000 })
+      } else {
+        this.map.setCenter([4.8357, 45.7640])
+        this.map.setZoom(11)
+      }
+    },
+    displayStations() {
+      if (!this.map || !this.showStations) return
+      
+      const stationFeatures = []
+      const addedCoords = new Set()
+      
+      this.displayedTrips.forEach(trip => {
+        const depKey = trip.depCoords
+        const arrKey = trip.arrCoords
+        
+        if (!addedCoords.has(depKey)) {
+          const [lon, lat] = trip.depCoords.split(', ').map(Number)
+          stationFeatures.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [lon, lat] },
+            properties: { name: trip.depName, id: trip.depId }
+          })
+          addedCoords.add(depKey)
+        }
+        
+        if (!addedCoords.has(arrKey)) {
+          const [lon, lat] = trip.arrCoords.split(', ').map(Number)
+          stationFeatures.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [lon, lat] },
+            properties: { name: trip.arrName, id: trip.arrId }
+          })
+          addedCoords.add(arrKey)
+        }
+      })
+      
+      if (stationFeatures.length === 0) return
+      
+      if (!this.map.getSource('stations')) {
+        this.map.addSource('stations', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: stationFeatures }
+        })
+        
+        this.map.addLayer({
+          id: 'stations-layer',
+          type: 'circle',
+          source: 'stations',
+          paint: {
+            'circle-radius': 5,
+            'circle-color': '#22C55E',
+            'circle-opacity': 0.8,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#fff'
+          }
+        })
+        
+        const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+        
+        this.map.on('mouseenter', 'stations-layer', (e) => {
+          this.map.getCanvas().style.cursor = 'pointer'
+          const props = e.features[0].properties
+          popup.setLngLat(e.lngLat)
+            .setHTML(`<div style="color: #22C55E; font-size: 12px; font-weight: 600;">${props.name}</div>`)
+            .addTo(this.map)
+        })
+        
+        this.map.on('mouseleave', 'stations-layer', () => {
+          this.map.getCanvas().style.cursor = ''
+          popup.remove()
+        })
+      }
+    },
+    toggleStations() {
+      if (!this.map) return
+      if (this.showStations) {
+        if (this.map.getLayer('stations-layer')) {
+          this.map.setLayoutProperty('stations-layer', 'visibility', 'visible')
+        } else {
+          this.displayStations()
+        }
+      } else {
+        if (this.map.getLayer('stations-layer')) {
+          this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
+        }
+      }
+    },
+    addTripClickHandler() {
+      if (!this.map || !this.map.getLayer('trips-layer')) return
+      
+      this.map.on('click', 'trips-layer', (e) => {
+        if (e.features.length === 0) return
+        const props = e.features[0].properties
+        
+        const tripIdx = this.displayedTrips.findIndex(
+          trip => trip.depName === props.depName && trip.arrName === props.arrName
+        )
+        
+        if (tripIdx >= 0) {
+          this.selectedTripIndex = tripIdx
+          this.onTripSelected()
+        }
+      })
+      
+      this.map.on('mouseenter', 'trips-layer', () => {
+        this.map.getCanvas().style.cursor = 'pointer'
+      })
+      this.map.on('mouseleave', 'trips-layer', () => {
+        this.map.getCanvas().style.cursor = ''
+      })
+    },
+    onTripSelected() {
+      if (!this.map || this.selectedTripIndex < 0) {
+        if (this.map && this.map.getLayer('trips-highlight')) {
+          this.map.setPaintProperty('trips-highlight', 'line-opacity', 0)
+        }
+        return
+      }
+      
+      const trip = this.selectedTrip
+      if (!trip) return
+      
+      const highlightFeature = {
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              trip.depCoords.split(', ').map(Number),
+              trip.arrCoords.split(', ').map(Number)
+            ]
+          }
+        }]
+      }
+      
+      if (!this.map.getSource('trips-highlight')) {
+        this.map.addSource('trips-highlight', {
+          type: 'geojson',
+          data: highlightFeature
+        })
+        
+        this.map.addLayer({
+          id: 'trips-highlight',
+          type: 'line',
+          source: 'trips-highlight',
+          paint: {
+            'line-color': '#FFD700',
+            'line-width': 6,
+            'line-opacity': 0.9,
+            'line-blur': 2
+          }
+        }, 'trips-layer')
+      } else {
+        this.map.getSource('trips-highlight').setData(highlightFeature)
+        this.map.setPaintProperty('trips-highlight', 'line-opacity', 0.9)
+      }
+      
+      const depCoords = trip.depCoords.split(', ').map(Number)
+      const arrCoords = trip.arrCoords.split(', ').map(Number)
+      const bounds = [
+        [Math.min(depCoords[0], arrCoords[0]), Math.min(depCoords[1], arrCoords[1])],
+        [Math.max(depCoords[0], arrCoords[0]), Math.max(depCoords[1], arrCoords[1])]
+      ]
+      
+      this.map.fitBounds(bounds, { padding: 140, duration: 600, maxZoom: 13 })
+      
+      console.log(`✨ Trajet sélectionné: ${trip.depName} → ${trip.arrName}`)
+    }
+  },
+  computed: {
+    selectedTrip() {
+      if (this.selectedTripIndex < 0 || this.selectedTripIndex >= this.displayedTrips.length) {
+        return null
+      }
+      return this.displayedTrips[this.selectedTripIndex]
+    }
   },
   beforeUnmount() {
     if (this.map) {
       this.map.remove()
-    }
-  },
-  methods: {
-    async loadTrips() {
-      this.isLoading = true
-      this.error = null
-
-      try {
-        // 1) Préférer les données locales si présentes
-        const local = this.getLocalTrips()
-        if (local) {
-          this.trips = local
-          this.isUsingLocal = true
-          this.updateMap()
-          return
-        }
-
-        // 2) Sinon, charger le fichier embarqué
-        const response = await fetch('/velov-trips.json')
-        
-        if (!response.ok) {
-          throw new Error('Impossible de charger les données VeloV')
-        }
-
-        this.trips = await response.json()
-        
-        if (this.trips.length === 0) {
-          this.error = 'Aucun trajet trouvé. Utilisez export-velov.html pour exporter vos données.'
-        } else {
-          this.updateMap()
-        }
-      } catch (error) {
-        this.error = error.message
-        console.error('Load error:', error)
-      } finally {
-        this.isLoading = false
-      }
-    },
-
-    openImportTool() {
-      window.open('/import-velov.html', '_blank')
-    },
-
-    onFileSelected(e) {
-      const file = e.target.files?.[0]
-      if (!file) return
-      const reader = new FileReader()
-      reader.onload = () => {
-        try {
-          const text = String(reader.result || '')
-          const json = JSON.parse(text)
-          if (!Array.isArray(json)) throw new Error('Fichier invalide: attendu un tableau de trajets')
-          this.trips = json
-          this.isUsingLocal = true
-          this.saveLocalTrips(json)
-          this.updateMap()
-        } catch (err) {
-          this.error = 'Fichier JSON invalide'
-          console.error(err)
-        }
-      }
-      reader.readAsText(file)
-      // reset input for re-selecting the same file later
-      e.target.value = ''
-    },
-
-    saveLocalTrips(trips) {
-      try {
-        const payload = { updatedAt: new Date().toISOString(), count: trips.length, trips }
-        localStorage.setItem('velovTrips', JSON.stringify(payload))
-      } catch {}
-    },
-
-    getLocalTrips() {
-      try {
-        const raw = localStorage.getItem('velovTrips')
-        if (!raw) return null
-        const parsed = JSON.parse(raw)
-        if (!parsed || !Array.isArray(parsed.trips)) return null
-        return parsed.trips
-      } catch { return null }
-    },
-
-    useLocalTrips() {
-      const local = this.getLocalTrips()
-      if (local) {
-        this.trips = local
-        this.isUsingLocal = true
-        this.updateMap()
-      }
-    },
-
-    clearLocalTrips() {
-      try { localStorage.removeItem('velovTrips') } catch {}
-      this.isUsingLocal = false
-      // Recharger depuis le fichier embarqué
-      this.loadTrips()
-    },
-
-    initMap() {
-      this.map = new mapboxgl.Map({
-        container: this.$refs.mapContainer,
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [4.8357, 45.7640], // Lyon
-        zoom: 12
-      })
-
-      this.map.on('load', () => {
-        // Ajouter les sources pour routes et heatmap
-        this.map.addSource('routes-source', {
-          type: 'geojson',
-          data: { type: 'FeatureCollection', features: [] }
-        })
-
-        this.map.addSource('heatmap-source', {
-          type: 'geojson',
-          data: { type: 'FeatureCollection', features: [] }
-        })
-
-        // Ajouter les layers
-        this.map.addLayer({
-          id: 'routes-layer',
-          type: 'line',
-          source: 'routes-source',
-          paint: {
-            'line-color': '#2171b5',
-            'line-width': 2,
-            'line-opacity': 0.7
-          }
-        })
-
-        this.map.addLayer({
-          id: 'heatmap-layer',
-          type: 'heatmap',
-          source: 'heatmap-source',
-          paint: {
-            'heatmap-weight': [
-              'interpolate',
-              ['linear'],
-              ['get', 'intensity'],
-              0, 0,
-              1, 1
-            ],
-            'heatmap-intensity': [
-              'interpolate',
-              ['linear'],
-              ['zoom'],
-              0, 1,
-              9, 3
-            ],
-            'heatmap-color': [
-              'interpolate',
-              ['linear'],
-              ['heatmap-density'],
-              0, 'rgba(33, 102, 172, 0)',
-              0.2, 'rgb(103, 169, 207)',
-              0.4, 'rgb(209, 229, 240)',
-              0.6, 'rgb(253, 219, 199)',
-              0.8, 'rgb(239, 138, 98)',
-              1, 'rgb(178, 24, 43)'
-            ],
-            'heatmap-radius': [
-              'interpolate',
-              ['linear'],
-              ['zoom'],
-              0, 2,
-              9, 20
-            ],
-            'heatmap-opacity': [
-              'interpolate',
-              ['linear'],
-              ['zoom'],
-              7, 1,
-              9, 0.5
-            ]
-          }
-        })
-
-        this.updateMap()
-      })
-
-      // Ajouter contrôles
-      this.map.addControl(new mapboxgl.NavigationControl())
-    },
-
-    updateMap() {
-      if (!this.map || !this.map.isStyleLoaded()) return
-
-      // Mettre à jour les routes
-      if (this.showRoutes) {
-        const routesData = createRoutesData(this.trips)
-        this.map.getSource('routes-source').setData(routesData)
-        this.map.setLayoutProperty('routes-layer', 'visibility', 'visible')
-      } else {
-        this.map.setLayoutProperty('routes-layer', 'visibility', 'none')
-      }
-
-      // Mettre à jour la heatmap
-      if (this.showHeatmap) {
-        const heatmapData = createHeatmapData(this.trips)
-        this.map.getSource('heatmap-source').setData(heatmapData)
-        this.map.setLayoutProperty('heatmap-layer', 'visibility', 'visible')
-      } else {
-        this.map.setLayoutProperty('heatmap-layer', 'visibility', 'none')
-      }
-    },
-
-    clearMap() {
-      if (this.map && this.map.isStyleLoaded()) {
-        this.map.getSource('routes-source').setData({ type: 'FeatureCollection', features: [] })
-        this.map.getSource('heatmap-source').setData({ type: 'FeatureCollection', features: [] })
-      }
-    },
-
-    selectTrip(trip) {
-      this.selectedTrip = trip
-      // Centrer la map sur le trajet
-      if (trip.startStation?.lat && trip.startStation?.lng) {
-        this.map.flyTo({
-          center: [trip.startStation.lng, trip.startStation.lat],
-          zoom: 14,
-          duration: 1000
-        })
-      }
-    },
-
-    formatDate(dateStr) {
-      return new Date(dateStr).toLocaleDateString('fr-FR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    },
-
-    formatDuration(minutes) {
-      const hours = Math.floor(minutes / 60)
-      const mins = minutes % 60
-      if (hours > 0) return `${hours}h ${mins}m`
-      return `${mins}m`
-    },
-
-    haversineDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371 // Rayon de la terre en km
-      const dLat = (lat2 - lat1) * Math.PI / 180
-      const dLon = (lon2 - lon1) * Math.PI / 180
-      const a = 
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-      return R * c
     }
   }
 }
 </script>
 
 <style scoped>
-.velov-page {
-  display: flex;
-  height: 100vh;
-}
-
-.velov-controls {
-  width: 350px;
-  background: white;
-  padding: 20px;
-  overflow-y: auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.velov-container {
   position: relative;
-}
-
-.map-container {
-  flex: 1;
-  position: relative;
-}
-
-.back {
-  position: static;
-  top: auto;
-  right: auto;
-  background: #2171b5;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  z-index: 10;
-  margin-bottom: 20px;
   width: 100%;
+  height: 100vh;
+  background: #000;
 }
 
-h1 {
-  margin: 0 0 20px 0;
-  color: #333;
-  font-size: 24px;
+.map-canvas {
+  width: 100%;
+  height: 100%;
 }
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.map-title {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #22C55E;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1;
 }
 
-.input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.btn {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-primary {
-  background: #2171b5;
-  color: white;
-}
-
-.btn-primary:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.btn-small {
-  background: #666;
-  color: white;
-  padding: 6px 12px;
-  font-size: 12px;
-}
-
-.error {
-  background: #fee;
-  color: #c00;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.data-tools .data-actions { display: flex; gap: 8px; margin: 6px 0; }
-.data-tools .data-actions-inline { display: flex; gap: 8px; margin-top: 8px; }
-.file-label { position: relative; overflow: hidden; }
-.file-label input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.muted { color: #666; font-size: 12px; }
-
-.user-info {
-  background: #f0f0f0;
-  padding: 12px;
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 0;
-}
-
-.trip-stats h3,
-.visualization-controls h3,
-.trip-list h3 {
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #333;
-}
-
-.trip-stats p,
-.visualization-controls label {
-  font-size: 13px;
-  margin: 6px 0;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.checkbox-label input {
-  cursor: pointer;
-}
-
-.scroll-container {
-  max-height: 300px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.trip-item {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.trip-item:hover {
-  background: #f5f5f5;
-}
-
-.trip-item.active {
-  background: #e3f2fd;
-  border-left: 3px solid #2171b5;
-}
-
-.arrow {
-  color: #999;
-  margin: 0 4px;
-}
-
-small {
-  color: #666;
-}
-
-.trip-popup {
+.stats-sidebar {
   position: absolute;
   bottom: 20px;
   left: 20px;
-  background: white;
-  padding: 15px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  padding: 10px 12px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-  max-width: 250px;
+  font-size: 11px;
+  color: #fff;
+  z-index: 10;
+  max-width: 220px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.stats-sidebar h2 {
+  margin: 0 0 12px 0;
   font-size: 13px;
-  z-index: 5;
+  color: #22C55E;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.trip-popup strong {
-  color: #2171b5;
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.trip-popup p {
-  margin: 6px 0 0 0;
-  color: #666;
+.stat-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: #ccc;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #22C55E;
+  text-align: right;
+  min-width: 62px;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid rgba(34, 197, 94, 0.3);
+  margin: 12px 0;
+}
+
+.map-controls {
+  margin: 8px 0;
+  font-size: 11px;
+}
+
+.map-controls label {
+  display: flex;
+  align-items: center;
+  color: #22C55E;
+  cursor: pointer;
+  font-weight: 600;
+  gap: 6px;
+}
+
+.map-controls input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #22C55E;
+}
+
+.trajet-selector {
+  margin: 8px 0;
+}
+
+.trajet-selector label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #22C55E;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trip-select {
+  width: 100%;
+  padding: 5px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trip-select:hover {
+  border-color: #22C55E;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.trip-select:focus {
+  outline: none;
+  border-color: #22C55E;
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.trip-select option {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.trip-details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(34, 197, 94, 0.3);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.detail-section {
+  margin-bottom: 8px;
+}
+
+.detail-section h3 {
+  margin: 8px 0 6px 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #22C55E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 9.5px;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .label {
+  font-weight: 600;
+  color: #aaa;
+  min-width: 58px;
+}
+
+.detail-row .value {
+  font-weight: 600;
+  color: #22C55E;
+  text-align: right;
+  flex: 1;
+}
+
+.detail-row .value.small {
+  font-size: 8.5px;
+  opacity: 0.9;
+}
+
+.detail-row .value.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: -0.5px;
+  word-break: break-all;
+}
+
+.back-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #000;
+  color: #22C55E;
+  border: 1px solid #22C55E;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #0b0b0b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .stats-sidebar {
+    max-width: 100%;
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  .map-title {
+    font-size: 16px;
+    padding: 10px 16px;
+    left: 50%;
+    top: 56px;
+    transform: translateX(-50%);
+  }
+  
+  .back-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
 }
 </style>
