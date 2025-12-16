@@ -134,7 +134,8 @@ export default {
       
       // Correspondances manuelles pour les IDs non standards
       const manualMapping = {
-        '5501': '516395829'  // Quai Des Célestins - Henri Iv
+        '5501': '516395829',        // Quai Des Célestins - Henri Iv
+        '20531346153': '218903767'  // René Boulanger - Lancry
       }
       
       const mappedId = manualMapping[sId] || sId
