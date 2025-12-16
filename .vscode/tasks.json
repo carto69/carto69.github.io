@@ -18,6 +18,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Fix: corrige structure Vue de FemmesQuaisView (docs dans template)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push portfolio cards loading",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Portfolio: charge les cartes depuis public/portfolio/cartes/index.json et simplifie catégories\" && git push",
+			"group": "build"
 		}
 	]
 }

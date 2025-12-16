@@ -1,0 +1,8 @@
+{
+  "title": "Cartes du portfolio",
+  "items": [
+    // Ajoutez ici les fichiers d’images présents dans ce dossier, par ex.:
+    // { "src": "/portfolio/cartes/ma-carte-1.jpg", "title": "Ma carte 1" },
+    // { "src": "/portfolio/cartes/ma-carte-2.png", "title": "Ma carte 2" }
+  ]
+}

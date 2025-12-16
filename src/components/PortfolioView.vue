@@ -73,48 +73,40 @@ export default {
   name: 'PortfolioView',
   data() {
     return {
-      activeCategory: 'all',
+      activeCategory: 'cartes',
       fullscreenMap: null,
       categories: [
         { id: 'cartes', name: 'Cartes', icon: '🗺️' },
         { id: 'autre', name: 'Autre', icon: '📦' }
       ],
-      maps: [
-        // Exemples de cartes - à remplacer par vos vraies cartes
-        {
-          id: 1,
-          title: 'Exemple de carte urbaine',
-          description: 'Description de la carte',
-          year: '2024',
-          category: 'urbain',
-          icon: '🏙️',
-          image: null // Remplacer par '/portfolio/carte1.png' quand disponible
-        },
-        {
-          id: 2,
-          title: 'Exemple carte mobilité',
-          description: 'Analyse des flux',
-          year: '2023',
-          category: 'mobilite',
-          icon: '🚴',
-          image: null
-        },
-        {
-          id: 3,
-          title: 'Exemple carte sociale',
-          description: 'Cartographie sensible',
-          year: '2024',
-          category: 'social',
-          icon: '👥',
-          image: null
-        }
-      ]
+      maps: []
     }
+  },
+  created() {
+    // Charge la liste des cartes depuis public/portfolio/cartes/index.json
+    fetch('/portfolio/cartes/index.json')
+      .then(r => r.json())
+      .then(json => {
+        if (json && Array.isArray(json.items)) {
+          this.maps = json.items.map((item, idx) => ({
+            id: idx + 1,
+            title: item.title || 'Carte',
+            description: item.description || '',
+            year: item.year || '',
+            category: 'cartes',
+            icon: '🗺️',
+            image: item.src
+          }))
+        }
+      })
+      .catch(() => {
+        this.maps = []
+      })
   },
   computed: {
     filteredMaps() {
       return this.maps.filter(map => {
-        if (this.activeCategory === 'cartes') return map.category !== 'autre'
+        if (this.activeCategory === 'cartes') return map.category === 'cartes'
         if (this.activeCategory === 'autre') return map.category === 'autre'
         return true
       })
