@@ -3,10 +3,33 @@
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velib-map" class="map-canvas"></div>
     <div class="map-title">Paris en Vélib'</div>
-    <div class="projection-info">
-      Mes trajets Vélib' à Paris
-      <div v-if="stats">
-        <strong>{{ stats.countFeatures }}</strong> segments sur <strong>{{ stats.countTrips }}</strong> trajets — <strong>{{ stats.kmTotal }} km</strong>
+    
+    <!-- Barre latérale des statistiques -->
+    <div class="stats-sidebar">
+      <h2>Mes trajets</h2>
+      <div class="stat-item">
+        <span class="stat-label">Trajets</span>
+        <span class="stat-value">{{ stats.countTrips }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Distance</span>
+        <span class="stat-value">{{ stats.kmTotal }} km</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">CO₂ économisé</span>
+        <span class="stat-value">{{ stats.co2Total }} kg</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Vitesse moyenne</span>
+        <span class="stat-value">{{ stats.avgSpeed }} km/h</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Segments tracés</span>
+        <span class="stat-value">{{ stats.countFeatures }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Durée moyenne</span>
+        <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
     </div>
   </div>
@@ -21,9 +44,17 @@ export default {
     return {
       trips: [],
       stations: {},
-      stats: { countTrips: 0, countFeatures: 0, kmTotal: 0 },
+      stats: {
+        countTrips: 0,
+        countFeatures: 0,
+        kmTotal: 0,
+        co2Total: 0,
+        avgSpeed: 0,
+        avgDuration: '0 min'
+      },
       loading: true,
-      error: null
+      error: null,
+      map: null
     }
   },
   mounted() {
@@ -52,6 +83,18 @@ export default {
         const response = await fetch('/velib-trips.json')
         const data = await response.json()
         this.trips = data.walletOperations || []
+        console.log(`📍 ${this.trips.length} trajets chargés`)
+        
+        // Extraire les IDs de stations uniques depuis les trajets
+        const stationIds = new Set()
+        this.trips.forEach(trip => {
+          const depId = String(trip.parameter3?.departureStationId || '')
+          const arrId = String(trip.parameter3?.arrivalStationId || '')
+          if (depId) stationIds.add(depId)
+          if (arrId) stationIds.add(arrId)
+        })
+        console.log(`🏢 ${stationIds.size} stations uniques identifiées`)
+        
         await this.loadStations()
         this.initMap()
       } catch (error) {
@@ -149,24 +192,41 @@ export default {
     },
     displayTrips() {
       if (!this.trips.length) {
-        this.stats = { countTrips: 0, countFeatures: 0, kmTotal: 0 }
+        this.stats = { countTrips: 0, countFeatures: 0, kmTotal: 0, co2Total: 0, avgSpeed: 0, avgDuration: '0 min' }
         console.warn('Aucun trajet à afficher')
         return
       }
 
-      const totalDistance = this.trips.reduce((sum, t) => 
-        sum + (parseFloat(t.parameter3?.DISTANCE) || 0), 0
-      )
+      let totalDistance = 0
+      let totalCO2 = 0
+      let totalDuration = 0
+      let totalSpeeds = []
+      
+      this.trips.forEach(trip => {
+        totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
+        totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
+        totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
+        
+        // Calculer la durée en secondes
+        const start = new Date(trip.startDate)
+        const end = new Date(trip.endDate)
+        totalDuration += (end - start) / 1000
+      })
+      
+      const avgSpeed = totalSpeeds.length > 0 
+        ? (totalSpeeds.reduce((a, b) => a + b, 0) / totalSpeeds.length).toFixed(1)
+        : 0
+
+      const avgDurationSeconds = totalDuration / this.trips.length
+      const avgDurationMin = Math.round(avgDurationSeconds / 60)
       
       // Collecte des IDs et stats de résolution
-      const allIds = []
       const resolved = {}
       const unresolved = {}
       
       this.trips.forEach(trip => {
         const depId = String(trip.parameter3?.departureStationId || '')
         const arrId = String(trip.parameter3?.arrivalStationId || '')
-        allIds.push(depId, arrId)
         
         const depStation = this.resolveStation(depId)
         const arrStation = this.resolveStation(arrId)
@@ -178,10 +238,7 @@ export default {
         else if (arrId) unresolved[arrId] = true
       })
       
-      console.log(`Résolution des stations: ${Object.keys(resolved).length} résolues / ${Object.keys(unresolved).length} non-résolues`)
-      if (Object.keys(unresolved).length > 0) {
-        console.log('IDs non-résolues (premiers 10):', Object.keys(unresolved).slice(0, 10))
-      }
+      console.log(`✅ ${Object.keys(resolved).length} stations résolues | ⚠️ ${Object.keys(unresolved).length} non-résolues`)
 
       // Crée les lignes de trajets
       const features = []
@@ -203,7 +260,8 @@ export default {
             },
             properties: {
               distance: trip.parameter3.DISTANCE,
-              date: trip.startDate
+              date: trip.startDate,
+              speed: trip.parameter3.AVERAGE_SPEED
             }
           })
         } else {
@@ -228,10 +286,13 @@ export default {
       this.stats = {
         countTrips: this.trips.length,
         countFeatures: features.length,
-        kmTotal: +(totalDistance / 1000).toFixed(1)
+        kmTotal: (totalDistance / 1000).toFixed(1),
+        co2Total: (totalCO2 / 1000).toFixed(2),
+        avgSpeed: avgSpeed,
+        avgDuration: `${avgDurationMin} min`
       }
 
-      console.log(`📊 Stats: ${features.length} segments | ${this.stats.kmTotal} km | ${this.trips.length} trajets`)
+      console.log(`📊 ${features.length}/${this.trips.length} trajets | ${this.stats.kmTotal}km | ${this.stats.co2Total}kg CO₂ | Vitesse: ${avgSpeed} km/h`)
 
       if (features.length > 0) {
         this.map.addSource('trips', {
@@ -245,8 +306,8 @@ export default {
           source: 'trips',
           paint: {
             'line-color': '#00D9FF',
-            'line-width': 2,
-            'line-opacity': 0.7
+            'line-width': 3,
+            'line-opacity': 0.8
           }
         })
         
@@ -266,16 +327,16 @@ export default {
           type: 'circle',
           source: 'trips-points',
           paint: {
-            'circle-radius': 5,
+            'circle-radius': 6,
             'circle-color': [
               'match', ['get', 'type'],
               'depart', '#00FF99',
               'arrivee', '#FFD166',
               '#00D9FF'
             ],
-            'circle-opacity': 0.8,
+            'circle-opacity': 0.85,
             'circle-stroke-color': '#000',
-            'circle-stroke-width': 1
+            'circle-stroke-width': 1.5
           }
         })
         console.log(`✓ ${pointFeatures.length} points fallback affichés`)
@@ -294,10 +355,10 @@ export default {
         const lons = coords.map(c => c[0])
         const lats = coords.map(c => c[1])
         const bounds = [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]]
-        this.map.fitBounds(bounds, { padding: 60, maxZoom: 14, duration: 800 })
+        this.map.fitBounds(bounds, { padding: 120, maxZoom: 13, duration: 1000 })
       } else {
         this.map.setCenter([2.35, 48.86])
-        this.map.setZoom(11.5)
+        this.map.setZoom(11)
       }
     }
   },
@@ -336,22 +397,54 @@ export default {
   z-index: 1;
 }
 
-.projection-info {
+.stats-sidebar {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 12px 16px;
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  padding: 16px 20px;
+  border-radius: 8px;
   font-size: 13px;
   color: #fff;
-  z-index: 1;
-  line-height: 1.5;
+  z-index: 10;
+  max-width: 280px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
-.projection-info strong {
+.stats-sidebar h2 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
   color: #00D9FF;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: #ccc;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #00D9FF;
+  text-align: right;
+  min-width: 80px;
 }
 
 .back-button {
@@ -375,5 +468,25 @@ export default {
   background: #EED08C;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .stats-sidebar {
+    max-width: 100%;
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  .map-title {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+  
+  .back-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
 }
 </style>
