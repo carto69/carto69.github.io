@@ -79,7 +79,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: 105% auto; /* léger dézoom */
-  background-position: 98% -20px; /* décale encore un peu à droite */
+  background-position: 99% -20px; /* décale encore un peu à droite */
 }
 
 .credits-top {
@@ -103,8 +103,8 @@ export default {
 }
 
 .credits-toggle {
-  background: rgba(74, 144, 164, 0.85);
-  color: #F4E4A0;
+  background: #FFD166; /* jaune cohérent avec la carte */
+  color: #2d3748;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -112,7 +112,7 @@ export default {
   z-index: 101;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-.credits-toggle:hover { background: rgba(74, 144, 164, 1); }
+.credits-toggle:hover { background: #FFC44D; }
 
 .credits-panel {
   position: fixed;
@@ -139,22 +139,22 @@ export default {
   padding: 40px 20px;
 }
 
-.title {
-  font-size: 5rem;
-  font-weight: 700;
-  color: #6BB6D0;
-  text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
-  margin: 0 0 60px 0;
-  font-family: 'Arial Black', sans-serif;
-  letter-spacing: 3px;
-  font-style: normal;
+.tile-btn {
+  width: 100%;
+  padding: 8px;
+  background: #FFD166; /* jaune pour les onglets/boutons */
+  color: #2d3748;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-
-.tiles {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+.tile-btn:hover {
+  background: #FFC44D;
+  transform: scale(1.02);
+}
   max-width: 900px;
 }
 
