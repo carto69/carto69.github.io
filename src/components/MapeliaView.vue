@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl'
+const mapboxgl = window.mapboxgl
 
 export default {
   name: 'MapeliaView',
