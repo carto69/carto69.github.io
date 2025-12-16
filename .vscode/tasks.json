@@ -24,6 +24,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Portfolio: charge les cartes depuis public/portfolio/cartes/index.json et simplifie catégories\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push portfolio JSON + fix FemmesQuaisView script",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Portfolio: index.json valide + fix script FemmesQuaisView (computed/methods)\" && git push",
+			"group": "build"
 		}
 	]
 }
