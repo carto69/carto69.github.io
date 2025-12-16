@@ -132,14 +132,21 @@ export default {
       if (!id) return null
       const sId = String(id).trim()
       
+      // Correspondances manuelles pour les IDs non standards
+      const manualMapping = {
+        '5501': '516395829'  // Quai Des Célestins - Henri Iv
+      }
+      
+      const mappedId = manualMapping[sId] || sId
+      
       // UNIQUEMENT correspondance exacte - pas de logique de matching partiel
-      if (this.stations[sId]) {
-        return this.stations[sId]
+      if (this.stations[mappedId]) {
+        return this.stations[mappedId]
       }
       
       // Debug pour les stations non trouvées
-      if (!this.stations[sId]) {
-        console.warn(`✗ Station ${sId} NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
+      if (!this.stations[mappedId]) {
+        console.warn(`✗ Station ${sId} (mappé: ${mappedId}) NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
       }
       
       return null
