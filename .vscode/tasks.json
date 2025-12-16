@@ -48,6 +48,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Portfolio: vignette PDF avec <embed>\\nHome: recadre fond (60% 80px)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push layout fixes",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Global: body sans marges\\nHome: zoom fond (120%) + position (55% 120px)\" && git push",
+			"group": "build"
 		}
 	]
 }
