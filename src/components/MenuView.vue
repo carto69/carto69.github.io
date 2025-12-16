@@ -75,7 +75,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center 70%;
+  background-position: center center;
 }
 
 .credits-top {
@@ -138,14 +138,14 @@ export default {
 
 .tile {
   position: relative;
-  padding: 16px 14px;
+  padding: 14px 12px;
   border-radius: 10px;
   background: rgba(44, 122, 123, 0.25);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 180px;
-  max-width: 210px;
+  min-width: 160px;
+  max-width: 190px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -157,7 +157,7 @@ export default {
 }
 
 .tile-icon {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   margin-bottom: 6px;
   text-align: center;
 }
@@ -165,17 +165,17 @@ export default {
 .tile h2 {
   margin: 0 0 6px 0;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
   color: rgba(255, 255, 255, 0.95);
-  font-size: 12px;
-  line-height: 1.3;
+  font-size: 11px;
+  line-height: 1.2;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }

@@ -44,16 +44,39 @@ export default {
       activeTab: 'home'
     }
   },
+  mounted() {
+    // Gérer le bouton retour du navigateur
+    window.addEventListener('popstate', this.handlePopState)
+    // Initialiser l'historique
+    this.updateHistory()
+  },
+  beforeUnmount() {
+    window.removeEventListener('popstate', this.handlePopState)
+  },
   methods: {
     openTab(tab) {
       if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia' || tab === 'femmes-quais' || tab === 'zonzon' || tab === 'portfolio') {
         this.activeTab = tab
+        this.updateHistory()
       } else {
         this.activeTab = 'home'
+        this.updateHistory()
       }
     },
     goHome() {
       this.activeTab = 'home'
+      this.updateHistory()
+    },
+    updateHistory() {
+      const url = this.activeTab === 'home' ? '/' : `/#${this.activeTab}`
+      window.history.pushState({ tab: this.activeTab }, '', url)
+    },
+    handlePopState(event) {
+      if (event.state && event.state.tab) {
+        this.activeTab = event.state.tab
+      } else {
+        this.activeTab = 'home'
+      }
     }
   }
 }
