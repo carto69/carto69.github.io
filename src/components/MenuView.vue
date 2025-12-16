@@ -104,7 +104,7 @@ export default {
 }
 
 .credits-toggle {
-  background: #FFD166; /* jaune cohérent avec la carte */
+  background: #F4E4A0; /* jaune beige plus doux */
   color: #2d3748;
   padding: 8px 12px;
   border-radius: 6px;
@@ -113,7 +113,7 @@ export default {
   z-index: 101;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-.credits-toggle:hover { background: #FFC44D; }
+.credits-toggle:hover { background: #EED08C; }
 
 .credits-panel {
   position: fixed;
@@ -143,7 +143,7 @@ export default {
 .tile-btn {
   width: 100%;
   padding: 8px;
-  background: #FFD166; /* jaune pour les onglets/boutons */
+  background: #F4E4A0; /* jaune beige pour les onglets */
   color: #2d3748;
   border: none;
   border-radius: 6px;
@@ -153,17 +153,19 @@ export default {
   transition: all 0.2s ease;
 }
 .tile-btn:hover {
-  background: #FFC44D;
+  background: #EED08C; /* hover légèrement plus sombre */
   transform: scale(1.02);
 }
 
 .title {
-  font-size: 4rem;
-  color: #fff;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-  margin-bottom: 40px;
-  text-align: center;
-  max-width: 900px;
+  font-size: 5rem;
+  font-weight: 700;
+  color: #6BB6D0;
+  text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
+  margin: 0 0 60px 0;
+  font-family: 'Arial Black', sans-serif;
+  letter-spacing: 3px;
+  font-style: normal;
 }
 
 .tile-break {
