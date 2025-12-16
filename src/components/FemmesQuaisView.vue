@@ -2,10 +2,10 @@
   <div class="femmes-quais-page">
     <aside class="sidebar">
       <button class="back" @click="$emit('back')">← Retour</button>
-      <h1>Femmes sur les quais du Rhône</h1>
+      <h1>Genre et espace public</h1>
       
       <div class="project-info">
-        <p>Projet cartographique sur la présence et représentation des femmes le long des quais du Rhône à Lyon</p>
+        <p>Cartographie sensible sur l'expérience des femmes sur les quais du Rhône</p>
       </div>
 
       <hr />
@@ -58,14 +58,14 @@ export default {
       tabs: [
         { 
           id: 'carte1', 
-          name: 'Carte principale', 
-          icon: '🗺️',
+          name: 'Jour', 
+          icon: '☀️',
           content: '/femmes-quais/carte-1.png'
         },
         { 
           id: 'carte2', 
-          name: 'Carte détaillée', 
-          icon: '📍',
+          name: 'Nuit', 
+          icon: '🌙',
           content: '/femmes-quais/carte-2.png'
         },
         { 

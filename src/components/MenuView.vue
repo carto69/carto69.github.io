@@ -22,7 +22,7 @@
           <p>Carte de mes itinéraires Vélib' à Paris</p>
           <button class="tile-btn">Explorer →</button>
         </article>
-        <article class="tile" @click="$emit('open', 'mapelia')">
+        <article class="tile" @click="openMapelia">
           <div class="tile-icon">🗺️</div>
           <h2>Mapelia</h2>
           <p>Carte interactive avec parcours personnalisables</p>
@@ -30,14 +30,14 @@
         </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
           <div class="tile-icon">👥</div>
-          <h2>Femmes sur les quais</h2>
-          <p>Cartes sensibles</p>
+          <h2>Genre et espace public</h2>
+          <p>Cartographie sensible sur l'expérience des femmes sur les quais du Rhône</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'zonzon')">
           <div class="tile-icon">🌍</div>
           <h2>zonzon</h2>
-          <p>Carte mondiale en projection Equal Earth</p>
+          <p>Carte mondiale des prisons</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'portfolio')">
@@ -53,7 +53,19 @@
 </template>
 
 <script>
-export default { name: 'MenuView' }
+export default {
+  name: 'MenuView',
+  methods: {
+    openMapelia() {
+      const code = prompt('Code d\'accès requis :')
+      if (code === '1612') {
+        this.$emit('open', 'mapelia')
+      } else if (code !== null) {
+        alert('Code incorrect')
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -126,14 +138,14 @@ export default { name: 'MenuView' }
 
 .tile {
   position: relative;
-  padding: 20px 18px;
-  border-radius: 12px;
+  padding: 16px 14px;
+  border-radius: 10px;
   background: rgba(44, 122, 123, 0.25);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 200px;
-  max-width: 240px;
+  min-width: 180px;
+  max-width: 210px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
