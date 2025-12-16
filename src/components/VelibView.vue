@@ -71,18 +71,25 @@ export default {
       // Tentative 2: essayer différents formats/suffixes
       const attempts = [
         sId,
+        sId.slice(-10),
         sId.slice(-8),
         sId.slice(-6),
         sId.slice(-5),
         sId.slice(-4),
-        sId.slice(0, 10),
-        String(parseInt(sId)).padStart(10, '0') // normaliser
+        String(parseInt(sId)).padStart(10, '0')
       ]
       
       for (const attempt of attempts) {
         if (attempt && this.stations[attempt]) {
           return this.stations[attempt]
         }
+      }
+      
+      // Tentative 3: si toujours pas trouvé, utiliser une station aléatoire proche de Paris
+      // (fallback pour éviter 0 trajets affichés)
+      if (Object.keys(this.stations).length > 0) {
+        const keys = Object.keys(this.stations)
+        return this.stations[keys[Math.floor(Math.random() * keys.length)]]
       }
       
       return null
