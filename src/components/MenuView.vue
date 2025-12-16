@@ -152,10 +152,10 @@ export default {
   width: 100%;
   padding: 8px;
   background: #F4E4A0; /* jaune beige pour les onglets */
-  color: #2d3748;
+  color: #2e7ba8; /* flèche bleue */
   border: none;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -186,8 +186,8 @@ export default {
   position: relative;
   padding: 12px 10px;
   border-radius: 10px;
-  background: rgba(182, 222, 238, 0.9); /* bleu clair moins clair pour l'onglet */
-  border: 1px solid rgba(58, 143, 191, 0.25); /* liseré bleu */
+  background: rgba(46, 123, 168, 0.9); /* même bleu que le titre */
+  border: 1px solid rgba(46, 123, 168, 0.35); /* liseré bleu assorti */
   cursor: pointer;
   min-width: 130px;
   max-width: 170px;
@@ -198,7 +198,7 @@ export default {
 .tile:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  background: rgba(198, 232, 243, 0.92);
+  background: rgba(46, 123, 168, 0.96);
 }
 
 .tile-icon {
@@ -209,12 +209,10 @@ export default {
 
 .tile h2 {
   margin: 0 0 6px 0;
-  color: #2d3748;
+  color: #f4f8fb;
   font-size: 1rem;
-  color: #2e7ba8; /* flèche bleue */
   text-align: center;
 }
-  font-size: 16px;
 .tile p {
   margin: 0 0 8px 0;
   color: #4a5568;
