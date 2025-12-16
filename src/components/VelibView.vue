@@ -177,16 +177,13 @@ export default {
       }
     },
     async loadStations() {
-      console.log('🔄 DÉBUT CHARGEMENT DES STATIONS')
       try {
         // Charger la source principale complète (vraies coordonnées)
         let stationsComplete = {}
         try {
           const respComplete = await fetch('/velib-stations-complete.json', { cache: 'no-store' })
-          console.log('📡 Réponse fetch:', respComplete.status)
           if (respComplete.ok) {
             const dataComplete = await respComplete.json()
-            console.log('📊 Données JSON chargées:', Array.isArray(dataComplete) ? `${dataComplete.length} stations` : 'format invalide')
             // Format: array de {id, coords: [lon, lat], name}
             if (Array.isArray(dataComplete)) {
               dataComplete.forEach(s => {
@@ -228,8 +225,6 @@ export default {
               })
             }
             console.log('✓ Stations complètes chargées:', Object.keys(stationsComplete).length)
-            console.log('🧪 stationsComplete["7295"]:', stationsComplete['7295'])
-            console.log('🧪 stationsComplete["27414932"]:', stationsComplete['27414932'])
           }
         } catch (e) {
           console.warn('Fichier stations complet inaccessible:', e.message)
@@ -260,23 +255,12 @@ export default {
         // Fusion: priorité à la source complète (ne pas écraser avec local)
         this.stations = { ...stationsLocal, ...stationsComplete }
         const count = Object.keys(this.stations).length
-        console.log('🔀 Fusion effectuée:', {
-          stationsComplete: Object.keys(stationsComplete).length,
-          stationsLocal: Object.keys(stationsLocal).length,
-          total: count
-        })
         
         if (count === 0) {
           this.error = 'Aucune donnée de stations disponible.'
           console.error(this.error)
         } else {
           console.log(`✓ Total: ${count} stations disponibles`)
-          
-          // 🔍 TEST: Vérifier les stations critiques APRÈS fusion
-          console.log('🧪 APRÈS FUSION this.stations["7295"]:', this.stations['7295'])
-          console.log('🧪 APRÈS FUSION this.stations["27414932"]:', this.stations['27414932'])
-          console.log('🧪 APRÈS FUSION this.stations["100925033"]:', this.stations['100925033'])
-          console.log('🧪 Échantillon des clés:', Object.keys(this.stations).slice(0, 30))
         }
       } catch (error) {
         console.error('Erreur chargement stations:', error)
@@ -288,7 +272,7 @@ export default {
       
       this.map = new mapboxgl.Map({
         container: 'velib-map',
-        style: 'mapbox://styles/mapbox/streets-v12',
+        style: 'mapbox://styles/mapbox/dark-v11',
         center: [2.3522, 48.8566],
         zoom: 12
       })
