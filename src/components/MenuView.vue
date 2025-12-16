@@ -119,7 +119,7 @@ export default {
   position: fixed;
   top: 60px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(244, 228, 160, 0.92); /* beige comme le bouton Crédit */
   color: #2d3748;
   padding: 10px 12px;
   border-radius: 6px;
@@ -186,7 +186,7 @@ export default {
   position: relative;
   padding: 12px 10px;
   border-radius: 10px;
-  background: rgba(214, 239, 247, 0.92); /* bleu clair pour l'onglet */
+  background: rgba(182, 222, 238, 0.9); /* bleu clair moins clair pour l'onglet */
   border: 1px solid rgba(58, 143, 191, 0.25); /* liseré bleu */
   cursor: pointer;
   min-width: 130px;
@@ -211,10 +211,10 @@ export default {
   margin: 0 0 6px 0;
   color: #2d3748;
   font-size: 1rem;
-  font-weight: 700;
+  color: #2e7ba8; /* flèche bleue */
   text-align: center;
 }
-
+  font-size: 16px;
 .tile p {
   margin: 0 0 8px 0;
   color: #4a5568;
