@@ -36,6 +36,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Portfolio: ajoute items depuis Téléchargements + ouvre PDF dans nouvel onglet\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push credits + thumbnails",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Home: crédits en haut à droite + rognage haut\\nPortfolio: vignettes PDF\" && git push",
+			"group": "build"
 		}
 	]
 }

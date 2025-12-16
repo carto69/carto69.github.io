@@ -28,11 +28,15 @@
           @click="openFullscreen(map)"
         >
           <div class="map-thumbnail">
-            <img 
-              v-if="map.image" 
-              :src="map.image" 
-              :alt="map.title"
-            />
+            <template v-if="map.image && !map.image.endsWith('.pdf')">
+              <img :src="map.image" :alt="map.title" />
+            </template>
+            <template v-else-if="map.image && map.image.endsWith('.pdf')">
+              <div class="pdf-thumb">
+                <div class="pdf-icon">📄 PDF</div>
+                <div class="pdf-name">{{ map.title }}</div>
+              </div>
+            </template>
             <div v-else class="placeholder">
               <span>{{ map.icon }}</span>
             </div>
@@ -264,6 +268,31 @@ hr {
   justify-content: center;
   font-size: 3rem;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+.pdf-thumb {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  background: linear-gradient(135deg, #212121 0%, #2b2b2b 100%);
+  border: 1px dashed #555;
+}
+.pdf-icon {
+  font-size: 1.2rem;
+  background: rgba(255,255,255,0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.pdf-name {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+  padding: 0 10px;
 }
 
 .map-info {

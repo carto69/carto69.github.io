@@ -1,6 +1,10 @@
 <template>
   <main class="menu">
-    <div class="credits-top">Elia Terragni</div>
+    <div class="credits-toggle top-right" @click="showCredits = !showCredits">Crédit</div>
+    <div v-if="showCredits" class="credits-panel">
+      <div class="credit-line"><strong>Source carte:</strong> Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
+      <div class="credit-line"><strong>Crédit:</strong> Elia Terragni</div>
+    </div>
     <div class="hero">
       <h1 class="title">carto69</h1>
       <div class="tiles">
@@ -42,8 +46,7 @@
         </article>
       </div>
     </div>
-    <div class="credits-toggle" @click="showCredits = !showCredits">Crédit</div>
-    <div v-if="showCredits" class="credits-bottom">Elia Terragni · Source carte: Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
+    
   </main>
 </template>
 
@@ -76,7 +79,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: cover;
-  background-position: center center; /* marges équilibrées */
+  background-position: center 40px; /* centre horizontal, rogne légèrement le haut pour cacher la ligne noire */
 }
 
 .credits-top {
@@ -93,25 +96,13 @@ export default {
   white-space: nowrap;
 }
 
-.credits-bottom {
+.top-right {
   position: fixed;
-  bottom: 20px;
-  right: 30px;
-  color: #000;
-  font-size: 0.75rem;
-  font-style: italic;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 6px 10px;
-  border-radius: 4px;
-  z-index: 100;
-  white-space: nowrap;
-  text-align: right;
+  top: 20px;
+  right: 20px;
 }
 
 .credits-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
   background: rgba(255, 255, 255, 0.85);
   color: #2d3748;
   padding: 8px 12px;
@@ -122,6 +113,20 @@ export default {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 .credits-toggle:hover { background: white; }
+
+.credits-panel {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2d3748;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  z-index: 101;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.credit-line { white-space: nowrap; }
 
 .hero {
   position: relative;
