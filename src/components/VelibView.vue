@@ -57,16 +57,50 @@ export default {
     },
     async loadStations() {
       try {
+        // 0) Fichier local (si présent dans /public)
+        let stationsLocal = {}
+        try {
+          const respLocal = await fetch('/velib-emplacement-des-stations.json', { cache: 'no-store' })
+          if (respLocal.ok) {
+            const dataLocal = await respLocal.json()
+            // Accepte soit une map {id: {name, coords}}, soit un array [{id, lon, lat, name}]
+            if (Array.isArray(dataLocal)) {
+              dataLocal.forEach(s => {
+                const id = s.id || s.station_id || s.code
+                const lon = s.lon ?? s.coord?.lon
+                const lat = s.lat ?? s.coord?.lat
+                if (id && lon != null && lat != null) {
+                  stationsLocal[String(id)] = { name: s.name || 'Station', coords: [lon, lat] }
+                }
+              })
+            } else {
+              stationsLocal = dataLocal || {}
+            }
+          }
+        } catch {}
+
         // 1) stationcode -> coords (OpenData proxy)
-        const resp1 = await fetch('/api/velib-stations')
-        const data1 = await resp1.json()
-        const stations1 = data1?.stations || {}
+        let stations1 = {}
+        try {
+          const resp1 = await fetch('/api/velib-stations')
+          if (resp1.ok) {
+            const data1 = await resp1.json()
+            stations1 = data1?.stations || {}
+          }
+        } catch {}
+
         // 2) station_id -> coords (GBFS proxy)
-        const resp2 = await fetch('/api/velib-gbfs')
-        const data2 = await resp2.json()
-        const stations2 = data2?.stations || {}
-        // Fusion des deux maps pour maximiser les correspondances
-        this.stations = { ...stations1, ...stations2 }
+        let stations2 = {}
+        try {
+          const resp2 = await fetch('/api/velib-gbfs')
+          if (resp2.ok) {
+            const data2 = await resp2.json()
+            stations2 = data2?.stations || {}
+          }
+        } catch {}
+
+        // Fusion des trois sources
+        this.stations = { ...stations1, ...stations2, ...stationsLocal }
       } catch (error) {
         console.error('Erreur chargement stations (proxy):', error)
       }
