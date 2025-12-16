@@ -76,12 +76,8 @@ export default {
       activeCategory: 'all',
       fullscreenMap: null,
       categories: [
-        { id: 'all', name: 'Toutes', icon: '📁' },
-        { id: 'urbain', name: 'Urbain', icon: '🏙️' },
-        { id: 'mobilite', name: 'Mobilité', icon: '🚴' },
-        { id: 'social', name: 'Social', icon: '👥' },
-        { id: 'environnement', name: 'Environnement', icon: '🌳' },
-        { id: 'autre', name: 'Autre', icon: '🗺️' }
+        { id: 'cartes', name: 'Cartes', icon: '🗺️' },
+        { id: 'autre', name: 'Autre', icon: '📦' }
       ],
       maps: [
         // Exemples de cartes - à remplacer par vos vraies cartes
@@ -117,10 +113,11 @@ export default {
   },
   computed: {
     filteredMaps() {
-      if (this.activeCategory === 'all') {
-        return this.maps
-      }
-      return this.maps.filter(map => map.category === this.activeCategory)
+      return this.maps.filter(map => {
+        if (this.activeCategory === 'cartes') return map.category !== 'autre'
+        if (this.activeCategory === 'autre') return map.category === 'autre'
+        return true
+      })
     }
   },
   methods: {

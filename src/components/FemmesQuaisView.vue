@@ -5,7 +5,7 @@
       <h1>Genre et espace public</h1>
       
       <div class="project-info">
-        <p>Cartographie sensible sur l'expérience des femmes sur les quais du Rhône</p>
+        <p>Cartes sensibles produites dans le cadre d'une enquête de L2 sur le thème "Genre et Espace Public" où nous avons enquêté sur le ressenti des femmes sur les quais du Rhône à Lyon.</p>
       </div>
 
       <hr />
@@ -55,38 +55,35 @@ export default {
     return {
       activeTab: 'carte1',
       fullscreen: false,
-      tabs: [
-        { 
-          id: 'carte1', 
-          name: 'Jour', 
-          icon: '☀️',
-          content: '/femmes-quais/carte-1.png'
-        },
-        { 
-          id: 'carte2', 
-          name: 'Nuit', 
-          icon: '🌙',
-          content: '/femmes-quais/carte-2.png'
-        },
-        { 
-          id: 'source3', 
-          name: 'Sources', 
-          icon: '📚',
-          content: '/femmes-quais/source-3.png'
-        },
-        { 
-          id: 'source4', 
-          name: 'Méthodologie', 
-          icon: '📊',
-          content: '/femmes-quais/source-4.png'
-        }
-      ]
+      docsPage: 'sources',
+          tabs: [
+            { 
+              id: 'carte1', 
+              name: 'Jour', 
+              icon: '☀️',
+              content: '/femmes-quais/carte-1.png'
+            },
+            { 
+              id: 'carte2', 
+              name: 'Nuit', 
+              icon: '🌙',
+              content: '/femmes-quais/carte-2.png'
+            },
+            { 
+              id: 'docs', 
+              name: 'Sources & Méthodo', 
+              icon: '📚',
+              content: null
+            }
+          ]
     }
   },
   computed: {
     activeContent() {
       const tab = this.tabs.find(t => t.id === this.activeTab)
-      return tab ? tab.content : null
+      if (!tab) return null
+      if (tab.id === 'docs') return null
+      return tab.content
     },
     activeTabName() {
       const tab = this.tabs.find(t => t.id === this.activeTab)
@@ -98,6 +95,18 @@ export default {
       this.fullscreen = !this.fullscreen
     }
   }
+    
+      <!-- Onglet docs: deux pages -->
+      <div v-if="activeTab === 'docs'" class="docs-container">
+        <div class="docs-tabs">
+          <button :class="{active: docsPage === 'sources'}" @click="docsPage = 'sources'">Sources</button>
+          <button :class="{active: docsPage === 'methodo'}" @click="docsPage = 'methodo'">Méthodologie</button>
+        </div>
+        <div class="docs-content">
+          <img v-if="docsPage === 'sources'" src="/femmes-quais/source-3.png" alt="Sources" />
+          <img v-else src="/femmes-quais/source-4.png" alt="Méthodologie" />
+        </div>
+      </div>
 }
 </script>
 
@@ -302,6 +311,18 @@ hr {
   background: #f7fafc;
   transform: scale(1.1);
 }
+
+.docs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+}
+.docs-tabs { display: flex; gap: 8px; }
+.docs-tabs button { padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; background: #f7fafc; cursor: pointer; }
+.docs-tabs button.active { background: #2C7A7B; color: #fff; border-color: #2C7A7B; }
+.docs-content img { max-width: 100%; max-height: calc(100vh - 220px); object-fit: contain; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
 
 @media (max-width: 768px) {
   .femmes-quais-page {

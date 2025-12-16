@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Commit and Push carto69 changes",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Femmes: fusion Sources & Méthodo + texte explicatif\" && git push",
+			"group": "build"
+		}
+	]
+}

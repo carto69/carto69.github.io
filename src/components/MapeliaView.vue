@@ -22,8 +22,9 @@ export default {
       this.map = new mapboxgl.Map({
         container: 'mapelia-map',
         style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [4.8357, 45.7640], // Lyon
-        zoom: 11
+        // Centré sur France + Italie
+        center: [7, 45],
+        zoom: 4.5
       })
 
       this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')

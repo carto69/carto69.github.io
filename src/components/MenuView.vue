@@ -7,7 +7,6 @@
         <article class="tile" @click="$emit('open', 'zonzon')">
           <div class="tile-icon">🌍</div>
           <h2>zonzon</h2>
-          <p>Carte mondiale des prisons</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="openMapelia">
@@ -18,32 +17,27 @@
         <article class="tile" @click="$emit('open', 'portfolio')">
           <div class="tile-icon">📁</div>
           <h2>Autres projets</h2>
-          <p>Portfolio de cartes et projets cartographiques</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <div class="tile-break"></div>
         <article class="tile" @click="$emit('open', 'italie2')">
           <div class="tile-icon">🗺️</div>
           <h2>Italie 2</h2>
-          <p>Plan interactif du centre commercial multi-étages</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'velov')">
           <div class="tile-icon">🚴</div>
           <h2>69 en velo'v</h2>
-          <p>Carte de mes itinéraires Vélo'V à Lyon</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'velib')">
           <div class="tile-icon">🚲</div>
           <h2>75 en vélib'</h2>
-          <p>Carte de mes itinéraires Vélib' à Paris</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
           <div class="tile-icon">👥</div>
           <h2>Genre et espace public</h2>
-          <p>Cartographie sensible sur l'expérience des femmes sur les quais du Rhône</p>
           <button class="tile-btn">Explorer →</button>
         </article>
       </div>
@@ -76,7 +70,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: cover;
-  background-position: center 45%;
+  background-position: center center; /* marges équilibrées */
 }
 
 .credits-top {
