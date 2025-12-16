@@ -11,38 +11,38 @@
         <article class="tile" @click="$emit('open', 'zonzon')">
           <div class="tile-icon">🌍</div>
           <h2>zonzon</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <article class="tile" @click="openMapelia">
           <div class="tile-icon">🗺️</div>
           <h2>Mapelia</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <article class="tile" @click="$emit('open', 'portfolio')">
           <div class="tile-icon">📁</div>
           <h2>Autres projets</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <div class="tile-break"></div>
         <article class="tile" @click="$emit('open', 'italie2')">
           <div class="tile-icon">🗺️</div>
           <h2>Italie 2</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <article class="tile" @click="$emit('open', 'velov')">
           <div class="tile-icon">🚴</div>
           <h2>69 en velo'v</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <article class="tile" @click="$emit('open', 'velib')">
           <div class="tile-icon">🚲</div>
           <h2>75 en vélib'</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
           <div class="tile-icon">👥</div>
           <h2>Genre et espace public</h2>
-          <button class="tile-btn">Explorer →</button>
+          <button class="tile-btn">→</button>
         </article>
       </div>
     </div>
@@ -140,6 +140,14 @@ export default {
   padding: 40px 20px;
 }
 
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px 22px;
+  max-width: 820px;
+}
+
 .tile-btn {
   width: 100%;
   padding: 8px;
@@ -160,7 +168,7 @@ export default {
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #6BB6D0;
+  color: #2e7ba8; /* bleu légèrement plus foncé */
   text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
@@ -178,8 +186,8 @@ export default {
   position: relative;
   padding: 12px 10px;
   border-radius: 10px;
-  background: rgba(244, 228, 160, 0.85); /* beige harmonisé avec la carte */
-  border: 1px solid rgba(120, 84, 40, 0.25); /* liseré brun doux */
+  background: rgba(214, 239, 247, 0.92); /* bleu clair pour l'onglet */
+  border: 1px solid rgba(58, 143, 191, 0.25); /* liseré bleu */
   cursor: pointer;
   min-width: 130px;
   max-width: 170px;
@@ -190,7 +198,7 @@ export default {
 .tile:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  background: rgba(238, 208, 140, 0.92);
+  background: rgba(198, 232, 243, 0.92);
 }
 
 .tile-icon {
