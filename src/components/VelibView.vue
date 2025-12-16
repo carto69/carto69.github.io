@@ -132,30 +132,14 @@ export default {
       if (!id) return null
       const sId = String(id).trim()
       
-      // Tentative 1: correspondance directe
+      // UNIQUEMENT correspondance exacte - pas de logique de matching partiel
       if (this.stations[sId]) {
         return this.stations[sId]
       }
       
-      // Tentative 2: chercher dans les clés qui commencent ou finissent par cet ID
-      const possibleKeys = Object.keys(this.stations).filter(key => {
-        // Match exact
-        if (key === sId) return true
-        // Key finit par l'ID (ex: "54000618" contient "0618")
-        if (key.endsWith(sId)) return true
-        // L'ID finit par la key (ex: ID "7295" trouvé dans key "7295")
-        if (sId.endsWith(key)) return true
-        // Chercher si c'est un suffixe avec des chiffres avant (ex "0618" pour "54000618")
-        if (key.includes(sId) && key.length > sId.length + 2) return true
-        return false
-      })
-      
-      if (possibleKeys.length === 1) {
-        return this.stations[possibleKeys[0]]
-      } else if (possibleKeys.length > 1) {
-        // Si plusieurs matches, retourner le plus long (probablement le plus précis)
-        const longestKey = possibleKeys.reduce((a, b) => a.length > b.length ? a : b)
-        return this.stations[longestKey]
+      // Debug pour les stations non trouvées
+      if (!this.stations[sId]) {
+        console.warn(`✗ Station ${sId} NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
       }
       
       return null
@@ -186,13 +170,16 @@ export default {
       }
     },
     async loadStations() {
+      console.log('🔄 DÉBUT CHARGEMENT DES STATIONS')
       try {
         // Charger la source principale complète (vraies coordonnées)
         let stationsComplete = {}
         try {
           const respComplete = await fetch('/velib-stations-complete.json', { cache: 'no-store' })
+          console.log('📡 Réponse fetch:', respComplete.status)
           if (respComplete.ok) {
             const dataComplete = await respComplete.json()
+            console.log('📊 Données JSON chargées:', Array.isArray(dataComplete) ? `${dataComplete.length} stations` : 'format invalide')
             // Format: array de {id, coords: [lon, lat], name}
             if (Array.isArray(dataComplete)) {
               dataComplete.forEach(s => {
@@ -234,6 +221,8 @@ export default {
               })
             }
             console.log('✓ Stations complètes chargées:', Object.keys(stationsComplete).length)
+            console.log('🧪 stationsComplete["7295"]:', stationsComplete['7295'])
+            console.log('🧪 stationsComplete["27414932"]:', stationsComplete['27414932'])
           }
         } catch (e) {
           console.warn('Fichier stations complet inaccessible:', e.message)
@@ -261,21 +250,26 @@ export default {
           console.warn('Fichier local indisponible:', e.message)
         }
 
-        // Fusion: priorité à la source complète, puis fallback local
-        this.stations = { ...stationsComplete, ...stationsLocal }
+        // Fusion: priorité à la source complète (ne pas écraser avec local)
+        this.stations = { ...stationsLocal, ...stationsComplete }
         const count = Object.keys(this.stations).length
+        console.log('🔀 Fusion effectuée:', {
+          stationsComplete: Object.keys(stationsComplete).length,
+          stationsLocal: Object.keys(stationsLocal).length,
+          total: count
+        })
+        
         if (count === 0) {
           this.error = 'Aucune donnée de stations disponible.'
           console.error(this.error)
         } else {
           console.log(`✓ Total: ${count} stations disponibles`)
-          // 🔍 Vérifier les coordonnées d'une station connue
-          const bastilleKey = Object.keys(this.stations).find(id => 
-            this.stations[id].name?.includes('Bastille')
-          )
-          if (bastilleKey) {
-            console.log(`🗺️ Bastille trouvée: ${this.stations[bastilleKey].coords}`)
-          }
+          
+          // 🔍 TEST: Vérifier les stations critiques APRÈS fusion
+          console.log('🧪 APRÈS FUSION this.stations["7295"]:', this.stations['7295'])
+          console.log('🧪 APRÈS FUSION this.stations["27414932"]:', this.stations['27414932'])
+          console.log('🧪 APRÈS FUSION this.stations["100925033"]:', this.stations['100925033'])
+          console.log('🧪 Échantillon des clés:', Object.keys(this.stations).slice(0, 30))
         }
       } catch (error) {
         console.error('Erreur chargement stations:', error)
