@@ -79,7 +79,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: 108% auto; /* dézoom supplémentaire pour voir plus de carte */
-  background-position: 55% -20px; /* décalage vers la droite pour voir plus à droite */
+  background-position: 62% -20px; /* décalage encore plus vers la droite */
 }
 
 .credits-top {
@@ -104,7 +104,7 @@ export default {
 
 .credits-toggle {
   background: rgba(74, 144, 164, 0.85);
-  color: white;
+  color: #F4E4A0;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -147,7 +147,7 @@ export default {
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
   letter-spacing: 3px;
-  font-style: italic;
+  font-style: normal;
 }
 
 .tiles {
