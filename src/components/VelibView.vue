@@ -68,8 +68,17 @@ export default {
       // Tentative 1: correspondance directe
       if (this.stations[sId]) return this.stations[sId]
       
-      // Tentative 2: versions raccourcies (cas où l'ID contient du padding)
-      const attempts = [sId, sId.slice(-8), sId.slice(-6), sId.slice(-5), sId.slice(-4), sId.slice(0, 4)]
+      // Tentative 2: essayer différents formats/suffixes
+      const attempts = [
+        sId,
+        sId.slice(-8),
+        sId.slice(-6),
+        sId.slice(-5),
+        sId.slice(-4),
+        sId.slice(0, 10),
+        String(parseInt(sId)).padStart(10, '0') // normaliser
+      ]
+      
       for (const attempt of attempts) {
         if (attempt && this.stations[attempt]) {
           return this.stations[attempt]
@@ -105,25 +114,46 @@ export default {
     },
     async loadStations() {
       try {
-        // Sources de stations (essayées dans l'ordre)
+        // Charger la source principale complète (vraies coordonnées)
+        let stationsComplete = {}
+        try {
+          const respComplete = await fetch('/velib-stations-complete.json', { cache: 'no-store' })
+          if (respComplete.ok) {
+            const dataComplete = await respComplete.json()
+            // Format: array de {id, coords: [lon, lat], name}
+            if (Array.isArray(dataComplete)) {
+              dataComplete.forEach(s => {
+                const id = String(s.id || '').trim()
+                const coords = s.coords || []
+                if (id && coords.length === 2) {
+                  stationsComplete[id] = { 
+                    name: s.name || `Station ${id}`, 
+                    coords: [coords[0], coords[1]]
+                  }
+                }
+              })
+            }
+            console.log('✓ Stations complètes chargées:', Object.keys(stationsComplete).length)
+          }
+        } catch (e) {
+          console.warn('Fichier stations complet inaccessible:', e.message)
+        }
+
+        // Charger le fichier local généré (fallback)
         let stationsLocal = {}
-        
-        // 1) Fichier local /public/velib-emplacement-des-stations.json
         try {
           const respLocal = await fetch('/velib-emplacement-des-stations.json', { cache: 'no-store' })
           if (respLocal.ok) {
             const dataLocal = await respLocal.json()
             if (Array.isArray(dataLocal)) {
               dataLocal.forEach(s => {
-                const id = String(s.id || s.station_id || s.code || '')
+                const id = String(s.id || s.station_id || '').trim()
                 const lon = s.lon ?? s.coord?.lon
                 const lat = s.lat ?? s.coord?.lat
                 if (id && lon != null && lat != null) {
                   stationsLocal[id] = { name: s.name || 'Station', coords: [lon, lat] }
                 }
               })
-            } else {
-              stationsLocal = dataLocal || {}
             }
             console.log('✓ Stations locales chargées:', Object.keys(stationsLocal).length)
           }
@@ -131,37 +161,11 @@ export default {
           console.warn('Fichier local indisponible:', e.message)
         }
 
-        // 2) OpenData proxy (stationcode)
-        let stations1 = {}
-        try {
-          const resp1 = await fetch('/api/velib-stations', { signal: AbortSignal.timeout(5000) })
-          if (resp1.ok) {
-            const data1 = await resp1.json()
-            stations1 = data1?.stations || {}
-            console.log('✓ OpenData proxy:', Object.keys(stations1).length, 'stations')
-          }
-        } catch (e) {
-          console.warn('OpenData proxy inaccessible:', e.message)
-        }
-
-        // 3) GBFS proxy (station_id)
-        let stations2 = {}
-        try {
-          const resp2 = await fetch('/api/velib-gbfs', { signal: AbortSignal.timeout(5000) })
-          if (resp2.ok) {
-            const data2 = await resp2.json()
-            stations2 = data2?.stations || {}
-            console.log('✓ GBFS proxy:', Object.keys(stations2).length, 'stations')
-          }
-        } catch (e) {
-          console.warn('GBFS proxy inaccessible:', e.message)
-        }
-
-        // Fusion: priorité au local, puis opendata, puis gbfs
-        this.stations = { ...stations1, ...stations2, ...stationsLocal }
+        // Fusion: priorité à la source complète, puis fallback local
+        this.stations = { ...stationsComplete, ...stationsLocal }
         const count = Object.keys(this.stations).length
         if (count === 0) {
-          this.error = 'Aucune donnée de stations disponible. Veuillez vérifier /public/velib-emplacement-des-stations.json ou les APIs.'
+          this.error = 'Aucune donnée de stations disponible.'
           console.error(this.error)
         } else {
           console.log(`✓ Total: ${count} stations disponibles`)
