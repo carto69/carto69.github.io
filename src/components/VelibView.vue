@@ -145,6 +145,7 @@ export default {
       // Crée les lignes de trajets
       const features = []
       let matchCount = 0
+      const pointFeatures = []
       this.trips.forEach(trip => {
         const depId = trip.parameter3?.departureStationId
         const arrId = trip.parameter3?.arrivalStationId
@@ -164,6 +165,22 @@ export default {
               date: trip.startDate
             }
           })
+        } else {
+          // Fallback: tracer des points si une des stations n'est pas résolue
+          if (depStation) {
+            pointFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: depStation.coords },
+              properties: { type: 'depart', date: trip.startDate }
+            })
+          }
+          if (arrStation) {
+            pointFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: arrStation.coords },
+              properties: { type: 'arrivee', date: trip.startDate }
+            })
+          }
         }
       })
 
@@ -193,6 +210,32 @@ export default {
         console.log(`${features.length} trajets affichés | ${(totalDistance/1000).toFixed(1)} km | ${totalCO2.toFixed(0)}g CO2 économisés`)
       } else {
         console.warn('Aucun segment affiché: probable mismatch entre IDs de stations et dataset temps réel.')
+      }
+
+      // Ajout des points en fallback pour visualiser les stations reconnues
+      if (pointFeatures.length > 0) {
+        this.map.addSource('trips-points', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: pointFeatures }
+        })
+        this.map.addLayer({
+          id: 'trips-points-layer',
+          type: 'circle',
+          source: 'trips-points',
+          paint: {
+            'circle-radius': 4,
+            'circle-color': [
+              'match', ['get', 'type'],
+              'depart', '#00FF99',
+              'arrivee', '#FFD166',
+              '#00D9FF'
+            ],
+            'circle-opacity': 0.85,
+            'circle-stroke-color': '#000',
+            'circle-stroke-width': 1
+          }
+        })
+        console.log(`Points fallback affichés: ${pointFeatures.length}`)
       }
     }
   },
