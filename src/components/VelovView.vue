@@ -140,35 +140,24 @@ export default {
   methods: {
     resolveStation(id) {
       if (!id) return null
-      const sId = String(id).trim()
-      
-      if (this.stations[sId]) {
-        return this.stations[sId]
-      }
-      
-      if (!this.stations[sId]) {
-        console.warn(`✗ Station ${sId} NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
-      }
-      
+      // For Velov format, we don't use IDs - just pass through
       return null
+    },
+    resolveStationByCoords(lng, lat) {
+      if (lng == null || lat == null) return null
+      const key = `${lng},${lat}`
+      return this.stations[key] || null
     },
     async loadTrips() {
       try {
         const response = await fetch('/velov-trips.json')
         const data = await response.json()
-        this.trips = data.walletOperations || []
+        // Velov format: array of trips with embedded station info
+        this.trips = Array.isArray(data) ? data : data.walletOperations || []
         console.log(`📍 ${this.trips.length} trajets chargés`)
         
-        const stationIds = new Set()
-        this.trips.forEach(trip => {
-          const depId = String(trip.parameter3?.departureStationId || '')
-          const arrId = String(trip.parameter3?.arrivalStationId || '')
-          if (depId) stationIds.add(depId)
-          if (arrId) stationIds.add(arrId)
-        })
-        console.log(`🏢 ${stationIds.size} stations uniques identifiées`)
-        
-        await this.loadStations()
+        // Extract and build stations from trip data
+        this.buildStationsFromTrips()
         this.initMap()
       } catch (error) {
         console.error('Erreur chargement trajets:', error)
@@ -176,52 +165,38 @@ export default {
         this.initMap()
       }
     },
-    async loadStations() {
-      try {
-        let stationsComplete = {}
-        try {
-          const respComplete = await fetch('/velov-stations.json', { cache: 'no-store' })
-          if (respComplete.ok) {
-            const dataComplete = await respComplete.json()
-            if (Array.isArray(dataComplete)) {
-              dataComplete.forEach(s => {
-                const id = String(s.id || '').trim()
-                const coords = s.coords || []
-                if (id && coords.length === 2) {
-                  const lon = coords[0]
-                  const lat = coords[1]
-                  
-                  let finalCoords = [lon, lat]
-                  if (lon > 100 && lat > 100) {
-                    console.warn(`⚠️ Coords Lambert 93 détectées: [${lon}, ${lat}] pour ${s.name}`)
-                  }
-                  
-                  stationsComplete[id] = { 
-                    name: s.name || `Station ${id}`, 
-                    coords: finalCoords
-                  }
-                }
-              })
-            }
-            console.log('✓ Stations complètes chargées:', Object.keys(stationsComplete).length)
-          }
-        } catch (e) {
-          console.warn('Fichier stations complet inaccessible:', e.message)
-        }
-
-        this.stations = stationsComplete
-        const count = Object.keys(this.stations).length
+    buildStationsFromTrips() {
+      // Build station map from embedded station data in trips
+      const stationsMap = {}
+      
+      this.trips.forEach(trip => {
+        const startStation = trip.startStation
+        const endStation = trip.endStation
         
-        if (count === 0) {
-          this.error = 'Aucune donnée de stations disponible.'
-          console.error(this.error)
-        } else {
-          console.log(`✓ Total: ${count} stations disponibles`)
+        if (startStation && startStation.name && startStation.lng != null && startStation.lat != null) {
+          const key = `${startStation.lng},${startStation.lat}`
+          if (!stationsMap[key]) {
+            stationsMap[key] = {
+              name: startStation.name,
+              coords: [startStation.lng, startStation.lat]
+            }
+          }
         }
-      } catch (error) {
-        console.error('Erreur chargement stations:', error)
-        this.error = 'Erreur chargement des stations'
-      }
+        
+        if (endStation && endStation.name && endStation.lng != null && endStation.lat != null) {
+          const key = `${endStation.lng},${endStation.lat}`
+          if (!stationsMap[key]) {
+            stationsMap[key] = {
+              name: endStation.name,
+              coords: [endStation.lng, endStation.lat]
+            }
+          }
+        }
+      })
+      
+      this.stations = stationsMap
+      const count = Object.keys(this.stations).length
+      console.log(`✓ ${count} stations extraites des trajets`)
     },
     initMap() {
       mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -251,80 +226,55 @@ export default {
       }
 
       let totalDistance = 0
-      let totalCO2 = 0
       let totalDuration = 0
-      let totalSpeeds = []
       let validTripsCount = 0
       
+      // Velov format: calculate distance from coords
       this.trips.forEach(trip => {
-        const depStation = this.resolveStation(trip.parameter3?.departureStationId)
-        const arrStation = this.resolveStation(trip.parameter3?.arrivalStationId)
-        
-        if (depStation && arrStation && trip.parameter3?.departureStationId !== trip.parameter3?.arrivalStationId) {
+        if (trip.startStation && trip.endStation && trip.duration) {
           validTripsCount++
-          totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
-          totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
-          totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
+          totalDuration += trip.duration * 60 // Convert minutes to seconds
           
-          const start = new Date(trip.startDate)
-          const end = new Date(trip.endDate)
-          totalDuration += (end - start) / 1000
+          // Haversine distance
+          const dist = this.haversineDistance(
+            trip.startStation.lat,
+            trip.startStation.lng,
+            trip.endStation.lat,
+            trip.endStation.lng
+          )
+          totalDistance += dist * 1000 // Convert to meters
         }
       })
       
-      const avgSpeed = totalSpeeds.length > 0 
-        ? (totalSpeeds.reduce((a, b) => a + b, 0) / totalSpeeds.length).toFixed(1)
-        : 0
-
       const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
       const avgDurationMin = Math.round(avgDurationSeconds / 60)
-      
-      const resolved = {}
-      const unresolved = {}
-      
-      this.trips.forEach(trip => {
-        const depId = String(trip.parameter3?.departureStationId || '')
-        const arrId = String(trip.parameter3?.arrivalStationId || '')
-        
-        const depStation = this.resolveStation(depId)
-        const arrStation = this.resolveStation(arrId)
-        
-        if (depStation) resolved[depId] = true
-        else if (depId) unresolved[depId] = true
-        
-        if (arrStation) resolved[arrId] = true
-        else if (arrId) unresolved[arrId] = true
-      })
-      
-      console.log(`✅ ${Object.keys(resolved).length} stations résolues | ⚠️ ${Object.keys(unresolved).length} non-résolues`)
 
       const features = []
       this.displayedTrips = []
       
       console.group('🗺️ VELOV MAP DEBUG')
       console.log(`Nombre total de trajets: ${this.trips.length}`)
-      console.log(`Nombre total de stations disponibles: ${Object.keys(this.stations).length}`)
+      console.log(`Nombre total de stations: ${Object.keys(this.stations).length}`)
       
       this.trips.forEach((trip, idx) => {
-        const depId = trip.parameter3?.departureStationId
-        const arrId = trip.parameter3?.arrivalStationId
+        const startStn = trip.startStation
+        const endStn = trip.endStation
         
-        const depStation = this.resolveStation(depId)
-        const arrStation = this.resolveStation(arrId)
-        
-        if (depStation && arrStation && depId !== arrId) {
+        if (startStn && endStn && startStn.lng != null && startStn.lat != null && endStn.lng != null && endStn.lat != null) {
+          const dist = this.haversineDistance(startStn.lat, startStn.lng, endStn.lat, endStn.lng)
+          
           const displayTrip = {
             idx: idx,
-            depId: String(depId),
-            arrId: String(arrId),
-            depName: depStation.name,
-            arrName: arrStation.name,
-            depCoords: depStation.coords.join(', '),
-            arrCoords: arrStation.coords.join(', '),
-            distance: parseFloat(trip.parameter3.DISTANCE),
-            speed: trip.parameter3.AVERAGE_SPEED,
-            date: trip.startDate,
-            co2: trip.parameter3.SAVED_CARBON_DIOXIDE
+            depId: startStn.name,
+            arrId: endStn.name,
+            depName: startStn.name,
+            arrName: endStn.name,
+            depCoords: `${startStn.lng}, ${startStn.lat}`,
+            arrCoords: `${endStn.lng}, ${endStn.lat}`,
+            distance: dist * 1000, // meters
+            speed: trip.bikeType || 'classic',
+            date: trip.startTime,
+            co2: 0
           }
           
           this.displayedTrips.push(displayTrip)
@@ -333,14 +283,14 @@ export default {
             type: 'Feature',
             geometry: {
               type: 'LineString',
-              coordinates: [depStation.coords, arrStation.coords]
+              coordinates: [[startStn.lng, startStn.lat], [endStn.lng, endStn.lat]]
             },
             properties: {
-              distance: trip.parameter3.DISTANCE,
-              date: trip.startDate,
-              speed: trip.parameter3.AVERAGE_SPEED,
-              depName: depStation.name,
-              arrName: arrStation.name
+              distance: dist * 1000,
+              date: trip.startTime,
+              bikeType: trip.bikeType,
+              depName: startStn.name,
+              arrName: endStn.name
             }
           })
         }
@@ -356,12 +306,12 @@ export default {
         countTrips: this.trips.length,
         countFeatures: features.length,
         kmTotal: (totalDistance / 1000).toFixed(1),
-        co2Total: (totalCO2 / 1000).toFixed(2),
-        avgSpeed: avgSpeed,
+        co2Total: '0',
+        avgSpeed: '0',
         avgDuration: `${avgDurationMin} min`
       }
 
-      console.log(`📊 ${features.length}/${this.trips.length} trajets valides | ${this.stats.kmTotal}km | ${this.stats.co2Total}kg CO₂`)
+      console.log(`📊 ${features.length}/${this.trips.length} trajets valides | ${this.stats.kmTotal}km`)
 
       if (features.length > 0) {
         this.map.addSource('trips', {
@@ -400,35 +350,35 @@ export default {
         this.map.setZoom(11)
       }
     },
+    haversineDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371 // Earth radius in km
+      const dLat = (lat2 - lat1) * Math.PI / 180
+      const dLon = (lon2 - lon1) * Math.PI / 180
+      const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+      return R * c
+    },
     displayStations() {
       if (!this.map || !this.showStations) return
       
       const stationFeatures = []
-      const addedCoords = new Set()
       
+      // Create unique station points from trips
       this.displayedTrips.forEach(trip => {
-        const depKey = trip.depCoords
-        const arrKey = trip.arrCoords
+        stationFeatures.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: trip.depCoords.split(', ').map(Number) },
+          properties: { name: trip.depName }
+        })
         
-        if (!addedCoords.has(depKey)) {
-          const [lon, lat] = trip.depCoords.split(', ').map(Number)
-          stationFeatures.push({
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [lon, lat] },
-            properties: { name: trip.depName, id: trip.depId }
-          })
-          addedCoords.add(depKey)
-        }
-        
-        if (!addedCoords.has(arrKey)) {
-          const [lon, lat] = trip.arrCoords.split(', ').map(Number)
-          stationFeatures.push({
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [lon, lat] },
-            properties: { name: trip.arrName, id: trip.arrId }
-          })
-          addedCoords.add(arrKey)
-        }
+        stationFeatures.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: trip.arrCoords.split(', ').map(Number) },
+          properties: { name: trip.arrName }
+        })
       })
       
       if (stationFeatures.length === 0) return
