@@ -212,23 +212,30 @@ export default {
       let totalCO2 = 0
       let totalDuration = 0
       let totalSpeeds = []
+      let validTripsCount = 0
       
       this.trips.forEach(trip => {
-        totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
-        totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
-        totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
+        const depStation = this.resolveStation(trip.parameter3?.departureStationId)
+        const arrStation = this.resolveStation(trip.parameter3?.arrivalStationId)
         
-        // Calculer la durée en secondes
-        const start = new Date(trip.startDate)
-        const end = new Date(trip.endDate)
-        totalDuration += (end - start) / 1000
+        // Compter seulement les trajets valides (avec stations trouvées)
+        if (depStation && arrStation && trip.parameter3?.departureStationId !== trip.parameter3?.arrivalStationId) {
+          validTripsCount++
+          totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
+          totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
+          totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
+          
+          const start = new Date(trip.startDate)
+          const end = new Date(trip.endDate)
+          totalDuration += (end - start) / 1000
+        }
       })
       
       const avgSpeed = totalSpeeds.length > 0 
         ? (totalSpeeds.reduce((a, b) => a + b, 0) / totalSpeeds.length).toFixed(1)
         : 0
 
-      const avgDurationSeconds = totalDuration / this.trips.length
+      const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
       const avgDurationMin = Math.round(avgDurationSeconds / 60)
       
       // Collecte des IDs et stats de résolution
@@ -251,9 +258,8 @@ export default {
       
       console.log(`✅ ${Object.keys(resolved).length} stations résolues | ⚠️ ${Object.keys(unresolved).length} non-résolues`)
 
-      // Crée les lignes de trajets
+      // Crée SEULEMENT les lignes de trajets valides
       const features = []
-      const pointFeatures = []
       
       this.trips.forEach(trip => {
         const depId = trip.parameter3?.departureStationId
@@ -261,8 +267,8 @@ export default {
         const depStation = this.resolveStation(depId)
         const arrStation = this.resolveStation(arrId)
         
+        // IMPORTANT: ne créer le segment QUE si les deux stations sont trouvées
         if (depStation && arrStation && depId !== arrId) {
-          // Trajet complet: ligne
           features.push({
             type: 'Feature',
             geometry: {
@@ -275,22 +281,6 @@ export default {
               speed: trip.parameter3.AVERAGE_SPEED
             }
           })
-        } else {
-          // Fallback: afficher les points individuels
-          if (depStation) {
-            pointFeatures.push({
-              type: 'Feature',
-              geometry: { type: 'Point', coordinates: depStation.coords },
-              properties: { type: 'depart', date: trip.startDate }
-            })
-          }
-          if (arrStation) {
-            pointFeatures.push({
-              type: 'Feature',
-              geometry: { type: 'Point', coordinates: arrStation.coords },
-              properties: { type: 'arrivee', date: trip.startDate }
-            })
-          }
         }
       })
 
@@ -303,7 +293,7 @@ export default {
         avgDuration: `${avgDurationMin} min`
       }
 
-      console.log(`📊 ${features.length}/${this.trips.length} trajets | ${this.stats.kmTotal}km | ${this.stats.co2Total}kg CO₂ | Vitesse: ${avgSpeed} km/h`)
+      console.log(`📊 ${features.length}/${this.trips.length} trajets valides | ${this.stats.kmTotal}km | ${this.stats.co2Total}kg CO₂`)
 
       if (features.length > 0) {
         this.map.addSource('trips', {
@@ -324,42 +314,13 @@ export default {
         
         console.log(`✓ ${features.length} trajets affichés sur la carte`)
       } else {
-        console.warn('⚠️ Aucun segment affiché: probable mismatch IDs')
-      }
-
-      // Affiche les points fallback
-      if (pointFeatures.length > 0) {
-        this.map.addSource('trips-points', {
-          type: 'geojson',
-          data: { type: 'FeatureCollection', features: pointFeatures }
-        })
-        this.map.addLayer({
-          id: 'trips-points-layer',
-          type: 'circle',
-          source: 'trips-points',
-          paint: {
-            'circle-radius': 6,
-            'circle-color': [
-              'match', ['get', 'type'],
-              'depart', '#00FF99',
-              'arrivee', '#FFD166',
-              '#00D9FF'
-            ],
-            'circle-opacity': 0.85,
-            'circle-stroke-color': '#000',
-            'circle-stroke-width': 1.5
-          }
-        })
-        console.log(`✓ ${pointFeatures.length} points fallback affichés`)
+        console.warn('⚠️ Aucun segment valide')
       }
 
       // Fit bounds
       const coords = []
       features.forEach(f => {
         f.geometry.coordinates.forEach(c => coords.push(c))
-      })
-      pointFeatures.forEach(p => {
-        coords.push(p.geometry.coordinates)
       })
       
       if (coords.length > 0) {
