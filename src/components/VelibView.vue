@@ -150,17 +150,6 @@ export default {
       
       return null
     },
-      }
-      
-      // Tentative 3: si toujours pas trouvé, utiliser une station aléatoire proche de Paris
-      // (fallback pour éviter 0 trajets affichés)
-      if (Object.keys(this.stations).length > 0) {
-        const keys = Object.keys(this.stations)
-        return this.stations[keys[Math.floor(Math.random() * keys.length)]]
-      }
-      
-      return null
-    },
     async loadTrips() {
       try {
         const response = await fetch('/velib-trips.json')
