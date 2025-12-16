@@ -1,86 +1,49 @@
 <template>
   <div class="femmes-quais-page">
-    <aside class="text-panel">
+    <aside class="sidebar">
       <button class="back" @click="$emit('back')">← Retour</button>
       <h1>Femmes sur les quais du Rhône</h1>
       
-      <div class="text-content">
-        <textarea 
-          v-model="userText" 
-          @input="saveText"
-          placeholder="Écrivez vos observations, analyses ou commentaires ici..."
-          class="text-editor"
-        ></textarea>
-        
-        <div class="text-info">
-          <small>{{ wordCount }} mots · Sauvegarde automatique</small>
-        </div>
+      <div class="project-info">
+        <p>Projet cartographique sur la présence et représentation des femmes le long des quais du Rhône à Lyon</p>
       </div>
 
       <hr />
 
-      <div class="navigation-tabs">
+      <div class="tabs">
         <button 
+          v-for="tab in tabs" 
+          :key="tab.id"
           class="tab-btn"
-          :class="{ active: activeTab === 'cartes' }"
-          @click="activeTab = 'cartes'"
+          :class="{ active: activeTab === tab.id }"
+          @click="activeTab = tab.id"
         >
-          📍 Cartes sensibles
-        </button>
-        <button 
-          class="tab-btn"
-          :class="{ active: activeTab === 'sources' }"
-          @click="activeTab = 'sources'"
-        >
-          📚 Sources & Méthodologie
+          {{ tab.icon }} {{ tab.name }}
         </button>
       </div>
     </aside>
 
-    <div class="maps-container">
-      <!-- Cartes sensibles -->
-      <div v-if="activeTab === 'cartes'" class="maps-grid">
-        <div class="map-item">
-          <img 
-            src="/femmes-quais/carte-1.png" 
-            alt="Carte sensible 1"
-            @click="openFullscreen('/femmes-quais/carte-1.png')"
-          />
-        </div>
-        <div class="map-item">
-          <img 
-            src="/femmes-quais/carte-2.png" 
-            alt="Carte sensible 2"
-            @click="openFullscreen('/femmes-quais/carte-2.png')"
-          />
-        </div>
+    <div class="content-container">
+      <div v-if="activeContent" class="image-viewer">
+        <img 
+          :src="activeContent" 
+          :alt="activeTabName"
+          @click="toggleFullscreen"
+          class="main-image"
+        />
+        <p class="image-caption">{{ activeTabName }}</p>
       </div>
 
-      <!-- Sources et méthodologie -->
-      <div v-else class="sources-grid">
-        <div class="source-item">
-          <img 
-            src="/femmes-quais/source-3.png" 
-            alt="Sources et méthodologie - page 1"
-            @click="openFullscreen('/femmes-quais/source-3.png')"
-          />
-        </div>
-        <div class="source-item">
-          <img 
-            src="/femmes-quais/source-4.png" 
-            alt="Sources et méthodologie - page 2"
-            @click="openFullscreen('/femmes-quais/source-4.png')"
-          />
-        </div>
+      <div v-else class="empty-state">
+        <span style="font-size: 4rem;">🗺️</span>
+        <p>Sélectionnez un onglet pour voir le contenu</p>
       </div>
     </div>
 
     <!-- Modal plein écran -->
-    <div v-if="fullscreenImage" class="fullscreen-modal" @click="closeFullscreen">
-      <div class="fullscreen-content">
-        <button class="close-btn" @click="closeFullscreen">✕</button>
-        <img :src="fullscreenImage" alt="Vue plein écran" />
-      </div>
+    <div v-if="fullscreen" class="fullscreen-modal" @click="toggleFullscreen">
+      <button class="close-btn" @click.stop="toggleFullscreen">✕</button>
+      <img :src="activeContent" :alt="activeTabName" />
     </div>
   </div>
 </template>
@@ -90,42 +53,49 @@ export default {
   name: 'FemmesQuaisView',
   data() {
     return {
-      activeTab: 'cartes',
-      userText: '',
-      fullscreenImage: null
+      activeTab: 'carte1',
+      fullscreen: false,
+      tabs: [
+        { 
+          id: 'carte1', 
+          name: 'Carte principale', 
+          icon: '🗺️',
+          content: '/femmes-quais/carte-1.png'
+        },
+        { 
+          id: 'carte2', 
+          name: 'Carte détaillée', 
+          icon: '📍',
+          content: '/femmes-quais/carte-2.png'
+        },
+        { 
+          id: 'source3', 
+          name: 'Sources', 
+          icon: '📚',
+          content: '/femmes-quais/source-3.png'
+        },
+        { 
+          id: 'source4', 
+          name: 'Méthodologie', 
+          icon: '📊',
+          content: '/femmes-quais/source-4.png'
+        }
+      ]
     }
   },
   computed: {
-    wordCount() {
-      return this.userText.trim().split(/\s+/).filter(w => w.length > 0).length
+    activeContent() {
+      const tab = this.tabs.find(t => t.id === this.activeTab)
+      return tab ? tab.content : null
+    },
+    activeTabName() {
+      const tab = this.tabs.find(t => t.id === this.activeTab)
+      return tab ? tab.name : ''
     }
   },
-  mounted() {
-    this.loadText()
-  },
   methods: {
-    saveText() {
-      try {
-        localStorage.setItem('femmesQuaisText', this.userText)
-      } catch (e) {
-        console.error('Erreur sauvegarde:', e)
-      }
-    },
-    loadText() {
-      try {
-        const saved = localStorage.getItem('femmesQuaisText')
-        if (saved) {
-          this.userText = saved
-        }
-      } catch (e) {
-        console.error('Erreur chargement:', e)
-      }
-    },
-    openFullscreen(imageSrc) {
-      this.fullscreenImage = imageSrc
-    },
-    closeFullscreen() {
-      this.fullscreenImage = null
+    toggleFullscreen() {
+      this.fullscreen = !this.fullscreen
     }
   }
 }
@@ -134,213 +104,203 @@ export default {
 <style scoped>
 .femmes-quais-page {
   display: flex;
-  width: 100%;
   height: 100vh;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  overflow: hidden;
 }
 
-.text-panel {
-  width: 400px;
-  height: 100%;
-  background: #fff;
-  border-right: 2px solid #ddd;
+.sidebar {
+  width: 300px;
+  background: white;
+  padding: 30px 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  gap: 20px;
 }
 
 .back {
-  background: #1a1a1a;
+  align-self: flex-start;
+  background: #667eea;
   color: white;
   border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
 .back:hover {
-  background: #000;
+  background: #5568d3;
+  transform: translateX(-4px);
 }
 
-h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
+.sidebar h1 {
+  font-size: 1.8rem;
+  color: #2d3748;
   margin: 0;
-  color: #333;
   line-height: 1.3;
+}
+
+.project-info {
+  background: #f7fafc;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.project-info p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #e2e8f0;
   margin: 10px 0;
 }
 
-.text-content {
-  flex: 1;
+.tabs {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-height: 300px;
-}
-
-.text-editor {
-  flex: 1;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-family: inherit;
-  line-height: 1.6;
-  resize: none;
-  background: #fafafa;
-  color: #333;
-}
-
-.text-editor:focus {
-  outline: none;
-  border-color: #2171b5;
-  background: #fff;
-}
-
-.text-info {
-  text-align: right;
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.navigation-tabs {
-  display: flex;
   gap: 8px;
 }
 
 .tab-btn {
-  flex: 1;
-  padding: 12px;
-  background: #f5f5f5;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
+  width: 100%;
+  padding: 12px 16px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  color: #666;
-  transition: all 0.2s;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
 }
 
 .tab-btn:hover {
-  background: #e8e8e8;
-  border-color: #bbb;
+  background: #edf2f7;
+  border-color: #cbd5e0;
 }
 
 .tab-btn.active {
-  background: #2171b5;
-  border-color: #2171b5;
+  background: #667eea;
+  border-color: #667eea;
   color: white;
+  font-weight: 600;
 }
 
-.maps-container {
+.content-container {
   flex: 1;
-  padding: 30px;
-  overflow-y: auto;
-  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: auto;
 }
 
-.maps-grid,
-.sources-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.image-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
-  max-width: 1800px;
-  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.map-item,
-.source-item {
+.main-image {
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+  transform: scale(1.02);
+}
+
+.image-caption {
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+  text-align: center;
   background: white;
+  padding: 12px 24px;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.map-item:hover,
-.source-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #718096;
+  text-align: center;
 }
 
-.map-item img,
-.source-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+.empty-state p {
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 .fullscreen-modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 1000;
   cursor: zoom-out;
+  padding: 20px;
 }
 
-.fullscreen-content {
-  position: relative;
-  max-width: 95%;
-  max-height: 95%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fullscreen-content img {
+.fullscreen-modal img {
   max-width: 100%;
-  max-height: 95vh;
+  max-height: 100%;
   object-fit: contain;
-  cursor: default;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
 }
 
 .close-btn {
-  position: absolute;
-  top: -50px;
-  right: 0;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  color: #2d3748;
   border: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 24px;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1001;
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .maps-grid,
-  .sources-grid {
-    grid-template-columns: 1fr;
-  }
+  background: #f7fafc;
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -348,36 +308,21 @@ hr {
     flex-direction: column;
   }
 
-  .text-panel {
+  .sidebar {
     width: 100%;
-    height: auto;
     max-height: 40vh;
   }
 
-  .maps-container {
-    padding: 15px;
+  .sidebar h1 {
+    font-size: 1.4rem;
   }
-}
 
-/* Scrollbar personnalisée */
-.text-panel::-webkit-scrollbar,
-.maps-container::-webkit-scrollbar {
-  width: 8px;
-}
+  .content-container {
+    padding: 20px;
+  }
 
-.text-panel::-webkit-scrollbar-track,
-.maps-container::-webkit-scrollbar-track {
-  background: #f5f5f5;
-}
-
-.text-panel::-webkit-scrollbar-thumb,
-.maps-container::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.text-panel::-webkit-scrollbar-thumb:hover,
-.maps-container::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
+  .main-image {
+    max-height: calc(60vh - 100px);
+  }
 }
 </style>

@@ -343,7 +343,6 @@ export default {
 
       // Ajouter contrôles
       this.map.addControl(new mapboxgl.NavigationControl())
-      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-right')
     },
 
     updateMap() {
@@ -443,7 +442,7 @@ export default {
   position: static;
   top: auto;
   right: auto;
-  background: #1a1a1a;
+  background: #2171b5;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -453,10 +452,6 @@ export default {
   z-index: 10;
   margin-bottom: 20px;
   width: 100%;
-}
-
-.back:hover {
-  background: #000;
 }
 
 h1 {

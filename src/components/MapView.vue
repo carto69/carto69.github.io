@@ -189,7 +189,8 @@ export default {
         const sw = [minLng - padLng, minLat - padLat]
         const ne = [maxLng + padLng, maxLat + padLat]
         try {
-          this.map.fitBounds([sw, ne], { padding: 60, maxZoom: 18, duration: 700 })
+          // Padding équilibré pour centrer la carte avec marges égales
+          this.map.fitBounds([sw, ne], { padding: { top: 80, bottom: 80, left: 320, right: 80 }, maxZoom: 18, duration: 700 })
         } catch (e) {
           console.warn('fitBounds failed', e)
         }

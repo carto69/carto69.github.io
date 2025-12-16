@@ -12,32 +12,20 @@
         </article>
         <article class="tile" @click="$emit('open', 'velov')">
           <div class="tile-icon">🚴</div>
-          <h2>69 en vélo'v</h2>
+          <h2>69 en velo'v</h2>
           <p>Carte de mes itinéraires Vélo'V à Lyon</p>
           <button class="tile-btn">Explorer →</button>
         </article>
-        <article class="tile" @click="$emit('open', 'velib')">
-          <div class="tile-icon">🚲</div>
-          <h2>75 en vélib'</h2>
-          <p>Carte de mes itinéraires Vélib' à Paris</p>
-          <button class="tile-btn">Explorer →</button>
-        </article>
-        <article class="tile" @click="$emit('open', 'mapelia')">
-          <div class="tile-icon">🗺️</div>
-          <h2>Mapelia</h2>
-          <p>Carte interactive avec marqueurs personnalisables</p>
-          <button class="tile-btn">Explorer →</button>
-        </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
-          <div class="tile-icon">👩</div>
-          <h2>Femmes sur les quais du Rhône</h2>
-          <p>Cartes sensibles et sources méthodologie</p>
+          <div class="tile-icon">👥</div>
+          <h2>Femmes sur les quais</h2>
+          <p>Cartes sensibles</p>
           <button class="tile-btn">Explorer →</button>
         </article>
-        <article class="tile" @click="$emit('open', 'autres-projets')">
-          <div class="tile-icon">📦</div>
+        <article class="tile" @click="$emit('open', 'portfolio')">
+          <div class="tile-icon">📁</div>
           <h2>Autres projets</h2>
-          <p>Découvrez d'autres projets cartographiques</p>
+          <p>Portfolio de cartes et projets cartographiques</p>
           <button class="tile-btn">Explorer →</button>
         </article>
       </div>
@@ -57,7 +45,7 @@ export default { name: 'MenuView' }
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center 40%;
+  background-position: center 70%;
 }
 
 .credits-top {
@@ -103,7 +91,7 @@ export default { name: 'MenuView' }
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #4A7C7E;
+  color: #B85C38;
   text-shadow: none;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
@@ -112,22 +100,22 @@ export default { name: 'MenuView' }
 
 .tiles {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .tile {
   position: relative;
-  padding: 12px 10px;
-  border-radius: 8px;
-  background: rgba(74, 124, 126, 0.15);
-  backdrop-filter: blur(8px);
+  padding: 20px 18px;
+  border-radius: 12px;
+  background: rgba(184, 92, 56, 0.25);
+  backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 150px;
-  max-width: 180px;
+  min-width: 200px;
+  max-width: 240px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -135,28 +123,28 @@ export default { name: 'MenuView' }
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(74, 124, 126, 0.35);
+  background: rgba(184, 92, 56, 0.5);
 }
 
 .tile-icon {
-  font-size: 1.5rem;
-  margin-bottom: 3px;
+  font-size: 2.2rem;
+  margin-bottom: 6px;
   text-align: center;
 }
 
 .tile h2 {
-  margin: 0 0 3px 0;
+  margin: 0 0 6px 0;
   color: white;
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   color: rgba(255, 255, 255, 0.95);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.3;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -164,12 +152,12 @@ export default { name: 'MenuView' }
 
 .tile-btn {
   width: 100%;
-  padding: 6px;
+  padding: 10px;
   background: rgba(255, 255, 255, 0.9);
   color: #2C5F2D;
   border: none;
-  border-radius: 5px;
-  font-size: 12px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;

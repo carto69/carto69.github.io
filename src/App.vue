@@ -8,11 +8,11 @@
       <div v-if="activeTab === 'velov'" class="scene">
         <VelovView @back="goHome" />
       </div>
-      <div v-if="activeTab === 'velib'" class="scene">
-        <VelibView @back="goHome" />
+      <div v-if="activeTab === 'femmes-quais'" class="scene">
+        <FemmesQuaisView @back="goHome" />
       </div>
-      <div v-if="activeTab === 'mapelia'" class="scene">
-        <MapeliaView @back="goHome" />
+      <div v-if="activeTab === 'portfolio'" class="scene">
+        <PortfolioView @back="goHome" />
       </div>
     </main>
   </div>
@@ -22,51 +22,26 @@
 import MenuView from './components/MenuView.vue'
 import MapView from './components/MapView.vue'
 import VelovView from './components/VelovView.vue'
-import VelibView from './components/VelibView.vue'
-import MapeliaView from './components/MapeliaView.vue'
+import FemmesQuaisView from './components/FemmesQuaisView.vue'
+import PortfolioView from './components/PortfolioView.vue'
 
 export default {
-  components: { MenuView, MapView, VelovView, VelibView, MapeliaView },
+  components: { MenuView, MapView, VelovView, FemmesQuaisView, PortfolioView },
   data() {
     return {
       activeTab: 'home'
     }
   },
-  mounted() {
-    // Restaurer l'état depuis l'URL au chargement
-    const hash = window.location.hash.slice(1)
-    if (hash && ['italie2', 'velov', 'velib', 'mapelia', 'femmes-quais', 'autres-projets'].includes(hash)) {
-      this.activeTab = hash
-    }
-
-    // Écouter les changements d'historique (bouton retour)
-    window.addEventListener('popstate', this.handlePopState)
-  },
-  beforeUnmount() {
-    window.removeEventListener('popstate', this.handlePopState)
-  },
   methods: {
     openTab(tab) {
-      if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia' || tab === 'femmes-quais' || tab === 'autres-projets') {
+      if (tab === 'italie2' || tab === 'velov' || tab === 'femmes-quais' || tab === 'portfolio') {
         this.activeTab = tab
-        window.history.pushState({ tab }, '', `#${tab}`)
       } else {
         this.activeTab = 'home'
-        window.history.pushState({ tab: 'home' }, '', '#')
       }
     },
     goHome() {
       this.activeTab = 'home'
-      window.history.pushState({ tab: 'home' }, '', '#')
-    },
-    handlePopState(event) {
-      // Gérer le bouton retour du navigateur
-      const hash = window.location.hash.slice(1)
-      if (hash && ['italie2', 'velov', 'velib', 'mapelia', 'femmes-quais', 'autres-projets'].includes(hash)) {
-        this.activeTab = hash
-      } else {
-        this.activeTab = 'home'
-      }
     }
   }
 }
