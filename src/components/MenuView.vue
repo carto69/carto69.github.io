@@ -168,7 +168,7 @@ export default {
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #2e7ba8; /* bleu légèrement plus foncé */
+  color: #7fa46a; /* même vert que les onglets */
   text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
