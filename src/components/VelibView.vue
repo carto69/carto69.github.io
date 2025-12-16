@@ -517,7 +517,7 @@ export default {
         [Math.max(depCoords[0], arrCoords[0]), Math.max(depCoords[1], arrCoords[1])]
       ]
       
-      this.map.fitBounds(bounds, { padding: 80, duration: 600 })
+      this.map.fitBounds(bounds, { padding: 140, duration: 600, maxZoom: 13 })
       
       console.log(`✨ Trajet sélectionné: ${trip.depName} → ${trip.arrName}`)
     }
@@ -553,14 +553,15 @@ export default {
 
 .map-title {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(0, 0, 0, 0.85);
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 20px;
-  font-weight: bold;
-  color: #fff;
+  font-weight: 800;
+  color: #00D9FF;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   z-index: 1;
 }
@@ -571,18 +572,18 @@ export default {
   left: 20px;
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(0, 217, 255, 0.4);
-  padding: 16px 20px;
+  padding: 10px 12px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 11px;
   color: #fff;
   z-index: 10;
-  max-width: 280px;
+  max-width: 220px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
 .stats-sidebar h2 {
   margin: 0 0 12px 0;
-  font-size: 16px;
+  font-size: 13px;
   color: #00D9FF;
   font-weight: 700;
   text-transform: uppercase;
@@ -593,8 +594,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  padding: 6px 0;
+  margin-bottom: 5px;
+  padding: 3px 0;
   border-bottom: 1px solid rgba(0, 217, 255, 0.2);
 }
 
@@ -612,7 +613,7 @@ export default {
   font-weight: 700;
   color: #00D9FF;
   text-align: right;
-  min-width: 80px;
+  min-width: 62px;
 }
 
 .sidebar-divider {
@@ -622,12 +623,12 @@ export default {
 }
 
 .trajet-selector {
-  margin: 12px 0;
+  margin: 8px 0;
 }
 
 .trajet-selector label {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   color: #00D9FF;
   margin-bottom: 6px;
@@ -637,12 +638,12 @@ export default {
 
 .trip-select {
   width: 100%;
-  padding: 8px;
+  padding: 5px;
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 4px;
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -664,20 +665,20 @@ export default {
 }
 
 .trip-details {
-  margin-top: 12px;
-  padding-top: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid rgba(0, 217, 255, 0.3);
-  max-height: 400px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
 .detail-section {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .detail-section h3 {
   margin: 8px 0 6px 0;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   color: #00D9FF;
   text-transform: uppercase;
@@ -688,8 +689,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font-size: 11px;
-  padding: 4px 0;
+  font-size: 9.5px;
+  padding: 2px 0;
   border-bottom: 1px solid rgba(0, 217, 255, 0.1);
 }
 
@@ -700,7 +701,7 @@ export default {
 .detail-row .label {
   font-weight: 600;
   color: #aaa;
-  min-width: 70px;
+  min-width: 58px;
 }
 
 .detail-row .value {
@@ -711,7 +712,7 @@ export default {
 }
 
 .detail-row .value.small {
-  font-size: 10px;
+  font-size: 8.5px;
   opacity: 0.9;
 }
 
@@ -724,14 +725,14 @@ export default {
 
 .back-button {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #F4E4A0;
-  color: #2d3748;
+  top: 16px;
+  left: 16px;
+  background: #0d6efd;
+  color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
@@ -740,7 +741,7 @@ export default {
 }
 
 .back-button:hover {
-  background: #EED08C;
+  background: #0b5ed7;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transform: translateY(-2px);
 }
@@ -757,6 +758,9 @@ export default {
   .map-title {
     font-size: 16px;
     padding: 10px 16px;
+    left: 50%;
+    top: 56px;
+    transform: translateX(-50%);
   }
   
   .back-button {
