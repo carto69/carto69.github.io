@@ -91,6 +91,22 @@ export default {
         } catch (e2) {
           console.warn('Fallback velib-stations indisponible:', e2)
         }
+
+        // GBFS officiel Velib Métropole: station_information avec station_id
+        try {
+          const gbfsUrl = 'https://velib-metropole-opendata.smoove.pro/gbfs/2/fr/station_information.json'
+          const gbfsResp = await fetch(gbfsUrl)
+          const gbfsData = await gbfsResp.json()
+          const stationsInfo = gbfsData?.data?.stations || []
+          stationsInfo.forEach(s => {
+            const code = s.station_id || s.external_id || s.name
+            if (code && s.lat != null && s.lon != null && !this.stations[code]) {
+              this.stations[code] = { name: s.name, coords: [s.lon, s.lat] }
+            }
+          })
+        } catch (e3) {
+          console.warn('Fallback GBFS station_information indisponible:', e3)
+        }
       } catch (error) {
         console.error('Erreur chargement stations:', error)
       }
