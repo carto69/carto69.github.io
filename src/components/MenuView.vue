@@ -42,7 +42,8 @@
         </article>
       </div>
     </div>
-    <div class="credits-bottom">Kunyu Wanguo Quantu, Matteo Ricci, 1602.</div>
+    <div class="credits-toggle" @click="showCredits = !showCredits">Crédit</div>
+    <div v-if="showCredits" class="credits-bottom">Elia Terragni · Source carte: Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
   </main>
 </template>
 
@@ -57,6 +58,11 @@ export default {
       } else if (code !== null) {
         alert('Code incorrect')
       }
+    }
+  },
+  data() {
+    return {
+      showCredits: false
     }
   }
 }
@@ -101,6 +107,21 @@ export default {
   white-space: nowrap;
   text-align: right;
 }
+
+.credits-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #2d3748;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  z-index: 101;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.credits-toggle:hover { background: white; }
 
 .hero {
   position: relative;

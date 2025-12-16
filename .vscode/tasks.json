@@ -6,6 +6,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Femmes: fusion Sources & Méthodo + texte explicatif\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push credit button",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Home: bouton Crédit (Elia Terragni + source carte)\" && git push",
+			"group": "build"
 		}
 	]
 }
