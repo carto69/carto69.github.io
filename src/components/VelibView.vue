@@ -57,9 +57,16 @@ export default {
     },
     async loadStations() {
       try {
-        const response = await fetch('/api/velib-stations')
-        const data = await response.json()
-        this.stations = data?.stations || {}
+        // 1) stationcode -> coords (OpenData proxy)
+        const resp1 = await fetch('/api/velib-stations')
+        const data1 = await resp1.json()
+        const stations1 = data1?.stations || {}
+        // 2) station_id -> coords (GBFS proxy)
+        const resp2 = await fetch('/api/velib-gbfs')
+        const data2 = await resp2.json()
+        const stations2 = data2?.stations || {}
+        // Fusion des deux maps pour maximiser les correspondances
+        this.stations = { ...stations1, ...stations2 }
       } catch (error) {
         console.error('Erreur chargement stations (proxy):', error)
       }
