@@ -35,15 +35,18 @@ export default {
       }
     },
     async loadStations() {
-      // Récupère les infos des stations depuis l'API Vélib' (si besoin)
-      // Pour l'instant on utilisera les IDs de stations du JSON
-      const stationIds = new Set()
-      this.trips.forEach(trip => {
-        if (trip.parameter3) {
-          stationIds.add(trip.parameter3.departureStationId)
-          stationIds.add(trip.parameter3.arrivalStationId)
-        }
-      })
+      try {
+        const response = await fetch('https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/velib-disponibilite-en-temps-reel/records?limit=100')
+        const data = await response.json()
+        data.results.forEach(station => {
+          this.stations[station.stationcode] = {
+            name: station.name,
+            coords: [station.coordonnees_geo.lon, station.coordonnees_geo.lat]
+          }
+        })
+      } catch (error) {
+        console.error('Erreur chargement stations:', error)
+      }
     },
     initMap() {
       mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -65,7 +68,6 @@ export default {
     displayTrips() {
       if (!this.trips.length) return
 
-      // Affiche les statistiques
       const totalDistance = this.trips.reduce((sum, t) => 
         sum + (parseFloat(t.parameter3?.DISTANCE) || 0), 0
       )
@@ -73,7 +75,48 @@ export default {
         sum + (parseFloat(t.parameter3?.SAVED_CARBON_DIOXIDE) || 0), 0
       )
       
-      console.log(`${this.trips.length} trajets | ${(totalDistance/1000).toFixed(1)} km | ${totalCO2.toFixed(0)}g CO2 économisés`)
+      // Crée les lignes de trajets
+      const features = []
+      this.trips.forEach(trip => {
+        const depId = trip.parameter3?.departureStationId
+        const arrId = trip.parameter3?.arrivalStationId
+        const depStation = this.stations[depId]
+        const arrStation = this.stations[arrId]
+        
+        if (depStation && arrStation && depId !== arrId) {
+          features.push({
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: [depStation.coords, arrStation.coords]
+            },
+            properties: {
+              distance: trip.parameter3.DISTANCE,
+              date: trip.startDate
+            }
+          })
+        }
+      })
+
+      if (features.length > 0) {
+        this.map.addSource('trips', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features }
+        })
+
+        this.map.addLayer({
+          id: 'trips-layer',
+          type: 'line',
+          source: 'trips',
+          paint: {
+            'line-color': '#00D9FF',
+            'line-width': 2,
+            'line-opacity': 0.6
+          }
+        })
+        
+        console.log(`${features.length} trajets affichés | ${(totalDistance/1000).toFixed(1)} km | ${totalCO2.toFixed(0)}g CO2 économisés`)
+      }
     }
   },
   beforeUnmount() {
