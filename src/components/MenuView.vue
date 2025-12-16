@@ -79,7 +79,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: 108% auto; /* dézoom supplémentaire pour voir plus de carte */
-  background-position: 28% -20px; /* décalage encore plus à gauche et garde hauteur */
+  background-position: 23% -20px; /* décalage fort à gauche et garde hauteur */
 }
 
 .credits-top {
@@ -103,8 +103,8 @@ export default {
 }
 
 .credits-toggle {
-  background: rgba(255, 255, 255, 0.85);
-  color: #2d3748;
+  background: rgba(74, 144, 164, 0.85);
+  color: white;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -112,7 +112,7 @@ export default {
   z-index: 101;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-.credits-toggle:hover { background: white; }
+.credits-toggle:hover { background: rgba(74, 144, 164, 1); }
 
 .credits-panel {
   position: fixed;
@@ -142,8 +142,8 @@ export default {
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #4A90A4;
-  text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
+  color: #6BB6D0;
+  text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
   letter-spacing: 3px;
@@ -168,7 +168,7 @@ export default {
   position: relative;
   padding: 10px 8px;
   border-radius: 8px;
-  background: rgba(46, 125, 50, 0.25); /* vert océan encore plus transparent */
+  background: rgba(46, 125, 50, 0.18); /* vert océan très transparent */
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
