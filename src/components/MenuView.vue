@@ -156,6 +156,13 @@ export default {
   background: #FFC44D;
   transform: scale(1.02);
 }
+
+.title {
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 40px;
+  text-align: center;
   max-width: 900px;
 }
 
@@ -209,23 +216,7 @@ export default {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.tile-btn {
-  width: 100%;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #2C5F2D;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.tile-btn:hover {
-  background: white;
-  transform: scale(1.02);
-}
+/* supprimé: doublon de tile-btn (version blanche) */
 
 @media (max-width: 768px) {
   .title {
