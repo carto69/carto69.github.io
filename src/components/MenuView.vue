@@ -74,8 +74,9 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: url('/vintage-map.jpg') center/cover no-repeat;
-  background-position: center center;
+  background: url('/vintage-map.jpg') no-repeat;
+  background-size: cover;
+  background-position: center 45%;
 }
 
 .credits-top {
@@ -130,7 +131,7 @@ export default {
 
 .tiles {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
   max-width: 1000px;
