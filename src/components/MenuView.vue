@@ -13,7 +13,6 @@
         <article class="tile" @click="openMapelia">
           <div class="tile-icon">🗺️</div>
           <h2>Mapelia</h2>
-          <p>Carte interactive avec parcours personnalisables</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'portfolio')">
@@ -85,10 +84,10 @@ export default {
   top: 20px;
   right: 30px;
   color: #000;
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  background: rgba(255, 255, 255, 0.75);
-  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 10px;
   border-radius: 4px;
   z-index: 100;
   white-space: nowrap;
@@ -99,10 +98,10 @@ export default {
   bottom: 20px;
   right: 30px;
   color: #000;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-style: italic;
-  background: rgba(255, 255, 255, 0.75);
-  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 10px;
   border-radius: 4px;
   z-index: 100;
   white-space: nowrap;
@@ -128,6 +127,7 @@ export default {
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
   letter-spacing: 3px;
+  font-style: italic;
 }
 
 .tiles {
@@ -146,14 +146,14 @@ export default {
 
 .tile {
   position: relative;
-  padding: 12px 10px;
+  padding: 10px 8px;
   border-radius: 8px;
-  background: rgba(44, 122, 123, 0.25);
+  background: rgba(46, 125, 50, 0.22); /* vert océan cohérent */
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
-  min-width: 140px;
-  max-width: 170px;
+  min-width: 130px;
+  max-width: 160px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -161,11 +161,11 @@ export default {
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(44, 122, 123, 0.5);
+  background: rgba(46, 125, 50, 0.45);
 }
 
 .tile-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 4px;
   text-align: center;
 }
@@ -173,7 +173,7 @@ export default {
 .tile h2 {
   margin: 0 0 5px 0;
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
@@ -181,8 +181,8 @@ export default {
 
 .tile p {
   margin: 0 0 8px 0;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 10px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 9px;
   line-height: 1.2;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
