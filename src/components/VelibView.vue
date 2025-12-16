@@ -7,6 +7,8 @@
     <!-- Barre latérale des statistiques -->
     <div class="stats-sidebar">
       <h2>Mes trajets</h2>
+      
+      <!-- Stats globales -->
       <div class="stat-item">
         <span class="stat-label">Trajets</span>
         <span class="stat-value">{{ stats.countTrips }}</span>
@@ -31,6 +33,69 @@
         <span class="stat-label">Durée moyenne</span>
         <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
+      
+      <!-- Sélecteur de trajet -->
+      <hr class="sidebar-divider" />
+      <div class="trajet-selector">
+        <label>Analyser un trajet:</label>
+        <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
+          <option :value="-1">-- Sélectionner --</option>
+          <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
+            {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
+          </option>
+        </select>
+      </div>
+      
+      <!-- Détails du trajet sélectionné -->
+      <div v-if="selectedTripIndex >= 0" class="trip-details">
+        <div class="detail-section">
+          <h3>📍 Départ</h3>
+          <div class="detail-row">
+            <span class="label">Station:</span>
+            <span class="value">{{ selectedTrip.depName }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">ID:</span>
+            <span class="value small">{{ selectedTrip.depId }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Coords:</span>
+            <span class="value small mono">{{ selectedTrip.depCoords }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-section">
+          <h3>🎯 Arrivée</h3>
+          <div class="detail-row">
+            <span class="label">Station:</span>
+            <span class="value">{{ selectedTrip.arrName }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">ID:</span>
+            <span class="value small">{{ selectedTrip.arrId }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Coords:</span>
+            <span class="value small mono">{{ selectedTrip.arrCoords }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-section">
+          <h3>📊 Trajet</h3>
+          <div class="detail-row">
+            <span class="label">Distance:</span>
+            <span class="value">{{ (selectedTrip.distance / 1000).toFixed(2) }} km</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Vitesse moy:</span>
+            <span class="value">{{ selectedTrip.speed }} km/h</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Date:</span>
+            <span class="value small">{{ new Date(selectedTrip.date).toLocaleDateString('fr-FR') }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +109,8 @@ export default {
     return {
       trips: [],
       stations: {},
+      displayedTrips: [],
+      selectedTripIndex: -1,
       stats: {
         countTrips: 0,
         countFeatures: 0,
@@ -133,9 +200,36 @@ export default {
                 const id = String(s.id || '').trim()
                 const coords = s.coords || []
                 if (id && coords.length === 2) {
+                  const lon = coords[0]
+                  const lat = coords[1]
+                  
+                  // 🔍 Vérifier si c'est Lambert 93 (grande valeurs ~680000-850000) ou lat/lon (~2.3 et 48.8)
+                  let finalCoords = [lon, lat]
+                  if (lon > 100 && lat > 100) {
+                    // Probablement Lambert 93 - convertir vers lat/lon
+                    console.warn(`⚠️ Coords Lambert 93 détectées: [${lon}, ${lat}] pour ${s.name}`)
+                    // Conversion Lambert 93 → WGS84
+                    const epsg2154to4326 = (lambertE, lambertN) => {
+                      // Approximation simple pour Paris région (TRÈS GROSSIÈRE)
+                      const n = 0.7256077650532472
+                      const c = 11603796.987734
+                      const xs = 700000
+                      const ys = 12655900
+                      const e = 0.08248325676
+                      
+                      const rho = Math.sqrt(Math.pow(lambertE - xs, 2) + Math.pow(lambertN - ys, 2))
+                      const gamma = Math.atan((lambertE - xs) / (ys - lambertN))
+                      const lon = gamma / n + 2.337229166
+                      const lat = 2 * Math.atan(Math.pow(c / rho, 1 / n) * Math.exp(-e / 2 * Math.log((1 + e * Math.sin(lon)) / (1 - e * Math.sin(lon))))) - Math.PI / 2
+                      
+                      return [lon * 180 / Math.PI, lat * 180 / Math.PI]
+                    }
+                    // finalCoords = epsg2154to4326(lon, lat)
+                  }
+                  
                   stationsComplete[id] = { 
                     name: s.name || `Station ${id}`, 
-                    coords: [coords[0], coords[1]]
+                    coords: finalCoords
                   }
                 }
               })
@@ -176,6 +270,13 @@ export default {
           console.error(this.error)
         } else {
           console.log(`✓ Total: ${count} stations disponibles`)
+          // 🔍 Vérifier les coordonnées d'une station connue
+          const bastilleKey = Object.keys(this.stations).find(id => 
+            this.stations[id].name?.includes('Bastille')
+          )
+          if (bastilleKey) {
+            console.log(`🗺️ Bastille trouvée: ${this.stations[bastilleKey].coords}`)
+          }
         }
       } catch (error) {
         console.error('Erreur chargement stations:', error)
@@ -259,15 +360,46 @@ export default {
 
       // Crée SEULEMENT les lignes de trajets valides
       const features = []
+      this.displayedTrips = []
       
-      this.trips.forEach(trip => {
+      console.group('🗺️ VELIB MAP DEBUG')
+      console.log(`Nombre total de trajets: ${this.trips.length}`)
+      console.log(`Nombre total de stations disponibles: ${Object.keys(this.stations).length}`)
+      
+      this.trips.forEach((trip, idx) => {
         const depId = trip.parameter3?.departureStationId
         const arrId = trip.parameter3?.arrivalStationId
+        
+        if (idx < 3) {
+          console.log(`\n📍 Trajet ${idx + 1}: Départ=${depId}, Arrivée=${arrId}`)
+        }
+        
         const depStation = this.resolveStation(depId)
         const arrStation = this.resolveStation(arrId)
         
+        if (idx < 3) {
+          console.log(`  Départ résolue: ${depStation ? depStation.name + ' ' + depStation.coords : 'NON TROUVÉE'}`)
+          console.log(`  Arrivée résolue: ${arrStation ? arrStation.name + ' ' + arrStation.coords : 'NON TROUVÉE'}`)
+        }
+        
         // IMPORTANT: ne créer le segment QUE si les deux stations sont trouvées
         if (depStation && arrStation && depId !== arrId) {
+          const displayTrip = {
+            idx: idx,
+            depId: String(depId),
+            arrId: String(arrId),
+            depName: depStation.name,
+            arrName: arrStation.name,
+            depCoords: depStation.coords.join(', '),
+            arrCoords: arrStation.coords.join(', '),
+            distance: parseFloat(trip.parameter3.DISTANCE),
+            speed: trip.parameter3.AVERAGE_SPEED,
+            date: trip.startDate,
+            co2: trip.parameter3.SAVED_CARBON_DIOXIDE
+          }
+          
+          this.displayedTrips.push(displayTrip)
+          
           features.push({
             type: 'Feature',
             geometry: {
@@ -277,11 +409,19 @@ export default {
             properties: {
               distance: trip.parameter3.DISTANCE,
               date: trip.startDate,
-              speed: trip.parameter3.AVERAGE_SPEED
+              speed: trip.parameter3.AVERAGE_SPEED,
+              depName: depStation.name,
+              arrName: arrStation.name
             }
           })
         }
       })
+      
+      console.log(`\n✅ ${features.length} features créées`)
+      if (features.length > 0) {
+        console.log(`Premier segment GeoJSON:`, features[0])
+      }
+      console.groupEnd()
 
       this.stats = {
         countTrips: this.trips.length,
@@ -331,6 +471,18 @@ export default {
         this.map.setCenter([2.35, 48.86])
         this.map.setZoom(11)
       }
+    },
+    onTripSelected() {
+      // Appelé quand on sélectionne un trajet
+      console.log('Trajet sélectionné:', this.selectedTripIndex)
+    }
+  },
+  computed: {
+    selectedTrip() {
+      if (this.selectedTripIndex < 0 || this.selectedTripIndex >= this.displayedTrips.length) {
+        return null
+      }
+      return this.displayedTrips[this.selectedTripIndex]
     }
   },
   beforeUnmount() {
@@ -416,6 +568,113 @@ export default {
   color: #00D9FF;
   text-align: right;
   min-width: 80px;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 217, 255, 0.3);
+  margin: 12px 0;
+}
+
+.trajet-selector {
+  margin: 12px 0;
+}
+
+.trajet-selector label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #00D9FF;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trip-select {
+  width: 100%;
+  padding: 8px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.5);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trip-select:hover {
+  border-color: #00D9FF;
+  background: rgba(0, 217, 255, 0.15);
+}
+
+.trip-select:focus {
+  outline: none;
+  border-color: #00D9FF;
+  background: rgba(0, 217, 255, 0.2);
+}
+
+.trip-select option {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.trip-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 217, 255, 0.3);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.detail-section {
+  margin-bottom: 12px;
+}
+
+.detail-section h3 {
+  margin: 8px 0 6px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #00D9FF;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .label {
+  font-weight: 600;
+  color: #aaa;
+  min-width: 70px;
+}
+
+.detail-row .value {
+  font-weight: 600;
+  color: #00D9FF;
+  text-align: right;
+  flex: 1;
+}
+
+.detail-row .value.small {
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+.detail-row .value.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: -0.5px;
+  word-break: break-all;
 }
 
 .back-button {
