@@ -12,6 +12,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Home: bouton Crédit (Elia Terragni + source carte)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push fix FemmesQuaisView structure",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Fix: corrige structure Vue de FemmesQuaisView (docs dans template)\" && git push",
+			"group": "build"
 		}
 	]
 }

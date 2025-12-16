@@ -45,6 +45,18 @@
       <button class="close-btn" @click.stop="toggleFullscreen">✕</button>
       <img :src="activeContent" :alt="activeTabName" />
     </div>
+    
+    <!-- Onglet docs: deux pages -->
+    <div v-if="activeTab === 'docs'" class="docs-container">
+      <div class="docs-tabs">
+        <button :class="{active: docsPage === 'sources'}" @click="docsPage = 'sources'">Sources</button>
+        <button :class="{active: docsPage === 'methodo'}" @click="docsPage = 'methodo'">Méthodologie</button>
+      </div>
+      <div class="docs-content">
+        <img v-if="docsPage === 'sources'" src="/femmes-quais/source-3.png" alt="Sources" />
+        <img v-else src="/femmes-quais/source-4.png" alt="Méthodologie" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,7 +68,7 @@ export default {
       activeTab: 'carte1',
       fullscreen: false,
       docsPage: 'sources',
-          tabs: [
+      tabs: [
             { 
               id: 'carte1', 
               name: 'Jour', 
@@ -82,24 +94,11 @@ export default {
     activeContent() {
       const tab = this.tabs.find(t => t.id === this.activeTab)
       if (!tab) return null
-      if (tab.id === 'docs') return null
-      return tab.content
-    },
-    activeTabName() {
-      const tab = this.tabs.find(t => t.id === this.activeTab)
-      return tab ? tab.name : ''
-    }
-  },
-  methods: {
-    toggleFullscreen() {
-      this.fullscreen = !this.fullscreen
-    }
   }
-    
       <!-- Onglet docs: deux pages -->
       <div v-if="activeTab === 'docs'" class="docs-container">
         <div class="docs-tabs">
-          <button :class="{active: docsPage === 'sources'}" @click="docsPage = 'sources'">Sources</button>
+          <button :class ="{active: docsPage === 'sources'}" @click="docsPage = 'sources'">Sources</button>
           <button :class="{active: docsPage === 'methodo'}" @click="docsPage = 'methodo'">Méthodologie</button>
         </div>
         <div class="docs-content">
