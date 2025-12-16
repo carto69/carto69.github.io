@@ -132,24 +132,24 @@ export default {
       if (!id) return null
       const sId = String(id).trim()
       
-      // Tentative 1: correspondance directe
-      if (this.stations[sId]) return this.stations[sId]
+      // Tentative 1: correspondance directe (priorité absolue)
+      if (this.stations[sId]) {
+        return this.stations[sId]
+      }
       
-      // Tentative 2: essayer différents formats/suffixes
-      const attempts = [
-        sId,
-        sId.slice(-10),
-        sId.slice(-8),
-        sId.slice(-6),
-        sId.slice(-5),
-        sId.slice(-4),
-        String(parseInt(sId)).padStart(10, '0')
-      ]
+      // Tentative 2: chercher si c'est un ID partiel (derniers 8-10 chiffres)
+      // BUT: ne pas faire du slicing stupide, chercher les VRAIES clés qui finissent par ce suffixe
+      const possibleKeys = Object.keys(this.stations).filter(key => 
+        key.endsWith(sId) || sId.endsWith(key)
+      )
       
-      for (const attempt of attempts) {
-        if (attempt && this.stations[attempt]) {
-          return this.stations[attempt]
-        }
+      if (possibleKeys.length > 0) {
+        // Retourner la première match (normalement il n'y en a qu'une)
+        return this.stations[possibleKeys[0]]
+      }
+      
+      return null
+    },
       }
       
       // Tentative 3: si toujours pas trouvé, utiliser une station aléatoire proche de Paris
@@ -473,8 +473,67 @@ export default {
       }
     },
     onTripSelected() {
-      // Appelé quand on sélectionne un trajet
-      console.log('Trajet sélectionné:', this.selectedTripIndex)
+      if (!this.map || this.selectedTripIndex < 0) {
+        // Réinitialiser le surlignage
+        if (this.map && this.map.getLayer('trips-highlight')) {
+          this.map.setPaintProperty('trips-highlight', 'line-opacity', 0)
+        }
+        return
+      }
+      
+      const trip = this.selectedTrip
+      if (!trip) return
+      
+      // Créer une couche de surlignage avec juste ce trajet
+      const highlightFeature = {
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              trip.depCoords.split(', ').map(Number),
+              trip.arrCoords.split(', ').map(Number)
+            ]
+          }
+        }]
+      }
+      
+      // Vérifier si la couche existe déjà
+      if (!this.map.getSource('trips-highlight')) {
+        this.map.addSource('trips-highlight', {
+          type: 'geojson',
+          data: highlightFeature
+        })
+        
+        this.map.addLayer({
+          id: 'trips-highlight',
+          type: 'line',
+          source: 'trips-highlight',
+          paint: {
+            'line-color': '#FFD700',
+            'line-width': 6,
+            'line-opacity': 0.9,
+            'line-blur': 2
+          }
+        }, 'trips-layer')
+      } else {
+        // Mettre à jour la source
+        this.map.getSource('trips-highlight').setData(highlightFeature)
+        this.map.setPaintProperty('trips-highlight', 'line-opacity', 0.9)
+      }
+      
+      // Zoomer sur le trajet
+      const depCoords = trip.depCoords.split(', ').map(Number)
+      const arrCoords = trip.arrCoords.split(', ').map(Number)
+      const bounds = [
+        [Math.min(depCoords[0], arrCoords[0]), Math.min(depCoords[1], arrCoords[1])],
+        [Math.max(depCoords[0], arrCoords[0]), Math.max(depCoords[1], arrCoords[1])]
+      ]
+      
+      this.map.fitBounds(bounds, { padding: 80, duration: 600 })
+      
+      console.log(`✨ Trajet sélectionné: ${trip.depName} → ${trip.arrName}`)
     }
   },
   computed: {
