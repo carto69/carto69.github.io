@@ -80,7 +80,7 @@ export default {
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: 105% auto; /* léger dézoom */
-  background-position: 99% -20px; /* décale encore un peu à droite */
+  background-position: 100% -20px; /* décale très légèrement à droite */
 }
 
 .credits-top {
@@ -176,22 +176,21 @@ export default {
 
 .tile {
   position: relative;
-  padding: 10px 8px;
-  border-radius: 8px;
-  background: rgba(46, 125, 50, 0.18); /* vert océan très transparent */
-  backdrop-filter: blur(10px);
-  border: none;
+  padding: 12px 10px;
+  border-radius: 10px;
+  background: rgba(244, 228, 160, 0.85); /* beige harmonisé avec la carte */
+  border: 1px solid rgba(120, 84, 40, 0.25); /* liseré brun doux */
   cursor: pointer;
   min-width: 130px;
-  max-width: 160px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 170px;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .tile:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(46, 125, 50, 0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  background: rgba(238, 208, 140, 0.92);
 }
 
 .tile-icon {
@@ -201,21 +200,19 @@ export default {
 }
 
 .tile h2 {
-  margin: 0 0 5px 0;
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #2d3748;
+  font-size: 1rem;
+  font-weight: 700;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tile p {
   margin: 0 0 8px 0;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 9px;
-  line-height: 1.2;
+  color: #4a5568;
+  font-size: 10px;
+  line-height: 1.25;
   text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* supprimé: doublon de tile-btn (version blanche) */
