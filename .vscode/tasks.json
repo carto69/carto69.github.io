@@ -30,6 +30,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Portfolio: index.json valide + fix script FemmesQuaisView (computed/methods)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push portfolio items + PDF handling",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Portfolio: ajoute items depuis Téléchargements + ouvre PDF dans nouvel onglet\" && git push",
+			"group": "build"
 		}
 	]
 }

@@ -114,7 +114,10 @@ export default {
   },
   methods: {
     openFullscreen(map) {
-      if (map.image) {
+      if (!map.image) return
+      if (map.image.endsWith('.pdf')) {
+        window.open(map.image, '_blank')
+      } else {
         this.fullscreenMap = map
       }
     },

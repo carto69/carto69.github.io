@@ -110,7 +110,6 @@ export default {
   }
 }
 </script>
-</script>
 
 <style scoped>
 .femmes-quais-page {
