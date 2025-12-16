@@ -22,7 +22,9 @@ export default {
     return {
       trips: [],
       stations: {},
-      stats: { countTrips: 0, countFeatures: 0, kmTotal: 0 }
+      stats: { countTrips: 0, countFeatures: 0, kmTotal: 0 },
+      loading: true,
+      error: null
     }
   },
   mounted() {
@@ -52,6 +54,7 @@ export default {
         this.initMap()
       } catch (error) {
         console.error('Erreur chargement trajets:', error)
+        this.error = 'Impossible de charger les trajets'
         this.initMap()
       }
     },
@@ -101,8 +104,12 @@ export default {
 
         // Fusion des trois sources
         this.stations = { ...stations1, ...stations2, ...stationsLocal }
+        if (!Object.keys(this.stations).length) {
+          this.error = 'Stations Vélib introuvables (API et fichier local).'
+        }
       } catch (error) {
         console.error('Erreur chargement stations (proxy):', error)
+        this.error = 'Erreur chargement des stations'
       }
     },
     initMap() {
@@ -121,6 +128,7 @@ export default {
 
       this.map.on('load', () => {
         this.displayTrips()
+        this.loading = false
       })
     },
     displayTrips() {
@@ -183,6 +191,15 @@ export default {
         countFeatures: features.length,
         kmTotal: +(totalDistance / 1000).toFixed(1)
       }
+
+      // Rapport correspondances pour debug
+      try {
+        const ids = this.trips.map(t => [String(t.parameter3?.departureStationId||''), String(t.parameter3?.arrivalStationId||'')]).flat()
+        const unique = Array.from(new Set(ids.filter(Boolean)))
+        const resolved = unique.filter(id => this.resolveStation(id))
+        const unresolved = unique.filter(id => !this.resolveStation(id))
+        console.log(`Stations: résolues ${resolved.length}/${unique.length}`, { resolved: resolved.slice(0,20), unresolved: unresolved.slice(0,20) })
+      } catch {}
 
       if (features.length > 0) {
         this.map.addSource('trips', {
@@ -249,6 +266,10 @@ export default {
         const maxLat = Math.max(...lats)
         const bounds = [[minLon, minLat], [maxLon, maxLat]]
         this.map.fitBounds(bounds, { padding: 60, maxZoom: 14, duration: 800 })
+      } else {
+        // Aucun point/segment: centrer sur Paris
+        this.map.setCenter([2.35, 48.86])
+        this.map.setZoom(11.5)
       }
     }
   },
