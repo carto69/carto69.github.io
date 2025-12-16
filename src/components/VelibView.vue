@@ -132,20 +132,30 @@ export default {
       if (!id) return null
       const sId = String(id).trim()
       
-      // Tentative 1: correspondance directe (priorité absolue)
+      // Tentative 1: correspondance directe
       if (this.stations[sId]) {
         return this.stations[sId]
       }
       
-      // Tentative 2: chercher si c'est un ID partiel (derniers 8-10 chiffres)
-      // BUT: ne pas faire du slicing stupide, chercher les VRAIES clés qui finissent par ce suffixe
-      const possibleKeys = Object.keys(this.stations).filter(key => 
-        key.endsWith(sId) || sId.endsWith(key)
-      )
+      // Tentative 2: chercher dans les clés qui commencent ou finissent par cet ID
+      const possibleKeys = Object.keys(this.stations).filter(key => {
+        // Match exact
+        if (key === sId) return true
+        // Key finit par l'ID (ex: "54000618" contient "0618")
+        if (key.endsWith(sId)) return true
+        // L'ID finit par la key (ex: ID "7295" trouvé dans key "7295")
+        if (sId.endsWith(key)) return true
+        // Chercher si c'est un suffixe avec des chiffres avant (ex "0618" pour "54000618")
+        if (key.includes(sId) && key.length > sId.length + 2) return true
+        return false
+      })
       
-      if (possibleKeys.length > 0) {
-        // Retourner la première match (normalement il n'y en a qu'une)
+      if (possibleKeys.length === 1) {
         return this.stations[possibleKeys[0]]
+      } else if (possibleKeys.length > 1) {
+        // Si plusieurs matches, retourner le plus long (probablement le plus précis)
+        const longestKey = possibleKeys.reduce((a, b) => a.length > b.length ? a : b)
+        return this.stations[longestKey]
       }
       
       return null
