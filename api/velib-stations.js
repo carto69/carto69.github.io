@@ -1,6 +1,6 @@
-import fetch from 'node-fetch'
+const fetch = require('node-fetch')
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const limit = 500
     let offset = 0

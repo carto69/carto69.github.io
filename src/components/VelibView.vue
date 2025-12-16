@@ -29,6 +29,20 @@ export default {
     this.loadTrips()
   },
   methods: {
+    resolveStation(id) {
+      if (!id) return null
+      const sId = String(id)
+      // Tentative 1: correspondance directe
+      if (this.stations[sId]) return this.stations[sId]
+      // Tentative 2: essayer versions raccourcies (certains IDs longs contiennent le stationcode en suffixe)
+      const candidates = [
+        sId.slice(-6), sId.slice(-5), sId.slice(-4)
+      ]
+      for (const c of candidates) {
+        if (c && this.stations[c]) return this.stations[c]
+      }
+      return null
+    },
     async loadTrips() {
       try {
         const response = await fetch('/velib-trips.json')
@@ -88,8 +102,8 @@ export default {
       this.trips.forEach(trip => {
         const depId = trip.parameter3?.departureStationId
         const arrId = trip.parameter3?.arrivalStationId
-        const depStation = this.stations[depId]
-        const arrStation = this.stations[arrId]
+        const depStation = this.resolveStation(depId)
+        const arrStation = this.resolveStation(arrId)
         
         if (depStation && arrStation && depId !== arrId) {
           matchCount++
