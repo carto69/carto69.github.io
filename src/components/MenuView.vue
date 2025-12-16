@@ -16,10 +16,28 @@
           <p>Carte de mes itinéraires Vélo'V à Lyon</p>
           <button class="tile-btn">Explorer →</button>
         </article>
+        <article class="tile" @click="$emit('open', 'velib')">
+          <div class="tile-icon">🚲</div>
+          <h2>75 en vélib'</h2>
+          <p>Carte de mes itinéraires Vélib' à Paris</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
+        <article class="tile" @click="$emit('open', 'mapelia')">
+          <div class="tile-icon">🗺️</div>
+          <h2>Mapelia</h2>
+          <p>Carte interactive avec parcours personnalisables</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
         <article class="tile" @click="$emit('open', 'femmes-quais')">
           <div class="tile-icon">👥</div>
           <h2>Femmes sur les quais</h2>
           <p>Cartes sensibles</p>
+          <button class="tile-btn">Explorer →</button>
+        </article>
+        <article class="tile" @click="$emit('open', 'zonzon')">
+          <div class="tile-icon">🌍</div>
+          <h2>zonzon</h2>
+          <p>Carte mondiale en projection Equal Earth</p>
           <button class="tile-btn">Explorer →</button>
         </article>
         <article class="tile" @click="$emit('open', 'portfolio')">
