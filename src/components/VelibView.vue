@@ -176,6 +176,25 @@ export default {
         })
         console.log(`Points fallback affichés: ${pointFeatures.length}`)
       }
+
+      // Fit bounds sur l'ensemble des coordonnés visibles (lignes + points)
+      const coords = []
+      features.forEach(f => {
+        f.geometry.coordinates.forEach(c => coords.push(c))
+      })
+      pointFeatures.forEach(p => {
+        coords.push(p.geometry.coordinates)
+      })
+      if (coords.length > 0) {
+        const lons = coords.map(c => c[0])
+        const lats = coords.map(c => c[1])
+        const minLon = Math.min(...lons)
+        const maxLon = Math.max(...lons)
+        const minLat = Math.min(...lats)
+        const maxLat = Math.max(...lats)
+        const bounds = [[minLon, minLat], [maxLon, maxLat]]
+        this.map.fitBounds(bounds, { padding: 60, maxZoom: 14, duration: 800 })
+      }
     }
   },
   beforeUnmount() {
