@@ -187,10 +187,9 @@ export default {
       
       this.map = new mapboxgl.Map({
         container: 'velib-map',
-        style: 'mapbox://styles/mapbox/dark-v11',
-        // Décale encore plus vers le sud-ouest pour libérer le nord-est
-        center: [2.32, 48.80],
-        zoom: 11
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [2.3522, 48.8566],
+        zoom: 12
       })
 
       this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
