@@ -54,6 +54,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Global: body sans marges\\nHome: zoom fond (120%) + position (55% 120px)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push recadrage carte",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Home: recadrage fond (background-size 130%, position 45% 160px)\" && git push",
+			"group": "build"
 		}
 	]
 }
