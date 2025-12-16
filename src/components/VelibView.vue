@@ -727,9 +727,9 @@ export default {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: #0d6efd;
-  color: #fff;
-  border: none;
+  background: #000;
+  color: #00D9FF;
+  border: 1px solid #00D9FF;
   padding: 8px 16px;
   border-radius: 6px;
   font-size: 13px;
@@ -741,7 +741,7 @@ export default {
 }
 
 .back-button:hover {
-  background: #0b5ed7;
+  background: #0b0b0b;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transform: translateY(-2px);
 }
