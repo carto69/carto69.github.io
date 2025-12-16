@@ -91,7 +91,7 @@ export default { name: 'MenuView' }
 .title {
   font-size: 5rem;
   font-weight: 700;
-  color: #B85C38;
+  color: #2C7A7B;
   text-shadow: none;
   margin: 0 0 60px 0;
   font-family: 'Arial Black', sans-serif;
@@ -110,7 +110,7 @@ export default { name: 'MenuView' }
   position: relative;
   padding: 20px 18px;
   border-radius: 12px;
-  background: rgba(184, 92, 56, 0.25);
+  background: rgba(44, 122, 123, 0.25);
   backdrop-filter: blur(10px);
   border: none;
   cursor: pointer;
@@ -123,7 +123,7 @@ export default { name: 'MenuView' }
 .tile:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  background: rgba(184, 92, 56, 0.5);
+  background: rgba(44, 122, 123, 0.5);
 }
 
 .tile-icon {
