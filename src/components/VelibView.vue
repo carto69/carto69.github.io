@@ -34,6 +34,15 @@
         <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
       
+      <!-- Options de la carte -->
+      <hr class="sidebar-divider" />
+      <div class="map-controls">
+        <label>
+          <input type="checkbox" v-model="showStations" @change="toggleStations" />
+          Stations
+        </label>
+      </div>
+      
       <!-- Sélecteur de trajet -->
       <hr class="sidebar-divider" />
       <div class="trajet-selector">
@@ -111,6 +120,7 @@ export default {
       stations: {},
       displayedTrips: [],
       selectedTripIndex: -1,
+      showStations: true,
       stats: {
         countTrips: 0,
         countFeatures: 0,
@@ -284,6 +294,8 @@ export default {
 
       this.map.on('load', () => {
         this.displayTrips()
+        this.displayStations()
+        this.addTripClickHandler()
         this.loading = false
       })
     },
@@ -458,6 +470,119 @@ export default {
         this.map.setZoom(11)
       }
     },
+    displayStations() {
+      if (!this.map || !this.showStations) return
+      
+      const stationFeatures = []
+      const addedCoords = new Set()
+      
+      // Créer des points pour chaque station unique utilisée
+      this.displayedTrips.forEach(trip => {
+        const depKey = trip.depCoords
+        const arrKey = trip.arrCoords
+        
+        if (!addedCoords.has(depKey)) {
+          const [lon, lat] = trip.depCoords.split(', ').map(Number)
+          stationFeatures.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [lon, lat] },
+            properties: { name: trip.depName, id: trip.depId }
+          })
+          addedCoords.add(depKey)
+        }
+        
+        if (!addedCoords.has(arrKey)) {
+          const [lon, lat] = trip.arrCoords.split(', ').map(Number)
+          stationFeatures.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [lon, lat] },
+            properties: { name: trip.arrName, id: trip.arrId }
+          })
+          addedCoords.add(arrKey)
+        }
+      })
+      
+      if (stationFeatures.length === 0) return
+      
+      // Ajouter la source et la couche
+      if (!this.map.getSource('stations')) {
+        this.map.addSource('stations', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: stationFeatures }
+        })
+        
+        this.map.addLayer({
+          id: 'stations-layer',
+          type: 'circle',
+          source: 'stations',
+          paint: {
+            'circle-radius': 5,
+            'circle-color': '#00D9FF',
+            'circle-opacity': 0.8,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#fff'
+          }
+        })
+        
+        // Ajouter les popups au survol
+        const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+        
+        this.map.on('mouseenter', 'stations-layer', (e) => {
+          this.map.getCanvas().style.cursor = 'pointer'
+          const props = e.features[0].properties
+          popup.setLngLat(e.lngLat)
+            .setHTML(`<div style="color: #00D9FF; font-size: 12px; font-weight: 600;">${props.name}</div>`)
+            .addTo(this.map)
+        })
+        
+        this.map.on('mouseleave', 'stations-layer', () => {
+          this.map.getCanvas().style.cursor = ''
+          popup.remove()
+        })
+      }
+    },
+    toggleStations() {
+      if (!this.map) return
+      if (this.showStations) {
+        // Afficher les stations
+        if (this.map.getLayer('stations-layer')) {
+          this.map.setLayoutProperty('stations-layer', 'visibility', 'visible')
+        } else {
+          this.displayStations()
+        }
+      } else {
+        // Masquer les stations
+        if (this.map.getLayer('stations-layer')) {
+          this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
+        }
+      }
+    },
+    addTripClickHandler() {
+      if (!this.map || !this.map.getLayer('trips-layer')) return
+      
+      this.map.on('click', 'trips-layer', (e) => {
+        if (e.features.length === 0) return
+        const props = e.features[0].properties
+        
+        // Chercher l'index du trajet avec ce nom
+        const tripIdx = this.displayedTrips.findIndex(
+          trip => trip.depName === props.depName && trip.arrName === props.arrName
+        )
+        
+        if (tripIdx >= 0) {
+          this.selectedTripIndex = tripIdx
+          this.onTripSelected()
+        }
+      })
+      
+      // Curseur au survol des trajets
+      this.map.on('mouseenter', 'trips-layer', () => {
+        this.map.getCanvas().style.cursor = 'pointer'
+      })
+      this.map.on('mouseleave', 'trips-layer', () => {
+        this.map.getCanvas().style.cursor = ''
+      })
+    },
     onTripSelected() {
       if (!this.map || this.selectedTripIndex < 0) {
         // Réinitialiser le surlignage
@@ -620,6 +745,27 @@ export default {
   border: none;
   border-top: 1px solid rgba(0, 217, 255, 0.3);
   margin: 12px 0;
+}
+
+.map-controls {
+  margin: 8px 0;
+  font-size: 11px;
+}
+
+.map-controls label {
+  display: flex;
+  align-items: center;
+  color: #00D9FF;
+  cursor: pointer;
+  font-weight: 600;
+  gap: 6px;
+}
+
+.map-controls input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #00D9FF;
 }
 
 .trajet-selector {
