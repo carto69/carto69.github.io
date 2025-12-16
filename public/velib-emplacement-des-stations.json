@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1001",
+    "station_id": "1001",
+    "name": "Abbesses",
+    "lon": 2.3433,
+    "lat": 48.8844
+  },
+  {
+    "id": "1002",
+    "station_id": "1002",
+    "name": "Pigalle",
+    "lon": 2.3389,
+    "lat": 48.8829
+  },
+  {
+    "id": "1003",
+    "station_id": "1003",
+    "name": "Notre-Dame",
+    "lon": 2.3522,
+    "lat": 48.8530
+  },
+  {
+    "id": "1004",
+    "station_id": "1004",
+    "name": "Louvre",
+    "lon": 2.3360,
+    "lat": 48.8606
+  },
+  {
+    "id": "1005",
+    "station_id": "1005",
+    "name": "Eiffel Tour",
+    "lon": 2.2945,
+    "lat": 48.8584
+  },
+  {
+    "id": "1006",
+    "station_id": "1006",
+    "name": "Arc de Triomphe",
+    "lon": 2.2954,
+    "lat": 48.8738
+  },
+  {
+    "id": "1007",
+    "station_id": "1007",
+    "name": "Champs-Élysées",
+    "lon": 2.3085,
+    "lat": 48.8697
+  },
+  {
+    "id": "1008",
+    "station_id": "1008",
+    "name": "Place de la Concorde",
+    "lon": 2.3215,
+    "lat": 48.8656
+  },
+  {
+    "id": "1009",
+    "station_id": "1009",
+    "name": "Tuileries",
+    "lon": 2.3279,
+    "lat": 48.8626
+  },
+  {
+    "id": "1010",
+    "station_id": "1010",
+    "name": "Musée d'Orsay",
+    "lon": 2.3265,
+    "lat": 48.8603
+  }
+]
