@@ -1,9 +1,15 @@
 <template>
+  
   <div class="velib-container">
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velib-map" class="map-canvas"></div>
     <div class="map-title">Paris en Vélib'</div>
-    <div class="projection-info">Mes trajets Vélib' à Paris</div>
+    <div class="projection-info">
+      Mes trajets Vélib' à Paris
+      <div v-if="stats">
+        <strong>{{ stats.countFeatures }}</strong> segments sur {{ stats.countTrips }} trajets — {{ stats.kmTotal }} km
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,7 +21,8 @@ export default {
   data() {
     return {
       trips: [],
-      stations: {}
+      stations: {},
+      stats: { countTrips: 0, countFeatures: 0, kmTotal: 0 }
     }
   },
   mounted() {
@@ -36,14 +43,27 @@ export default {
     },
     async loadStations() {
       try {
-        const response = await fetch('https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/velib-disponibilite-en-temps-reel/records?limit=100')
-        const data = await response.json()
-        data.results.forEach(station => {
-          this.stations[station.stationcode] = {
-            name: station.name,
-            coords: [station.coordonnees_geo.lon, station.coordonnees_geo.lat]
-          }
-        })
+        // Charge toutes les stations en plusieurs pages pour ne pas rater de codes
+        const limit = 500
+        let offset = 0
+        let hasMore = true
+
+        while (hasMore) {
+          const url = `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/velib-disponibilite-en-temps-reel/records?limit=${limit}&offset=${offset}`
+          const response = await fetch(url)
+          const data = await response.json()
+          const results = data?.results || []
+
+          results.forEach(station => {
+            this.stations[station.stationcode] = {
+              name: station.name,
+              coords: [station.coordonnees_geo.lon, station.coordonnees_geo.lat]
+            }
+          })
+
+          hasMore = results.length === limit
+          offset += limit
+        }
       } catch (error) {
         console.error('Erreur chargement stations:', error)
       }
@@ -54,7 +74,8 @@ export default {
       this.map = new mapboxgl.Map({
         container: 'velib-map',
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [2.3522, 48.8566],
+        // Décale encore plus vers le sud-ouest pour libérer le nord-est
+        center: [2.32, 48.80],
         zoom: 11
       })
 
@@ -66,7 +87,10 @@ export default {
       })
     },
     displayTrips() {
-      if (!this.trips.length) return
+      if (!this.trips.length) {
+        this.stats = { countTrips: 0, countFeatures: 0, kmTotal: 0 }
+        return
+      }
 
       const totalDistance = this.trips.reduce((sum, t) => 
         sum + (parseFloat(t.parameter3?.DISTANCE) || 0), 0
@@ -77,6 +101,7 @@ export default {
       
       // Crée les lignes de trajets
       const features = []
+      let matchCount = 0
       this.trips.forEach(trip => {
         const depId = trip.parameter3?.departureStationId
         const arrId = trip.parameter3?.arrivalStationId
@@ -84,6 +109,7 @@ export default {
         const arrStation = this.stations[arrId]
         
         if (depStation && arrStation && depId !== arrId) {
+          matchCount++
           features.push({
             type: 'Feature',
             geometry: {
@@ -97,6 +123,12 @@ export default {
           })
         }
       })
+
+      this.stats = {
+        countTrips: this.trips.length,
+        countFeatures: features.length,
+        kmTotal: +(totalDistance / 1000).toFixed(1)
+      }
 
       if (features.length > 0) {
         this.map.addSource('trips', {
@@ -116,6 +148,8 @@ export default {
         })
         
         console.log(`${features.length} trajets affichés | ${(totalDistance/1000).toFixed(1)} km | ${totalCO2.toFixed(0)}g CO2 économisés`)
+      } else {
+        console.warn('Aucun segment affiché: probable mismatch entre IDs de stations et dataset temps réel.')
       }
     }
   },
