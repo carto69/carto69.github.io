@@ -134,7 +134,7 @@ export default {
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 570px;
 }
 
 .tile {
