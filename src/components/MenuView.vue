@@ -78,8 +78,8 @@ export default {
   height: 100vh;
   overflow: hidden;
   background: url('/vintage-map.jpg') no-repeat;
-  background-size: 150% auto; /* zoom léger pour couper davantage à gauche */
-  background-position: 100% -20px; /* ancré à droite, on rogne côté gauche */
+  background-size: 100% auto; /* pas de zoom, comme avant */
+  background-position: 95% -20px; /* décale vers la droite sans changer le zoom */
 }
 
 .credits-top {
