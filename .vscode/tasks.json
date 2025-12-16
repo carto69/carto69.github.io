@@ -42,6 +42,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Home: crédits en haut à droite + rognage haut\\nPortfolio: vignettes PDF\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push pdf embed + recenter background",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Portfolio: vignette PDF avec <embed>\\nHome: recadre fond (60% 80px)\" && git push",
+			"group": "build"
 		}
 	]
 }

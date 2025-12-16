@@ -33,8 +33,11 @@
             </template>
             <template v-else-if="map.image && map.image.endsWith('.pdf')">
               <div class="pdf-thumb">
-                <div class="pdf-icon">📄 PDF</div>
-                <div class="pdf-name">{{ map.title }}</div>
+                <embed :src="map.image + '#page=1&zoom=100'" type="application/pdf" class="pdf-embed" />
+                <div class="pdf-overlay">
+                  <div class="pdf-icon">📄 PDF</div>
+                  <div class="pdf-name">{{ map.title }}</div>
+                </div>
               </div>
             </template>
             <div v-else class="placeholder">
@@ -274,17 +277,28 @@ hr {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  position: relative;
   color: #fff;
-  background: linear-gradient(135deg, #212121 0%, #2b2b2b 100%);
-  border: 1px dashed #555;
+  background: #1a1a1a;
+}
+.pdf-embed { width: 100%; height: 100%; }
+.pdf-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 80%);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 .pdf-icon {
   font-size: 1.2rem;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.12);
   padding: 6px 10px;
   border-radius: 6px;
 }
