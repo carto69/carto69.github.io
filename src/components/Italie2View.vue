@@ -24,9 +24,23 @@
     <div class="content">
       <!-- Vue en deux colonnes : Carte + Liste -->
       <div class="main-layout">
-        <!-- Carte de l'étage -->
+        <!-- Carte de l'étage (SVG) -->
         <div class="floor-map-container">
-          <div id="floor-map" class="floor-map"></div>
+          <svg class="floor-svg" :width="svgWidth" :height="svgHeight" viewBox="0 0 800 600">
+            <rect x="40" y="40" width="720" height="520" rx="16" ry="16" fill="#ffffff" stroke="#d0d5db" stroke-width="2" />
+            <g stroke="#eef2f7" stroke-width="1">
+              <template v-for="i in 12">
+                <line :x1="60 + (i-1)*60" y1="60" :x2="60 + (i-1)*60" y2="540" />
+              </template>
+              <template v-for="j in 8">
+                <line x1="60" :y1="60 + (j-1)*60" x2="740" :y2="60 + (j-1)*60" />
+              </template>
+            </g>
+            <g v-for="(store, idx) in currentFloorStores" :key="store.id">
+              <circle :cx="storeX(idx)" :cy="storeY(idx)" r="6" :fill="getCategoryColor(store.category)" />
+              <text :x="storeX(idx) + 10" :y="storeY(idx) + 4" font-size="12" font-weight="600" fill="#334155">{{ store.name }}</text>
+            </g>
+          </svg>
           <div class="map-legend">
             <div class="legend-item" v-for="(count, category) in categoryCounts" :key="category">
               <span class="legend-color" :style="{ background: getCategoryColor(category) }"></span>
@@ -81,8 +95,6 @@
 </template>
 
 <script>
-import { markRaw } from 'vue'
-const THREE = window.THREE
 
 export default {
   name: 'Italie2View',
@@ -93,10 +105,8 @@ export default {
       searchQuery: '',
       selectedStore: null,
       meetingPlaceInfo: null,
-      scene: null,
-      camera: null,
-      renderer: null,
-      storeMarkers: [],
+      svgWidth: 800,
+      svgHeight: 600,
       highlightedMarker: null
     }
   },
@@ -125,13 +135,8 @@ export default {
   },
   async mounted() {
     await this.loadFloors()
-    this.init3DMap()
   },
-  beforeUnmount() {
-    if (this.renderer) {
-      this.renderer.dispose()
-    }
-  },
+  beforeUnmount() {},
   methods: {
     async loadFloors() {
       try {
@@ -145,116 +150,28 @@ export default {
       }
     },
     
-    init3DMap() {
-      const container = document.getElementById('floor-map')
-      if (!container || !THREE) return
-
-      // Scene (markRaw empêche Vue de créer un proxy)
-      this.scene = markRaw(new THREE.Scene())
-      this.scene.background = new THREE.Color(0xf5f5f5)
-
-      // Camera
-      this.camera = markRaw(new THREE.OrthographicCamera(
-        -200, 200, 150, -150, 1, 1000
-      ))
-      this.camera.position.set(0, 0, 100)
-      this.camera.lookAt(0, 0, 0)
-
-      // Renderer
-      this.renderer = markRaw(new THREE.WebGLRenderer({ antialias: true }))
-      this.renderer.setSize(container.clientWidth, container.clientHeight)
-      container.appendChild(this.renderer.domElement)
-
-      // Lumières
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
-      this.scene.add(ambientLight)
-
-      // Charger le plan d'étage et ajouter les marqueurs
-      this.loadFloorPlan()
+    // Positionnement des magasins sur une grille régulière (SVG)
+    storeX(idx) {
+      const cols = 10
+      const col = idx % cols
+      return 80 + col * 65
+    },
+    storeY(idx) {
+      const cols = 10
+      const row = Math.floor(idx / cols)
+      return 90 + row * 65
     },
 
     async loadFloorPlan() {
-      // Créer un plan de base en attendant le vrai modèle
-      this.createBasicFloorPlan()
-      this.addStoreMarkers()
-          // Rendu unique après création
-          if (this.renderer && this.scene && this.camera) {
-            this.renderer.render(this.scene, this.camera)
-          }
+      // plus de rendu 3D; les données sont utilisées par le SVG
+      return
     },
 
-    createBasicFloorPlan() {
-      // Plan de sol simple
-      const geometry = new THREE.PlaneGeometry(350, 280)
-      const material = new THREE.MeshBasicMaterial({ 
-        color: 0xffffff,
-        side: THREE.DoubleSide 
-      })
-      const plane = new THREE.Mesh(geometry, material)
-      this.scene.add(plane)
+    createBasicFloorPlan() {},
 
-      // Bordure
-      const edges = new THREE.EdgesGeometry(geometry)
-      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xcccccc }))
-      this.scene.add(line)
-    },
+    addStoreMarkers() {},
 
-    addStoreMarkers() {
-      // Nettoyer anciens marqueurs
-      this.storeMarkers.forEach(marker => this.scene.remove(marker))
-      this.storeMarkers = []
-
-      const stores = this.currentFloorStores
-      const gridSize = Math.ceil(Math.sqrt(stores.length))
-      const spacing = 40
-
-      stores.forEach((store, index) => {
-        const row = Math.floor(index / gridSize)
-        const col = index % gridSize
-        const x = (col - gridSize / 2) * spacing
-        const y = (row - gridSize / 2) * spacing
-
-        // Marqueur du magasin
-        const markerGroup = new THREE.Group()
-        
-        // Point coloré selon la catégorie
-        const dotGeometry = new THREE.CircleGeometry(3, 16)
-        const dotMaterial = new THREE.MeshBasicMaterial({ 
-          color: this.getCategoryColorHex(store.category)
-        })
-        const dot = new THREE.Mesh(dotGeometry, dotMaterial)
-        dot.position.set(x, y, 1)
-        markerGroup.add(dot)
-
-        // Texte du nom du magasin
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
-        canvas.width = 256
-        canvas.height = 64
-        ctx.fillStyle = '#333'
-        ctx.font = 'bold 20px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(store.name.substring(0, 20), 128, 35)
-
-        const texture = new THREE.CanvasTexture(canvas)
-        const labelMaterial = new THREE.SpriteMaterial({ map: texture })
-        const label = new THREE.Sprite(labelMaterial)
-        label.position.set(x, y + 8, 2)
-        label.scale.set(30, 7.5, 1)
-        markerGroup.add(label)
-
-        markerGroup.userData = { store }
-        this.storeMarkers.push(markerGroup)
-        this.scene.add(markerGroup)
-      })
-    },
-
-    animate() {
-      if (!this.renderer) return
-      // Désactivé temporairement pour déboguer
-      // requestAnimationFrame(this.animate.bind(this))
-      // this.renderer.render(this.scene, this.camera)
-    },
+    animate() {},
 
     selectStore(store) {
       this.selectedStore = store
@@ -308,7 +225,7 @@ export default {
     currentFloor() {
       this.searchQuery = ''
       this.selectedStore = null
-      this.addStoreMarkers()
+      // le SVG se met à jour automatiquement via computed
     }
   }
 }
@@ -448,7 +365,7 @@ export default {
   box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.floor-map {
+.floor-svg {
   width: 100%;
   height: 100%;
 }
