@@ -3,12 +3,26 @@
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     
     <div class="header">
-      <h1>Italie Deux - Centre Commercial</h1>
-      <p class="subtitle">Explorer les 117 boutiques et services</p>
+      <h1>Italie Deux</h1>
+      <p class="subtitle">Plan interactif du centre</p>
+    </div>
+
+    <!-- Onglets des étages -->
+    <div class="floors-tabs">
+      <button 
+        v-for="(floorData, key) in floors" 
+        :key="key"
+        @click="currentFloor = key"
+        :class="['floor-tab', { active: currentFloor === key }]"
+      >
+        <span class="floor-icon">{{ getFloorIcon(key) }}</span>
+        <span class="floor-name">{{ floorData.name }}</span>
+        <span class="floor-count">{{ floorData.stores.length }}</span>
+      </button>
     </div>
 
     <div class="content">
-      <!-- Filtres et recherche -->
+      <!-- Barre de recherche et filtres -->
       <div class="search-section">
         <input 
           v-model="searchQuery" 
@@ -28,7 +42,7 @@
         </div>
       </div>
 
-      <!-- Liste des magasins -->
+      <!-- Grille des magasins de l'étage actuel -->
       <div class="stores-grid">
         <div 
           v-for="store in filteredStores" 
@@ -38,7 +52,7 @@
           :class="{ selected: selectedStore?.id === store.id }"
         >
           <div v-if="store.logo" class="store-logo">
-            <img :src="store.logo" :alt="store.name" @error="useStoreName">
+            <img :src="'https:' + store.logo" :alt="store.name" @error="handleImageError">
           </div>
           <div v-else class="store-placeholder">
             {{ store.name.charAt(0).toUpperCase() }}
@@ -46,7 +60,6 @@
           <div class="store-info">
             <h3>{{ store.name }}</h3>
             <p class="category">{{ store.category }}</p>
-            <p v-if="store.floorPlanID" class="floor-plan">📍 {{ store.floorPlanID }}</p>
           </div>
         </div>
       </div>
@@ -108,7 +121,8 @@ export default {
   name: 'Italie2View',
   data() {
     return {
-      stores: [],
+      floors: {},
+      currentFloor: 'floor2', // Démarrer au 2ème étage
       searchQuery: '',
       selectedCategory: null,
       selectedStore: null,
@@ -116,12 +130,15 @@ export default {
     }
   },
   computed: {
+    currentFloorStores() {
+      return this.floors[this.currentFloor]?.stores || []
+    },
     uniqueCategories() {
-      const categories = [...new Set(this.stores.map(s => s.category))].sort()
+      const categories = [...new Set(this.currentFloorStores.map(s => s.category))].sort()
       return categories
     },
     filteredStores() {
-      let filtered = this.stores
+      let filtered = this.currentFloorStores
 
       if (this.searchQuery) {
         const query = this.searchQuery.toLowerCase()
@@ -138,30 +155,46 @@ export default {
       return filtered.sort((a, b) => a.name.localeCompare(b.name))
     },
     storesWithFloorPlan() {
-      return this.stores.filter(s => s.floorPlanID).length
+      return this.currentFloorStores.filter(s => s.floorPlanID).length
     }
   },
   async mounted() {
-    await this.loadStores()
+    await this.loadFloors()
   },
   methods: {
-    async loadStores() {
+    async loadFloors() {
       try {
-        const response = await fetch('/sens-italie-deux/stores.json')
+        const response = await fetch('/sens-italie-deux/floors-data.json')
         const data = await response.json()
         this.meetingPlaceInfo = data.meetingPlace
-        this.stores = data.stores
+        this.floors = data.floors
       } catch (error) {
-        console.error('Erreur lors du chargement des magasins:', error)
-        this.stores = []
+        console.error('Erreur lors du chargement des étages:', error)
+        this.floors = {}
       }
     },
     selectStore(store) {
       this.selectedStore = store
     },
-    useStoreName(event) {
-      // Fallback si l'image ne charge pas
+    handleImageError(event) {
       event.target.style.display = 'none'
+    },
+    getFloorIcon(floorKey) {
+      const icons = {
+        'parking': '🅿️',
+        'floor1': '1️⃣',
+        'floor2': '2️⃣',
+        'floor3': '3️⃣'
+      }
+      return icons[floorKey] || '📍'
+    }
+  },
+  watch: {
+    currentFloor() {
+      // Réinitialiser les filtres quand on change d'étage
+      this.searchQuery = ''
+      this.selectedCategory = null
+      this.selectedStore = null
     }
   }
 }
@@ -171,7 +204,7 @@ export default {
 .italie2-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 20px;
   position: relative;
 }
@@ -200,29 +233,88 @@ export default {
 
 .header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   color: white;
 }
 
 .header h1 {
   font-size: 2.5em;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  font-weight: 700;
 }
 
 .subtitle {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin: 10px 0 0 0;
-  opacity: 0.9;
+  opacity: 0.85;
+}
+
+/* Onglets des étages */
+.floors-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.floor-tab {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.floor-tab:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.floor-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.floor-icon {
+  font-size: 20px;
+}
+
+.floor-name {
+  font-weight: 600;
+}
+
+.floor-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.floor-tab.active .floor-count {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .content {
   max-width: 1400px;
   margin: 0 auto;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .search-section {
