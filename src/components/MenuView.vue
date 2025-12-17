@@ -25,7 +25,7 @@
         </article>
         <div class="tile-break"></div>
         <article class="tile" @click="$emit('open', 'italie2')">
-          <div class="tile-icon">🗺️</div>
+          <div class="tile-icon">🎵</div>
           <h2>Italie 2</h2>
           <button class="tile-btn">→</button>
         </article>
@@ -167,6 +167,7 @@ export default {
 
 .title {
   font-size: 5rem;
+
   font-weight: 700;
   color: #7fa46a; /* même vert que les onglets */
   text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;

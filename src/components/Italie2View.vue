@@ -1,6 +1,6 @@
 <template>
   <div class="italie2-container">
-    <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
+    <button class="back-button-left" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     
     <div class="header">
       <h1>Italie Deux</h1>
@@ -319,10 +319,10 @@ export default {
   position: relative;
 }
 
-.back-button {
+.back-button-left {
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
   background: rgba(255, 255, 255, 0.95);
   border: none;
   padding: 10px 20px;
@@ -335,7 +335,7 @@ export default {
   transition: all 0.3s ease;
 }
 
-.back-button:hover {
+.back-button-left:hover {
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transform: translateY(-2px);
