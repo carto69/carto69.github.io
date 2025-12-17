@@ -26,19 +26,17 @@
       <div class="main-layout">
         <!-- Carte de l'étage (SVG) -->
         <div class="floor-map-container">
-          <svg class="floor-svg" :width="svgWidth" :height="svgHeight" viewBox="0 0 800 600">
-            <rect x="40" y="40" width="720" height="520" rx="16" ry="16" fill="#ffffff" stroke="#d0d5db" stroke-width="2" />
+          <div v-if="isLoading" class="map-empty">Chargement…</div>
+          <div v-else-if="!currentFloorStores.length" class="map-empty">Aucune donnée pour cet étage</div>
+          <svg v-else class="floor-svg" :width="svgWidth" :height="svgHeight" viewBox="0 0 800 600">
+            <rect x="40" y="40" width="720" height="520" rx="16" ry="16" fill="#f8fafc" stroke="#d0d5db" stroke-width="2" />
             <g stroke="#eef2f7" stroke-width="1">
-              <template v-for="i in 12">
-                <line :x1="60 + (i-1)*60" y1="60" :x2="60 + (i-1)*60" y2="540" />
-              </template>
-              <template v-for="j in 8">
-                <line x1="60" :y1="60 + (j-1)*60" x2="740" :y2="60 + (j-1)*60" />
-              </template>
+              <line v-for="i in 12" :key="'v'+i" :x1="60 + (i-1)*60" y1="60" :x2="60 + (i-1)*60" y2="540" />
+              <line v-for="j in 8" :key="'h'+j" x1="60" :y1="60 + (j-1)*60" x2="740" :y2="60 + (j-1)*60" />
             </g>
             <g v-for="(store, idx) in currentFloorStores" :key="store.id">
-              <circle :cx="storeX(idx)" :cy="storeY(idx)" r="6" :fill="getCategoryColor(store.category)" />
-              <text :x="storeX(idx) + 10" :y="storeY(idx) + 4" font-size="12" font-weight="600" fill="#334155">{{ store.name }}</text>
+              <circle :cx="storeX(idx)" :cy="storeY(idx)" r="7" :fill="getCategoryColor(store.category)" />
+              <text :x="storeX(idx) + 12" :y="storeY(idx) + 4" font-size="12" font-weight="600" fill="#1f2937">{{ store.name }}</text>
             </g>
           </svg>
           <div class="map-legend">
@@ -107,7 +105,8 @@ export default {
       meetingPlaceInfo: null,
       svgWidth: 800,
       svgHeight: 600,
-      highlightedMarker: null
+      highlightedMarker: null,
+      isLoading: true
     }
   },
   computed: {
@@ -147,6 +146,8 @@ export default {
       } catch (error) {
         console.error('Erreur chargement étages:', error)
         this.floors = {}
+      } finally {
+        this.isLoading = false
       }
     },
     
@@ -359,7 +360,7 @@ export default {
 /* Carte de l'étage */
 .floor-map-container {
   position: relative;
-  background: #f5f5f5;
+  background: #f1f5f9;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
@@ -368,6 +369,17 @@ export default {
 .floor-svg {
   width: 100%;
   height: 100%;
+}
+
+.map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334155;
+  font-weight: 600;
+  background: rgba(255,255,255,0.8);
 }
 
 .map-legend {
