@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
   --bg: #f6f8fb;
   --accent: #2171b5;
 }
 
-html,body,#app { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg) }
+html,body,#app { height: 100%; margin: 0; font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg) }
 
 .app-header { height: 60px; display:flex; align-items:center; gap:12px; padding:0 16px; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,0.06) }
 .app-header .back { background:transparent; border:0; cursor:pointer }

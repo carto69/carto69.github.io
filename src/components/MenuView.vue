@@ -2,9 +2,11 @@
   <main class="menu">
     <div class="credits-toggle top-right" @click="showCredits = !showCredits">Crédit</div>
     <div v-if="showCredits" class="credits-panel">
-      <div class="credit-line"><strong>Source carte:</strong> Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
-      <div class="credit-line"><strong>Crédit:</strong> Elia Terragni</div>
-    </div>
+      <div class="credit-line"><strong>Crédit :</strong> Elia Terragni</div>
+      <div class="credit-line"><strong>Contact :</strong> <a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a></div>
+      <div class="credit-line"><strong>Repo :</strong> <a href="https://github.com/wxiote/carto69" target="_blank" rel="noopener">github.com/wxiote/carto69</a></div>
+      <div class="credit-line"><strong>Source carte :</strong> Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
+      </div>
     <div class="hero">
       <h1 class="title">carto69</h1>
       <div class="tiles">
@@ -78,9 +80,12 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: url('/vintage-map.jpg') no-repeat;
   background-size: 105% auto; /* léger dézoom */
-  background-position: 100% -20px; /* décale très légèrement à droite */
+  background-position: 102% -20px; /* léger décalage à droite mais réduit */
 }
 
 .credits-top {
@@ -136,8 +141,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 40px 20px;
+  text-align: center;
+  gap: 28px;
+  width: min(1100px, 92vw);
+  padding: 0 20px;
 }
 
 .tiles {
@@ -146,6 +153,7 @@ export default {
   justify-content: center;
   gap: 18px 22px;
   max-width: 820px;
+  width: 100%;
 }
 
 .tile-btn {
@@ -166,13 +174,13 @@ export default {
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 5.6rem;
 
   font-weight: 700;
   color: #7fa46a; /* même vert que les onglets */
   text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
   margin: 0 0 60px 0;
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   letter-spacing: 3px;
   font-style: normal;
 }

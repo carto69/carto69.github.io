@@ -25,24 +25,45 @@
       <!-- Vue en deux colonnes : Carte + Liste -->
       <div class="main-layout">
         <!-- Carte de l'étage (SVG) -->
-        <div class="floor-map-container">
+        <div class="floor-map-container" :style="floorBgStyle">
           <div v-if="isLoading" class="map-empty">Chargement…</div>
-          <div v-else-if="!currentFloorStores.length" class="map-empty">Aucune donnée pour cet étage</div>
           <svg v-else class="floor-svg" :width="svgWidth" :height="svgHeight" viewBox="0 0 800 600">
+            <!-- Titre d'étage -->
+            <text x="400" y="28" text-anchor="middle" font-size="20" font-weight="800" fill="#0f172a">
+              {{ floorTitle }}
+            </text>
             <rect x="40" y="40" width="720" height="520" rx="16" ry="16" fill="#f8fafc" stroke="#d0d5db" stroke-width="2" />
             <g stroke="#eef2f7" stroke-width="1">
               <line v-for="i in 12" :key="'v'+i" :x1="60 + (i-1)*60" y1="60" :x2="60 + (i-1)*60" y2="540" />
               <line v-for="j in 8" :key="'h'+j" x1="60" :y1="60 + (j-1)*60" x2="740" :y2="60 + (j-1)*60" />
             </g>
-            <g v-for="(store, idx) in currentFloorStores" :key="store.id">
+            <!-- Schéma parking basique -->
+            <g v-if="currentFloor === 'parking'">
+              <rect x="60" y="80" width="680" height="440" fill="#e2e8f0" stroke="#cbd5e1"/>
+              <g v-for="r in 4" :key="'row'+r">
+                <rect :x="80" :y="90 + (r-1)*100" width="280" height="70" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+                <rect :x="440" :y="90 + (r-1)*100" width="280" height="70" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+              </g>
+              <text x="400" y="560" text-anchor="middle" font-size="12" fill="#475569">Allées parking indicatives</text>
+            </g>
+            <g v-if="hasStores" v-for="(store, idx) in currentFloorStores" :key="store.id">
               <circle :cx="storeX(idx)" :cy="storeY(idx)" r="7" :fill="getCategoryColor(store.category)" />
               <text :x="storeX(idx) + 12" :y="storeY(idx) + 4" font-size="12" font-weight="600" fill="#1f2937">{{ store.name }}</text>
             </g>
+            <g v-else>
+              <text x="400" y="310" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">
+                {{ currentFloor === 'parking' ? 'Plan Parking' : 'Aucune donnée' }}
+              </text>
+            </g>
           </svg>
           <div class="map-legend">
-            <div class="legend-item" v-for="(count, category) in categoryCounts" :key="category">
+            <div class="legend-item" v-for="(count, category) in categoryCounts" :key="category" v-if="hasStores">
               <span class="legend-color" :style="{ background: getCategoryColor(category) }"></span>
               <span class="legend-label">{{ category }} ({{ count }})</span>
+            </div>
+            <div v-else class="legend-item">
+              <span class="legend-color" style="background:#94a3b8"></span>
+              <span class="legend-label">{{ currentFloor === 'parking' ? 'Parking' : 'Vide' }}</span>
             </div>
           </div>
         </div>
@@ -112,6 +133,24 @@ export default {
   computed: {
     currentFloorStores() {
       return this.floors[this.currentFloor]?.stores || []
+    },
+    hasStores() {
+      return (this.currentFloorStores?.length || 0) > 0
+    },
+    floorTitle() {
+      return this.floors[this.currentFloor]?.name || 'Étage'
+    },
+    floorBgStyle() {
+      const base = `/sens-italie-deux/floors/${this.currentFloor}`
+      const url = `${base}.svg`
+      const urlPng = `${base}.png`
+      const urlJpg = `${base}.jpg`
+      return {
+        backgroundImage: `url('${url}'), url('${urlPng}'), url('${urlJpg}')`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+      }
     },
     filteredStores() {
       let filtered = this.currentFloorStores
@@ -364,11 +403,13 @@ export default {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+  height: 600px; /* garantir la hauteur de rendu du SVG */
 }
 
 .floor-svg {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 .map-empty {
