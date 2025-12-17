@@ -1,0 +1,1089 @@
+{
+  "meetingPlace": {
+    "name": "Italie Deux",
+    "businessUnitCode": "SHC068",
+    "coordinates": {
+      "lat": 48.82926,
+      "lon": 2.355218
+    },
+    "phoneNumber": "01 45 80 72 00",
+    "email": "contact@italiedeux.com"
+  },
+  "stores": [
+    {
+      "id": "56d921f5-e38f-557e-9585-dedb9c067457",
+      "name": "Carrefour Market",
+      "slug": "carrefour-market",
+      "floorPlanID": "shop-floor01-020",
+      "category": "Alimentation",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7kJA7pupG61WJvJCP4FWfS/76c59dee7a769a75dc7b43546f545bf0/Carrefour_market_logo.svg.png",
+      "description": null
+    },
+    {
+      "id": "f91bb456-4b9e-592c-bfe7-8c4d5530cab1",
+      "name": "Bricorama",
+      "slug": "bricorama",
+      "floorPlanID": "shop-floor01-015",
+      "category": "Maison et Décoration",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4AplSKM53ONSivSZonvE36/ba467ee278488c0fb81b4ae06ffc9c3e/Bricorama_logo.png",
+      "description": null
+    },
+    {
+      "id": "6ce36c13-b174-583c-bc6d-eabea7b312db",
+      "name": "Armand Thiery Femme",
+      "slug": "armand-thiery-femme",
+      "floorPlanID": "shop-floor02-006",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5ZfO6AUwd9aiOF6fNdDonh/3e3814665d930f9e3929db541cf90d8d/armand-thiery-femme-logo.jpg",
+      "description": null
+    },
+    {
+      "id": "f20807c0-010b-586c-87f8-a960d5285f09",
+      "name": "Courir",
+      "slug": "courir",
+      "floorPlanID": "shop-floor02-025",
+      "category": "Chaussures",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5yXZhpFs2oMSaIjR3Ck3U/15449ae4c91ba37a1e7cbfed929b58c1/brand_Courir-Logo.png",
+      "description": null
+    },
+    {
+      "id": "38fa03ea-8460-5586-ae7e-c00caafeb25d",
+      "name": "Claire's",
+      "slug": "claires",
+      "floorPlanID": "shop-floor02-024",
+      "category": "Accessoires et montres",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/43KNWNAite9WPNGK20dO6Q/76e82e1a626b34a6158833fdb5a46dc3/CLAIRES_410x282.png",
+      "description": null
+    },
+    {
+      "id": "2fce142e-ea67-506f-916a-d7fd0640bf6d",
+      "name": "Bleu Libellule",
+      "slug": "bleu-libellule",
+      "floorPlanID": "shop-floor03-010",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3AFtvibt3E8JomhQSalBBG/939eb53e2a5762a508db19682bde7983/bleu-libellule.png",
+      "description": null
+    },
+    {
+      "id": "9e2f1b2b-e23e-545f-9c6a-68764530df9a",
+      "name": "GrandOptical",
+      "slug": "grandoptical",
+      "floorPlanID": "shop-floor03-043",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6DJeAZAu3QZ8dqKb0l1xFb/938e0013cc5f63028409d3a6ba4bd376/grandoptical_logo.PNG",
+      "description": null
+    },
+    {
+      "id": "fa593998-8f88-565f-8c49-1997328c555f",
+      "name": "Draeger",
+      "slug": "draeger",
+      "floorPlanID": "shop-floor02-027",
+      "category": "Accessoires et montres",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/IWBq5PnSyIi7ybOzFYLWp/ff83b97aca76ff38e3eb91d31350ca96/draeger.png",
+      "description": null
+    },
+    {
+      "id": "1fd904c1-5c71-5db6-847e-c04927104eb5",
+      "name": "Franck Provost",
+      "slug": "franck-provost",
+      "floorPlanID": "shop-floor03-039",
+      "category": "Services",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2nTXs3ab0Hr7axK4enWjbn/e22c0cfc53cf59e7a4050c1493a37df7/franck.png",
+      "description": null
+    },
+    {
+      "id": "0b557d42-7555-500c-86ae-141fb0504d71",
+      "name": "Jeff de Bruges",
+      "slug": "jeff-de-bruges",
+      "floorPlanID": "shop-floor02-052",
+      "category": "Autre",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2zvRFeSeHbtxedG4AMA2dv/1a01449a2d8313d0dbc4fe34306d93cf/jeff-de-bruges-logo.jpg",
+      "description": null
+    },
+    {
+      "id": "deab9839-cca0-5b00-bac0-a6d2c663ab90",
+      "name": "Bodyminute",
+      "slug": "body-minute",
+      "floorPlanID": "shop-floor03-012",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2CGrX31OHR5Ye1GRMScXTc/7e7ee008c9f51eb1891bbde28667eb02/body_minute.jpg",
+      "description": null
+    },
+    {
+      "id": "52d289af-4f24-5e22-81c3-c1bfd99e1b72",
+      "name": "Promod",
+      "slug": "promod",
+      "floorPlanID": "shop-floor02-089",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2q8BJr3XekYHB2aPj8Aqc4/a142641b42bc57a122b96b847e6e5a75/logo-promod.png",
+      "description": null
+    },
+    {
+      "id": "d3d14569-ce4f-5011-9e3e-0c71bf262655",
+      "name": "Jules",
+      "slug": "jules",
+      "floorPlanID": "shop-floor02-130",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2y7GUUtAtUn6QxakLTPxBz/90950bd848a5dbdabb3e4bcac3e6066b/brand-Jules-Logo.png",
+      "description": null
+    },
+    {
+      "id": "b2c4485f-99a0-5cbc-b32f-8ec0d711ef0d",
+      "name": "Zara Homme",
+      "slug": "zara-homme",
+      "floorPlanID": "shop-floor01-107",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/VmNJYY36cvmfNTJssGWOL/a466d6d32672209efb97379227dcba34/Poland_tenant_Zara_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "50fd0e78-528d-51fb-8a84-2244af84572d",
+      "name": "Lovisa",
+      "slug": "lovisa",
+      "floorPlanID": "shop-floor01-061",
+      "category": "Bijoux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5605CtlFCFjUloQkY77SFb/93c3ffdc9e52bbae9e1fb8bb4d06f578/Lovisa_Logo.png",
+      "description": null
+    },
+    {
+      "id": "e980eecb-4970-557d-bfeb-74a14d8b7335",
+      "name": "Jacadi",
+      "slug": "jacadi",
+      "floorPlanID": "shop-floor03-051",
+      "category": "Mode Enfant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/76BYuXkvc1ldEpgoo0esc0/41356788a5738b90f9f3fcdf14783168/Jacadi_logo.gif",
+      "description": null
+    },
+    {
+      "id": "5ebdcab9-1fd1-5d69-ba25-8e02bfa22573",
+      "name": "Adidas ",
+      "slug": "adidas",
+      "floorPlanID": "shop-floor02-002",
+      "category": "Chaussures",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7jD60aMvHdVhxtivF8YlDi/be52bb9c76f31f7f63c84673ca607aa6/Adidas-logo.png",
+      "description": null
+    },
+    {
+      "id": "c2e1d271-7f25-5482-8170-bc11154eaa56",
+      "name": "Maison 123",
+      "slug": "maison-123",
+      "floorPlanID": "shop-floor02-064",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3NIHtYN0HmoNpfgypSREZv/d7aa5d3cd06bd71c268a8cda48144ec5/Maison-123.png",
+      "description": null
+    },
+    {
+      "id": "4e72c5f5-e55b-5f96-83df-d4ea3674ea85",
+      "name": "Entre Nous Lingerie",
+      "slug": "entre-nous-lingerie",
+      "floorPlanID": "shop-floor03-031",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/ZxYdgNYL5FVbdt9szI9xh/77a6d31fe0b3ce4a8349885f8aa0eda0/entre-nous.png",
+      "description": null
+    },
+    {
+      "id": "cf9f9e2b-9d97-5e00-9c80-7d956024ba6c",
+      "name": "Sephora",
+      "slug": "sephora",
+      "floorPlanID": "shop-floor03-094",
+      "category": "Parfums",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6hU1yXY9SvlKeoLgJQ9yrw/7cd9ffc4531e963051144d227a4f34ac/Poland_tenant_Sephora_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "415e6e08-8c56-5cf8-a00a-d625b0e14fe6",
+      "name": "Forestland",
+      "slug": "forestland",
+      "floorPlanID": "shop-floor01-038",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/66FPbYDsLMxFtXbbkenLMm/2e1f5b8398cf5c562ebc4bbab0501447/MicrosoftTeams-image__1_.png",
+      "description": null
+    },
+    {
+      "id": "208fd7b2-28f3-5eec-b13c-09d6e18c715c",
+      "name": "Mister Minit",
+      "slug": "mister-minit",
+      "floorPlanID": "shop-floor02-071",
+      "category": "Services",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/14tBvWLshe8syofzxe546e/5555071efbce9105000e3545ea3e4747/PL_logo_MisterMinit.png",
+      "description": null
+    },
+    {
+      "id": "2e773dc3-4ee4-5741-8cc4-6ca603b97fc9",
+      "name": "Rituals",
+      "slug": "rituals",
+      "floorPlanID": "shop-floor01-092",
+      "category": "Parfums",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2tYYlB4adb82ebcn2SpKMv/dda088adf6ece646c8897cc394d215e4/rituals_logo_800x800.jpg",
+      "description": null
+    },
+    {
+      "id": "f0066360-780f-53dc-92d5-3fe031ce1197",
+      "name": "NIN & LAUR",
+      "slug": "nin-laur",
+      "floorPlanID": "shop-floor01-076",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4TRRlT6MObCzkZyHeLHDwt/6f7f0d88e9c418724a4821752199bfe7/Nin_Laur.jpg",
+      "description": null
+    },
+    {
+      "id": "a6738838-5b66-5ca1-aa15-d41fd556955d",
+      "name": "SFR",
+      "slug": "sfr",
+      "floorPlanID": "shop-floor03-095",
+      "category": "Téléphonie et Internet",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5hdzwhcwBJgM4UVm0u1nOy/3cd57206a45f15afbc26a3a583f61c5f/SFR_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "2af04dfd-7b84-5fd6-95af-75b402f1d406",
+      "name": "Minelli",
+      "slug": "minelli",
+      "floorPlanID": "shop-floor02-069",
+      "category": "Chaussures",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2aPPD7xh7jTiM8lapMDrV2/462e17720d9a84301648fc546bf3652d/MicrosoftTeams-image__2_.png",
+      "description": null
+    },
+    {
+      "id": "3d7254b8-e578-53b7-a50a-5e90b109d2ab",
+      "name": "WeFix",
+      "slug": "wefix",
+      "floorPlanID": "shop-floor01-103",
+      "category": "Services",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/32IPvvX2o4Naum9HJJe7bF/88a6d9b0c057b1a912873fb307a5dfd8/wefix.png",
+      "description": null
+    },
+    {
+      "id": "232794ca-2741-5d3d-942a-ecdd0d5757d5",
+      "name": "Zara Enfant",
+      "slug": "zara-enfant",
+      "floorPlanID": "shop-floor01-106",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/VmNJYY36cvmfNTJssGWOL/a466d6d32672209efb97379227dcba34/Poland_tenant_Zara_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "49e724aa-c048-51bc-9546-9637ecbc41c5",
+      "name": "Armand Thiery Homme",
+      "slug": "armand-thiery-homme",
+      "floorPlanID": "shop-floor02-007",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/79YdwLh7QJgOyTTZWatljR/63487e178264d2770837eabedeef78b0/armand-thiery-homme-logo.jpg",
+      "description": null
+    },
+    {
+      "id": "bf72b3e6-3d1a-5d37-9d28-bf04e1e985f0",
+      "name": "Celio",
+      "slug": "celio",
+      "floorPlanID": "shop-floor02-022",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5LiO6QbGJp3AZ5Ia3BN2eZ/e04469ebded2d43b44476aa286201ea0/Celio.png",
+      "description": null
+    },
+    {
+      "id": "fc741448-3f53-5706-bf61-cc00571b2a7c",
+      "name": "Theâtre Le 13ème Art",
+      "slug": "theatre-le-13eme-art",
+      "floorPlanID": "shop-floor02-099",
+      "category": "Divertissement",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/xZAAxlGreNgWP8opIvPHv/411c58b2301794d5861f4d20eadbb690/logo13eart_square.png",
+      "description": null
+    },
+    {
+      "id": "760e6fbc-99b4-52f4-9765-d7865b0c110d",
+      "name": "Tabac Tabacase",
+      "slug": "tabac-tabacase",
+      "floorPlanID": "shop-floor01-097",
+      "category": "Autre",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6mNmDHwcnz6laibD0iSnyp/343afb3bd57017f62637fa106f34c9c8/tabac.png",
+      "description": null
+    },
+    {
+      "id": "fc0d19e6-984c-51e6-aba9-4e559a8d6d0f",
+      "name": "Levi's",
+      "slug": "levis",
+      "floorPlanID": "shop-floor01-059",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5Xp3t7hMRWX6u3t8ZVXzNW/34469f5b6d25206b773ca7dfee75e7d2/Levi-s_logo.png",
+      "description": null
+    },
+    {
+      "id": "9a2f5298-62d1-59f9-86f6-28b1ca340d82",
+      "name": "Montre Service",
+      "slug": "montre-service",
+      "floorPlanID": "shop-floor01-072",
+      "category": "Services",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4XBG9cdTe2lE0luzi4imWt/93c5ac82286e0064879a6f6e7604e515/montre_services_logo.png",
+      "description": null
+    },
+    {
+      "id": "5d2f98af-16a6-5f0a-89b5-4527c1b1df40",
+      "name": "Calzedonia",
+      "slug": "calzedonia",
+      "floorPlanID": "shop-floor02-018",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/UpHQk7p8VrujhYXP2ccuo/53f90766cb28f59979c500f0da22b24c/Poland_tenant_Calzedonia_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "e480347f-e767-5e42-b4d4-fa6ec0c6363b",
+      "name": "Epicéa",
+      "slug": "epicea",
+      "floorPlanID": "shop-floor02-032",
+      "category": "Bagages et Sacs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3fiJinv9ebQq9fDBuIonU3/12b2e690d882fca9e056a21e4e3be741/epicea_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "81f2d9b4-7351-5b50-958a-1aa085a9d2d9",
+      "name": "Boulanger",
+      "slug": "boulanger",
+      "floorPlanID": "shop-floor03-013",
+      "category": "Loisirs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3NB4rKHhVpC8xGxERs560w/521093a70548bc29c1c8693068fab9b0/boulanger_logo_rvb.png",
+      "description": null
+    },
+    {
+      "id": "6f457c24-50bb-5770-bc18-c80ef2e57091",
+      "name": "Petit Bateau",
+      "slug": "petit-bateau",
+      "floorPlanID": "shop-floor03-085",
+      "category": "Mode Enfant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7qyeBN4iTd0lK4cBW9hxcK/7c0ec7ec6f7bb30787669dd83a156a83/petit-bateau.png",
+      "description": null
+    },
+    {
+      "id": "15bf0fb8-67b7-5c67-b43f-8784e09a548f",
+      "name": "Undiz",
+      "slug": "undiz",
+      "floorPlanID": "shop-floor02-100",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5RolhrGo0yQCFXWsXkzWVT/17b34e2d8c97c13c5f18180899cd0eb7/undiz.png",
+      "description": null
+    },
+    {
+      "id": "66ab0acc-97eb-58ce-b14d-1ab981d5d6d5",
+      "name": "Lacoste",
+      "slug": "lacoste",
+      "floorPlanID": "shop-floor02-057",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4z5KAn2llP9RrJLZhFroyS/e0d6c5ead0e17ab5c2eba09ae13af135/lagoste_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "5e5763c1-9470-5fa3-8b2b-e97025b291fc",
+      "name": "Zara",
+      "slug": "zara",
+      "floorPlanID": "shop-floor02-105",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/VmNJYY36cvmfNTJssGWOL/a466d6d32672209efb97379227dcba34/Poland_tenant_Zara_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "37916b1c-0092-5253-b1ed-2cf76e65ba8e",
+      "name": "Histoire d'Or (Kiosque)",
+      "slug": "histoire-dor-kiosque",
+      "floorPlanID": "shop-floor02-047",
+      "category": "Bijoux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7kIKJVn9q1MxIyk8MobJgq/dda0a7c347744e2ba258cdfac2275136/histoire-d_or.png",
+      "description": null
+    },
+    {
+      "id": "acc5d611-44ba-54fd-b674-820b0ec5fa94",
+      "name": "Foot Locker",
+      "slug": "foot-locker",
+      "floorPlanID": "shop-floor01-037",
+      "category": "Chaussures",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7jKhA4DzbQn9T7tiGOkuJZ/89acff6cb7f3b7e3925d211622cf2572/footlocker_logo_800x800.jpg",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"With more than 2500 stores across the world, Foot Locker is the leading global athletic footwear and apparel retailer. Our close partnerships with the ultimate top brands mean that we will constantly provide you with the best, most exclusive ranges of products there is. At Foot Locker, we live sneakers, we breathe sneakers, we dream sneakers… Sneakers are all we think about and nothing makes us more proud than being able to keep our followers up to date with the latest trends.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "8809b215-0414-521e-8cbb-b5316ec1cc53",
+      "name": "Expert Car Wash",
+      "slug": "expert-car-wash",
+      "floorPlanID": "shop-floor-1-035",
+      "category": "Services",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5l4OP8oKh0ce53vC4bt7k2/511802ba5b96b3e3cde979c357c9bf70/Expert_car_Wash_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "fbf1c023-cb2d-501a-b8cc-8df710f3a155",
+      "name": "Okaïdi",
+      "slug": "okaidi",
+      "floorPlanID": "shop-floor03-079",
+      "category": "Mode Enfant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4abiaHMFQZYLdRGdPjPoqe/e48483329fff7ac2766af6f1f37aff97/okaidi.png",
+      "description": null
+    },
+    {
+      "id": "3c09c34a-b2b0-5c6a-aa52-623c30548eb9",
+      "name": "Parfois",
+      "slug": "parfois",
+      "floorPlanID": "shop-floor02-084",
+      "category": "Accessoires et montres",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3sUIOjqBuQgsZdygaeN834/87b71b6f22332fc0f23f93bff25b5a71/PL_logo_Parfois.png",
+      "description": null
+    },
+    {
+      "id": "70a9a1b4-14f7-53f7-8713-007779b6c527",
+      "name": "Café coton",
+      "slug": "cafe-coton",
+      "floorPlanID": "shop-floor02-017",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7MXFihp4q8Wy1l55WdOBY0/d27d33625d5c645dc1ba986c83f26d3d/cafe_coton_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "421a3d70-a462-526d-a9c3-a2ba6a45f4e9",
+      "name": "LC PAP",
+      "slug": "lcpap",
+      "floorPlanID": "shop-floor03-068",
+      "category": "Mode Homme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3socf05bRV9MOTu3wgKN8i/681c2b941b1b18ce5440d1bdadfd8cbe/Italie_Deux_Logo_Shop_LCPAP_320x320.png",
+      "description": null
+    },
+    {
+      "id": "757ec8d8-5e5e-5567-9484-2476d95ffb58",
+      "name": "HORACE",
+      "slug": "horace",
+      "floorPlanID": "shop-floor02-048",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/zn0F6bu8burdCRxgHcxxK/7c62bb1ea2be67d466c4c354273a58d5/logo_horace_fondbleu.jpg",
+      "description": null
+    },
+    {
+      "id": "4574e03f-3a7c-5d79-9ad6-59ee2539ed18",
+      "name": "Chantelle ",
+      "slug": "chantelle",
+      "floorPlanID": "shop-floor02-023",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7jRIiCaFV9CCirSWLYrSJ8/e204a1ee59cd6f43401cc357a194bc1e/Chantelle.png",
+      "description": null
+    },
+    {
+      "id": "fcebf1e2-8e7c-5ea3-99a6-ce839f025524",
+      "name": "Nature & Découvertes",
+      "slug": "nature-decouvertes",
+      "floorPlanID": "shop-floor03-075",
+      "category": "Loisirs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4cGbYodMZPd8Oioz2rjQK8/e8bdaeecaac991945b96684e095b3812/nature___decou.png",
+      "description": null
+    },
+    {
+      "id": "b569abc0-2756-5951-a75d-409e25bf5849",
+      "name": "Alain Afflelou",
+      "slug": "alain-afflelou",
+      "floorPlanID": "shop-floor02-004",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1u42WffxKXmQSLrIY6Nzy9/32892f6c0ce013425f731fa312c9e1b1/Logo_AA.jpg",
+      "description": null
+    },
+    {
+      "id": "d7c9e380-9061-5dc1-9eaf-de9a5650a32e",
+      "name": "Générale d'Optique",
+      "slug": "generale-doptique",
+      "floorPlanID": "shop-floor01-044",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2yfGBjbWRAqFe7J2d9fyjj/254bd7de00a0b34edc0839ea712712f8/general-optique.png",
+      "description": null
+    },
+    {
+      "id": "7fb56cad-adef-5403-865c-c5d8e0ee8fb3",
+      "name": "Kiko Milano",
+      "slug": "kiko-milano",
+      "floorPlanID": "shop-floor02-054",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/57SxI2toX9NJXs9rvi0PPV/68e2b98e68c769f088b15c7bb0b0bafe/RIO-Shopping_tenant-logo_kiko-milano.png",
+      "description": null
+    },
+    {
+      "id": "dd3496fc-e91c-53d9-9ba7-cdbaeefdc4b9",
+      "name": "Marionnaud",
+      "slug": "marionnaud",
+      "floorPlanID": "shop-floor02-067",
+      "category": "Parfums",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1Eb4DwG7u9dHf0wDLH38d7/5680e58fca1eab77a104910fac011b63/marionnaud_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "559106fe-bfd2-5610-9f54-c76d6a21f82a",
+      "name": "Pharmacie Italie Deux",
+      "slug": "pharmacie-italie-deux",
+      "floorPlanID": "shop-floor02-086",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5okSQ8AL6CaqqVXszSSgJM/6b3bf290c8b1350266af472d5afe4923/pharmacie.png",
+      "description": null
+    },
+    {
+      "id": "d12e7ab0-9f14-5489-a2f6-513071519c7e",
+      "name": "Yves Rocher",
+      "slug": "yves-rocher",
+      "floorPlanID": "shop-floor02-104",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4SSWT65ULxDJSBdSz3xYjP/99c20c42db5f8a77801eca94031e351d/PL_logo_YvesRocher.png",
+      "description": null
+    },
+    {
+      "id": "c3aefc45-8f07-5ef8-b457-56b899b654aa",
+      "name": "Acuitis",
+      "slug": "acuitis",
+      "floorPlanID": "shop-floor02-001",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7zjrLUCwWjOaILC3LAKR3d/582d1d59d453b69086ba259e52c33048/brand_Acuitis-Logo.png",
+      "description": null
+    },
+    {
+      "id": "61e87122-10c7-507c-bec9-c2975e888930",
+      "name": "Pylones",
+      "slug": "pylones",
+      "floorPlanID": "shop-floor01-090",
+      "category": "Jouets et Cadeaux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6MfBTUKy73Y5S7Ts54spOs/156ab9dbace915399f4fac0d080aed86/Pylones_Logo.jpg",
+      "description": null
+    },
+    {
+      "id": "1b2e419c-2c19-53ad-950e-5df6d6099fb7",
+      "name": "CAROLL",
+      "slug": "caroll",
+      "floorPlanID": "shop-floor02-019",
+      "category": "Mode Femme",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2wz4UFd3kqnxPlJZQbzzuI/f9d7007d321dfec10333147fe13a3d75/Caroll_logo.png",
+      "description": null
+    },
+    {
+      "id": "d527bb13-2e24-5af8-9798-52e8a03f936c",
+      "name": "Etam Lingerie",
+      "slug": "etam-lingerie",
+      "floorPlanID": "shop-floor02-034",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/63a5z8KVhmWwkzMxrrNyaV/af4a27cda8212d0d61651c94a787f363/Etam_lingerie_logo.png",
+      "description": null
+    },
+    {
+      "id": "0ad6c115-ee4a-5f51-8d1c-ef646d086b25",
+      "name": "Pandora",
+      "slug": "pandora",
+      "floorPlanID": "shop-floor02-083",
+      "category": "Bijoux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1E8K7GOtfK1iZpUz2YF0NR/8bb05360f1f254d514f99da30120f519/Global_Brand_PL_Pandora_Logo.jpg",
+      "description": null
+    },
+    {
+      "id": "c8ea1abc-c684-51c8-855c-d6c7ff4190fa",
+      "name": "INTERSPORT",
+      "slug": "intersport",
+      "floorPlanID": "shop-floor02-042",
+      "category": "Chaussures",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7gw3RxdUhEZHOk38wrDkUy/b338710ff8e0f2e6ea28b6f99cc92cea/Intersport392x392.jpg",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"\\n\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "d8ab0b51-0ec7-59e3-a97b-445f1abcdba8",
+      "name": "Marc Orian",
+      "slug": "marc-orian",
+      "floorPlanID": "shop-floor02-066",
+      "category": "Bijoux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1AKVx1SzVwOqq5gHGp2dOY/41350fc057cdd97c03cd392d42cb5a69/marc-orian.png",
+      "description": null
+    },
+    {
+      "id": "f9b94584-08eb-5cf3-929a-211ca31ad9a5",
+      "name": "Histoire d'Or",
+      "slug": "histoire-dor",
+      "floorPlanID": "shop-floor02-046",
+      "category": "Bijoux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7kIKJVn9q1MxIyk8MobJgq/dda0a7c347744e2ba258cdfac2275136/histoire-d_or.png",
+      "description": null
+    },
+    {
+      "id": "dac342a4-0681-5d03-86c7-7759e9f5796b",
+      "name": "Bouygues Telecom",
+      "slug": "bouygues-telecom",
+      "floorPlanID": "shop-floor01-014",
+      "category": "Téléphonie et Internet",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6fnETyq8fsWMfHryuGeW4n/611b6032405266204aca9d5a3f097b5a/bouygues-telecom.png",
+      "description": null
+    },
+    {
+      "id": "cc927fe9-e379-5641-82b4-98c1ff0511f5",
+      "name": "La Grande Récré",
+      "slug": "la-grande-recre",
+      "floorPlanID": "shop-floor03-056",
+      "category": "Jouets et Cadeaux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/HqcidJcamkV5JgKcIZtjR/c2c0b8996d28cfb757b75efb4dc7a19d/la_grande_recre.png",
+      "description": null
+    },
+    {
+      "id": "f74f4a14-59f9-5da1-8391-2e36da71313b",
+      "name": "Hema",
+      "slug": "hema",
+      "floorPlanID": "shop-floor01-045",
+      "category": "Maison et Décoration",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6dP1o1906csSolHPBEI8iX/213e98c64576a9a0ddd20bde3eb9dedf/HEMA_logo.png",
+      "description": null
+    },
+    {
+      "id": "4f80ea2e-3098-5e60-84f3-b0375c57a25b",
+      "name": "Orange (Générale de téléphonie)",
+      "slug": "orange",
+      "floorPlanID": "shop-floor01-080",
+      "category": "Téléphonie et Internet",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4NXTDmakvDEK0qK235Vcd9/f095e36caa5439aad3de05661c57fe5e/Poland_tenant_Orange_logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "aa19bc41-27f1-5dc5-86fe-0b9a96e39bfd",
+      "name": "Lunettes pour Tous",
+      "slug": "lunettes-pour-tous",
+      "floorPlanID": "shop-floor01-062",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/58nZl1Kk07VVQatDZNfYHQ/c454f75b63618694aa1c4133ccaaa58f/LUNETTES_POUR_TOUS_.png",
+      "description": null
+    },
+    {
+      "id": "4c8f90b0-3c46-5b7e-86b8-80e0dfcf2f36",
+      "name": "CABAIA",
+      "slug": "cabaia",
+      "floorPlanID": "shop-floor02-016",
+      "category": "Accessoires et montres",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3Z84EzHDG3zz4OqN3I93D7/dd9b5d8d6f092193c0988bb333d93065/cabaia.png",
+      "description": null
+    },
+    {
+      "id": "52b031cf-0187-5a79-8655-767dde65e2d1",
+      "name": "E Clope Store",
+      "slug": "e-clope-store",
+      "floorPlanID": "shop-floor03-030",
+      "category": "Santé et Bien-être",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5zE1SLz2EA54vY0kAZawhP/ecf42768d5d1c536aef5567403de89b0/ECLOPE_STORE_JPG.jpg",
+      "description": null
+    },
+    {
+      "id": "c36fb76d-c7b5-5454-8e32-fc84c0fab812",
+      "name": "Avril",
+      "slug": "avril",
+      "floorPlanID": "shop-floor02-009",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/CNyym61AAiumnu3801SkR/de5f354826426f69105da139822801cd/avril_logo.png",
+      "description": null
+    },
+    {
+      "id": "7204c98b-8d87-59ab-9a54-b4ce9f8102ed",
+      "name": "Du bruit dans la cuisine",
+      "slug": "du-bruit-dans-la-cuisine",
+      "floorPlanID": "shop-floor01-028",
+      "category": "Cuisine",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7yG2plbxoUJx9jxWl1s1ur/2f9d03970979c019af856b025b64ed2c/du_bruit_dans_la_cuisine.jpg",
+      "description": null
+    },
+    {
+      "id": "403cd27d-4e77-5674-8a68-f4d7ce785b4d",
+      "name": "NORMAL",
+      "slug": "normal",
+      "floorPlanID": "shop-floor02-077",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3p2LgE02pfSnr53kWxGNPf/fd68a1a0a0b3c29e0b233ad75c2c2a1f/normal_logo_800x800.png",
+      "description": null
+    },
+    {
+      "id": "895f1543-46fa-52b8-9914-ee07495e4dfd",
+      "name": "Uniqlo ",
+      "slug": "uniqlo",
+      "floorPlanID": "shop-floor02-101",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1foyN5ecj4GpSEuwqs3y2j/128f8f7fb7eb16598b39f6df39ce36bc/Uniqlo_logo.png",
+      "description": null
+    },
+    {
+      "id": "19803f14-8476-5820-8053-f5710871d4f6",
+      "name": "GIFI",
+      "slug": "gifi",
+      "floorPlanID": "shop-floor01-041",
+      "category": "Maison et Décoration",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5oUhSJvBJYL4wYEnT93S1t/75510a0c09d677e6bd3e3c2753f6ca58/Gifi.JPG",
+      "description": null
+    },
+    {
+      "id": "8f3ebcdf-8d70-52cd-b2e2-bef5ee0330a8",
+      "name": "Free",
+      "slug": "free",
+      "floorPlanID": "shop-floor01-040",
+      "category": "Téléphonie et Internet",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3MQkdwzGyeEmSqESu5eY2v/92e6721d685b99e0e4d2323874c81332/free_logo.png",
+      "description": null
+    },
+    {
+      "id": "3cbcd808-2db0-50be-993f-503ff2031de3",
+      "name": "Audio pour Tous",
+      "slug": "audio-pour-tous",
+      "floorPlanID": "shop-floor01-008",
+      "category": "Santé et Bien-être",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/lVwXPP2rpNux9NC3cK08M/b049d1a7fafd690f5e637718a74a49f1/audiopourtous.png",
+      "description": null
+    },
+    {
+      "id": "5e2d49f1-8335-5d31-aeb0-e9bcdbf25dbf",
+      "name": "Miniso",
+      "slug": "miniso",
+      "floorPlanID": "shop-floor02-070",
+      "category": "Jouets et Cadeaux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5QAq1RuiwH2lIMxFrjwDpP/7dc387538bc9cd759e6e318b9dbfe371/miniso.png",
+      "description": null
+    },
+    {
+      "id": "03209b21-fa4b-5705-8e21-cb9cc326f646",
+      "name": "Taktic",
+      "slug": "taktic",
+      "floorPlanID": "shop-floor02-098",
+      "category": "Divertissement",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3ulWu1PZhLpnEUTb8ac0rN/b0c9bdd27210267ad6577ae88aeef4bf/taktic.png",
+      "description": null
+    },
+    {
+      "id": "0e558d59-a041-54f3-97cb-8cf044ab1985",
+      "name": "Naturalia",
+      "slug": "naturalia",
+      "floorPlanID": "shop-floor02-074",
+      "category": "Alimentation",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4lCRxBgIYrLLFpxRHBf6bo/20202b9c185a91260faa47eee13e0a2f/Naturalia_logo.png",
+      "description": null
+    },
+    {
+      "id": "9b9698b2-679d-5dfc-9bfe-9268cbce6730",
+      "name": "Lyre",
+      "slug": "lyre",
+      "floorPlanID": "shop-floor03-063",
+      "category": "Culture, Livres, Musique et Photos",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/1UQb5ePjsZyKxvcU8wV1Lp/5b060ffd190029ed6dce5ce09d9f3213/LOGO-LYRE.jpg",
+      "description": null
+    },
+    {
+      "id": "81baf3b0-0953-5a03-b87f-908faf464315",
+      "name": "POOOW!",
+      "slug": "pooow",
+      "floorPlanID": "shop-floor03-125",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2EYoXEfw3YWLRMqkPqnayE/c03ac1d451dfe7a9bfb05be634b94f7d/POOOW_logo.png",
+      "description": null
+    },
+    {
+      "id": "18982e67-e182-506b-aab0-6bdc3834c853",
+      "name": "Carlota ",
+      "slug": "carlota",
+      "floorPlanID": "shop-floor01-058",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/22fgAuWqIsH5bDeTTUOe3P/4db2a6e36adc55c9d48e57c9dc5c1370/Le_bar_a_ongles.png",
+      "description": null
+    },
+    {
+      "id": "d6f56383-282f-5c97-a090-ba992795374f",
+      "name": "RIGOLO comme la vie",
+      "slug": "rigolo-comme-la-vie",
+      "floorPlanID": "shop-floor03-091",
+      "category": "Crèche",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6hROWpOLRO63ULo2sarYcI/605bb61e8768e0643498da6856dc2b4e/rigolo.png",
+      "description": null
+    },
+    {
+      "id": "0282611c-4319-5d11-be75-5d83050abea8",
+      "name": "ADOPT",
+      "slug": "adopt",
+      "floorPlanID": "shop-floor03-003",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4S7GGY7YBH8XXfgc6GliB1/93e2f5abc523a33fae3810d1fc34312f/LOGO_ADOPT.png",
+      "description": null
+    },
+    {
+      "id": "e7babadc-2967-50d2-b8a2-060c377e2883",
+      "name": "NYX Professional Makeup",
+      "slug": "nyx-professional-makeup",
+      "floorPlanID": "shop-floor02-078",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5kYoIJdwL7yxgzZSY9gQpB/40541df78102577986acc4f414555b8f/NYX.png",
+      "description": null
+    },
+    {
+      "id": "608e6d99-e0b4-594c-aec7-919ac5ba4ed2",
+      "name": "Rougier & Plé",
+      "slug": "rougier-ple",
+      "floorPlanID": "shop-floor02-093",
+      "category": "Loisirs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/ASt695fssWRYPU2U7vLRW/fca775de63934a526b78344361098458/LOGO_ROUGIER.jpg",
+      "description": null
+    },
+    {
+      "id": "54b1cb08-d8ab-5192-996d-a21cf3cf6618",
+      "name": "Saveurs d'Asie",
+      "slug": "saveurs-dasie",
+      "floorPlanID": "fb-floor01-114",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/zfmGAdimUlc1d4PYdVYeM/bf13671b2b017f9e18283ff2f2bdb988/saverus_dasie.png",
+      "description": null
+    },
+    {
+      "id": "ffc1744b-992d-59d3-8ba1-011f8d96db85",
+      "name": "McDonald's",
+      "slug": "mcdonalds",
+      "floorPlanID": "fb-floor01-111",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/58pbbXG2G3tvNnQNDYBzic/fbfa58cc0c971e61d8cdf8c4dfe6741a/mcdonalds.jpg",
+      "description": null
+    },
+    {
+      "id": "b9eb3fbe-12c0-5bb8-8feb-24f41f2e45fc",
+      "name": "Yogurt Factory",
+      "slug": "yogurt-factory",
+      "floorPlanID": "fb-floor02-116",
+      "category": "Glaces et confiseries",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/2VqTcmoylYGURPHHWmdxk8/56c08efa3ec3a245a8fe8ebb21f44e18/MicrosoftTeams-image__5_.png",
+      "description": null
+    },
+    {
+      "id": "589fe817-f761-578f-b8c3-63b8e3757138",
+      "name": "Hippopotamus",
+      "slug": "hippopotamus",
+      "floorPlanID": "fb-floor03-110",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/LSWNq5VPEeKjBLqVScfsA/f49c234c3697da184fad3c3dfc009c4c/hippopotamus_logo.jpg",
+      "description": null
+    },
+    {
+      "id": "b4a9440e-277f-5c3a-b86c-7c59860ea0c8",
+      "name": "Boulangerie Paul",
+      "slug": "boulangerie-paul",
+      "floorPlanID": "fb-floor01-109",
+      "category": "Café",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/34gOOIt3GhUqr1lX5q9jn8/08a25aef2b40688e85d8c5859c3ec7ce/brand-Paul-Logo.png",
+      "description": null
+    },
+    {
+      "id": "5e911b10-6aec-5d65-a08a-1585cc452109",
+      "name": "Pret A Manger",
+      "slug": "pret-a-manger",
+      "floorPlanID": "fb-floor02-113",
+      "category": "Café",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3RGZC2i0AoJyEm0G3G9zhQ/0e38af74f40c2c5f94fd875bd449337c/pret_a_manger.jpg",
+      "description": null
+    },
+    {
+      "id": "bedb1630-62a3-5f34-903d-0f21f766647a",
+      "name": "The X Pot",
+      "slug": "the-x-pot",
+      "floorPlanID": "fb-floor02-115",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/TmjDMEjOnCk4TUP7YWm7u/ee3c3cf8735990c5013eab8dcbfeece9/the-x-pot-logo.png",
+      "description": null
+    },
+    {
+      "id": "a67e4c3c-0df6-512f-91b3-974928491aa5",
+      "name": "Starbucks",
+      "slug": "starbucks",
+      "floorPlanID": "shop-floor02-096",
+      "category": "Café",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3PznjIi5oykX5BdixZfz9Y/e3a6e22fcbcd22ebcdfc9be86d9192cc/starbuks-logo.jpg",
+      "description": null
+    },
+    {
+      "id": "25d34fb6-2125-553d-850c-2835c3c0af6b",
+      "name": "Intimissimi",
+      "slug": "intimissimi",
+      "floorPlanID": "shop-floor02-119",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6YXfHSYPelYiLnqgs3av1N/4d9633a48b239f23b0ddbaeca20f8ca3/PL_logo_Intimissimi.png",
+      "description": null
+    },
+    {
+      "id": "75462ffb-e2f5-5cf8-b3f7-cdb0ff1cffc3",
+      "name": "Tezenis",
+      "slug": "tezenis",
+      "floorPlanID": "shop-floor02-118",
+      "category": "Lingerie et Sous-vêtements",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/77x7YB3xqVGd3aoAwTaEti/2cebf13305396c2e05751111e2c0a169/Tezenis_logo.png",
+      "description": null
+    },
+    {
+      "id": "1a6ee9cf-f4cb-58b5-acb7-8e75c4f6cbb7",
+      "name": "Geek Factory",
+      "slug": "geek-factory",
+      "floorPlanID": "shop-floor03-121",
+      "category": "Loisirs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/17ErkoUYZGB11AUvZ2FgEw/93233c38157bfd60468ffb37be4f32bc/Global_Brand_Geek-Factory_Logo_600x600.jpg",
+      "description": null
+    },
+    {
+      "id": "b46e4cff-dd91-5d95-b57b-7592e2f74867",
+      "name": "IKEA ",
+      "slug": "ikea",
+      "floorPlanID": "shop-floor02-123",
+      "category": "Maison et Décoration",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7poxUqt7vsQL4DtQ10Q07j/6f06dc029820e8aba8191ed736d7d6b6/Global_Brand_IKEA_logo.jpg",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"IKEA offers a wide range of simple, well-designed and affordable home furnishings, because enjoying a Wonderful Everyday starts with a better life at home. You'll find everything from smart home solutions to a large selection of home furnishing accessories available to take away as well as a Swedish Deli, serving traditional Swedish delicacies.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "9a4c3436-29c5-5dbc-b87a-fa217d489e44",
+      "name": "IKEA Le Comptoir suédois",
+      "slug": "ikea-comptoir-suedois",
+      "floorPlanID": "fb-floor03-124",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/25xA0M2TAflOcw7rwGsAj0/4cd004360a1bf97fd4a831029d7f8ca0/IKEA_1000x1000.jpg",
+      "description": null
+    },
+    {
+      "id": "b35583f3-2472-5066-b75f-129a1be51ac0",
+      "name": "Popeyes",
+      "slug": "italie-deux-popeyes",
+      "floorPlanID": "fb-floor02-122",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3mMEx5Tl7SNJvkXRa1x4K7/25aafba0751941ca581d50151cf3589e/22PLK_POPEYES_Chicken__Seal__RBI_Design-01.png",
+      "description": null
+    },
+    {
+      "id": "d6883aaa-a70c-5fd2-9ad7-f52a971b2771",
+      "name": "Inspire Concept Store",
+      "slug": "inspire-concept-store",
+      "floorPlanID": "shop-floor02-124",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6JBWnGacPlmPvinbKe9y8U/66d2a9afa2e41329ec6d9a24b3b37cd2/France_shop_Inspire-concept-Store_Logo_500x500.jpg",
+      "description": null
+    },
+    {
+      "id": "34d8df7b-5d7d-5ec8-bd2b-681e96adfe64",
+      "name": "La Chaise Longue",
+      "slug": "italie-deux-or-shop-or-la-chaise-longue",
+      "floorPlanID": "shop-floor03-126",
+      "category": "Jouets et Cadeaux",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4vNSVqrEtjqF6eq9devXD1/06d11eba9f5bbfb1c20e85c91a0f69c0/Brand-LA-CHAISE-LONGUE-Logo.png",
+      "description": null
+    },
+    {
+      "id": "78ad0bd8-eec8-59ea-becc-b95071d6407b",
+      "name": "C'est Mon Donuts",
+      "slug": "italie-deux-or-food-and-beverage-or-c-mon-donuts",
+      "floorPlanID": "fb-floor02-129",
+      "category": "Café",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/4RhW5duyx4rPqQWc0weAua/74db208165a80502b478403f393c815e/Logoc_estmondonuts-min.jpg",
+      "description": null
+    },
+    {
+      "id": "9f5b8b50-b49a-5ffa-a38b-277fdac14cff",
+      "name": "Saint-Algue",
+      "slug": "italie-deux-ou-shop-ou-saint-algue",
+      "floorPlanID": "shop-floor01-128",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3oarW6qluZkmGOfTqcMKBV/06af3f9d087ac8a042ac4d9c7bac1c6f/brand_SaintAlgue-Logo.png",
+      "description": null
+    },
+    {
+      "id": "0453a0f8-5ac0-52ea-bd48-0786ae0727a4",
+      "name": "be camaïeu",
+      "slug": "becamaieu",
+      "floorPlanID": "shop-floor02-133",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6Y5cznZE55AoBwfB42XxuP/fd685dec7ce50d520d730896d60954fb/LOGO_CAMAIEU_900x900__1_.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[{\"type\":\"bold\"}],\"value\":\"be camaïeu signe le renouveau d’une marque iconique\",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[],\"value\":\", avec une mode plus audacieuse, inclusive et inspirante : l’essentiel pour toutes les femmes, avec style et authenticité au quotidien.\\n\\nIci, pas de diktats ni d’artifices. Juste une mode qui reflète la réalité des femmes, leurs envies, leurs rythmes et leurs humeurs. \",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[{\"type\":\"bold\"}],\"value\":\"be camaïeu,\",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[],\"value\":\" c’est avant tout une communauté : un espace où l’on se soutient, où l’on s’inspire et où l’on se tire vers le haut, avec légèreté, complicité et une touche de second degré pour libérer les rires et célébrer chaque moment du quotidien.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "2ec020ca-3581-56a5-801d-7bec540b2bad",
+      "name": "Aroma-Zone",
+      "slug": "aroma-zone",
+      "floorPlanID": "shop-floor03-131",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/7etK8c9JVvfdZYmW2gDhqp/c2ff8b2e4824aaf0c5a3f548dcaf7a72/LOGO-AROMAZONE-MARRON-900X900.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[{\"type\":\"bold\"}],\"value\":\"Aroma-Zone est une marque française pionnière et experte en cosmétique naturelle, en aromathérapie et en formulation. Depuis plus de 20 ans, elle met son savoir-faire scientifique au service de la beauté, du bien-être et de la santé au naturel.\\n\\n\",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[],\"value\":\"Guidée par une exigence de qualité, la marque propose des soins pour le visage et pour les cheveux respectueux de la peau comme de l’environnement. Aroma-Zone développe des produits alliant naturalité, innovation et transparence, pour une cosmétique plus sensorielle, experte et responsable.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "ddbab125-f607-5a5b-bc8c-7004c3e7fb9b",
+      "name": "Owen's",
+      "slug": "owens",
+      "floorPlanID": "fb-floor02-130",
+      "category": "Restaurant",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/51z1bY9C70zUANK1q78GNe/4e0911928db0126c9f9a7ec0141f9d22/OWEN-S_Logo_Italie2.jpg",
+      "description": null
+    },
+    {
+      "id": "047c7ff2-e2ee-5ce3-bb98-ebd6d95fe04b",
+      "name": "Bagelstein",
+      "slug": "bagelstein",
+      "floorPlanID": "fb-floor02-132",
+      "category": "Snacks",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/28dj7rzxFjZtIQfjOMyjuZ/208f98021a8696a0c1fac0360a21fe5b/Logo-Bagelstein-NBO.jpg",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Un concept simple : une équipe de tarés et des bagels à tomber !\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Bagelstein c’est le spécialiste du pain à trou, présent partout en France !\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Nos bagels d'amour sont pétris et cuits chaque nuit dans nos ateliers, puis garnis en restaurant avec des produits de qualité. \\nAlors 'Arrêtez de manger de la merde!\\\" (Big up JP.Coffe)\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"A déguster avec une boisson chaude pour le petit déj' ou une pâtisserie pour le goûter. Ou l'inverse, c'est toi qui vois.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Le tout servi sur place ou à emporter, par une équipe un peu barrée mais aux petits soins.\\n\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "0b578165-68ad-5f57-990b-b8b2b67246b1",
+      "name": "Kyushu Ramen",
+      "slug": "untitled-entry-2025-09-13-at-07-18-23",
+      "floorPlanID": "fb-floor01-131",
+      "category": "Déjeuner",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6NFJSNEIEpwgCc6TRsXk5H/ee3399a971f8e9f8ab15b89c164e14e7/Screenshot_2025-09-13_at_09.17.44.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Le \",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[{\"type\":\"bold\"}],\"value\":\"ramen japonais\",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[],\"value\":\" trouve son origine à l’époque Meiji, lorsque des chefs chinois du Guangdong, installés à Nagasaki, dans le Kyushu, ont introduit leurs nouilles. Peu à peu, ce plat s’est popularisé à travers tout le Japon, donnant naissance à une version unique, devenue emblématique dans tout le pays.\\n\\nLes bouillons se déclinent principalement en deux grandes saveurs : poulet ou porc. \\n\\nEn plus des nouilles et de la soupe, le ramen s’accompagne généralement de garnitures variées comme des tranches de porc ou de bœuf, des algues, des œufs, des pousses de bambou, des légumes et bien d’autres ingrédients.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Tél. 01 45 65 96 11\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "a289e461-16ac-5b85-b754-b628f385726d",
+      "name": "FRAM",
+      "slug": "untitled-entry-2025-09-28-at-15-34-18",
+      "floorPlanID": "shop-floor02-136",
+      "category": "Loisirs",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6qC91AMIZIIpEC0Ul5f138/e39538b7df32cda4d44bd8ed1088e75d/FRAM.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Chez FRAM, nous mettons tout en œuvre pour faire de vos vacances des moments inoubliables.\\nDepuis plus de 70 ans, nous imaginons pour vous des séjours clés en main, des clubs animés comme\\nnos Framissima, Club Jumbo et des escapades partout dans le monde au meilleur rapport\\nqualité/prix.\\n\\nAvec nous, vous partez l’esprit léger : vols, hébergement, animations, tout est pensé\\npour que vous n’ayez plus qu’à profiter. \\n\\nQue vous voyagiez en famille, en couple ou entre amis, nous\\nvous accompagnons dès votre ville de départ pour créer des souvenirs uniques. \\n\\nAvec FRAM, vos vacances commencent dès la réservation.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "32b5bc1c-be43-5d7b-8c68-f2a9f3ef86f7",
+      "name": "Cache Cache",
+      "slug": "cache-cache",
+      "floorPlanID": "shop-floor02-139",
+      "category": "Mode",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/5sm74Q05HvGgTP7lmYhfti/45fcc8d40177ae7b505ffe8d143d5d70/1_ligne_CCH_CMJN.png",
+      "description": {
+        "raw": "{\"nodeType\":\"document\",\"data\":{},\"content\":[{\"nodeType\":\"paragraph\",\"data\":{},\"content\":[{\"nodeType\":\"text\",\"value\":\"x\",\"marks\":[],\"data\":{}}]}]}"
+      }
+    },
+    {
+      "id": "922de81e-28f3-51b4-8815-d259fe198b92",
+      "name": "Søstrene Grene",
+      "slug": "sostrene-grene",
+      "floorPlanID": "shop-floor03-137",
+      "category": "Maison et Décoration",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/6uoHxvvOJSZ1GXXo3F2E8b/4c2be2247b494d03bc94390ba6956f61/SÃ_strene_Grene_Logo_Black.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Søstrene Grene s’attache à vous offrir, au quotidien, tout ce qu’il faut pour la maison, pour nourrir votre créativité et pour accompagner les grands comme les petits moments de la vie.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Créée en 1973, l’enseigne danoise propose une sélection de petits meubles, d’articles de décoration, de loisirs créatifs et bien plus encore. Sa sélection évolue sans cesse, ce qui fait de chaque visite une nouvelle découverte.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Søstrene Grene, qui signifie \",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[{\"type\":\"italic\"}],\"value\":\"Les Sœurs Grene\",\"nodeType\":\"text\"},{\"data\":{},\"marks\":[],\"value\":\", ne se limite pas à une simple expérience de shopping : la marque vous invite à plonger dans l’univers apaisant et inspirant d’Anna et Clara.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Poussez la porte de Søstrene Grene et savourez la magie des petites choses — celles qui, bien souvent, procurent les plus grandes joies.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    },
+    {
+      "id": "b6ff3519-634c-56a5-8084-2467a65f258d",
+      "name": "Centre d'Ophtalmologie",
+      "slug": "centre-dophtalmologie",
+      "floorPlanID": "shop-floor03-138",
+      "category": "Pharmacie, Optique et Audition",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/3QhmKtzrwCD6K5NBrmIjQB/0c1f74efba445dd9a122168da6893992/logo_ItalieDeux_2024_favicon.png",
+      "description": null
+    },
+    {
+      "id": "39a19de4-2f60-558f-abc6-0e75a648ff98",
+      "name": "BeautifulSmile Cosmetics",
+      "slug": "beautifulsmile-cosmetics",
+      "floorPlanID": "shop-floor03-140",
+      "category": "Beauté",
+      "logo": "//images.ctfassets.net/vy8x7x5kxmef/oIXDathLmBAlcFeSaccQ1/612b2686d42843b9816e3c6cfb9b3a8b/unnamed.png",
+      "description": {
+        "raw": "{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"“Quand votre peau sourit, Beautiful Smile” \",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"},{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Beautiful Smile est une marque de cosmétiques K-beauty qui allie la pureté de la nature à l’expertise des soins coréens. Nous croyons que la vraie beauté commence par une peau saine, et nous proposons des soins quotidiens simples, efficaces et doux. Nos produits sont formulés avec des ingrédients naturels et respectueux de la peau, pour convenir à tous les types de peau. Plus que de simples cosmétiques, nous offrons un soin sincère qui permet à votre peau de sourire chaque jour. Avec honnêteté, simplicité et bienveillance, Beautiful Smile est votre partenaire quotidien pour une beauté naturelle et confiante.\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"
+      }
+    }
+  ]
+}

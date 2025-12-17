@@ -3,7 +3,7 @@
     <main>
       <MenuView v-if="activeTab === 'home'" @open="openTab" />
       <div v-if="activeTab === 'italie2'" class="scene">
-        <MapView @back="goHome" />
+        <Italie2View @back="goHome" />
       </div>
       <div v-if="activeTab === 'velov'" class="scene">
         <VelovView @back="goHome" />
@@ -30,6 +30,7 @@
 <script>
 import MenuView from './components/MenuView.vue'
 import MapView from './components/MapView.vue'
+import Italie2View from './components/Italie2View.vue'
 import VelovView from './components/VelovView.vue'
 import VelibView from './components/VelibView.vue'
 import MapeliaView from './components/MapeliaView.vue'
@@ -38,7 +39,7 @@ import ZonzonView from './components/ZonzonView.vue'
 import PortfolioView from './components/PortfolioView.vue'
 
 export default {
-  components: { MenuView, MapView, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView },
+  components: { MenuView, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView },
   data() {
     return {
       activeTab: 'home'
