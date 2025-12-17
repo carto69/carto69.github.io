@@ -190,8 +190,7 @@ export default {
   background: rgba(127, 164, 106, 0.75); /* plus transparent */
   border: 1px solid rgba(127, 164, 106, 0.4); /* liseré vert assorti */
   cursor: pointer;
-  min-width: 130px;
-  max-width: 170px;
+  width: 160px;
   transition: all 0.25s ease;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }

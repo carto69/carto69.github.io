@@ -171,14 +171,16 @@ export default {
 
       // Charger le plan d'étage et ajouter les marqueurs
       this.loadFloorPlan()
-      
-      this.animate()
     },
 
     async loadFloorPlan() {
       // Créer un plan de base en attendant le vrai modèle
       this.createBasicFloorPlan()
       this.addStoreMarkers()
+          // Rendu unique après création
+          if (this.renderer && this.scene && this.camera) {
+            this.renderer.render(this.scene, this.camera)
+          }
     },
 
     createBasicFloorPlan() {
@@ -249,8 +251,9 @@ export default {
 
     animate() {
       if (!this.renderer) return
-      requestAnimationFrame(this.animate.bind(this))
-      this.renderer.render(this.scene, this.camera)
+      // Désactivé temporairement pour déboguer
+      // requestAnimationFrame(this.animate.bind(this))
+      // this.renderer.render(this.scene, this.camera)
     },
 
     selectStore(store) {
