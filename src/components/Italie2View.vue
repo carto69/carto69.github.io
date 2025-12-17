@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 const THREE = window.THREE
 
 export default {
@@ -148,19 +149,19 @@ export default {
       const container = document.getElementById('floor-map')
       if (!container || !THREE) return
 
-      // Scene
-      this.scene = new THREE.Scene()
+      // Scene (markRaw empêche Vue de créer un proxy)
+      this.scene = markRaw(new THREE.Scene())
       this.scene.background = new THREE.Color(0xf5f5f5)
 
       // Camera
-      this.camera = new THREE.OrthographicCamera(
+      this.camera = markRaw(new THREE.OrthographicCamera(
         -200, 200, 150, -150, 1, 1000
-      )
+      ))
       this.camera.position.set(0, 0, 100)
       this.camera.lookAt(0, 0, 0)
 
       // Renderer
-      this.renderer = new THREE.WebGLRenderer({ antialias: true })
+      this.renderer = markRaw(new THREE.WebGLRenderer({ antialias: true }))
       this.renderer.setSize(container.clientWidth, container.clientHeight)
       container.appendChild(this.renderer.domElement)
 

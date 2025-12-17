@@ -187,7 +187,7 @@ export default {
   position: relative;
   padding: 12px 10px;
   border-radius: 10px;
-  background: rgba(127, 164, 106, 0.9); /* vert proche de la carte */
+  background: rgba(127, 164, 106, 0.75); /* plus transparent */
   border: 1px solid rgba(127, 164, 106, 0.4); /* liseré vert assorti */
   cursor: pointer;
   min-width: 130px;
@@ -199,7 +199,7 @@ export default {
 .tile:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  background: rgba(127, 164, 106, 0.96);
+  background: rgba(127, 164, 106, 0.85);
 }
 
 .tile-icon {
