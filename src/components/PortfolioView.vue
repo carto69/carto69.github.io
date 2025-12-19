@@ -83,40 +83,38 @@ export default {
       activeCategory: 'cartes',
       fullscreenMap: null,
       categories: [
-        { id: 'cartes', name: 'Cartes', icon: '🗺️' },
-        { id: 'autre', name: 'Autre', icon: '📦' }
+        { id: 'cartes', name: 'Cartes', icon: '🗺️' }
       ],
       maps: []
     }
   },
   created() {
-    // Charge la liste des cartes depuis public/portfolio/cartes/index.json
-    fetch('/portfolio/cartes/index.json')
-      .then(r => r.json())
-      .then(json => {
-        if (json && Array.isArray(json.items)) {
-          this.maps = json.items.map((item, idx) => ({
-            id: idx + 1,
-            title: item.title || 'Carte',
-            description: item.description || '',
-            year: item.year || '',
-            category: 'cartes',
-            icon: '🗺️',
-            image: item.src
-          }))
-        }
-      })
-      .catch(() => {
-        this.maps = []
-      })
+    // Liste tous les fichiers du dossier /cartes (hors sous-dossiers cachés)
+    const files = [
+      "Accéssibilité au campus PDA en TC.pdf",
+      "Densité de population Ain.pdf",
+      "Elia Terragni TD3.pdf",
+      "EliaTerragni_cartographieEval1.pdf",
+      "LGV France.pdf",
+      "La pratique des sports de combats en France.pdf",
+      "Population des chefs lieux de l'AIn.pdf",
+      "schéma place Mazagran.pdf",
+      "Évolution Population Ain.pdf",
+      "Évolution occ du sol Privas.pdf"
+    ];
+    this.maps = files.map((file, idx) => ({
+      id: idx + 1,
+      title: file.replace(/\.[^/.]+$/, ''),
+      description: '',
+      year: '',
+      category: 'cartes',
+      icon: '🗺️',
+      image: `/cartes/${file}`
+    }))
   },
   computed: {
     filteredMaps() {
-      return this.maps.filter(map => {
-        if (this.activeCategory === 'cartes') return map.category === 'cartes'
-        if (this.activeCategory === 'autre') return map.category === 'autre'
-        return true
-      })
+      return this.maps
     }
   },
   methods: {

@@ -21,6 +21,9 @@
       </button>
     </div>
 
+    <!-- Plans vectoriels de chaque étage -->
+    <Italie2SvgPlans style="margin-bottom:32px;" />
+
     <div class="content">
       <!-- Vue en deux colonnes : Carte + Liste -->
       <div class="main-layout">
@@ -115,8 +118,11 @@
 
 <script>
 
+import Italie2SvgPlans from './Italie2SvgPlans.vue'
+
 export default {
   name: 'Italie2View',
+  components: { Italie2SvgPlans },
   data() {
     return {
       floors: {},

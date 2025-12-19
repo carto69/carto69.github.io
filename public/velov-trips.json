@@ -1,102 +1,102 @@
 [
   {
-    "id": "78d650a0-61cd-4c47-b2e4-f41f55f2e0d4",
-    "startTime": "2025-12-15T06:38:46",
-    "endTime": "2025-12-15T06:49:41",
-    "duration": 11,
+    "id": "f6c1cf19-1839-445d-91cc-c935a7156553",
+    "startTime": "2025-12-19T11:01:36",
+    "endTime": "2025-12-19T11:14:28",
+    "duration": 13,
     "bikeType": "classic",
     "startStation": {
+      "name": "Pizay",
+      "lng": 4.83639169,
+      "lat": 45.76720042,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "17, Rue Pizay"
+    },
+    "endStation": {
       "name": "Chazette Lassagne",
       "lng": 4.83726954,
       "lat": 45.77292662,
       "commune": "Lyon 1er Arrondissement",
       "address": "Quai André Lasagne"
     },
-    "endStation": {
-      "name": "Chazière",
-      "lng": 4.81788993,
-      "lat": 45.77542247,
-      "commune": "Lyon 4e Arrondissement",
-      "address": "25, Rue Chazière"
-    },
     "geometry": {
       "type": "LineString",
       "coordinates": [
+        [
+          4.83639169,
+          45.76720042
+        ],
         [
           4.83726954,
           45.77292662
-        ],
-        [
-          4.81788993,
-          45.77542247
         ]
       ]
     }
   },
   {
-    "id": "f654dd1c-6347-4351-a25a-0e3fcdf98e11",
-    "startTime": "2025-12-14T13:29:33",
-    "endTime": "2025-12-14T13:40:42",
-    "duration": 12,
-    "bikeType": "classic",
+    "id": "5462ed4a-a42c-4f76-825d-c4122b8c05b0",
+    "startTime": "2025-12-17T17:24:17",
+    "endTime": "2025-12-17T17:25:02",
+    "duration": 1,
+    "bikeType": "electric",
     "startStation": {
-      "lat": 45.76369570578669,
-      "lng": 4.836605295037804,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Conservatoire",
+      "lng": 4.81267622,
+      "lat": 45.76978221,
+      "commune": "Lyon 9e Arrondissement",
+      "address": "Face 40, Quai Chauveau"
     },
     "endStation": {
-      "lat": 45.76373054664099,
-      "lng": 4.836172984160351,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Conservatoire",
+      "lng": 4.81267622,
+      "lat": 45.76978221,
+      "commune": "Lyon 9e Arrondissement",
+      "address": "Face 40, Quai Chauveau"
     },
     "geometry": {
       "type": "LineString",
       "coordinates": [
         [
-          4.836605295037804,
-          45.76369570578669
+          4.81267622,
+          45.76978221
         ],
         [
-          4.836172984160351,
-          45.76373054664099
+          4.81267622,
+          45.76978221
         ]
       ]
     }
   },
   {
-    "id": "55dda495-a4e2-45fa-a11a-105429f697ff",
-    "startTime": "2025-12-14T00:38:08",
-    "endTime": "2025-12-14T00:57:40",
-    "duration": 20,
+    "id": "82e107d5-3a34-4ce1-b697-116689c981f4",
+    "startTime": "2025-12-17T07:17:35",
+    "endTime": "2025-12-17T07:22:10",
+    "duration": 5,
     "bikeType": "classic",
     "startStation": {
-      "lat": 45.763885412349005,
-      "lng": 4.834389790004837,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Lafayette / Corneille",
+      "lng": 4.84377734,
+      "lat": 45.76375948,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "64, Rue Pierre Corneille"
     },
     "endStation": {
-      "lat": 45.7640182753961,
-      "lng": 4.835874879821529,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Place Raspail",
+      "lng": 4.84073279,
+      "lat": 45.75576871,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "Place Raspail"
     },
     "geometry": {
       "type": "LineString",
       "coordinates": [
         [
-          4.834389790004837,
-          45.763885412349005
+          4.84377734,
+          45.76375948
         ],
         [
-          4.835874879821529,
-          45.7640182753961
+          4.84073279,
+          45.75576871
         ]
       ]
     }
@@ -170,244 +170,6 @@
     }
   },
   {
-    "id": "a89de5f6-1d93-4935-9233-a682cf3e9b97",
-    "startTime": "2025-12-12T19:31:23",
-    "endTime": "2025-12-12T19:37:11",
-    "duration": 6,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76408026957972,
-      "lng": 4.836153618057899,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.763736501019764,
-      "lng": 4.834994580674039,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836153618057899,
-          45.76408026957972
-        ],
-        [
-          4.834994580674039,
-          45.763736501019764
-        ]
-      ]
-    }
-  },
-  {
-    "id": "69e5fa19-2471-41ff-902f-feeaa6fdc18f",
-    "startTime": "2025-12-12T13:31:50",
-    "endTime": "2025-12-12T13:33:39",
-    "duration": 2,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.763867903963664,
-      "lng": 4.83600859973629,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76406759146906,
-      "lng": 4.835738521270693,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.83600859973629,
-          45.763867903963664
-        ],
-        [
-          4.835738521270693,
-          45.76406759146906
-        ]
-      ]
-    }
-  },
-  {
-    "id": "41f3d3a2-7c3e-4815-9f0f-8553b77208aa",
-    "startTime": "2025-12-11T13:35:55",
-    "endTime": "2025-12-11T13:45:04",
-    "duration": 10,
-    "bikeType": "electric",
-    "startStation": {
-      "lat": 45.764373572964004,
-      "lng": 4.835771582906662,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.763998370924504,
-      "lng": 4.835704106209424,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835771582906662,
-          45.764373572964004
-        ],
-        [
-          4.835704106209424,
-          45.763998370924504
-        ]
-      ]
-    }
-  },
-  {
-    "id": "01715bf2-bfe9-4a75-8f93-0211ba058f88",
-    "startTime": "2025-12-11T07:05:39",
-    "endTime": "2025-12-11T07:14:52",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76395568809817,
-      "lng": 4.83680007810516,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76464246892154,
-      "lng": 4.834995687847033,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.83680007810516,
-          45.76395568809817
-        ],
-        [
-          4.834995687847033,
-          45.76464246892154
-        ]
-      ]
-    }
-  },
-  {
-    "id": "8aef40a4-e0e7-4ef5-8542-c0b9aaeb6d1e",
-    "startTime": "2025-12-10T16:59:18",
-    "endTime": "2025-12-10T17:08:09",
-    "duration": 9,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76402657446755,
-      "lng": 4.835704680328623,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76366816637098,
-      "lng": 4.83557373447806,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835704680328623,
-          45.76402657446755
-        ],
-        [
-          4.83557373447806,
-          45.76366816637098
-        ]
-      ]
-    }
-  },
-  {
-    "id": "70d2bb41-80ae-4277-a38a-881c1dc920fa",
-    "startTime": "2025-12-10T07:10:32",
-    "endTime": "2025-12-10T07:17:51",
-    "duration": 8,
-    "bikeType": "electric",
-    "startStation": {
-      "lat": 45.764223529682106,
-      "lng": 4.8363576703962945,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76360391530745,
-      "lng": 4.835293544310217,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.8363576703962945,
-          45.764223529682106
-        ],
-        [
-          4.835293544310217,
-          45.76360391530745
-        ]
-      ]
-    }
-  },
-  {
-    "id": "dc7e578b-1f57-47f2-a484-2a6b0202bfc5",
-    "startTime": "2025-12-09T16:25:34",
-    "endTime": "2025-12-09T16:35:19",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.764009194812736,
-      "lng": 4.835746706000915,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.764078396639896,
-      "lng": 4.834331149756047,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835746706000915,
-          45.764009194812736
-        ],
-        [
-          4.834331149756047,
-          45.764078396639896
-        ]
-      ]
-    }
-  },
-  {
     "id": "07750169-6522-4f96-8476-b8369f346697",
     "startTime": "2025-12-08T16:54:58",
     "endTime": "2025-12-08T17:13:16",
@@ -437,380 +199,6 @@
         [
           4.83791179,
           45.77220147
-        ]
-      ]
-    }
-  },
-  {
-    "id": "42bc366e-fa7a-488a-865b-ab1c53cd8470",
-    "startTime": "2025-12-04T16:18:07",
-    "endTime": "2025-12-04T16:33:31",
-    "duration": 16,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.763470732269084,
-      "lng": 4.835339472783226,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76403813646958,
-      "lng": 4.835942539730086,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835339472783226,
-          45.763470732269084
-        ],
-        [
-          4.835942539730086,
-          45.76403813646958
-        ]
-      ]
-    }
-  },
-  {
-    "id": "e7769fc4-4e03-4646-b3a1-ac7dc440d767",
-    "startTime": "2025-11-26T17:00:57",
-    "endTime": "2025-11-26T17:07:36",
-    "duration": 7,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76416436588502,
-      "lng": 4.836641331906971,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76416636913241,
-      "lng": 4.83561079863021,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836641331906971,
-          45.76416436588502
-        ],
-        [
-          4.83561079863021,
-          45.76416636913241
-        ]
-      ]
-    }
-  },
-  {
-    "id": "1b8a4a4f-ae79-44e9-a7c6-a568568f2c46",
-    "startTime": "2025-11-26T07:26:40",
-    "endTime": "2025-11-26T07:35:58",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.7638546997723,
-      "lng": 4.835280159620128,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76395821588474,
-      "lng": 4.83564200163912,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835280159620128,
-          45.7638546997723
-        ],
-        [
-          4.83564200163912,
-          45.76395821588474
-        ]
-      ]
-    }
-  },
-  {
-    "id": "e39ba74a-4fa3-4f7c-a2c9-efef75d3e545",
-    "startTime": "2025-11-25T16:30:54",
-    "endTime": "2025-11-25T16:37:15",
-    "duration": 7,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76405807074581,
-      "lng": 4.835371989057626,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76380111707412,
-      "lng": 4.83445132416087,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835371989057626,
-          45.76405807074581
-        ],
-        [
-          4.83445132416087,
-          45.76380111707412
-        ]
-      ]
-    }
-  },
-  {
-    "id": "9f2cc8c7-c04c-438f-8d91-97688414d90b",
-    "startTime": "2025-11-25T16:07:42",
-    "endTime": "2025-11-25T16:14:48",
-    "duration": 8,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.763868940917284,
-      "lng": 4.835595402469914,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76348330064176,
-      "lng": 4.836219374332213,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835595402469914,
-          45.763868940917284
-        ],
-        [
-          4.836219374332213,
-          45.76348330064176
-        ]
-      ]
-    }
-  },
-  {
-    "id": "e0d820ed-2f41-4809-906b-53e6dca11a89",
-    "startTime": "2025-11-20T17:06:30",
-    "endTime": "2025-11-20T17:15:54",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76423613355932,
-      "lng": 4.836735401739535,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76419185771424,
-      "lng": 4.835901268063706,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836735401739535,
-          45.76423613355932
-        ],
-        [
-          4.835901268063706,
-          45.76419185771424
-        ]
-      ]
-    }
-  },
-  {
-    "id": "0424598a-a0a1-4fd4-876b-17621e9d2cec",
-    "startTime": "2025-11-20T06:51:25",
-    "endTime": "2025-11-20T07:01:10",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76384146248468,
-      "lng": 4.835792856377294,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76400741196401,
-      "lng": 4.8342346447537246,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835792856377294,
-          45.76384146248468
-        ],
-        [
-          4.8342346447537246,
-          45.76400741196401
-        ]
-      ]
-    }
-  },
-  {
-    "id": "bfc2980b-28fd-4f80-8d07-4a7f765d0d8b",
-    "startTime": "2025-11-19T17:32:18",
-    "endTime": "2025-11-19T17:39:41",
-    "duration": 8,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76336969766822,
-      "lng": 4.835311219229518,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76429777650789,
-      "lng": 4.836585487858845,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835311219229518,
-          45.76336969766822
-        ],
-        [
-          4.836585487858845,
-          45.76429777650789
-        ]
-      ]
-    }
-  },
-  {
-    "id": "3d17c033-7b02-46a8-b77a-e28224180f35",
-    "startTime": "2025-11-18T17:29:45",
-    "endTime": "2025-11-18T17:35:53",
-    "duration": 7,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.764321694894015,
-      "lng": 4.836584704012536,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76375355372521,
-      "lng": 4.835255177864401,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836584704012536,
-          45.764321694894015
-        ],
-        [
-          4.835255177864401,
-          45.76375355372521
-        ]
-      ]
-    }
-  },
-  {
-    "id": "c16b56de-7cd5-4a65-bc90-64579b7e52e4",
-    "startTime": "2025-11-18T17:11:57",
-    "endTime": "2025-11-18T17:17:47",
-    "duration": 6,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76394165778905,
-      "lng": 4.8358361020284875,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76421311077199,
-      "lng": 4.834646545968155,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.8358361020284875,
-          45.76394165778905
-        ],
-        [
-          4.834646545968155,
-          45.76421311077199
-        ]
-      ]
-    }
-  },
-  {
-    "id": "35fca3a7-a09c-4847-bd3c-ea3e8871fad1",
-    "startTime": "2025-11-18T07:17:42",
-    "endTime": "2025-11-18T07:27:08",
-    "duration": 10,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.764256747654464,
-      "lng": 4.835020980175273,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76365136321093,
-      "lng": 4.835254168366653,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835020980175273,
-          45.764256747654464
-        ],
-        [
-          4.835254168366653,
-          45.76365136321093
         ]
       ]
     }
@@ -850,176 +238,6 @@
     }
   },
   {
-    "id": "bb911f37-e762-4fee-af68-abbe9cddbdaf",
-    "startTime": "2025-11-17T17:15:00",
-    "endTime": "2025-11-17T17:21:03",
-    "duration": 7,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76465969907702,
-      "lng": 4.83627339911041,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76400081954219,
-      "lng": 4.835635913656766,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.83627339911041,
-          45.76465969907702
-        ],
-        [
-          4.835635913656766,
-          45.76400081954219
-        ]
-      ]
-    }
-  },
-  {
-    "id": "a4b084c8-9125-42b6-9ba8-59e9f2ef5b5e",
-    "startTime": "2025-11-16T12:27:24",
-    "endTime": "2025-11-16T12:42:36",
-    "duration": 16,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76383310909525,
-      "lng": 4.834244140180318,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76443899024239,
-      "lng": 4.835288525766358,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.834244140180318,
-          45.76383310909525
-        ],
-        [
-          4.835288525766358,
-          45.76443899024239
-        ]
-      ]
-    }
-  },
-  {
-    "id": "055f71e4-7fdb-4331-a614-dbb81058cda4",
-    "startTime": "2025-11-16T12:04:44",
-    "endTime": "2025-11-16T12:18:42",
-    "duration": 14,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76395347421138,
-      "lng": 4.834258629073228,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76456620693187,
-      "lng": 4.835187012495212,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.834258629073228,
-          45.76395347421138
-        ],
-        [
-          4.835187012495212,
-          45.76456620693187
-        ]
-      ]
-    }
-  },
-  {
-    "id": "348a3ff7-ee3e-4698-b89f-880d5b2a2254",
-    "startTime": "2025-11-14T07:31:24",
-    "endTime": "2025-11-14T07:42:09",
-    "duration": 11,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76415766017023,
-      "lng": 4.8353028210604885,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76386398175405,
-      "lng": 4.837091456672958,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.8353028210604885,
-          45.76415766017023
-        ],
-        [
-          4.837091456672958,
-          45.76386398175405
-        ]
-      ]
-    }
-  },
-  {
-    "id": "8f4e7f10-60f6-4b15-b7be-e5cb1e6b7e47",
-    "startTime": "2025-11-12T11:21:52",
-    "endTime": "2025-11-12T11:25:24",
-    "duration": 4,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.764171124518235,
-      "lng": 4.835743226608267,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76406686832805,
-      "lng": 4.835166759363475,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835743226608267,
-          45.764171124518235
-        ],
-        [
-          4.835166759363475,
-          45.76406686832805
-        ]
-      ]
-    }
-  },
-  {
     "id": "bb519ed6-a5d8-4732-ab20-bc75285ede27",
     "startTime": "2025-11-12T10:54:38",
     "endTime": "2025-11-12T11:05:03",
@@ -1054,425 +272,221 @@
     }
   },
   {
-    "id": "496dab43-0845-45cd-b5c7-00ad73f90773",
-    "startTime": "2025-11-12T07:46:09",
-    "endTime": "2025-11-12T07:51:44",
-    "duration": 6,
+    "id": "9bb6dba7-66a1-4d2f-87b2-cd4b17296f69",
+    "startTime": "2025-12-17T15:35:35",
+    "endTime": "2025-12-17T15:37:34",
+    "duration": 2,
     "bikeType": "classic",
     "startStation": {
-      "lat": 45.76390503448937,
-      "lng": 4.83483690015852,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.763496044553186,
-      "lng": 4.8364993492747335,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.83483690015852,
-          45.76390503448937
-        ],
-        [
-          4.8364993492747335,
-          45.763496044553186
-        ]
-      ]
-    }
-  },
-  {
-    "id": "5cb11e5c-059d-4777-9aa0-4219603f7525",
-    "startTime": "2025-11-05T16:55:36",
-    "endTime": "2025-11-05T17:03:56",
-    "duration": 9,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76442999547706,
-      "lng": 4.836385052755647,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76421739170487,
-      "lng": 4.834393215117963,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836385052755647,
-          45.76442999547706
-        ],
-        [
-          4.834393215117963,
-          45.76421739170487
-        ]
-      ]
-    }
-  },
-  {
-    "id": "4891cc41-8761-4d8d-ad46-b73849c74dbf",
-    "startTime": "2025-11-05T07:22:37",
-    "endTime": "2025-11-05T07:33:43",
-    "duration": 12,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.764377504669696,
-      "lng": 4.835913606627964,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76401567589824,
-      "lng": 4.836091172090128,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835913606627964,
-          45.764377504669696
-        ],
-        [
-          4.836091172090128,
-          45.76401567589824
-        ]
-      ]
-    }
-  },
-  {
-    "id": "d7c76cb1-67d2-49e9-9380-e4cd6e441777",
-    "startTime": "2025-11-04T17:08:39",
-    "endTime": "2025-11-04T17:16:18",
-    "duration": 8,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.7643430074754,
-      "lng": 4.835562783671226,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.763599762035966,
-      "lng": 4.834993418384048,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835562783671226,
-          45.7643430074754
-        ],
-        [
-          4.834993418384048,
-          45.763599762035966
-        ]
-      ]
-    }
-  },
-  {
-    "id": "e7bec13c-4373-4346-b313-48611feb71f8",
-    "startTime": "2025-11-03T17:01:30",
-    "endTime": "2025-11-03T17:07:06",
-    "duration": 6,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76412058495103,
-      "lng": 4.835844286165122,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76392346331278,
-      "lng": 4.834851417706062,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835844286165122,
-          45.76412058495103
-        ],
-        [
-          4.834851417706062,
-          45.76392346331278
-        ]
-      ]
-    }
-  },
-  {
-    "id": "381ad67a-8b5c-487c-a3d0-eb2a90a40cad",
-    "startTime": "2025-11-03T16:45:50",
-    "endTime": "2025-11-03T16:49:13",
-    "duration": 4,
-    "bikeType": "classic",
-    "startStation": {
-      "name": "Chazière",
-      "lng": 4.81788993,
-      "lat": 45.77542247,
-      "commune": "Lyon 4e Arrondissement",
-      "address": "25, Rue Chazière"
-    },
-    "endStation": {
-      "name": "Jacquart / Denfert-Rochereau",
-      "lng": 4.82537896,
-      "lat": 45.77589951,
-      "commune": "Lyon 4e Arrondissement",
-      "address": "Face 27, Rue Denfert-Rochereau"
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.81788993,
-          45.77542247
-        ],
-        [
-          4.82537896,
-          45.77589951
-        ]
-      ]
-    }
-  },
-  {
-    "id": "f415cb5d-be74-44aa-ab7a-8850ad780476",
-    "startTime": "2025-11-03T15:52:30",
-    "endTime": "2025-11-03T16:01:26",
-    "duration": 9,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76462016060624,
-      "lng": 4.836159197474432,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.763845635120596,
-      "lng": 4.836417530561502,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.836159197474432,
-          45.76462016060624
-        ],
-        [
-          4.836417530561502,
-          45.763845635120596
-        ]
-      ]
-    }
-  },
-  {
-    "id": "eddea58f-1ead-4eb0-86dc-eeef67b0b7bb",
-    "startTime": "2025-11-03T15:17:00",
-    "endTime": "2025-11-03T15:29:36",
-    "duration": 13,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.763795986385674,
-      "lng": 4.835869195311725,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76459203002322,
-      "lng": 4.836071351983463,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.835869195311725,
-          45.763795986385674
-        ],
-        [
-          4.836071351983463,
-          45.76459203002322
-        ]
-      ]
-    }
-  },
-  {
-    "id": "55b4a26d-6d91-4f45-9e89-a58693230ae4",
-    "startTime": "2025-11-03T12:29:04",
-    "endTime": "2025-11-03T12:45:21",
-    "duration": 17,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76444387256348,
-      "lng": 4.834950567937911,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.76362619506388,
-      "lng": 4.836717726156798,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.834950567937911,
-          45.76444387256348
-        ],
-        [
-          4.836717726156798,
-          45.76362619506388
-        ]
-      ]
-    }
-  },
-  {
-    "id": "10e3d5d8-ae7c-4708-ba67-af815a8b941b",
-    "startTime": "2025-11-03T12:24:23",
-    "endTime": "2025-11-03T12:28:11",
-    "duration": 4,
-    "bikeType": "classic",
-    "startStation": {
-      "lat": 45.76340378986152,
-      "lng": 4.8355477783544405,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "endStation": {
-      "lat": 45.764035812261376,
-      "lng": 4.835842353447569,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
-    },
-    "geometry": {
-      "type": "LineString",
-      "coordinates": [
-        [
-          4.8355477783544405,
-          45.76340378986152
-        ],
-        [
-          4.835842353447569,
-          45.764035812261376
-        ]
-      ]
-    }
-  },
-  {
-    "id": "535ff4ae-d2fc-4573-ae11-39e21edb7c20",
-    "startTime": "2025-11-01T11:01:53",
-    "endTime": "2025-11-01T11:09:50",
-    "duration": 8,
-    "bikeType": "classic",
-    "startStation": {
-      "name": "Place de la Paix",
-      "lng": 4.83174125,
-      "lat": 45.76802361,
-      "commune": "Lyon 1er Arrondissement",
-      "address": "Place de la Paix"
-    },
-    "endStation": {
       "name": "Chazette Lassagne",
       "lng": 4.83726954,
       "lat": 45.77292662,
       "commune": "Lyon 1er Arrondissement",
       "address": "Quai André Lasagne"
     },
+    "endStation": {
+      "name": "Place Tolozan",
+      "lng": 4.83760844,
+      "lat": 45.76960059,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "18, Place Tolozan"
+    },
     "geometry": {
       "type": "LineString",
       "coordinates": [
         [
-          4.83174125,
-          45.76802361
-        ],
-        [
           4.83726954,
           45.77292662
+        ],
+        [
+          4.83760844,
+          45.76960059
         ]
       ]
     }
   },
   {
-    "id": "affa71d4-7af1-4b65-b466-afd656279e23",
-    "startTime": "2025-11-01T11:00:56",
-    "endTime": "2025-11-01T11:01:34",
+    "id": "585793dc-1303-4da3-8d92-8aff829906bc",
+    "startTime": "2025-12-10T18:44:14",
+    "endTime": "2025-12-10T18:54:28",
+    "duration": 11,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Universités Lyon III / Lyon II",
+      "lng": 4.83614351,
+      "lat": 45.7511009,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "Face 18/16, Quai Claude Bernard"
+    },
+    "endStation": {
+      "name": "Part-Dieu / Cuirassiers",
+      "lng": 4.85757303,
+      "lat": 45.75989765,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "Rue Docteur Bouchut"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83614351,
+          45.7511009
+        ],
+        [
+          4.85757303,
+          45.75989765
+        ]
+      ]
+    }
+  },
+  {
+    "id": "338af0b3-dcb7-49b4-9f7b-ab4a7cc07c6d",
+    "startTime": "2025-12-10T10:44:02",
+    "endTime": "2025-12-10T10:58:31",
+    "duration": 15,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Place Tolozan",
+      "lng": 4.83760844,
+      "lat": 45.76960059,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "18, Place Tolozan"
+    },
+    "endStation": {
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83760844,
+          45.76960059
+        ],
+        [
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "99863557-738e-4cfd-93b0-f4478e8d71b6",
+    "startTime": "2025-12-09T20:19:57",
+    "endTime": "2025-12-09T20:20:07",
     "duration": 1,
     "bikeType": "classic",
     "startStation": {
-      "name": "Place de la Paix",
-      "lng": 4.83174125,
-      "lat": 45.76802361,
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
       "commune": "Lyon 1er Arrondissement",
-      "address": "Place de la Paix"
+      "address": "Face 18, Rue Joseph Serlin"
     },
     "endStation": {
-      "name": "Place de la Paix",
-      "lng": 4.83174125,
-      "lat": 45.76802361,
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
       "commune": "Lyon 1er Arrondissement",
-      "address": "Place de la Paix"
+      "address": "Face 18, Rue Joseph Serlin"
     },
     "geometry": {
       "type": "LineString",
       "coordinates": [
         [
-          4.83174125,
-          45.76802361
+          4.83657207,
+          45.76760204
         ],
         [
-          4.83174125,
-          45.76802361
+          4.83657207,
+          45.76760204
         ]
       ]
     }
   },
   {
-    "id": "8c213593-35c5-4755-8caf-47a5122a7335",
-    "startTime": "2025-10-31T21:35:33",
-    "endTime": "2025-10-31T21:41:42",
-    "duration": 7,
+    "id": "b5659406-8d80-4bab-bdbc-00f6f719e497",
+    "startTime": "2025-12-05T15:20:54",
+    "endTime": "2025-12-05T15:39:27",
+    "duration": 19,
     "bikeType": "classic",
     "startStation": {
-      "name": "Carmélites",
-      "lng": 4.82929778,
-      "lat": 45.77002124,
-      "commune": "Lyon 1er Arrondissement",
-      "address": "Face 30, Montée des Carmélites"
+      "name": "Place Carnot",
+      "lng": 4.82689084,
+      "lat": 45.75122705,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "23, Place Carnot"
+    },
+    "endStation": {
+      "name": "Part-Dieu / Garibaldi",
+      "lng": 4.85242777,
+      "lat": 45.76275116,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "4, Boulevard Eugène Deruelle"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.82689084,
+          45.75122705
+        ],
+        [
+          4.85242777,
+          45.76275116
+        ]
+      ]
+    }
+  },
+  {
+    "id": "616a911c-1a47-4d7c-846a-726b2e3ab7c7",
+    "startTime": "2025-12-03T21:17:27",
+    "endTime": "2025-12-03T21:26:22",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Jaurès / Thibaudière",
+      "lng": 4.84504825,
+      "lat": 45.7503448,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "Face 27, Rue de la Thibaudière"
+    },
+    "endStation": {
+      "name": "Place Carnot",
+      "lng": 4.82689084,
+      "lat": 45.75122705,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "23, Place Carnot"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.84504825,
+          45.7503448
+        ],
+        [
+          4.82689084,
+          45.75122705
+        ]
+      ]
+    }
+  },
+  {
+    "id": "4e73cae5-b7aa-4074-b3b7-792a7262cd4a",
+    "startTime": "2025-11-29T08:28:15",
+    "endTime": "2025-11-29T08:38:23",
+    "duration": 11,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Place Carnot",
+      "lng": 4.82689084,
+      "lat": 45.75122705,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "23, Place Carnot"
     },
     "endStation": {
       "name": "Chazette Lassagne",
@@ -1485,8 +499,8 @@
       "type": "LineString",
       "coordinates": [
         [
-          4.82929778,
-          45.77002124
+          4.82689084,
+          45.75122705
         ],
         [
           4.83726954,
@@ -1496,35 +510,715 @@
     }
   },
   {
-    "id": "05e0f14f-d154-42ca-849a-1f99420c01d9",
-    "startTime": "2025-10-31T11:51:59",
-    "endTime": "2025-10-31T12:00:14",
-    "duration": 9,
+    "id": "eb2751f1-1a47-41a1-89e5-2bc43df79758",
+    "startTime": "2025-11-28T12:24:29",
+    "endTime": "2025-11-28T12:38:58",
+    "duration": 15,
     "bikeType": "classic",
     "startStation": {
-      "lat": 45.76458787293466,
-      "lng": 4.835234748195122,
-      "name": "Départ",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Place Tolozan",
+      "lng": 4.83760844,
+      "lat": 45.76960059,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "18, Place Tolozan"
     },
     "endStation": {
-      "lat": 45.76403423813881,
-      "lng": 4.8346785097565395,
-      "name": "Arrivée",
-      "commune": "Lyon",
-      "address": ""
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
     },
     "geometry": {
       "type": "LineString",
       "coordinates": [
         [
-          4.835234748195122,
-          45.76458787293466
+          4.83760844,
+          45.76960059
         ],
         [
-          4.8346785097565395,
-          45.76403423813881
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "f1d7fb2b-df65-4700-8259-8803a3d5fc61",
+    "startTime": "2025-11-27T14:21:39",
+    "endTime": "2025-11-27T14:37:00",
+    "duration": 16,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "bbe5e694-0bbf-4ed5-8e8f-6549614ea7b4",
+    "startTime": "2025-11-26T18:30:29",
+    "endTime": "2025-11-26T18:44:10",
+    "duration": 14,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Centre Berthelot",
+      "lng": 4.8359997,
+      "lat": 45.74735617,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "105, Rue Pasteur"
+    },
+    "endStation": {
+      "name": "Part-Dieu / Cuirassiers",
+      "lng": 4.85757303,
+      "lat": 45.75989765,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "Rue Docteur Bouchut"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8359997,
+          45.74735617
+        ],
+        [
+          4.85757303,
+          45.75989765
+        ]
+      ]
+    }
+  },
+  {
+    "id": "a7fa0440-b94e-452a-b113-a127c148078a",
+    "startTime": "2025-11-24T16:16:08",
+    "endTime": "2025-11-24T16:56:20",
+    "duration": 41,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Perrache / Carnot",
+      "lng": 4.8280515,
+      "lat": 45.75009964,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "Face 16, Place Carnot"
+    },
+    "endStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8280515,
+          45.75009964
+        ],
+        [
+          4.83726954,
+          45.77292662
+        ]
+      ]
+    }
+  },
+  {
+    "id": "d7f33904-a024-4e46-8542-38addc7753d6",
+    "startTime": "2025-11-20T21:13:37",
+    "endTime": "2025-11-20T21:17:37",
+    "duration": 5,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Face 18, Rue Joseph Serlin"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.83657207,
+          45.76760204
+        ]
+      ]
+    }
+  },
+  {
+    "id": "b8239ab7-d490-4a21-a6b8-8af1d715d21a",
+    "startTime": "2025-11-19T10:43:47",
+    "endTime": "2025-11-19T10:46:44",
+    "duration": 3,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Place Tolozan",
+      "lng": 4.83760844,
+      "lat": 45.76960059,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "18, Place Tolozan"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.83760844,
+          45.76960059
+        ]
+      ]
+    }
+  },
+  {
+    "id": "2b9cea06-8997-4e4c-8216-18b44c839b2c",
+    "startTime": "2025-11-18T17:05:32",
+    "endTime": "2025-11-18T17:07:27",
+    "duration": 2,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Perrache / Carnot",
+      "lng": 4.8280515,
+      "lat": 45.75009964,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "Face 16, Place Carnot"
+    },
+    "endStation": {
+      "name": "Remparts d'Ainay",
+      "lng": 4.82980714,
+      "lat": 45.75308921,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "15, Rue des Remparts d'Ainay"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8280515,
+          45.75009964
+        ],
+        [
+          4.82980714,
+          45.75308921
+        ]
+      ]
+    }
+  },
+  {
+    "id": "94828e5d-ea5e-4ab0-bc16-6bbf00e40864",
+    "startTime": "2025-11-14T22:18:28",
+    "endTime": "2025-11-14T22:30:37",
+    "duration": 13,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Quai Sarrail",
+      "lng": 4.84108083,
+      "lat": 45.76685057,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "Face 4, Quai Général Sarrail"
+    },
+    "endStation": {
+      "name": "Gambetta / Jusserand",
+      "lng": 4.85558509,
+      "lat": 45.75111241,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "97, Avenue Jules Jusserand"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.84108083,
+          45.76685057
+        ],
+        [
+          4.85558509,
+          45.75111241
+        ]
+      ]
+    }
+  },
+  {
+    "id": "c649b545-03bd-4dd2-b0f8-19353306046c",
+    "startTime": "2025-11-14T18:19:23",
+    "endTime": "2025-11-14T18:30:38",
+    "duration": 12,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Quai Lassagne",
+      "lng": 4.83791179,
+      "lat": 45.77220147,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "3, Quai André Lassagne"
+    },
+    "endStation": {
+      "name": "Lafayette / Corneille",
+      "lng": 4.84377734,
+      "lat": 45.76375948,
+      "commune": "Lyon 6e Arrondissement",
+      "address": "64, Rue Pierre Corneille"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83791179,
+          45.77220147
+        ],
+        [
+          4.84377734,
+          45.76375948
+        ]
+      ]
+    }
+  },
+  {
+    "id": "65f3d2ae-5867-425a-b01a-63135584394c",
+    "startTime": "2025-11-14T15:05:35",
+    "endTime": "2025-11-14T15:19:39",
+    "duration": 15,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Bron - Mairie",
+      "lng": 4.90872068,
+      "lat": 45.73394553,
+      "commune": "Bron",
+      "address": "5, Rue de Verdun"
+    },
+    "endStation": {
+      "name": "Place Aristide Briand",
+      "lng": 4.85024743,
+      "lat": 45.75300435,
+      "commune": "Lyon 3e Arrondissement",
+      "address": "Face 303, Rue Duguesclin"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.90872068,
+          45.73394553
+        ],
+        [
+          4.85024743,
+          45.75300435
+        ]
+      ]
+    }
+  },
+  {
+    "id": "b04b1130-5278-404d-8304-6ae9054a5a6a",
+    "startTime": "2025-11-14T12:20:37",
+    "endTime": "2025-11-14T12:35:33",
+    "duration": 15,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Quai Lassagne",
+      "lng": 4.83791179,
+      "lat": 45.77220147,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "3, Quai André Lassagne"
+    },
+    "endStation": {
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83791179,
+          45.77220147
+        ],
+        [
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "2ce91e4a-7a6a-4a91-8b2d-b4be051c24ed",
+    "startTime": "2025-11-14T00:31:23",
+    "endTime": "2025-11-14T00:38:27",
+    "duration": 8,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Place Ampère",
+      "lng": 4.82824554,
+      "lat": 45.75304453,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "18, Rue Bourgelat"
+    },
+    "endStation": {
+      "name": "Saint-Luc / Saint-Joseph",
+      "lng": 4.83485668,
+      "lat": 45.7493886,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "Face 22, Quai Claude Bernard"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.82824554,
+          45.75304453
+        ],
+        [
+          4.83485668,
+          45.7493886
+        ]
+      ]
+    }
+  },
+  {
+    "id": "75ebd8b8-c74d-4fa9-a8aa-dd590e445327",
+    "startTime": "2025-11-13T23:58:35",
+    "endTime": "2025-11-14T00:07:42",
+    "duration": 10,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Place Carnot",
+      "lng": 4.82689084,
+      "lat": 45.75122705,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "23, Place Carnot"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.82689084,
+          45.75122705
+        ]
+      ]
+    }
+  },
+  {
+    "id": "5c636242-108c-4baf-bfc3-cf7525bf72b1",
+    "startTime": "2025-11-13T21:09:43",
+    "endTime": "2025-11-13T21:13:47",
+    "duration": 5,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Face 18, Rue Joseph Serlin"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.83657207,
+          45.76760204
+        ]
+      ]
+    }
+  },
+  {
+    "id": "5fd17f52-2a47-43d7-b2fc-8cfb65b4578d",
+    "startTime": "2025-11-13T17:29:47",
+    "endTime": "2025-11-13T17:38:45",
+    "duration": 9,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Perrache / Carnot",
+      "lng": 4.8280515,
+      "lat": 45.75009964,
+      "commune": "Lyon 2e Arrondissement",
+      "address": "Face 16, Place Carnot"
+    },
+    "endStation": {
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Face 18, Rue Joseph Serlin"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8280515,
+          45.75009964
+        ],
+        [
+          4.83657207,
+          45.76760204
+        ]
+      ]
+    }
+  },
+  {
+    "id": "7c9a6eb7-c056-43b6-ab88-dec6a995cb21",
+    "startTime": "2025-11-13T14:06:15",
+    "endTime": "2025-11-13T14:21:01",
+    "duration": 15,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "5d34d701-5e9c-4d17-9b47-bae8e2af093f",
+    "startTime": "2025-11-12T10:31:15",
+    "endTime": "2025-11-12T10:36:01",
+    "duration": 5,
+    "bikeType": "electric",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Opéra",
+      "lng": 4.83657207,
+      "lat": 45.76760204,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Face 18, Rue Joseph Serlin"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.83657207,
+          45.76760204
+        ]
+      ]
+    }
+  },
+  {
+    "id": "2b568c4a-a4de-428a-b544-1c9763ff4b92",
+    "startTime": "2025-11-10T19:10:31",
+    "endTime": "2025-11-10T19:20:43",
+    "duration": 11,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Meissonnier",
+      "lng": 4.83283358,
+      "lat": 45.76608507,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "3, Place Meissonnier"
+    },
+    "endStation": {
+      "name": "Saint-Luc / Saint-Joseph",
+      "lng": 4.83485668,
+      "lat": 45.7493886,
+      "commune": "Lyon 7e Arrondissement",
+      "address": "Face 22, Quai Claude Bernard"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83283358,
+          45.76608507
+        ],
+        [
+          4.83485668,
+          45.7493886
+        ]
+      ]
+    }
+  },
+  {
+    "id": "52cac45a-f389-42a2-b9ed-019529fbd8ee",
+    "startTime": "2025-11-07T12:16:30",
+    "endTime": "2025-11-07T12:34:43",
+    "duration": 19,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Saint-Romain / Berliet",
+      "lng": 4.86037209,
+      "lat": 45.74225688,
+      "commune": "Lyon 8e Arrondissement",
+      "address": "55, Rue Marius Berliet"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.86037209,
+          45.74225688
+        ]
+      ]
+    }
+  },
+  {
+    "id": "508d5263-af9d-4387-8ba2-0f81320e2e48",
+    "startTime": "2025-11-06T20:27:16",
+    "endTime": "2025-11-06T20:30:09",
+    "duration": 3,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Terreaux / Chenavard",
+      "lng": 4.83293149,
+      "lat": 45.7667671,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "11, Rue Paul Chenavard"
+    },
+    "endStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83293149,
+          45.7667671
+        ],
+        [
+          4.83726954,
+          45.77292662
+        ]
+      ]
+    }
+  },
+  {
+    "id": "096b54ea-009d-459d-ae93-55b6bf9c1666",
+    "startTime": "2025-11-06T18:17:52",
+    "endTime": "2025-11-06T18:23:31",
+    "duration": 6,
+    "bikeType": "classic",
+    "startStation": {
+      "name": "Chazette Lassagne",
+      "lng": 4.83726954,
+      "lat": 45.77292662,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "Quai André Lasagne"
+    },
+    "endStation": {
+      "name": "Terreaux / Terme",
+      "lng": 4.83213506,
+      "lat": 45.76773469,
+      "commune": "Lyon 1er Arrondissement",
+      "address": "33, Rue Terme"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.83726954,
+          45.77292662
+        ],
+        [
+          4.83213506,
+          45.76773469
         ]
       ]
     }

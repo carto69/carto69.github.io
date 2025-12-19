@@ -60,6 +60,15 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Home: recadrage fond (background-size 130%, position 45% 160px)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Vite dev server",
+			"type": "shell",
+			"command": "npm run dev",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

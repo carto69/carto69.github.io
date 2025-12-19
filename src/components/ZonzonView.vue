@@ -54,16 +54,18 @@ export default {
 
 .map-title {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.85);
-  padding: 12px 24px;
+  padding: 12px 32px;
   border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  z-index: 1;
+  z-index: 2;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .projection-info {
@@ -82,17 +84,19 @@ export default {
 .back-button {
   position: absolute;
   top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.95);
+  left: 20px;
+  background: #7fa46a;
+  color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 18px 36px;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   z-index: 10;
   transition: all 0.3s ease;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .back-button:hover {

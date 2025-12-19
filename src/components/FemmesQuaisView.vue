@@ -24,7 +24,11 @@
     </aside>
 
     <div class="content-container">
-      <div v-if="activeContent" class="image-viewer">
+      <div v-if="activeTab === 'docs'" class="docs-coteacote" style="display:flex;justify-content:center;align-items:flex-start;gap:2vw;padding:2vw 0;">
+        <img src="/femmes-quais/source-3.png" alt="Sources" style="max-width:45vw;max-height:80vh;border-radius:10px;box-shadow:0 2px 16px #0002;" />
+        <img src="/femmes-quais/source-4.png" alt="Démarche" style="max-width:45vw;max-height:80vh;border-radius:10px;box-shadow:0 2px 16px #0002;" />
+      </div>
+      <div v-else-if="activeContent" class="image-viewer">
         <img 
           :src="activeContent" 
           :alt="activeTabName"
@@ -32,11 +36,6 @@
           class="main-image"
         />
         <p class="image-caption">{{ activeTabName }}</p>
-      </div>
-
-      <div v-else class="empty-state">
-        <span style="font-size: 4rem;">🗺️</span>
-        <p>Sélectionnez un onglet pour voir le contenu</p>
       </div>
     </div>
 
@@ -46,17 +45,7 @@
       <img :src="activeContent" :alt="activeTabName" />
     </div>
     
-    <!-- Onglet docs: deux pages -->
-    <div v-if="activeTab === 'docs'" class="docs-container">
-      <div class="docs-tabs">
-        <button :class="{active: docsPage === 'sources'}" @click="docsPage = 'sources'">Sources</button>
-        <button :class="{active: docsPage === 'methodo'}" @click="docsPage = 'methodo'">Méthodologie</button>
-      </div>
-      <div class="docs-content">
-        <img v-if="docsPage === 'sources'" src="/femmes-quais/source-3.png" alt="Sources" />
-        <img v-else src="/femmes-quais/source-4.png" alt="Méthodologie" />
-      </div>
-    </div>
+    <!-- Onglet docs: deux pages côte à côte (déjà ci-dessus, doublon supprimé) -->
   </div>
 </template>
 
@@ -83,7 +72,7 @@ export default {
             },
             { 
               id: 'docs', 
-              name: 'Sources & Méthodo', 
+              name: 'Sources & Démarche', 
               icon: '📚',
               content: null
             }

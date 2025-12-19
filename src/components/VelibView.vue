@@ -2,7 +2,7 @@
   <div class="velib-container">
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velib-map" class="map-canvas"></div>
-    <div class="map-title">Paris en Vélib'</div>
+    <div class="map-title">le 75 en vélib</div>
     
     <!-- Barre latérale des statistiques -->
     <div class="stats-sidebar">
@@ -34,25 +34,26 @@
         <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
       
-      <!-- Options de la carte -->
+      <!-- Options de la carte + Sélecteur de trajet -->
       <hr class="sidebar-divider" />
-      <div class="map-controls">
+      <div class="map-controls" style="display: flex; flex-direction: row; align-items: center; gap: 1em; flex-wrap: wrap;">
         <label>
-          <input type="checkbox" v-model="showStations" @change="toggleStations" />
+          <input type="checkbox" v-model="showStations" @change="toggleStations" :disabled="showHotspot" />
           Stations
         </label>
-      </div>
-      
-      <!-- Sélecteur de trajet -->
-      <hr class="sidebar-divider" />
-      <div class="trajet-selector">
-        <label>Analyser un trajet:</label>
-        <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
-          <option :value="-1">-- Sélectionner --</option>
-          <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
-            {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
-          </option>
-        </select>
+        <label>
+          <input type="checkbox" v-model="showHotspot" @change="toggleHotspot" />
+          Heatmap
+        </label>
+        <div class="trajet-selector" style="margin: 0;">
+          <label style="margin-right: 0.5em;">Analyser un trajet:</label>
+          <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
+            <option :value="-1">-- Sélectionner --</option>
+            <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
+              {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
+            </option>
+          </select>
+        </div>
       </div>
       
       <!-- Détails du trajet sélectionné -->
@@ -121,6 +122,7 @@ export default {
       displayedTrips: [],
       selectedTripIndex: -1,
       showStations: true,
+      showHotspot: false,
       stats: {
         countTrips: 0,
         countFeatures: 0,
@@ -138,6 +140,83 @@ export default {
     this.loadTrips()
   },
   methods: {
+        toggleHotspot() {
+          if (!this.map) return
+          if (this.showHotspot) {
+            // Masquer segments et points
+            if (this.map.getLayer('trips-layer')) {
+              this.map.setLayoutProperty('trips-layer', 'visibility', 'none')
+            }
+            if (this.map.getLayer('stations-layer')) {
+              this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
+            }
+            // Afficher la heatmap
+            this.displayHeatmap()
+          } else {
+            // Masquer la heatmap
+            if (this.map.getLayer('velib-heatmap')) {
+              this.map.setLayoutProperty('velib-heatmap', 'visibility', 'none')
+            }
+            // Réafficher segments/points selon options
+            if (this.map.getLayer('trips-layer')) {
+              this.map.setLayoutProperty('trips-layer', 'visibility', 'visible')
+            }
+            if (this.showStations && this.map.getLayer('stations-layer')) {
+              this.map.setLayoutProperty('stations-layer', 'visibility', 'visible')
+            }
+          }
+        },
+
+        displayHeatmap() {
+          if (!this.map) return
+          // Construire les points de heatmap à partir des départs/arrivées
+          const heatFeatures = []
+          this.displayedTrips.forEach(trip => {
+            // Départ
+            const dep = trip.depCoords.split(',').map(Number)
+            heatFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: dep },
+              properties: {}
+            })
+            // Arrivée
+            const arr = trip.arrCoords.split(',').map(Number)
+            heatFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: arr },
+              properties: {}
+            })
+          })
+          if (!this.map.getSource('velib-heatmap')) {
+            this.map.addSource('velib-heatmap', {
+              type: 'geojson',
+              data: { type: 'FeatureCollection', features: heatFeatures }
+            })
+            this.map.addLayer({
+              id: 'velib-heatmap',
+              type: 'heatmap',
+              source: 'velib-heatmap',
+              maxzoom: 15,
+              paint: {
+                'heatmap-weight': 1,
+                'heatmap-intensity': 1.2,
+                'heatmap-color': [
+                  'interpolate', ['linear'], ['heatmap-density'],
+                  0, 'rgba(0,0,0,0)',
+                  0.2, '#00D9FF',
+                  0.4, '#0EA5E9',
+                  0.6, '#0369A1',
+                  1, '#F59E42'
+                ],
+                'heatmap-radius': 32,
+                'heatmap-opacity': 0.8
+              }
+            })
+          } else {
+            this.map.getSource('velib-heatmap').setData({ type: 'FeatureCollection', features: heatFeatures })
+            this.map.setLayoutProperty('velib-heatmap', 'visibility', 'visible')
+          }
+        },
     resolveStation(id) {
       if (!id) return null
       const sId = String(id).trim()
@@ -446,9 +525,17 @@ export default {
             'line-color': '#00D9FF',
             'line-width': 3,
             'line-opacity': 0.8
+          },
+          layout: {
+            'visibility': this.showHotspot ? 'none' : 'visible'
           }
         })
-        
+
+        // Masquer la heatmap si elle existe
+        if (this.map.getLayer('velib-heatmap')) {
+          this.map.setLayoutProperty('velib-heatmap', 'visibility', 'none')
+        }
+
         console.log(`✓ ${features.length} trajets affichés sur la carte`)
       } else {
         console.warn('⚠️ Aucun segment valide')
@@ -561,14 +648,12 @@ export default {
       if (!this.map || !this.map.getLayer('trips-layer')) return
       
       this.map.on('click', 'trips-layer', (e) => {
-        if (e.features.length === 0) return
+        if (!e.features || e.features.length === 0) return
         const props = e.features[0].properties
-        
-        // Chercher l'index du trajet avec ce nom
+        // Recherche stricte sur depName, arrName ET distance (évite collisions)
         const tripIdx = this.displayedTrips.findIndex(
-          trip => trip.depName === props.depName && trip.arrName === props.arrName
+          trip => trip.depName === props.depName && trip.arrName === props.arrName && Math.abs(trip.distance - props.distance) < 2
         )
-        
         if (tripIdx >= 0) {
           this.selectedTripIndex = tripIdx
           this.onTripSelected()

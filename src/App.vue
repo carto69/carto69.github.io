@@ -14,6 +14,12 @@
       <div v-if="activeTab === 'mapelia'" class="scene">
         <MapeliaView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'plouf'" class="scene">
+        <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">🌊 Plouf !</div>
+      </div>
+      <div v-if="activeTab === '69'" class="scene">
+        <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">♋ 69</div>
+      </div>
       <div v-if="activeTab === 'femmes-quais'" class="scene">
         <FemmesQuaisView @back="goHome" />
       </div>
@@ -56,7 +62,10 @@ export default {
   },
   methods: {
     openTab(tab) {
-      if (tab === 'italie2' || tab === 'velov' || tab === 'velib' || tab === 'mapelia' || tab === 'femmes-quais' || tab === 'zonzon' || tab === 'portfolio') {
+      if ([
+        'italie2', 'velov', 'velib', 'mapelia', 'plouf', '69',
+        'femmes-quais', 'zonzon', 'portfolio'
+      ].includes(tab)) {
         this.activeTab = tab
         this.updateHistory()
       } else {
@@ -88,15 +97,18 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 main {
   width: 100%;
   height: 100%;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 .scene {
   width: 100%;
   height: 100%;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 </style>

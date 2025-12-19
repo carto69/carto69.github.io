@@ -1,51 +1,66 @@
 <template>
   <main class="menu">
     <div class="credits-toggle top-right" @click="showCredits = !showCredits">Crédit</div>
-    <div v-if="showCredits" class="credits-panel">
+    <div v-if="showCredits" class="credits-panel next-to-toggle">
       <div class="credit-line"><strong>Crédit :</strong> Elia Terragni</div>
       <div class="credit-line"><strong>Contact :</strong> <a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a></div>
       <div class="credit-line"><strong>Repo :</strong> <a href="https://github.com/wxiote/carto69" target="_blank" rel="noopener">github.com/wxiote/carto69</a></div>
       <div class="credit-line"><strong>Source carte :</strong> Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
       </div>
     <div class="hero">
-      <h1 class="title">carto69</h1>
-      <div class="tiles">
-        <article class="tile" @click="$emit('open', 'zonzon')">
-          <div class="tile-icon">🌍</div>
-          <h2>zonzon</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <article class="tile" @click="openMapelia">
-          <div class="tile-icon">🗺️</div>
-          <h2>Mapelia</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <article class="tile" @click="$emit('open', 'portfolio')">
-          <div class="tile-icon">📁</div>
-          <h2>Autres projets</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <div class="tile-break"></div>
-        <article class="tile" @click="$emit('open', 'italie2')">
-          <div class="tile-icon">🎵</div>
-          <h2>Italie 2</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <article class="tile" @click="$emit('open', 'velov')">
-          <div class="tile-icon">🚴</div>
-          <h2>69 en velo'v</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <article class="tile" @click="$emit('open', 'velib')">
-          <div class="tile-icon">🚲</div>
-          <h2>75 en vélib'</h2>
-          <button class="tile-btn">→</button>
-        </article>
-        <article class="tile" @click="$emit('open', 'femmes-quais')">
-          <div class="tile-icon">👥</div>
-          <h2>Genre et espace public</h2>
-          <button class="tile-btn">→</button>
-        </article>
+      <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
+      <div class="tiles double-row">
+        <!-- Ligne 1 (4 tuiles) -->
+        <div class="tiles-row">
+          <article class="tile" @click="openMapelia">
+            <div class="tile-icon">🗺️</div>
+            <h2><span class="tile-title">mapelia</span></h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', '69')">
+            <div class="tile-icon">♋</div>
+            <h2>69</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'plouf')">
+            <div class="tile-icon">🌊</div>
+            <h2>plouf</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'zonzon')">
+            <div class="tile-icon">🌍</div>
+            <h2>zonzon</h2>
+            <button class="tile-btn">→</button>
+          </article>
+        </div>
+        <!-- Ligne 2 (5 tuiles) -->
+        <div class="tiles-row">
+          <article class="tile" @click="$emit('open', 'velov')">
+            <div class="tile-icon">🚴</div>
+            <h2>69 en velov</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'velib')">
+            <div class="tile-icon">🚲</div>
+            <h2>75 en velib</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'femmes-quais')">
+            <div class="tile-icon">👥</div>
+            <h2>genre et espace public</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'italie2')">
+            <div class="tile-icon">🎵</div>
+            <h2>Italie 2</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'portfolio')">
+            <div class="tile-icon">📁</div>
+            <h2>autres projets</h2>
+            <button class="tile-btn">→</button>
+          </article>
+        </div>
       </div>
     </div>
     
@@ -75,151 +90,176 @@ export default {
 </script>
 
 <style scoped>
+
 .menu {
   position: relative;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
+    padding-top: 0rem;
   overflow: hidden;
   display: flex;
-  align-items: center;
+    background: #1a3d1a;
   justify-content: center;
-  background: url('/vintage-map.jpg') no-repeat;
-  background-size: 105% auto; /* léger dézoom */
-  background-position: 102% -20px; /* léger décalage à droite mais réduit */
+  background: url('/vintage-map.jpg') no-repeat center center fixed;
+  background-size: 110% 110%;
+  background-position: 55% 50%;
 }
 
-.credits-top {
+/* Rapproché de la zone de tuiles */
+/* Retour position initiale en haut à droite */
+.credits-toggle.top-right {
   position: fixed;
   top: 20px;
   right: 30px;
-  color: #000;
-  font-size: 0.75rem;
-  font-weight: 400;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 6px 10px;
-  border-radius: 4px;
-  z-index: 100;
-  white-space: nowrap;
+    color: #7fa46a;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: rgb(244, 228, 160);
+    border: 1px solid #7fa46a;
+    box-shadow: 0 0 0 1px #7fa46a;
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 100;
+    white-space: nowrap;
+    cursor: pointer;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.top-right {
+/* Affichage du panneau à côté du bouton crédit */
+.credits-panel.next-to-toggle {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 170px;
+  margin-left: 0;
 }
-
-.credits-toggle {
-  background: #F4E4A0; /* jaune beige plus doux */
-  color: #2d3748;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  z-index: 101;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-.credits-toggle:hover { background: #EED08C; }
 
 .credits-panel {
+  box-shadow: 0 0 0 1px #7fa46a, 0 2px 16px #0002;
+  background: rgb(244, 228, 160);
+  color: #222;
+  min-width: unset;
+  max-width: unset;
+  width: auto;
+    padding: 10px 18px 8px 18px;
+    font-size: 0.85rem;
+  z-index: 9999;
   position: fixed;
-  top: 60px;
-  right: 20px;
-  background: rgba(244, 228, 160, 0.92); /* beige comme le bouton Crédit */
-  color: #2d3748;
-  padding: 10px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  z-index: 101;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  top: 120px;
+  right: 30px;
+  display: block;
+  border-radius: 12px;
+  box-sizing: border-box;
 }
-.credit-line { white-space: nowrap; }
-
-.hero {
-  position: relative;
-  z-index: 2;
+.credit-line { 
+  color: #222;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  white-space: nowrap; 
+  display: block;
+  font-family: inherit;
+}
+.title {
+  font-size: 16rem;
+  font-weight: 700;
+  color: #7fa46a;
+  text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
+  margin: 260px 0 40px 0;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: 7px;
+  font-style: normal;
+  text-align: center;
+}
+.hero .tiles.double-row {
+  display: flex;
+  flex-direction: column;
+  gap: 18px 0;
+  margin-top: 20px;
+  max-width: 900px;
+  width: 100%;
+  align-items: center;
+}
+.tiles-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+.hero .tile {
+  background: rgba(127, 164, 106, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 0 0 2px #E8D4A0, 0 2px 8px #E8D4A0;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  gap: 28px;
-  width: min(1100px, 92vw);
-  padding: 0 20px;
-}
-
-.tiles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px 22px;
-  max-width: 820px;
-  width: 100%;
-}
-
-.tile-btn {
-  width: 100%;
-  padding: 8px;
-  background: #F4E4A0; /* jaune beige pour les onglets */
-  color: #2e7ba8; /* flèche bleue */
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 140px;
+  min-width: 120px;
+  max-width: 180px;
+  height: 90px;
   border: none;
-  border-radius: 6px;
+  box-sizing: border-box;
+  opacity: 0.92;
+}
+.hero .tile h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -1px;
+  text-align: center;
+  text-transform: none;
+  color: rgb(244, 228, 160);
+}
+.tile-btn {
+  color: #7fa46a;
+  background: rgb(244, 228, 160);
+  border: none;
+  border-radius: 8px;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  margin-top: 4px;
+  padding: 0 18px;
+  transition: background 0.2s, transform 0.2s;
+}
+.tile-btn .arrow {
+  font-size: 3em;
+  color: #7fa46a;
 }
 .tile-btn:hover {
-  background: #EED08C; /* hover légèrement plus sombre */
-  transform: scale(1.02);
+  background: #fffbe6;
+  color: #7fa46a;
+  transform: scale(1.05);
 }
-
-.title {
-  font-size: 5.6rem;
-
-  font-weight: 700;
-  color: #7fa46a; /* même vert que les onglets */
-  text-shadow: -1px -1px 0 #E8D4A0, 1px -1px 0 #E8D4A0, -1px 1px 0 #E8D4A0, 1px 1px 0 #E8D4A0;
-  margin: 0 0 60px 0;
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  letter-spacing: 3px;
-  font-style: normal;
+.credits-panel {
+  box-shadow: 0 0 0 1px #7fa46a, 0 2px 16px #0002;
+  background: rgb(244, 228, 160);
+  color: #222;
+  min-width: unset;
+  max-width: unset;
+  width: auto;
+  padding: 16px 28px 12px 28px;
+  font-size: 1rem;
+  z-index: 9999;
+  position: fixed;
+  top: 120px;
+  right: 30px;
+  display: block;
+  border-radius: 12px;
+  box-sizing: border-box;
 }
-
-.tile-break {
-  width: 100%;
-  flex-basis: 100%;
-  height: 0;
-}
-
-.tile {
-  position: relative;
-  padding: 12px 10px;
-  border-radius: 10px;
-  background: rgba(127, 164, 106, 0.75); /* plus transparent */
-  border: 1px solid rgba(127, 164, 106, 0.4); /* liseré vert assorti */
-  cursor: pointer;
-  width: 160px;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
-
-.tile:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  background: rgba(127, 164, 106, 0.85);
-}
-
 .tile-icon {
   font-size: 1.4rem;
   margin-bottom: 4px;
   text-align: center;
+  color: #E8D4A0;
 }
-
-.tile h2 {
-  margin: 0 0 6px 0;
-  color: #f4f8fb;
-  font-size: 1rem;
-  text-align: center;
+.arrow {
+  font-size: 3em;
+  color: #E8D4A0;
 }
 .tile p {
   margin: 0 0 8px 0;
@@ -228,24 +268,21 @@ export default {
   line-height: 1.25;
   text-align: center;
 }
-
-/* supprimé: doublon de tile-btn (version blanche) */
-
 @media (max-width: 768px) {
   .title {
     font-size: 3rem;
   }
-  .tiles {
+  .hero .tiles {
     flex-direction: column;
     align-items: center;
   }
-  .tile {
+  .hero .tile {
     max-width: 100%;
   }
-  .credits-top,
-  .credits-bottom {
-    font-size: 0.8rem;
-    right: 15px;
+  .credits-toggle,
+  .credits-panel {
+    right: 10px;
+    left: auto;
   }
 }
 </style>

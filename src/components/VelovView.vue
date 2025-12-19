@@ -2,7 +2,7 @@
   <div class="velov-container">
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velov-map" class="map-canvas"></div>
-    <div class="map-title">Lyon en Vélo'v</div>
+    <div class="map-title">le 69 en vélo'v</div>
     
     <!-- Barre latérale des statistiques -->
     <div class="stats-sidebar">
@@ -36,10 +36,14 @@
       
       <!-- Options de la carte -->
       <hr class="sidebar-divider" />
-      <div class="map-controls">
+      <div class="map-controls" style="display: flex; flex-direction: row; align-items: center; gap: 1em; flex-wrap: wrap;">
         <label>
-          <input type="checkbox" v-model="showStations" @change="toggleStations" />
+          <input type="checkbox" v-model="showStations" @change="toggleStations" :disabled="showHotspot" />
           Stations
+        </label>
+        <label>
+          <input type="checkbox" v-model="showHotspot" @change="toggleHotspot" />
+          Heatmap
         </label>
       </div>
       
@@ -121,6 +125,7 @@ export default {
       displayedTrips: [],
       selectedTripIndex: -1,
       showStations: true,
+      showHotspot: false,
       stats: {
         countTrips: 0,
         countFeatures: 0,
@@ -138,6 +143,83 @@ export default {
     this.loadTrips()
   },
   methods: {
+        toggleHotspot() {
+          if (!this.map) return
+          if (this.showHotspot) {
+            // Masquer segments et points
+            if (this.map.getLayer('trips-layer')) {
+              this.map.setLayoutProperty('trips-layer', 'visibility', 'none')
+            }
+            if (this.map.getLayer('stations-layer')) {
+              this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
+            }
+            // Afficher la heatmap
+            this.displayHeatmap()
+          } else {
+            // Masquer la heatmap
+            if (this.map.getLayer('velov-heatmap')) {
+              this.map.setLayoutProperty('velov-heatmap', 'visibility', 'none')
+            }
+            // Réafficher segments/points selon options
+            if (this.map.getLayer('trips-layer')) {
+              this.map.setLayoutProperty('trips-layer', 'visibility', 'visible')
+            }
+            if (this.showStations && this.map.getLayer('stations-layer')) {
+              this.map.setLayoutProperty('stations-layer', 'visibility', 'visible')
+            }
+          }
+        },
+
+        displayHeatmap() {
+          if (!this.map) return
+          // Construire les points de heatmap à partir des départs/arrivées
+          const heatFeatures = []
+          this.displayedTrips.forEach(trip => {
+            // Départ
+            const dep = trip.depCoords.split(',').map(Number)
+            heatFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: dep },
+              properties: {}
+            })
+            // Arrivée
+            const arr = trip.arrCoords.split(',').map(Number)
+            heatFeatures.push({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: arr },
+              properties: {}
+            })
+          })
+          if (!this.map.getSource('velov-heatmap')) {
+            this.map.addSource('velov-heatmap', {
+              type: 'geojson',
+              data: { type: 'FeatureCollection', features: heatFeatures }
+            })
+            this.map.addLayer({
+              id: 'velov-heatmap',
+              type: 'heatmap',
+              source: 'velov-heatmap',
+              maxzoom: 15,
+              paint: {
+                'heatmap-weight': 1,
+                'heatmap-intensity': 1.2,
+                'heatmap-color': [
+                  'interpolate', ['linear'], ['heatmap-density'],
+                  0, 'rgba(0,0,0,0)',
+                  0.2, '#22C55E',
+                  0.4, '#16A34A',
+                  0.6, '#166534',
+                  1, '#F59E42'
+                ],
+                'heatmap-radius': 32,
+                'heatmap-opacity': 0.8
+              }
+            })
+          } else {
+            this.map.getSource('velov-heatmap').setData({ type: 'FeatureCollection', features: heatFeatures })
+            this.map.setLayoutProperty('velov-heatmap', 'visibility', 'visible')
+          }
+        },
     resolveStation(id) {
       if (!id) return null
       // For Velov format, we don't use IDs - just pass through
@@ -327,9 +409,17 @@ export default {
             'line-color': '#22C55E',
             'line-width': 3,
             'line-opacity': 0.8
+          },
+          layout: {
+            'visibility': this.showHotspot ? 'none' : 'visible'
           }
         })
-        
+
+        // Masquer la heatmap si elle existe
+        if (this.map.getLayer('velov-heatmap')) {
+          this.map.setLayoutProperty('velov-heatmap', 'visibility', 'none')
+        }
+
         console.log(`✓ ${features.length} trajets affichés sur la carte`)
       } else {
         console.warn('⚠️ Aucun segment valide')
@@ -436,13 +526,12 @@ export default {
       if (!this.map || !this.map.getLayer('trips-layer')) return
       
       this.map.on('click', 'trips-layer', (e) => {
-        if (e.features.length === 0) return
+        if (!e.features || e.features.length === 0) return
         const props = e.features[0].properties
-        
+        // Recherche stricte sur depName, arrName ET distance (évite collisions)
         const tripIdx = this.displayedTrips.findIndex(
-          trip => trip.depName === props.depName && trip.arrName === props.arrName
+          trip => trip.depName === props.depName && trip.arrName === props.arrName && Math.abs(trip.distance - props.distance) < 2
         )
-        
         if (tripIdx >= 0) {
           this.selectedTripIndex = tripIdx
           this.onTripSelected()
