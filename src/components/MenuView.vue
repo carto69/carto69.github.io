@@ -22,9 +22,9 @@
             <h2>69</h2>
             <button class="tile-btn">→</button>
           </article>
-          <article class="tile" @click="$emit('open', 'plouf')">
-            <div class="tile-icon">🌊</div>
-            <h2>plouf</h2>
+          <article class="tile" @click="$emit('open', 'xplore')">
+            <div class="tile-icon">☀️</div>
+            <h2>☀️ xplore</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'zonzon')">

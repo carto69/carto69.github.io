@@ -14,7 +14,7 @@
       <div v-if="activeTab === 'mapelia'" class="scene">
         <MapeliaView @back="goHome" />
       </div>
-      <div v-if="activeTab === 'plouf'" class="scene">
+      <div v-if="activeTab === 'xplore'" class="scene">
         <PloufMap @back="goHome" />
       </div>
       <div v-if="activeTab === '69'" class="scene">
@@ -64,7 +64,7 @@ export default {
   methods: {
     openTab(tab) {
       if ([
-        'italie2', 'velov', 'velib', 'mapelia', 'plouf', '69',
+        'italie2', 'velov', 'velib', 'mapelia', 'xplore', '69',
         'femmes-quais', 'zonzon', 'portfolio'
       ].includes(tab)) {
         this.activeTab = tab
