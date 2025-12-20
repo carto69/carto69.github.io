@@ -15,7 +15,7 @@
         <MapeliaView @back="goHome" />
       </div>
       <div v-if="activeTab === 'plouf'" class="scene">
-        <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">🌊 Plouf !</div>
+        <PloufMap @back="goHome" />
       </div>
       <div v-if="activeTab === '69'" class="scene">
         <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">♋ 69</div>
@@ -43,9 +43,10 @@ import MapeliaView from './components/MapeliaView.vue'
 import FemmesQuaisView from './components/FemmesQuaisView.vue'
 import ZonzonView from './components/ZonzonView.vue'
 import PortfolioView from './components/PortfolioView.vue'
+import PloufMap from './components/PloufMap.vue'
 
 export default {
-  components: { MenuView, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView },
+  components: { MenuView, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap },
   data() {
     return {
       activeTab: 'home'

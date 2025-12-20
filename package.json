@@ -1,5 +1,5 @@
 {
-  "name": "cartes-monami-copilot",
+  "name": "xplia",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@turf/turf": "^7.3.1",
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
+    "mapbox-gl": "^3.17.0",
     "three": "^0.181.2",
     "vue": "^3.4.0"
   },

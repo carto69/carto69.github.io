@@ -69,6 +69,12 @@
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push carte Plouf satellite + masques",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Plouf: carte satellite + masques dynamiques (Paris, Lyon, trajet, buffer) + fix import turf\" && git push",
+			"group": "build"
 		}
 	]
 }

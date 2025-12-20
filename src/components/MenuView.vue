@@ -1,12 +1,12 @@
 <template>
   <main class="menu">
     <div class="credits-toggle top-right" @click="showCredits = !showCredits">Crédit</div>
+    <div class="photos-toggle top-left" @click="$emit('open', 'photos')">Photos</div>
     <div v-if="showCredits" class="credits-panel next-to-toggle">
-      <div class="credit-line"><strong>Crédit :</strong> Elia Terragni</div>
-      <div class="credit-line"><strong>Contact :</strong> <a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a></div>
-      <div class="credit-line"><strong>Repo :</strong> <a href="https://github.com/wxiote/carto69" target="_blank" rel="noopener">github.com/wxiote/carto69</a></div>
-      <div class="credit-line"><strong>Source carte :</strong> Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
-      </div>
+      <div class="credit-line">Elia Terragni</div>
+      <div class="credit-line"><a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a><br>0652213579</div>
+      <div class="credit-line">Source carte : Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
+    </div>
     <div class="hero">
       <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
       <div class="tiles double-row">
@@ -90,6 +90,29 @@ export default {
 </script>
 
 <style scoped>
+/* Bouton Photos en haut à gauche, couleur rose Canada */
+.photos-toggle.top-left {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  color: #111;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: #e5bb8cff;
+  border: 1px solid #111;
+  box-shadow: 0 0 0 1px #111;
+  padding: 4px 12px;
+  border-radius: 8px;
+  z-index: 101;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
+.photos-toggle.top-left:hover {
+  background: #f3e0c7;
+  color: #b89c6c;
+}
 
 .menu {
   position: relative;
