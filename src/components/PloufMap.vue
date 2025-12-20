@@ -6,17 +6,20 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl';
 export default {
   name: 'PloufMap',
   mounted() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpYTY5IiwiYSI6ImNtaWZ1dWxpeDAwNnQzZnF1djVydGZpaWYifQ.gtuX2XSr0O5HV9kDQU1dzA';
-    this.map = new mapboxgl.Map({
-      container: this.$refs.mapContainer,
-      style: 'mapbox://styles/mapbox/satellite-v9',
-      center: [2.2137, 46.6034],
-      zoom: 4.5
-    });
+    let mapboxgl;
+    if (typeof window !== 'undefined') {
+      mapboxgl = require('mapbox-gl');
+      mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpYTY5IiwiYSI6ImNtaWZ1dWxpeDAwNnQzZnF1djVydGZpaWYifQ.gtuX2XSr0O5HV9kDQU1dzA';
+      this.map = new mapboxgl.Map({
+        container: this.$refs.mapContainer,
+        style: 'mapbox://styles/mapbox/satellite-v9',
+        center: [2.2137, 46.6034],
+        zoom: 4.5
+      });
+    }
   },
   beforeUnmount() {
     if (this.map) this.map.remove();
