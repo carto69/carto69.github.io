@@ -81,6 +81,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Fix: PloufMap import turf + clean code pour compatibilité Vercel\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push fix PloufMap template unique",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Fix: PloufMap.vue template unique (Vue SFC)\" && git push",
+			"group": "build"
 		}
 	]
 }
