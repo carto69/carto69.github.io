@@ -75,6 +75,12 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Plouf: carte satellite + masques dynamiques (Paris, Lyon, trajet, buffer) + fix import turf\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Commit and Push fix PloufMap import turf + clean",
+			"type": "shell",
+			"command": "git add -A && git commit -m \"Fix: PloufMap import turf + clean code pour compatibilité Vercel\" && git push",
+			"group": "build"
 		}
 	]
 }
