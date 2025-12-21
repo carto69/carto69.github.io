@@ -89,15 +89,14 @@ export default {
     }
   },
   created() {
-    // Liste tous les fichiers du dossier /cartes (hors sous-dossiers cachés)
+    // Liste tous les fichiers PDF du dossier /portfolio
     const files = [
       "Accéssibilité au campus PDA en TC.pdf",
       "Densité de population Ain.pdf",
-      "Elia Terragni TD3.pdf",
-      "EliaTerragni_cartographieEval1.pdf",
       "LGV France.pdf",
       "La pratique des sports de combats en France.pdf",
       "Population des chefs lieux de l'AIn.pdf",
+      "Pratique des sports collectifs et individuels en France.pdf",
       "schéma place Mazagran.pdf",
       "Évolution Population Ain.pdf",
       "Évolution occ du sol Privas.pdf"
@@ -109,7 +108,7 @@ export default {
       year: '',
       category: 'cartes',
       icon: '🗺️',
-      image: `/cartes/${file}`
+      image: `/portfolio/${file}`
     }))
   },
   computed: {

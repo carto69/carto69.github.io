@@ -77,7 +77,7 @@ export default {
       newOverlayName: '',
       newOverlayFloor: null,
       newOverlayBounds: null,
-      showParkings: true
+      showParkings: true,
     }
   },
   mounted() {
@@ -95,24 +95,55 @@ export default {
   },
   methods: {
     async initMap() {
-      // Use an empty/neutral style so only our GeoJSON layers and image overlays are visible
-      const blankStyle = {
+      // Style de base : fond blanc
+      const style = {
         version: 8,
-        name: 'Blank',
-        sources: {},
+        name: 'White with Littorals',
+        sources: {
+          'naturalearth-land': {
+            type: 'vector',
+            url: 'mapbox://mapbox.natural-earth-hypso',
+          },
+          'naturalearth-coastline': {
+            type: 'vector',
+            url: 'mapbox://mapbox.natural-earth-2',
+          },
+          'satellite': {
+            type: 'raster',
+            url: 'mapbox://mapbox.satellite',
+            tileSize: 256
+          }
+        },
         layers: [
           {
             id: 'background',
             type: 'background',
             paint: { 'background-color': '#ffffff' }
+          },
+          // Couche satellite (masquée par défaut)
+          {
+            id: 'satellite',
+            type: 'raster',
+            source: 'satellite',
+            layout: { visibility: 'none' }
+          },
+          // Littoraux (traits noirs)
+          {
+            id: 'coastline',
+            type: 'line',
+            source: 'naturalearth-coastline',
+            'source-layer': 'ne_10m_coastline',
+            paint: {
+              'line-color': '#111',
+              'line-width': 1.2
+            }
           }
         ]
       }
 
       this.map = new mapboxgl.Map({
         container: this.$refs.mapContainer,
-        style: blankStyle,
-        // Centrer sur Paris (Italie 2 est à Paris)
+        style: style,
         center: [2.3522, 48.8566],
         zoom: 16
       })
@@ -120,40 +151,45 @@ export default {
       this.map.on('load', async () => {
         // add navigation controls
         this.map.addControl(new mapboxgl.NavigationControl({ showCompass: true }))
-
-        try {
-          // try several possible locations for map.json (dev / build differences)
-          const candidates = ['/map.json', 'map.json', './map.json', '/public/map.json']
-          let json = null
-          for (const url of candidates) {
-            try {
-              const r = await fetch(url)
-              if (!r.ok) continue
-              const j = await r.json()
-              if (j && Array.isArray(j.features)) { json = j; break }
-            } catch (e) {
-              // ignore and try next
-            }
+        // Essayez de charger map.json, mais n'empêchez pas l'affichage du fond si absent
+        const candidates = ['/map.json', 'map.json', './map.json', '/public/map.json']
+        let json = null
+        for (const url of candidates) {
+          try {
+            const r = await fetch(url)
+            if (!r.ok) continue
+            const j = await r.json()
+            if (j && Array.isArray(j.features)) { json = j; break }
+          } catch (e) {
+            // ignore and try next
           }
-          if (!json) throw new Error('map.json introuvable ou invalide (essayé: ' + candidates.join(',') + ')')
-          // Expecting GeoJSON FeatureCollection or similar structure
+        }
+        if (json) {
+          // Si map.json trouvé, on continue comme avant
           this.rawData = json
           this.featuresCount = Array.isArray(json.features) ? json.features.length : 0
           this.loadError = null
           this.prepareFloors()
-          // restore previously selected floor if present
           this.loadSelectedFloorFromStorage()
           this.addSourcesAndLayers()
-          // load overlays from storage and add them to the map
           this.loadOverlaysFromStorage()
-          // fit map to the features bounds so the centre commercial is visible
           this.fitToFeatures()
-        } catch (err) {
-          console.error('Erreur en chargeant map.json', err)
-          this.loadError = String(err && err.message ? err.message : err)
-          this.rawData = null
-          this.featuresCount = 0
+        } else {
+          // Si map.json absent, on centre sur la France et affiche le fond blanc + littoraux
+          this.loadError = 'Aucun plan chargé, fond blanc + littoraux seulement.'
+          try {
+            this.map.setCenter([2, 47]);
+            this.map.setZoom(5);
+          } catch (e) {
+            this.loadError += ' (Erreur centrage: ' + e + ')';
+          }
         }
+        // Vérification du chargement de la carte Mapbox
+        this.map.on('error', (e) => {
+          if (e && e.error && e.error.message && e.error.message.includes('access token')) {
+            this.loadError = 'Erreur Mapbox : problème de token ou de droits.';
+          }
+        });
       })
     },
     // called by floor button
@@ -206,67 +242,6 @@ export default {
       const arr = Array.from(floorSet).sort((a, b) => Number(a) - Number(b))
       this.floors = arr.length ? arr : ['0']
       this.selectedFloor = this.floors[0]
-    },
-    addSourcesAndLayers() {
-      // floor source: full GeoJSON
-      if (this.map.getSource('floor-data')) this.map.removeSource('floor-data')
-      this.map.addSource('floor-data', { type: 'geojson', data: this.rawData })
-      // All-features outline (background) - show geometry of all floors
-      if (this.map.getLayer('all-line')) this.map.removeLayer('all-line')
-      this.map.addLayer({
-        id: 'all-line',
-        type: 'line',
-        source: 'floor-data',
-        paint: { 'line-color': '#666', 'line-width': 1, 'line-opacity': 0.45 }
-      })
-
-      // floor fill layer (filtered by selected floor) - highlighted
-      if (this.map.getLayer('floor-fill')) this.map.removeLayer('floor-fill')
-      this.map.addLayer({
-        id: 'floor-fill',
-        type: 'fill',
-        source: 'floor-data',
-        paint: {
-          'fill-color': '#6baed6',
-          'fill-opacity': 0.45
-        },
-        filter: ['==', ['to-string', ['coalesce', ['get', 'floor'], ['get', 'level'], '0']], String(this.selectedFloor)]
-      })
-
-      // outline for selected floor
-      if (this.map.getLayer('floor-line')) this.map.removeLayer('floor-line')
-      this.map.addLayer({
-        id: 'floor-line',
-        type: 'line',
-        source: 'floor-data',
-        paint: { 'line-color': '#2171b5', 'line-width': 2 },
-        filter: ['==', ['to-string', ['coalesce', ['get', 'floor'], ['get', 'level'], '0']], String(this.selectedFloor)]
-      })
-
-      // parkings source (derived)
-      const parkingFeatures = (this.rawData.features || []).filter(f => {
-        const t = (f.properties && (f.properties.type || f.properties.TYPE || f.properties.kind)) || ''
-        const pname = String(t).toLowerCase()
-        return pname.includes('park') || pname.includes('parking') || (f.properties && f.properties.parking === true)
-      })
-
-      const parkGeo = { type: 'FeatureCollection', features: parkingFeatures }
-      if (this.map.getSource('parking-data')) this.map.removeSource('parking-data')
-      this.map.addSource('parking-data', { type: 'geojson', data: parkGeo })
-
-      if (this.map.getLayer('parking-layer')) this.map.removeLayer('parking-layer')
-      this.map.addLayer({
-        id: 'parking-layer',
-        type: 'circle',
-        source: 'parking-data',
-        paint: {
-          'circle-radius': 6,
-          'circle-color': '#fdae6b'
-        }
-      })
-
-      this.updateParking()
-      this.updateOverlaysForFloor()
     },
     // --- Overlay / floor plan manager ---
     addOverlayFromUrl() {
@@ -416,15 +391,61 @@ export default {
       if (!this.map) return
       const visibility = this.showParkings ? 'visible' : 'none'
       if (this.map.getLayer('parking-layer')) this.map.setLayoutProperty('parking-layer', 'visibility', visibility)
+    },
+    // Affiche la vue satellite sur une zone (ex: commune de Lyon)
+    // bbox = [minLng, minLat, maxLng, maxLat]
+    showSatelliteOnBBox(bbox) {
+      if (!this.map) return;
+      // Ajoute un masque polygonal blanc sur toute la carte sauf la bbox
+      if (this.map.getLayer('satellite-mask')) {
+        this.map.removeLayer('satellite-mask')
+        this.map.removeSource('satellite-mask')
+      }
+      // Polygone couvrant le monde entier, avec un trou sur la bbox
+      const world = [
+        [ [-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85] ]
+      ]
+      const [minLng, minLat, maxLng, maxLat] = bbox
+      const hole = [
+        [minLng, minLat], [maxLng, minLat], [maxLng, maxLat], [minLng, maxLat], [minLng, minLat]
+      ]
+      const maskGeoJSON = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Polygon',
+              coordinates: [world[0], hole]
+            }
+          }
+        ]
+      }
+      this.map.addSource('satellite-mask', {
+        type: 'geojson',
+        data: maskGeoJSON
+      })
+      this.map.addLayer({
+        id: 'satellite-mask',
+        type: 'fill',
+        source: 'satellite-mask',
+        paint: {
+          'fill-color': '#fff',
+          'fill-opacity': 1
+        },
+        layout: {}
+      }, 'coastline')
+      // Affiche la couche satellite
+      this.map.setLayoutProperty('satellite', 'visibility', 'visible')
     }
   }
 }
 </script>
 
 <style scoped>
-.map-page { display: flex; height: calc(100vh - 60px); }
+.map-page { display: flex; height: 100vh; }
 .controls { width: 220px; padding: 12px; background:#fff; box-shadow: 0 0 6px rgba(0,0,0,0.08); z-index:5; overflow-y: auto; }
-.map-container { flex:1 }
+.map-container { flex:1; height: 100vh; min-height: 400px; background: #e0e0e0; }
 .map-container > div { height: 100% }
 .back-btn { width: 100%; padding: 8px 12px; background: #2171b5; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; margin-bottom: 12px; }
 .back-btn:hover { background: #1b5fa3; }

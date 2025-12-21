@@ -15,7 +15,7 @@
         <MapeliaView @back="goHome" />
       </div>
       <div v-if="activeTab === 'xplore'" class="scene">
-        <PloufMap @back="goHome" />
+        <XploreMap @back="goHome" />
       </div>
       <div v-if="activeTab === '69'" class="scene">
         <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">♋ 69</div>
@@ -35,6 +35,7 @@
 
 <script>
 import MenuView from './components/MenuView.vue'
+import XploreMap from './components/XploreMap.vue'
 import MapView from './components/MapView.vue'
 import Italie2View from './components/Italie2View.vue'
 import VelovView from './components/VelovView.vue'
@@ -46,7 +47,7 @@ import PortfolioView from './components/PortfolioView.vue'
 import PloufMap from './components/PloufMap.vue'
 
 export default {
-  components: { MenuView, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap },
+  components: { MenuView, XploreMap, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap },
   data() {
     return {
       activeTab: 'home'
