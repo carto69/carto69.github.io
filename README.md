@@ -1,33 +1,37 @@
-# Cartes — Italie 2 (demo)
+# carto69 — Portfolio cartographique
 
-Projet Vite + Vue 3 minimal pour afficher des plans multi-étages et regrouper les parkings.
+Projet Vue 3 + Vite regroupant différentes cartes interactives (Leaflet/Mapbox) et dashboards.
 
-Pré-requis
-- Node.js (16+ recommandé)
+## Installation
 
-Installation
 ```bash
-cd /home/gesukri/Documents/cartesmonamicopilot
 npm install
 ```
 
-Variables d'environnement
-- Copiez `.env.example` en `.env` et ajoutez votre token Mapbox si vous voulez utiliser un style Mapbox.
-	- Exemple `.env`:
-		```
-		VITE_MAPBOX_TOKEN=pk.your_mapbox_token_here
-		```
-	- Si `VITE_MAPBOX_TOKEN` est présent, l'application utilise automatiquement le style Mapbox `mapbox://styles/mapbox/light-v11`. Sinon un style public MapLibre est utilisé en fallback.
+## Lancer en dev
 
-Lancer en dev
 ```bash
 npm run dev
 ```
 
-Notes
-- Un `map.json` de démonstration multi-étages a été ajouté à la racine du projet. Remplacez-le par votre `map.json` réel si nécessaire (placer à la racine ou dans `public/`).
-- L'interface démarre sur une "Page de garde" (onglet). Cliquez sur l'onglet `Italie 2` pour voir la carte.
+## Cartes disponibles
 
-Fichiers importants
-- `src/components/MapView.vue` — logique de chargement de `/map.json`, sélection d'étage, regroupement des parkings.
-- `map.json` — demo GeoJSON multi-étages.
+- **Cops Kill** — Carte des décès causés par la police française (1977-2024), points géolocalisés avec détails par victime, vues DOM-TOM
+- **Femmes de Quais** — Analyse spatiale et temporelle
+- **Plouf** — Carte satellite avec masques dynamiques (Paris, Lyon, trajets, buffers)
+- **Velib / Velov** — Visualisations de stations de vélos en libre-service
+- **Portfolio** — Galerie de cartes et projets avec vignettes et PDFs
+
+## Structure
+
+- `src/components/` — composants Vue des différentes cartes
+- `public/` — données CSV/GeoJSON/JSON, fichiers statiques
+- `api/` — endpoints serverless Vercel (GBFS, trajets, etc.)
+
+## Déploiement
+
+Le projet est configuré pour Vercel avec routes API serverless.
+
+```bash
+vercel --prod
+```
