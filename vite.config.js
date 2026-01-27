@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  base: '/carto69/',
+  base: '/',
   plugins: [vue()],
   external: ['mapbox-gl'],
   build: {
