@@ -663,6 +663,7 @@ export default {
   background: rgba(0, 0, 0, 0.9);
   padding: 12px 24px;
   border-radius: 8px;
+  border: 2px solid #22C55E;
   font-size: 20px;
   font-weight: 800;
   color: #22C55E;

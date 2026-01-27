@@ -120,7 +120,7 @@ export default {
 <style scoped>
 .velo13-container { position: relative; width: 100%; height: 100vh; background: #000; }
 .map-canvas { width: 100%; height: 100%; }
-.map-title { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); padding: 12px 24px; border-radius: 8px; font-size: 20px; font-weight: 800; color: #00D9FF; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 1; }
+.map-title { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); padding: 12px 24px; border-radius: 8px; border: 2px solid #00D9FF; font-size: 20px; font-weight: 800; color: #00D9FF; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 1; }
 .stats-sidebar { position: absolute; top: 50%; left: 20px; transform: translateY(-50%); background: rgba(0,0,0,0.9); border: 1px solid rgba(0, 217, 255, 0.4); padding: 10px 12px; border-radius: 8px; font-size: 11px; color: #fff; z-index: 10; max-width: 220px; box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
 .stats-sidebar h2 { margin: 0 0 12px 0; font-size: 13px; color: #00D9FF; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 .stat-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding: 3px 0; border-bottom: 1px solid rgba(0, 217, 255, 0.2); }
