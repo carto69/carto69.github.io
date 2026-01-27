@@ -1,28 +1,11 @@
 <template>
   <div class="portfolio-page">
-    <aside class="sidebar">
-      <button class="back" @click="$emit('back')">← Retour</button>
-      <h1>Autres projets</h1>
-
-      <hr />
-
-      <div class="categories">
-        <button 
-          v-for="category in categories" 
-          :key="category.id"
-          class="category-btn"
-          :class="{ active: activeCategory === category.id }"
-          @click="activeCategory = category.id"
-        >
-          {{ category.icon }} {{ category.name }}
-        </button>
-      </div>
-    </aside>
+    <button class="back-btn" @click="$emit('back')">← Retour</button>
 
     <div class="portfolio-container">
       <div class="maps-grid">
         <div 
-          v-for="map in filteredMaps" 
+          v-for="map in maps" 
           :key="map.id"
           class="map-card"
           @click="handleCardClick($event, map)"
@@ -51,13 +34,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Placeholder si aucune carte -->
-      <div v-if="filteredMaps.length === 0" class="empty-state">
-        <span style="font-size: 4rem;">📦</span>
-        <p>Aucune carte dans cette catégorie pour le moment</p>
-        <small>Les projets seront ajoutés progressivement</small>
-      </div>
     </div>
 
     <!-- Modal plein écran -->
@@ -80,11 +56,7 @@ export default {
   name: 'PortfolioView',
   data() {
     return {
-      activeCategory: 'cartes',
       fullscreenMap: null,
-      categories: [
-        { id: 'cartes', name: 'Cartes', icon: '🗺️' }
-      ],
       maps: []
     }
   },
@@ -111,11 +83,6 @@ export default {
       icon: '🗺️',
       image: file.path
     }))
-  },
-  computed: {
-    filteredMaps() {
-      return this.maps
-    }
   },
   methods: {
     handleCardClick(event, map) {
@@ -146,91 +113,43 @@ export default {
 
 <style scoped>
 .portfolio-page {
-  display: flex;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   background: #1a1a1a;
-  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
-.sidebar {
-  width: 300px;
-  height: 100vh;
-  background: #242424;
-  padding: 30px;
-  overflow-y: auto;
-  border-right: 1px solid #333;
-}
-
-.back {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.back-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
   padding: 10px 20px;
-  border-radius: 6px;
+  background: white;
+  border: 2px solid #0f172a;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 4px 12px rgba(15,23,42,0.15);
   transition: all 0.3s ease;
-  margin-bottom: 30px;
-  width: 100%;
 }
 
-.back:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateX(-5px);
-}
-
-h1 {
-  font-size: 1.8rem;
-  margin: 0 0 15px 0;
-  color: #fff;
-}
-
-.portfolio-info {
-  margin-bottom: 20px;
-  color: #aaa;
-  font-size: 0.95rem;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #333;
-  margin: 25px 0;
-}
-
-.categories {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.category-btn {
-  background: rgba(255, 255, 255, 0.05);
-  color: #ccc;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  text-align: left;
-}
-
-.category-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.category-btn.active {
-  background: #8B6F47;
-  color: white;
-  border-color: #8B6F47;
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15,23,42,0.25);
 }
 
 .portfolio-container {
-  flex: 1;
+  width: 100%;
   height: 100vh;
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.maps-grid {
   overflow-y: auto;
   padding: 40px;
 }

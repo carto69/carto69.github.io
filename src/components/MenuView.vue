@@ -1,68 +1,59 @@
 <template>
   <main class="menu home-bg">
-    <div class="credits-toggle top-right" @click="showCredits = !showCredits">Crédit</div>
+    <div class="credits-toggle top-right" @click="showCredits = !showCredits">crédit</div>
     <div v-if="showCredits" class="credits-panel next-to-toggle">
       <div class="credit-line">Elia Terragni</div>
       <div class="credit-line"><a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a><br>0652213579</div>
       <div class="credit-line">Source carte : Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
     </div>
-    <button class="photos-toggle bottom-left" @click="$emit('open', 'photos')">Photos</button>
+    <button class="portfolio-toggle bottom-left" @click="$emit('open', 'portfolio')">Autres<br>cartes</button>
+    <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Photos</button>
     <div class="hero">
       <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
       <div class="tiles double-row">
         <!-- Ligne 1 (5 tuiles) -->
         <div class="tiles-row">
           <article class="tile" @click="openMapelia">
-            <div class="tile-icon">🗺️</div>
             <h2><span class="tile-title">mapelia</span></h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'sontla')">
-            <div class="tile-icon">🚨</div>
             <h2>son la</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'xplore')">
-            <div class="tile-icon">☀️</div>
             <h2>xplore</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'zonzon')">
-            <div class="tile-icon">🌍</div>
             <h2>zonzon</h2>
             <button class="tile-btn">→</button>
           </article>
-          <article class="tile" @click="$emit('open', 'dashboard-r')">
-            <div class="tile-icon">📊</div>
-            <h2>Dashboard R<br>Enquête Strasbourg</h2>
+          <article class="tile" @click="$emit('open', 'copskill')">
+            <h2>cops kill</h2>
             <button class="tile-btn">→</button>
           </article>
         </div>
         <!-- Ligne 2 (5 tuiles) -->
         <div class="tiles-row">
+          <article class="tile" @click="$emit('open', 'dashboard-r')">
+            <h2>dashboard R<br> Strasbourg</h2>
+            <button class="tile-btn">→</button>
+          </article>
           <article class="tile" @click="$emit('open', 'velov')">
-            <div class="tile-icon">🚴</div>
             <h2>69 en velov</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'velo13')">
-            <div class="tile-icon">🚴‍♂️</div>
             <h2>13 en vélo</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'velib')">
-            <div class="tile-icon">🚲</div>
             <h2>75 en velib</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'femmes-quais')">
-            <div class="tile-icon">👥</div>
             <h2>genre et espace public</h2>
-            <button class="tile-btn">→</button>
-          </article>
-          <article class="tile" @click="$emit('open', 'portfolio')">
-            <div class="tile-icon">📁</div>
-            <h2>autres projets</h2>
             <button class="tile-btn">→</button>
           </article>
         </div>
@@ -110,7 +101,7 @@ export default {
   z-index: 101;
   white-space: nowrap;
   cursor: pointer;
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   transition: background 0.2s, color 0.2s;
 }
 .photos-toggle.top-left:hover {
@@ -118,10 +109,10 @@ export default {
   color: #b89c6c;
 }
 
-/* Bouton Photos en bas à gauche */
-.photos-toggle.bottom-left {
+/* Bouton Photos au-dessus du bouton Autres cartes */
+.photos-toggle.bottom-left-above {
   position: fixed;
-  bottom: 30px;
+  bottom: 100px;
   left: 30px;
   color: #2d7d4d;
   font-size: 0.9rem;
@@ -134,11 +125,38 @@ export default {
   z-index: 100;
   white-space: nowrap;
   cursor: pointer;
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   transition: all 0.2s ease;
 }
 
-.photos-toggle.bottom-left:hover {
+.photos-toggle.bottom-left-above:hover {
+  background: #f3e0c7;
+  border-color: #4a9f6d;
+  transform: scale(1.05);
+}
+
+/* Bouton Portfolio/Autres cartes en bas à gauche */
+.portfolio-toggle.bottom-left {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  color: #2d7d4d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  background: #e5bb8cff;
+  border: 2px solid #2d7d4d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 8px 16px;
+  border-radius: 8px;
+  z-index: 100;
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+  transition: all 0.2s ease;
+}
+
+.portfolio-toggle.bottom-left:hover {
   background: #f3e0c7;
   border-color: #4a9f6d;
   transform: scale(1.05);
@@ -184,7 +202,7 @@ export default {
     z-index: 100;
     white-space: nowrap;
     cursor: pointer;
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* Affichage du panneau à côté du bouton crédit */
@@ -226,7 +244,7 @@ export default {
   color: #7fa46a;
   text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
   margin: 260px 0 40px 0;
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   letter-spacing: 7px;
   font-style: normal;
   text-align: center;
@@ -269,12 +287,13 @@ export default {
 .hero .tile h2 {
   font-size: 1.1rem;
   margin: 0;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -1px;
   text-align: center;
   text-transform: none;
   color: rgb(244, 228, 160);
   line-height: 1.1;
+  font-family: "Courier New", Courier, monospace;
 }
 .tile-btn {
   color: #7fa46a;
@@ -344,7 +363,7 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   white-space: nowrap;
 }
 

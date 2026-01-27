@@ -23,6 +23,9 @@
       <div v-if="activeTab === 'zonzon'" class="scene">
         <ZonzonView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'copskill'" class="scene">
+        <CopsKillView @back="goHome" />
+      </div>
       <div v-if="activeTab === 'portfolio'" class="scene">
         <PortfolioView @back="goHome" />
       </div>
@@ -50,9 +53,10 @@ import PortfolioView from './components/PortfolioView.vue'
 import PloufMap from './components/PloufMap.vue'
 import DashboardRView from './components/DashboardRView.vue'
 import SontlaMap from './components/SontlaMap.vue'
+import CopsKillView from './components/CopsKillView.vue'
 
 export default {
-  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap },
+  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CopsKillView },
   data() {
     return {
       activeTab: 'home'
@@ -71,7 +75,7 @@ export default {
     openTab(tab) {
       if ([
         'velov', 'velib', 'velo13', 'mapelia', 'xplore', 'sontla',
-        'femmes-quais', 'zonzon', 'portfolio', 'dashboard-r'
+        'femmes-quais', 'zonzon', 'copskill', 'portfolio', 'dashboard-r'
       ].includes(tab)) {
         this.activeTab = tab
         this.updateHistory()
