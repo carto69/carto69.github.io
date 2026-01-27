@@ -54,7 +54,7 @@
         <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
           <option :value="-1">-- Sélectionner --</option>
           <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
-            {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
+            {{ formatDate(trip.date) }} | {{ trip.depName }} → {{ trip.arrName }}
           </option>
         </select>
       </div>
@@ -114,14 +114,14 @@
 </template>
 
 <script>
-const mapboxgl = window.mapboxgl
+import maplibregl from 'maplibre-gl'
 
 export default {
   name: 'VelovView',
   data() {
     return {
       trips: [],
-      stations: {},
+      stations: {}, // mapping idstation -> { id, name, lng, lat, commune }
       displayedTrips: [],
       selectedTripIndex: -1,
       showStations: true,
@@ -225,6 +225,17 @@ export default {
       // For Velov format, we don't use IDs - just pass through
       return null
     },
+    formatDate(dateValue) {
+      if (!dateValue) return 'N/A'
+      try {
+        // Accepte les formats ISO (2026-01-07T11:22:24) et les timestamps
+        const date = new Date(dateValue)
+        if (isNaN(date.getTime())) return 'N/A'
+        return date.toLocaleDateString('fr-FR')
+      } catch (e) {
+        return 'N/A'
+      }
+    },
     resolveStationByCoords(lng, lat) {
       if (lng == null || lat == null) return null
       const key = `${lng},${lat}`
@@ -232,18 +243,42 @@ export default {
     },
     async loadTrips() {
       try {
-        const response = await fetch('/velov-trips.json')
+        // 1. Charger les stations (mapping id -> infos)
+        const stationsResp = await fetch('/stations_velov.json')
+        const stationsData = await stationsResp.json()
+        const stationsMap = {}
+        for (const feature of stationsData.features) {
+          const s = feature.properties
+          stationsMap[s.idstation] = {
+            id: s.idstation,
+            name: s.nom,
+            lng: feature.geometry.coordinates[0],
+            lat: feature.geometry.coordinates[1],
+            commune: s.commune
+          }
+        }
+        this.stations = stationsMap
+
+        // 2. Charger les trajets bruts
+        const response = await fetch('/velov-elia.json')
         const data = await response.json()
-        // Velov format: array of trips with embedded station info
-        this.trips = Array.isArray(data) ? data : data.walletOperations || []
-        console.log(`📍 ${this.trips.length} trajets chargés`)
-        
-        // Extract and build stations from trip data
+        const rawTrips = Array.isArray(data) ? data : data.walletOperations || []
+        // 3. Enrichir chaque trajet avec infos station (si possible)
+        this.trips = rawTrips.map(trip => {
+          const start = this.stations[trip.startStation]
+          const end = this.stations[trip.endStation]
+          return {
+            ...trip,
+            startStation: start ? { ...start } : null,
+            endStation: end ? { ...end } : null
+          }
+        })
+        console.log(`📍 ${this.trips.length} trajets enrichis (velov-elia.json + stations)`)
         this.buildStationsFromTrips()
         this.initMap()
       } catch (error) {
-        console.error('Erreur chargement trajets:', error)
-        this.error = 'Impossible de charger les trajets'
+        console.error('Erreur chargement trajets ou stations:', error)
+        this.error = 'Impossible de charger les trajets ou stations'
         this.initMap()
       }
     },
@@ -281,17 +316,15 @@ export default {
       console.log(`✓ ${count} stations extraites des trajets`)
     },
     initMap() {
-      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-      
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: 'velov-map',
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
         center: [4.8357, 45.7640],
         zoom: 12
       })
 
-      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+      this.map.addControl(new maplibregl.NavigationControl(), 'top-right')
+      this.map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left')
 
       this.map.on('load', () => {
         this.displayTrips()
@@ -310,41 +343,22 @@ export default {
       let totalDistance = 0
       let totalDuration = 0
       let validTripsCount = 0
-      
-      // Velov format: calculate distance from coords
-      this.trips.forEach(trip => {
-        if (trip.startStation && trip.endStation && trip.duration) {
-          validTripsCount++
-          totalDuration += trip.duration * 60 // Convert minutes to seconds
-          
-          // Haversine distance
-          const dist = this.haversineDistance(
-            trip.startStation.lat,
-            trip.startStation.lng,
-            trip.endStation.lat,
-            trip.endStation.lng
-          )
-          totalDistance += dist * 1000 // Convert to meters
-        }
-      })
-      
-      const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
-      const avgDurationMin = Math.round(avgDurationSeconds / 60)
 
       const features = []
       this.displayedTrips = []
-      
+
       console.group('🗺️ VELOV MAP DEBUG')
       console.log(`Nombre total de trajets: ${this.trips.length}`)
       console.log(`Nombre total de stations: ${Object.keys(this.stations).length}`)
-      
+
       this.trips.forEach((trip, idx) => {
         const startStn = trip.startStation
         const endStn = trip.endStation
-        
         if (startStn && endStn && startStn.lng != null && startStn.lat != null && endStn.lng != null && endStn.lat != null) {
+          validTripsCount++
+          totalDuration += trip.duration * 60 // Convert minutes to seconds
           const dist = this.haversineDistance(startStn.lat, startStn.lng, endStn.lat, endStn.lng)
-          
+          totalDistance += dist * 1000 // Convert to meters
           const displayTrip = {
             idx: idx,
             depId: startStn.name,
@@ -355,12 +369,10 @@ export default {
             arrCoords: `${endStn.lng}, ${endStn.lat}`,
             distance: dist * 1000, // meters
             speed: trip.bikeType || 'classic',
-            date: trip.startTime,
+            date: trip.startDateTime || trip.startTime,
             co2: 0
           }
-          
           this.displayedTrips.push(displayTrip)
-          
           features.push({
             type: 'Feature',
             geometry: {
@@ -369,7 +381,7 @@ export default {
             },
             properties: {
               distance: dist * 1000,
-              date: trip.startTime,
+              date: trip.startDateTime || trip.startTime,
               bikeType: trip.bikeType,
               depName: startStn.name,
               arrName: endStn.name
@@ -377,7 +389,17 @@ export default {
           })
         }
       })
-      
+
+      // Trier les trajets par ordre chronologique (ascendant = du plus ancien au plus récent)
+      this.displayedTrips.sort((a, b) => {
+        const dateA = new Date(a.date).getTime()
+        const dateB = new Date(b.date).getTime()
+        return dateA - dateB
+      })
+
+      const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
+      const avgDurationMin = Math.round(avgDurationSeconds / 60)
+
       console.log(`\n✅ ${features.length} features créées`)
       if (features.length > 0) {
         console.log(`Premier segment GeoJSON:`, features[0])
@@ -385,7 +407,7 @@ export default {
       console.groupEnd()
 
       this.stats = {
-        countTrips: this.trips.length,
+        countTrips: validTripsCount,
         countFeatures: features.length,
         kmTotal: (totalDistance / 1000).toFixed(1),
         co2Total: '0',
@@ -492,7 +514,7 @@ export default {
           }
         })
         
-        const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+        const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false })
         
         this.map.on('mouseenter', 'stations-layer', (e) => {
           this.map.getCanvas().style.cursor = 'pointer'
@@ -650,8 +672,9 @@ export default {
 
 .stats-sidebar {
   position: absolute;
-  bottom: 20px;
+  top: 50%;
   left: 20px;
+  transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(34, 197, 94, 0.4);
   padding: 10px 12px;
@@ -855,7 +878,8 @@ export default {
     width: calc(100% - 40px);
     left: 20px;
     right: 20px;
-    bottom: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   .map-title {
@@ -870,5 +894,35 @@ export default {
     padding: 8px 16px;
     font-size: 12px;
   }
+}
+
+/* Customiser les contrôles MapLibre - couleur verte pour Velov */
+:deep(.maplibregl-ctrl-zoom-in),
+:deep(.maplibregl-ctrl-zoom-out),
+:deep(.maplibregl-ctrl-compass) {
+  background-color: #000 !important;
+  border: 1px solid #22C55E !important;
+  color: #22C55E !important;
+}
+
+:deep(.maplibregl-ctrl-zoom-in::before),
+:deep(.maplibregl-ctrl-zoom-out::before) {
+  background-color: #22C55E !important;
+}
+
+:deep(.maplibregl-ctrl-zoom-in:hover),
+:deep(.maplibregl-ctrl-zoom-out:hover),
+:deep(.maplibregl-ctrl-compass:hover) {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+}
+
+:deep(.maplibregl-ctrl-compass::before) {
+  background-color: #22C55E !important;
+}
+
+:deep(.maplibregl-ctrl-scale) {
+  background-color: #000 !important;
+  border: 1px solid #22C55E !important;
+  color: #22C55E !important;
 }
 </style>

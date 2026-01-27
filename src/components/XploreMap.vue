@@ -2,16 +2,15 @@
   <div class="xplore-map-container">
     <div class="map-title">xplore</div>
     <button class="back-btn" @click="$emit('back')">← Accueil</button>
-    <button class="reveal-btn" style="display: none;">Révéler Lyon satellite</button>
     <div ref="mapContainer" class="map-container"></div>
+      <canvas ref="satCanvas" class="sat-canvas" :width="svgWidth" :height="svgHeight" style="position:absolute;top:0;left:0;pointer-events:none;z-index:20"></canvas>
   </div>
 </template>
 
 
 <script>
 import * as turf from '@turf/turf';
-const mapboxgl = window.mapboxgl;
-if (!mapboxgl) throw new Error('MapboxGL non disponible (window.mapboxgl)');
+import maplibregl from 'maplibre-gl'
 
 // Fonction utilitaire pour créer un polygone cercle GeoJSON (centre [lon, lat], rayon en km)
 function createCircle(center, radiusKm, points = 64) {
@@ -66,6 +65,13 @@ function addLayerIfNotExists(map, def) {
 
 export default {
   name: 'XploreMap',
+  data() {
+    return {
+      svgWidth: 0,
+      svgHeight: 0,
+      circles: []
+    }
+  },
   mounted() {
     if (this.map) {
       this.map.remove();
@@ -73,8 +79,21 @@ export default {
     }
     // Génère un suffixe unique pour chaque montage
     const uniqueId = Date.now().toString();
-    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-    this.map = new mapboxgl.Map({
+    // Déclare tous les IDs en haut pour éviter tout problème de portée
+    const satelliteId = 'satellite-' + uniqueId;
+    const satelliteLayerId = 'satellite-couche-' + uniqueId;
+    const landId = 'land-' + uniqueId;
+    const landLayerId = 'land-' + uniqueId;
+    const oceanId = 'ocean-' + uniqueId;
+    const oceanLayerId = 'ocean-' + uniqueId;
+    const lakesId = 'lakes-' + uniqueId;
+    const lakesLayerId = 'lakes-' + uniqueId;
+    const coastlineId = 'coastline-' + uniqueId;
+    const bufferId = `satellite-buffer-marseille-${uniqueId}`;
+    const bufferLayerId = `satellite-buffer-layer-marseille-${uniqueId}`;
+    const rasterId = `satellite-raster-marseille-${uniqueId}`;
+
+    this.map = new maplibregl.Map({
       container: this.$refs.mapContainer,
       style: {
         version: 8,
@@ -87,125 +106,183 @@ export default {
           }
         ]
       },
-      center: [15, 40], // Méditerranée/Europe
-      zoom: 3.5,
+      center: [5.3698, 43.2965], // Marseille
+      zoom: 8,
       attributionControl: false
     });
     // Ajout de l'échelle cartographique
-    this.map.addControl(new mapboxgl.ScaleControl({ maxWidth: 200, unit: 'metric' }), 'bottom-left');
+    this.map.addControl(new maplibregl.ScaleControl({ maxWidth: 200, unit: 'metric' }), 'bottom-left');
 
-    this.map.on('load', () => {
-            // Nettoyage des anciennes couches si elles existent
-            ['satellite-corridor-mask-fill','satellite-corridor','land-'+uniqueId,'ocean-'+uniqueId].forEach(id => {
-              if (this.map.getLayer(id)) this.map.removeLayer(id);
-            });
-            ['satellite-corridor-mask','satellite-corridor','land-'+uniqueId,'ocean-'+uniqueId].forEach(id => {
-              if (this.map.getSource(id)) this.map.removeSource(id);
-            });
-      // Vérification de la disponibilité de turf
-      const turf = window.turf;
-      if (!turf) {
-        alert('Turf.js non disponible (window.turf)');
-        return;
-      }
-      // --- Déclaration de toutes les variables en tout début ---
-      // IDs dynamiques pour les sources/layers
-      const satelliteId = 'satellite-' + uniqueId;
-      const satelliteLayerId = 'satellite-couche-' + uniqueId;
-      const landId = 'land-' + uniqueId;
-      const landLayerId = 'land-' + uniqueId;
-      const oceanId = 'ocean-' + uniqueId;
-      const oceanLayerId = 'ocean-' + uniqueId;
-      const lakesId = 'lakes-' + uniqueId;
-      const lakesLayerId = 'lakes-' + uniqueId;
-      const coastlineId = 'coastline-' + uniqueId;
-      // Ajoute la couche océan (bleu) tout en bas
-      addSourceIfNotExists(this.map, oceanId, {
-        type: 'geojson',
-        data: '/ne_ocean.geojson'
-      });
-      addLayerIfNotExists(this.map, {
-        id: oceanLayerId,
-        type: 'fill',
-        source: oceanId,
-        paint: {
-          'fill-color': '#2196f3',
-          'fill-opacity': 1
+      this.map.on('load', async () => {
+        // Vérification de la disponibilité de turf
+        const turf = window.turf;
+        if (!turf) {
+          alert('Turf.js non disponible (window.turf)');
+          return;
         }
-      });
-
-      // --- Ajout des sources et layers dans le bon ordre ---
-      // 1. Satellite uniquement dans les buffers (ronds) des villes, au premier plan
-      // (plus de masque troué global ni de buffer automatique)
-        // (Pas de couche satellite, ni masque, ni debug)
-
-      // (aucun code satellite, base propre)
-
-      // 2. Océan (bleu) tout en bas
-      addSourceIfNotExists(this.map, oceanId, {
-        type: 'geojson',
-        data: '/ne_ocean.geojson'
-      });
-      addLayerIfNotExists(this.map, {
-        id: oceanLayerId,
-        type: 'fill',
-        source: oceanId,
-        paint: {
-          'fill-color': '#2196f3',
-          'fill-opacity': 1
-        }
-      });
-
-      // 3. Terre (blanc) au-dessus de l'océan
-      // Affiche le trait de côte en blanc
-      // Affiche la terre en blanc (remplissage)
-      // Charge le trait de côte et génère dynamiquement un polygone terre
-      fetch('/ne_coastline.geojson')
-        .then(r => r.json())
-        .then(coastData => {
-          // Fusionne tous les LineString en un seul anneau fermé
-          const merged = turf.lineToPolygon(coastData);
-          // Ajoute la source polygone terre
-           if (!this.map.getSource(landId)) {
-             this.map.addSource(landId, {
-               type: 'geojson',
-               data: merged
-             });
-           } else {
-             this.map.getSource(landId).setData(merged);
-           }
-           if (!this.map.getLayer(landLayerId)) {
-             this.map.addLayer({
-               id: landLayerId,
-               type: 'fill',
-               source: landId,
-               paint: {
-                 'fill-color': '#fff',
-                 'fill-opacity': 1
-               },
-               beforeId: oceanLayerId // Ajoute la terre juste au-dessus de l’océan
-             });
-           }
-           // Centre la carte sur Marseille
-           this.map.setCenter([5.3698, 43.2965]);
-           this.map.setZoom(8);
+        // --- Ajout d'un buffer satellite Marseille ---
+        // Centre du buffer sur Marseille directement
+        const marseilleCenter = [5.3698, 43.2965];
+        const radius = 25; // km - rayon pour couvrir la ville
+        const circle = turf.circle(marseilleCenter, radius, { steps: 128, units: 'kilometers' });
+        // Source GeoJSON du buffer
+        addSourceIfNotExists(this.map, bufferId, {
+          type: 'geojson',
+          data: circle
         });
-    });
-  },
-  beforeDestroy() {
-    if (this.map) {
-      this.map.remove();
-      this.map = null;
-    }
+        // Ajoute la couche océan (bleu) tout en bas
+        addSourceIfNotExists(this.map, oceanId, {
+          type: 'geojson',
+          data: '/ne_ocean.geojson'
+        });
+        addLayerIfNotExists(this.map, {
+          id: oceanLayerId,
+          type: 'fill',
+          source: oceanId,
+          paint: {
+            'fill-color': '#2196f3',
+            'fill-opacity': 1
+          }
+        });
+
+        // Charge le trait de côte et génère dynamiquement un polygone terre AVEC trou au buffer
+        const coastResp = await fetch('/ne_coastline.geojson');
+        const coastData = await coastResp.json();
+        let merged = turf.lineToPolygon(coastData);
+        
+        // Crée la terre avec un trou au centre du buffer
+        let landWithHole = merged;
+        if (merged.geometry.type === 'Polygon') {
+          // Polygon GeoJSON with hole: coordinates = [exterior ring, hole ring 1, hole ring 2...]
+          const holeRing = circle.geometry.coordinates[0];
+          const exterior = merged.geometry.coordinates[0];
+          const otherHoles = merged.geometry.coordinates.slice(1);
+          landWithHole.geometry.coordinates = [exterior, holeRing, ...otherHoles];
+        } else if (merged.geometry.type === 'MultiPolygon') {
+          // Pour MultiPolygon, ajoute le trou au premier polygon
+          const holeRing = circle.geometry.coordinates[0];
+          const firstPolyExterior = merged.geometry.coordinates[0][0];
+          const firstPolyHoles = merged.geometry.coordinates[0].slice(1);
+          merged.geometry.coordinates[0] = [firstPolyExterior, holeRing, ...firstPolyHoles];
+        }
+        
+        // Ajoute la source polygone terre avec trou
+        if (!this.map.getSource(landId)) {
+          this.map.addSource(landId, {
+            type: 'geojson',
+            data: landWithHole
+          });
+        } else {
+          this.map.getSource(landId).setData(landWithHole);
+        }
+        
+        // Ajoute la source du raster satellite
+        addSourceIfNotExists(this.map, rasterId, {
+          type: 'raster',
+          tiles: [
+            'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+          ],
+          tileSize: 256
+        });
+
+        // Ajoute la couche raster satellite 
+        if (!this.map.getLayer(rasterId)) {
+          this.map.addLayer({
+            id: rasterId,
+            type: 'raster',
+            source: rasterId,
+            paint: {
+              'raster-opacity': 0.85
+            }
+          });
+        }
+        // Ajoute la couche "land" (terre) blanche avec trou
+        if (!this.map.getLayer(landLayerId)) {
+          this.map.addLayer({
+            id: landLayerId,
+            type: 'fill',
+            source: landId,
+            paint: {
+              'fill-color': '#fff',
+              'fill-opacity': 1
+            }
+          }, rasterId); // ajoute APRÈS le raster (donc au-dessus)
+        }
+      });
   }
 
 }
 </script>
 
 <style scoped>
+.sat-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+.sat-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
 
 .xplore-map-container {
   background: #2196f3;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.map-title {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  background: #fff;
+  padding: 0.3em 1.2em;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 10;
+  letter-spacing: 0.1em;
+}
+
+.back-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-size: 1.1rem;
+  background: #fff;
+  color: #2196f3;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 11;
+  transition: background 0.2s, color 0.2s;
+}
+.back-btn:hover {
+  background: #2196f3;
+  color: #fff;
+}
+
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
 </style>

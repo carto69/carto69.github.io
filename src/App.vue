@@ -2,23 +2,20 @@
   <div id="app">
     <main>
       <MenuView v-if="activeTab === 'home'" @open="openTab" />
-      <div v-if="activeTab === 'italie2'" class="scene">
-        <Italie2View @back="goHome" />
-      </div>
       <div v-if="activeTab === 'velov'" class="scene">
         <VelovView @back="goHome" />
       </div>
       <div v-if="activeTab === 'velib'" class="scene">
         <VelibView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'velo13'" class="scene">
+        <Velo13View @back="goHome" />
+      </div>
       <div v-if="activeTab === 'mapelia'" class="scene">
         <MapeliaView @back="goHome" />
       </div>
       <div v-if="activeTab === 'xplore'" class="scene">
         <XploreMap @back="goHome" />
-      </div>
-      <div v-if="activeTab === '69'" class="scene">
-        <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:3rem;">♋ 69</div>
       </div>
       <div v-if="activeTab === 'femmes-quais'" class="scene">
         <FemmesQuaisView @back="goHome" />
@@ -29,6 +26,12 @@
       <div v-if="activeTab === 'portfolio'" class="scene">
         <PortfolioView @back="goHome" />
       </div>
+      <div v-if="activeTab === 'dashboard-r'" class="scene">
+        <DashboardRView @back="goHome" />
+      </div>
+      <div v-if="activeTab === 'sontla'" class="scene">
+        <SontlaMap @back="goHome" />
+      </div>
     </main>
   </div>
 </template>
@@ -37,17 +40,19 @@
 import MenuView from './components/MenuView.vue'
 import XploreMap from './components/XploreMap.vue'
 import MapView from './components/MapView.vue'
-import Italie2View from './components/Italie2View.vue'
 import VelovView from './components/VelovView.vue'
 import VelibView from './components/VelibView.vue'
+import Velo13View from './components/Velo13View.vue'
 import MapeliaView from './components/MapeliaView.vue'
 import FemmesQuaisView from './components/FemmesQuaisView.vue'
 import ZonzonView from './components/ZonzonView.vue'
 import PortfolioView from './components/PortfolioView.vue'
 import PloufMap from './components/PloufMap.vue'
+import DashboardRView from './components/DashboardRView.vue'
+import SontlaMap from './components/SontlaMap.vue'
 
 export default {
-  components: { MenuView, XploreMap, MapView, Italie2View, VelovView, VelibView, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap },
+  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap },
   data() {
     return {
       activeTab: 'home'
@@ -65,8 +70,8 @@ export default {
   methods: {
     openTab(tab) {
       if ([
-        'italie2', 'velov', 'velib', 'mapelia', 'xplore', '69',
-        'femmes-quais', 'zonzon', 'portfolio'
+        'velov', 'velib', 'velo13', 'mapelia', 'xplore', 'sontla',
+        'femmes-quais', 'zonzon', 'portfolio', 'dashboard-r'
       ].includes(tab)) {
         this.activeTab = tab
         this.updateHistory()

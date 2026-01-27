@@ -25,7 +25,7 @@
           v-for="map in filteredMaps" 
           :key="map.id"
           class="map-card"
-          @click="openFullscreen(map)"
+          @click="handleCardClick($event, map)"
         >
           <div class="map-thumbnail">
             <template v-if="map.image && !map.image.endsWith('.pdf')">
@@ -89,26 +89,27 @@ export default {
     }
   },
   created() {
-    // Liste tous les fichiers PDF du dossier /portfolio
+    // Liste tous les fichiers PDF
     const files = [
-      "Accéssibilité au campus PDA en TC.pdf",
-      "Densité de population Ain.pdf",
-      "LGV France.pdf",
-      "La pratique des sports de combats en France.pdf",
-      "Population des chefs lieux de l'AIn.pdf",
-      "Pratique des sports collectifs et individuels en France.pdf",
-      "schéma place Mazagran.pdf",
-      "Évolution Population Ain.pdf",
-      "Évolution occ du sol Privas.pdf"
+      { name: "Poster police tue.pdf", path: "/Poster police tue.pdf" },
+      { name: "Accéssibilité au campus PDA en TC.pdf", path: "/portfolio/Accéssibilité au campus PDA en TC.pdf" },
+      { name: "Densité de population Ain.pdf", path: "/portfolio/Densité de population Ain.pdf" },
+      { name: "LGV France.pdf", path: "/portfolio/LGV France.pdf" },
+      { name: "La pratique des sports de combats en France.pdf", path: "/portfolio/La pratique des sports de combats en France.pdf" },
+      { name: "Population des chefs lieux de l'AIn.pdf", path: "/portfolio/Population des chefs lieux de l'AIn.pdf" },
+      { name: "Pratique des sports collectifs et individuels en France.pdf", path: "/portfolio/Pratique des sports collectifs et individuels en France.pdf" },
+      { name: "schéma place Mazagran.pdf", path: "/portfolio/schéma place Mazagran.pdf" },
+      { name: "Évolution Population Ain.pdf", path: "/portfolio/Évolution Population Ain.pdf" },
+      { name: "Évolution occ du sol Privas.pdf", path: "/portfolio/Évolution occ du sol Privas.pdf" }
     ];
     this.maps = files.map((file, idx) => ({
       id: idx + 1,
-      title: file.replace(/\.[^/.]+$/, ''),
+      title: file.name.replace(/\.[^/.]+$/, ''),
       description: '',
       year: '',
       category: 'cartes',
       icon: '🗺️',
-      image: `/portfolio/${file}`
+      image: file.path
     }))
   },
   computed: {
@@ -117,10 +118,21 @@ export default {
     }
   },
   methods: {
-    openFullscreen(map) {
+    handleCardClick(event, map) {
+      event.stopPropagation()
+      event.preventDefault()
+      
       if (!map.image) return
+      
       if (map.image.endsWith('.pdf')) {
-        window.open(map.image, '_blank')
+        // Créer un lien temporaire et le cliquer
+        const link = document.createElement('a')
+        link.href = map.image
+        link.target = '_blank'
+        link.rel = 'noopener noreferrer'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
       } else {
         this.fullscreenMap = map
       }

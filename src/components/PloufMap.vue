@@ -6,16 +6,15 @@
 </template>
 
 <script>
+import maplibregl from 'maplibre-gl'
+
 export default {
   name: 'PloufMap',
   mounted() {
-    let mapboxgl;
     if (typeof window !== 'undefined') {
-      mapboxgl = require('mapbox-gl');
-      mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpYTY5IiwiYSI6ImNtaWZ1dWxpeDAwNnQzZnF1djVydGZpaWYifQ.gtuX2XSr0O5HV9kDQU1dzA';
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: this.$refs.mapContainer,
-        style: 'mapbox://styles/mapbox/satellite-v9',
+        style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
         center: [2.2137, 46.6034],
         zoom: 4.5
       });

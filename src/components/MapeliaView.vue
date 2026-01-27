@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const mapboxgl = window.mapboxgl
+import maplibregl from 'maplibre-gl'
 
 export default {
   name: 'MapeliaView',
@@ -17,18 +17,16 @@ export default {
   },
   methods: {
     initMap() {
-      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-      
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: 'mapelia-map',
-        style: 'mapbox://styles/mapbox/outdoors-v12',
+        style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
         // Centré sur France + Italie
         center: [7, 45],
         zoom: 4.5
       })
 
-      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+      this.map.addControl(new maplibregl.NavigationControl(), 'top-right')
+      this.map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left')
     }
   },
   beforeUnmount() {

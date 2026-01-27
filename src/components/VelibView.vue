@@ -50,7 +50,7 @@
           <select v-model="selectedTripIndex" @change="onTripSelected" class="trip-select">
             <option :value="-1">-- Sélectionner --</option>
             <option v-for="(trip, idx) in displayedTrips" :key="idx" :value="idx">
-              {{ trip.idx + 1 }}. {{ trip.depName }} → {{ trip.arrName }} ({{ trip.distance }}m)
+              {{ new Date(trip.date).toLocaleDateString('fr-FR') }} | {{ trip.depName }} → {{ trip.arrName }}
             </option>
           </select>
         </div>
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-const mapboxgl = window.mapboxgl
+import maplibregl from 'maplibre-gl'
 
 export default {
   name: 'VelibView',
@@ -137,6 +137,7 @@ export default {
     }
   },
   mounted() {
+    console.log('🚲 VelibView mounted - début chargement des trajets')
     this.loadTrips()
   },
   methods: {
@@ -203,10 +204,10 @@ export default {
                 'heatmap-color': [
                   'interpolate', ['linear'], ['heatmap-density'],
                   0, 'rgba(0,0,0,0)',
-                  0.2, '#00D9FF',
-                  0.4, '#0EA5E9',
-                  0.6, '#0369A1',
-                  1, '#F59E42'
+                  0.2, '#FCA5A5',
+                  0.4, '#EF4444',
+                  0.6, '#B91C1C',
+                  1, '#7F1D1D'
                 ],
                 'heatmap-radius': 32,
                 'heatmap-opacity': 0.8
@@ -243,11 +244,33 @@ export default {
       return null
     },
     async loadTrips() {
+      console.log('🔄 loadTrips() appelée')
       try {
-        const response = await fetch('/velib-trips.json')
-        const data = await response.json()
-        this.trips = data.walletOperations || []
-        console.log(`📍 ${this.trips.length} trajets chargés`)
+        let data = null
+        console.log('📡 Tentative de chargement /velib-tous-trajets.json...')
+        let response = await fetch('/velib-tous-trajets.json', { cache: 'no-store' })
+        console.log('📡 Réponse /velib-tous-trajets.json:', response.status, response.ok)
+        if (!response.ok) {
+          console.warn('⚠️ /velib-tous-trajets.json introuvable, tentative avec /velib-trips.json')
+          response = await fetch('/velib-trips.json', { cache: 'no-store' })
+          console.log('📡 Réponse /velib-trips.json:', response.status, response.ok)
+        }
+        if (!response.ok) {
+          console.warn('⚠️ /velib-trips.json introuvable, tentative avec /velibs-trips2.json')
+          response = await fetch('/velibs-trips2.json', { cache: 'no-store' })
+          console.log('📡 Réponse /velibs-trips2.json:', response.status, response.ok)
+        }
+        data = await response.json()
+        console.log('📦 Données JSON reçues:', data)
+        // Le nouveau fichier /velib-tous-trajets.json est un tableau brut
+        if (Array.isArray(data)) {
+          this.trips = data
+        } else if (Array.isArray(data.walletOperations)) {
+          this.trips = data.walletOperations
+        } else {
+          this.trips = []
+        }
+        console.log(`📍 ${this.trips.length} trajets chargés (source: ${response.url.split('/').pop()})`)
         
         // Extraire les IDs de stations uniques depuis les trajets
         const stationIds = new Set()
@@ -262,7 +285,7 @@ export default {
         await this.loadStations()
         this.initMap()
       } catch (error) {
-        console.error('Erreur chargement trajets:', error)
+        console.error('❌ Erreur chargement trajets:', error)
         this.error = 'Impossible de charger les trajets'
         this.initMap()
       }
@@ -359,17 +382,15 @@ export default {
       }
     },
     initMap() {
-      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-      
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: 'velib-map',
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
         center: [2.3522, 48.8566],
         zoom: 12
       })
 
-      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+      this.map.addControl(new maplibregl.NavigationControl(), 'top-right')
+      this.map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left')
 
       this.map.on('load', () => {
         this.displayTrips()
@@ -494,6 +515,13 @@ export default {
         }
       })
       
+      // Trier les trajets par ordre chronologique (ascendant = du plus ancien au plus récent)
+      this.displayedTrips.sort((a, b) => {
+        const dateA = new Date(a.date).getTime()
+        const dateB = new Date(b.date).getTime()
+        return dateA - dateB
+      })
+      
       console.log(`\n✅ ${features.length} features créées`)
       if (features.length > 0) {
         console.log(`Premier segment GeoJSON:`, features[0])
@@ -522,7 +550,7 @@ export default {
           type: 'line',
           source: 'trips',
           paint: {
-            'line-color': '#00D9FF',
+            'line-color': '#EF4444',
             'line-width': 3,
             'line-opacity': 0.8
           },
@@ -604,7 +632,7 @@ export default {
           source: 'stations',
           paint: {
             'circle-radius': 5,
-            'circle-color': '#00D9FF',
+            'circle-color': '#EF4444',
             'circle-opacity': 0.8,
             'circle-stroke-width': 2,
             'circle-stroke-color': '#fff'
@@ -612,13 +640,13 @@ export default {
         })
         
         // Ajouter les popups au survol
-        const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+        const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false })
         
         this.map.on('mouseenter', 'stations-layer', (e) => {
           this.map.getCanvas().style.cursor = 'pointer'
           const props = e.features[0].properties
           popup.setLngLat(e.lngLat)
-            .setHTML(`<div style="color: #00D9FF; font-size: 12px; font-weight: 600;">${props.name}</div>`)
+            .setHTML(`<div style="color: #EF4444; font-size: 12px; font-weight: 600;">${props.name}</div>`)
             .addTo(this.map)
         })
         
@@ -771,17 +799,18 @@ export default {
   border-radius: 8px;
   font-size: 20px;
   font-weight: 800;
-  color: #00D9FF;
+  color: #EF4444;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   z-index: 1;
 }
 
 .stats-sidebar {
   position: absolute;
-  bottom: 20px;
+  top: 50%;
   left: 20px;
+  transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  border: 1px solid rgba(239, 68, 68, 0.4);
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 11px;
@@ -794,7 +823,7 @@ export default {
 .stats-sidebar h2 {
   margin: 0 0 12px 0;
   font-size: 13px;
-  color: #00D9FF;
+  color: #EF4444;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -806,7 +835,7 @@ export default {
   align-items: center;
   margin-bottom: 5px;
   padding: 3px 0;
-  border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 .stat-item:last-child {
@@ -821,14 +850,14 @@ export default {
 
 .stat-value {
   font-weight: 700;
-  color: #00D9FF;
+  color: #EF4444;
   text-align: right;
   min-width: 62px;
 }
 
 .sidebar-divider {
   border: none;
-  border-top: 1px solid rgba(0, 217, 255, 0.3);
+  border-top: 1px solid rgba(239, 68, 68, 0.3);
   margin: 12px 0;
 }
 
@@ -840,7 +869,7 @@ export default {
 .map-controls label {
   display: flex;
   align-items: center;
-  color: #00D9FF;
+  color: #EF4444;
   cursor: pointer;
   font-weight: 600;
   gap: 6px;
@@ -850,7 +879,7 @@ export default {
   width: 14px;
   height: 14px;
   cursor: pointer;
-  accent-color: #00D9FF;
+  accent-color: #EF4444;
 }
 
 .trajet-selector {
@@ -861,7 +890,7 @@ export default {
   display: block;
   font-size: 10px;
   font-weight: 600;
-  color: #00D9FF;
+  color: #EF4444;
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -870,8 +899,8 @@ export default {
 .trip-select {
   width: 100%;
   padding: 5px;
-  background: rgba(0, 217, 255, 0.1);
-  border: 1px solid rgba(0, 217, 255, 0.5);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
   border-radius: 4px;
   color: #fff;
   font-size: 10px;
@@ -880,14 +909,14 @@ export default {
 }
 
 .trip-select:hover {
-  border-color: #00D9FF;
-  background: rgba(0, 217, 255, 0.15);
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
 }
 
 .trip-select:focus {
   outline: none;
-  border-color: #00D9FF;
-  background: rgba(0, 217, 255, 0.2);
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.2);
 }
 
 .trip-select option {
@@ -898,7 +927,7 @@ export default {
 .trip-details {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid rgba(0, 217, 255, 0.3);
+  border-top: 1px solid rgba(239, 68, 68, 0.3);
   max-height: 280px;
   overflow-y: auto;
 }
@@ -911,7 +940,7 @@ export default {
   margin: 8px 0 6px 0;
   font-size: 11px;
   font-weight: 700;
-  color: #00D9FF;
+  color: #EF4444;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -922,7 +951,7 @@ export default {
   align-items: flex-start;
   font-size: 9.5px;
   padding: 2px 0;
-  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.1);
 }
 
 .detail-row:last-child {
@@ -937,7 +966,7 @@ export default {
 
 .detail-row .value {
   font-weight: 600;
-  color: #00D9FF;
+  color: #EF4444;
   text-align: right;
   flex: 1;
 }
@@ -959,8 +988,8 @@ export default {
   top: 16px;
   left: 16px;
   background: #000;
-  color: #00D9FF;
-  border: 1px solid #00D9FF;
+  color: #EF4444;
+  border: 1px solid #EF4444;
   padding: 8px 16px;
   border-radius: 6px;
   font-size: 13px;
@@ -983,7 +1012,8 @@ export default {
     width: calc(100% - 40px);
     left: 20px;
     right: 20px;
-    bottom: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   .map-title {
@@ -998,5 +1028,35 @@ export default {
     padding: 8px 16px;
     font-size: 12px;
   }
+}
+
+/* Customiser les contrôles MapLibre - couleur rouge pour Vélib */
+:deep(.maplibregl-ctrl-zoom-in),
+:deep(.maplibregl-ctrl-zoom-out),
+:deep(.maplibregl-ctrl-compass) {
+  background-color: #000 !important;
+  border: 1px solid #EF4444 !important;
+  color: #EF4444 !important;
+}
+
+:deep(.maplibregl-ctrl-zoom-in::before),
+:deep(.maplibregl-ctrl-zoom-out::before) {
+  background-color: #EF4444 !important;
+}
+
+:deep(.maplibregl-ctrl-zoom-in:hover),
+:deep(.maplibregl-ctrl-zoom-out:hover),
+:deep(.maplibregl-ctrl-compass:hover) {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+:deep(.maplibregl-ctrl-compass::before) {
+  background-color: #EF4444 !important;
+}
+
+:deep(.maplibregl-ctrl-scale) {
+  background-color: #000 !important;
+  border: 1px solid #EF4444 !important;
+  color: #EF4444 !important;
 }
 </style>

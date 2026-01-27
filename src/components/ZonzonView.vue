@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const mapboxgl = window.mapboxgl
+import maplibregl from 'maplibre-gl'
 
 export default {
   name: 'ZonzonView',
@@ -17,18 +17,16 @@ export default {
   },
   methods: {
     initMap() {
-      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-      
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: 'zonzon-map',
-        style: 'mapbox://styles/mapbox/satellite-streets-v12',
+        style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
         projection: 'equalEarth', // Projection qui respecte les vraies tailles
         center: [0, 20],
         zoom: 1.5
       })
 
-      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-      this.map.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-left')
+      this.map.addControl(new maplibregl.NavigationControl(), 'top-right')
+      this.map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left')
     }
   },
   beforeUnmount() {

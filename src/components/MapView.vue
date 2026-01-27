@@ -59,7 +59,7 @@
 </template>
 
 <script>
-const mapboxgl = window.mapboxgl
+import maplibregl from 'maplibre-gl'
 
 export default {
   name: 'MapView',
@@ -86,10 +86,6 @@ export default {
       console.warn('No Mapbox token set. See .env.example')
     }
     this.token = t
-    // Disable Mapbox telemetry/events which some adblockers flag and block.
-    // This avoids console errors like `ERR_BLOCKED_BY_CLIENT` for events.mapbox.com.
-    try { if (typeof mapboxgl.setTelemetryEnabled === 'function') mapboxgl.setTelemetryEnabled(false) } catch(e) {}
-    mapboxgl.accessToken = this.token
 
     this.initMap()
   },
@@ -141,7 +137,7 @@ export default {
         ]
       }
 
-      this.map = new mapboxgl.Map({
+      this.map = new maplibregl.Map({
         container: this.$refs.mapContainer,
         style: style,
         center: [2.3522, 48.8566],
@@ -150,7 +146,7 @@ export default {
 
       this.map.on('load', async () => {
         // add navigation controls
-        this.map.addControl(new mapboxgl.NavigationControl({ showCompass: true }))
+        this.map.addControl(new maplibregl.NavigationControl({ showCompass: true }))
         // Essayez de charger map.json, mais n'empêchez pas l'affichage du fond si absent
         const candidates = ['/map.json', 'map.json', './map.json', '/public/map.json']
         let json = null
@@ -356,12 +352,12 @@ export default {
     saveOverlaysToStorage() {
       try {
         const data = JSON.stringify(this.overlays)
-        localStorage.setItem('italie2_overlays', data)
+        localStorage.setItem('map_overlays', data)
       } catch (e) { console.warn('save overlays failed', e) }
     },
     loadOverlaysFromStorage() {
       try {
-        const raw = localStorage.getItem('italie2_overlays')
+        const raw = localStorage.getItem('map_overlays')
         if (!raw) return
         const arr = JSON.parse(raw)
         if (!Array.isArray(arr)) return
@@ -372,11 +368,11 @@ export default {
       } catch (e) { console.warn('load overlays failed', e) }
     },
     saveSelectedFloorToStorage() {
-      try { localStorage.setItem('italie2_selectedFloor', String(this.selectedFloor)) } catch(e){}
+      try { localStorage.setItem('map_selectedFloor', String(this.selectedFloor)) } catch(e){}
     },
     loadSelectedFloorFromStorage() {
       try {
-        const v = localStorage.getItem('italie2_selectedFloor')
+        const v = localStorage.getItem('map_selectedFloor')
         if (v !== null) this.selectedFloor = v
       } catch(e){}
     },
