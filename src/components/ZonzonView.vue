@@ -60,6 +60,7 @@ export default {
       geoData: null,
       centroidData: null,
       capitalCoords: {},
+      capitals: {},
       popup: null,
       selectedIndicator: 'population_prison',
       indicators: [
