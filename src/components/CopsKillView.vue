@@ -16,10 +16,8 @@
         <button class="back-btn" @click="$emit('back')">← Retour</button>
       </div>
       
-      <!-- Carte principale -->
       <div id="map" class="main-map"></div>
       
-      <!-- Popup au clic -->
       <div class="popup-info" v-if="selectedPerson">
         <div class="popup-header">
           <h3>{{ selectedPerson.prenom }} {{ selectedPerson.nom }}</h3>
@@ -157,17 +155,13 @@ export default {
         maxZoom: 19
       }).addTo(this.map)
 
-      // Charger la géométrie France
       this.loadFranceGeometry()
       
-      // Ajouter les marqueurs
       this.addMarkers()
       
-      // Ajouter légende et contrôles
       this.addLegend()
       this.addScale()
       
-      // Initialiser les cartes DOM-TOM
       this.initDOMTOMMaps()
     },
     initDOMTOMMaps() {

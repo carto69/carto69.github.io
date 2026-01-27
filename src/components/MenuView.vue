@@ -85,6 +85,15 @@ export default {
 </script>
 
 <style scoped>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
 /* Bouton Photos en haut à gauche, couleur rose Canada */
 .photos-toggle.top-left {
   position: fixed;
@@ -164,29 +173,43 @@ export default {
 
 
       .home-bg {
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
         min-height: 100vh;
         min-width: 100vw;
         width: 100vw;
         height: 100vh;
-        background: #e6f0fa url('/vintage-map-compressed.jpg') 120% center/100% no-repeat;
-        background-size: 100% auto;
+        background: #e6f0fa url('/vintage-map-compressed.jpg') center 0px no-repeat;
+        background-size: cover;
         opacity: 1 !important;
         z-index: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
       }
 .menu {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  min-height: 100vh;
-  padding-top: 0rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* background-position supprimé pour laisser .home-bg gérer le fond */
+  align-items: center;
 }
 
-/* Rapproché de la zone de tuiles */
-/* Retour position initiale en haut à droite */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .credits-toggle.top-right {
   position: fixed;
   top: 20px;
@@ -243,7 +266,7 @@ export default {
   font-weight: 700;
   color: #7fa46a;
   text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
-  margin: 260px 0 40px 0;
+  margin: 0 0 40px 0;
   font-family: "Courier New", Courier, monospace;
   letter-spacing: 7px;
   font-style: normal;

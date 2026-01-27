@@ -103,23 +103,36 @@ export default {
 }
 </script>
 
+<style>
+:global(html), :global(body) {
+  margin: 0;
+  padding: 0;
+}
+</style>
+
 <style scoped>
 #app {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 main {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 .scene {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 </style>
