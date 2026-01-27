@@ -94,7 +94,6 @@ html, body {
   position: fixed;
 }
 
-/* Bouton Photos en haut à gauche, couleur rose Canada */
 .photos-toggle.top-left {
   position: fixed;
   top: 20px;
@@ -118,7 +117,6 @@ html, body {
   color: #b89c6c;
 }
 
-/* Bouton Photos au-dessus du bouton Autres cartes */
 .photos-toggle.bottom-left-above {
   position: fixed;
   bottom: 100px;
@@ -144,7 +142,6 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Bouton Portfolio/Autres cartes en bas à gauche */
 .portfolio-toggle.bottom-left {
   position: fixed;
   bottom: 30px;
@@ -228,7 +225,6 @@ html, body {
   font-family: "Courier New", Courier, monospace;
 }
 
-/* Affichage du panneau à côté du bouton crédit */
 .credits-panel.next-to-toggle {
   position: fixed;
   top: 20px;
