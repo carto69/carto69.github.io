@@ -30,7 +30,15 @@
             z-index: 1;
             font-size: 24px;
             font-weight: bold;
-            color: #8B0000;
+            color: #e74c3c;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        #map {
+            background: #1a1a1a !important;
+        }
+        .maplibregl-canvas {
+            background: #1a1a1a !important;
         }
         .legend {
             position: absolute;
@@ -370,8 +378,8 @@
 
         document.querySelector('[data-territory="france"]').classList.add('active');
 
-        // Charger et afficher les CRA en projet depuis le CSV
-        async function loadProjectCRA() {
+        // Charger et afficher les marqueurs depuis le CSV avec 3 types distincts
+        async function loadMarkers() {
             try {
                 const response = await fetch('./cra2.csv');
                 const csv = await response.text();
@@ -392,38 +400,60 @@
                     const x = parseFloat(parts[6].trim());
                     const y = parseFloat(parts[7].trim());
                     
-                    // Identifier les "CRA en projet" : fermeture contenant "projet" ou ouverture vide + type CRA
-                    if ((type === 'CRA' && fermeture.toLowerCase().includes('projet')) ||
-                        (type === 'CRA' && ouverture === '' && fermeture === '')) {
-                        
-                        if (!isNaN(x) && !isNaN(y)) {
-                            // Créer un marqueur blanc avec bordure rouge
-                            const el = document.createElement('div');
-                            el.style.width = '12px';
-                            el.style.height = '12px';
-                            el.style.backgroundColor = '#ffffff';
-                            el.style.border = '3px solid #e74c3c';
-                            el.style.borderRadius = '50%';
-                            el.style.cursor = 'pointer';
-                            
-                            const popup = new mapboxgl.Popup({offset: 25})
-                                .setHTML(`<strong>${nom}</strong><br>${lieu}<br>${adresse}`);
-                            
-                            new mapboxgl.Marker(el)
-                                .setLngLat([y, x])
-                                .setPopup(popup)
-                                .addTo(map);
-                        }
+                    if (isNaN(x) || isNaN(y)) return;
+                    
+                    let markerSize = 10;
+                    let markerBg = '#000000';
+                    let markerBorder = '2px solid #e74c3c';
+                    let category = '';
+                    
+                    // Déterminer le type de marqueur
+                    if (type === 'CRA' && (fermeture.toLowerCase().includes('projet') || (ouverture === '' && fermeture === ''))) {
+                        // CRA en projet : blanc avec bordure rouge, GROS
+                        markerSize = 16;
+                        markerBg = '#ffffff';
+                        markerBorder = '3px solid #e74c3c';
+                        category = 'projet';
+                    } else if (type === 'CRA') {
+                        // CRA opérationnel : noir avec bordure rouge, MOYEN
+                        markerSize = 12;
+                        markerBg = '#000000';
+                        markerBorder = '2px solid #e74c3c';
+                        category = 'cra';
+                    } else if (type === 'LRA') {
+                        // LRA : petit point rouge PETIT
+                        markerSize = 6;
+                        markerBg = '#e74c3c';
+                        markerBorder = 'none';
+                        category = 'lra';
                     }
+                    
+                    // Créer le marqueur
+                    const el = document.createElement('div');
+                    el.style.width = markerSize + 'px';
+                    el.style.height = markerSize + 'px';
+                    el.style.backgroundColor = markerBg;
+                    el.style.border = markerBorder;
+                    el.style.borderRadius = '50%';
+                    el.style.cursor = 'pointer';
+                    el.style.boxShadow = '0 0 0 1px rgba(0,0,0,0.2)';
+                    
+                    const popup = new mapboxgl.Popup({offset: 25})
+                        .setHTML(`<strong>${nom}</strong><br><em>${category}</em><br>${lieu}<br>${adresse}`);
+                    
+                    new mapboxgl.Marker(el)
+                        .setLngLat([y, x])
+                        .setPopup(popup)
+                        .addTo(map);
                 });
             } catch (error) {
-                console.error('Erreur au chargement du CSV:', error);
+                console.error('Erreur au chargement des marqueurs:', error);
             }
         }
 
-        // Charger les CRA en projet après que la carte soit chargée
+        // Charger les marqueurs après que la carte soit chargée
         map.on('load', () => {
-            loadProjectCRA();
+            loadMarkers();
         });
     </script>
 </body>
