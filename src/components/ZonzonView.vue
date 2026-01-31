@@ -90,7 +90,7 @@ export default {
       this.map = new maplibregl.Map({
         container: 'zonzon-map',
         style: 'https://basemaps.cartocdn.com/gl/voyager-nolabels-gl-style/style.json',
-        projection: { name: 'equalEarth' },
+        projection: 'naturalEarth',
         center: [15, 30],
         zoom: 1.3,
         maxZoom: 8

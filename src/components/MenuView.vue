@@ -2,12 +2,11 @@
   <main class="menu home-bg">
     <div class="credits-toggle top-right" @click="showCredits = !showCredits">crédit</div>
     <div v-if="showCredits" class="credits-panel next-to-toggle">
-      <div class="credit-line">Elia Terragni</div>
-      <div class="credit-line"><a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a><br>0652213579</div>
+      <div class="credit-line"><a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a></div>
       <div class="credit-line">Source carte : Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
     </div>
     <button class="portfolio-toggle bottom-left" @click="$emit('open', 'portfolio')">Autres<br>cartes</button>
-    <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Photos</button>
+    <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Fotos</button>
     <div class="hero">
       <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
       <div class="tiles triple-row">
@@ -139,8 +138,8 @@ html, body {
   white-space: nowrap;
   cursor: pointer;
   font-family: "Courier New", Courier, monospace;
-  transition: all 0.2s ease;
-}
+  transition: all 0.2s ease;  width: 90px;
+  text-align: center;}
 
 .photos-toggle.bottom-left-above:hover {
   background: #f3e0c7;
@@ -166,6 +165,7 @@ html, body {
   cursor: pointer;
   font-family: "Courier New", Courier, monospace;
   transition: all 0.2s ease;
+  width: 90px;
 }
 
 .portfolio-toggle.bottom-left:hover {

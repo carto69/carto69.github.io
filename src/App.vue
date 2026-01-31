@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <main>
+    <LoginView v-if="!isAuthenticated" @authenticated="handleAuthenticated" />
+    <main v-else>
       <MenuView v-if="activeTab === 'home'" @open="openTab" />
       <div v-if="activeTab === 'velov'" class="scene">
         <VelovView @back="goHome" />
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+import LoginView from './components/LoginView.vue'
 import MenuView from './components/MenuView.vue'
 import XploreMap from './components/XploreMap.vue'
 import MapView from './components/MapView.vue'
@@ -60,13 +62,18 @@ import CracarteView from './components/CracarteView.vue'
 import CopsKillView from './components/CopsKillView.vue'
 
 export default {
-  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CracarteView, CopsKillView },
+  components: { LoginView, MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CracarteView, CopsKillView },
   data() {
     return {
-      activeTab: 'home'
+      activeTab: 'home',
+      isAuthenticated: false
     }
   },
   mounted() {
+    // Supprimer l'authentification à chaque reload
+    localStorage.removeItem('carto69_authenticated')
+    localStorage.removeItem('carto69_user')
+    this.checkAuthentication()
     window.addEventListener('popstate', this.handlePopState)
     this.updateHistory()
   },
@@ -74,6 +81,13 @@ export default {
     window.removeEventListener('popstate', this.handlePopState)
   },
   methods: {
+    checkAuthentication() {
+      const auth = localStorage.getItem('carto69_authenticated')
+      this.isAuthenticated = auth === 'true'
+    },
+    handleAuthenticated() {
+      this.isAuthenticated = true
+    },
     openTab(tab) {
       if ([
         'velov', 'velib', 'velo13', 'mapelia', 'xplore', 'sontla',
