@@ -10,8 +10,7 @@
     <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Photos</button>
     <div class="hero">
       <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
-      <div class="tiles double-row">
-        <!-- Ligne 1 (5 tuiles) -->
+      <div class="tiles triple-row">
         <div class="tiles-row">
           <article class="tile" @click="openMapelia">
             <h2><span class="tile-title">mapelia</span></h2>
@@ -25,8 +24,14 @@
             <h2>xplore</h2>
             <button class="tile-btn">→</button>
           </article>
+        </div>
+        <div class="tiles-row">
           <article class="tile" @click="$emit('open', 'zonzon')">
             <h2>zonzon</h2>
+            <button class="tile-btn">→</button>
+          </article>
+          <article class="tile" @click="$emit('open', 'abruler')">
+            <h2>à bruler</h2>
             <button class="tile-btn">→</button>
           </article>
           <article class="tile" @click="$emit('open', 'copskill')">
@@ -34,12 +39,7 @@
             <button class="tile-btn">→</button>
           </article>
         </div>
-        <!-- Ligne 2 (5 tuiles) -->
         <div class="tiles-row">
-          <article class="tile" @click="$emit('open', 'dashboard-r')">
-            <h2>dashboard R<br> Strasbourg</h2>
-            <button class="tile-btn">→</button>
-          </article>
           <article class="tile" @click="$emit('open', 'velov')">
             <h2>69 en velov</h2>
             <button class="tile-btn">→</button>
@@ -52,8 +52,14 @@
             <h2>75 en velib</h2>
             <button class="tile-btn">→</button>
           </article>
+        </div>
+        <div class="tiles-row">
+          <article class="tile" @click="$emit('open', 'dashboard-r')">
+            <h2>Dashboard<br>R Stras.</h2>
+            <button class="tile-btn">→</button>
+          </article>
           <article class="tile" @click="$emit('open', 'femmes-quais')">
-            <h2>genre et espace public</h2>
+            <h2>genre &<br>espace pub</h2>
             <button class="tile-btn">→</button>
           </article>
         </div>
@@ -168,23 +174,23 @@ html, body {
   transform: scale(1.05);
 }
 
+.home-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  background: #e6f0fa url('/vintage-map-compressed.jpg') center 0px no-repeat;
+  background-size: cover;
+  opacity: 1 !important;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
-      .home-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-height: 100vh;
-        min-width: 100vw;
-        width: 100vw;
-        height: 100vh;
-        background: #e6f0fa url('/vintage-map-compressed.jpg') center 0px no-repeat;
-        background-size: cover;
-        opacity: 1 !important;
-        z-index: 0;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
 .menu {
   position: fixed;
   top: 0;
@@ -211,17 +217,17 @@ html, body {
   position: fixed;
   top: 20px;
   right: 30px;
-    color: #7fa46a;
-    font-size: 0.9rem;
-    font-weight: 700;
-    background: rgb(244, 228, 160);
-    border: 1px solid #7fa46a;
-    box-shadow: 0 0 0 1px #7fa46a;
-    padding: 4px 12px;
-    border-radius: 8px;
-    z-index: 100;
-    white-space: nowrap;
-    cursor: pointer;
+  color: #7fa46a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgb(244, 228, 160);
+  border: 1px solid #7fa46a;
+  box-shadow: 0 0 0 1px #7fa46a;
+  padding: 4px 12px;
+  border-radius: 8px;
+  z-index: 100;
+  white-space: nowrap;
+  cursor: pointer;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -239,8 +245,8 @@ html, body {
   min-width: unset;
   max-width: unset;
   width: auto;
-    padding: 10px 18px 8px 18px;
-    font-size: 0.85rem;
+  padding: 10px 18px 8px 18px;
+  font-size: 0.85rem;
   z-index: 9999;
   position: fixed;
   top: 120px;
@@ -249,14 +255,16 @@ html, body {
   border-radius: 12px;
   box-sizing: border-box;
 }
-.credit-line { 
+
+.credit-line {
   color: #222;
   font-size: 0.85rem;
   margin-bottom: 4px;
-  white-space: nowrap; 
+  white-space: nowrap;
   display: block;
   font-family: inherit;
 }
+
 .title {
   font-size: 16rem;
   font-weight: 700;
@@ -268,43 +276,47 @@ html, body {
   font-style: normal;
   text-align: center;
 }
-.hero .tiles.double-row {
+
+.hero .tiles.triple-row {
   display: flex;
   flex-direction: column;
-  gap: 18px 0;
+  gap: 14px;
   margin-top: 20px;
-  max-width: 900px;
+  max-width: 520px;
   width: 100%;
   align-items: center;
 }
+
 .tiles-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
   width: 100%;
 }
+
 .hero .tile {
   background: rgba(127, 164, 106, 0.85);
-  border-radius: 18px;
+  border-radius: 14px;
   box-shadow: 0 0 0 2px #E8D4A0, 0 2px 8px #E8D4A0;
-  padding: 15px 10px;
+  padding: 10px 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
-  width: 140px;
-  min-width: 120px;
-  max-width: 180px;
-  height: 90px;
+  width: 110px;
+  min-width: 95px;
+  max-width: 130px;
+  height: 75px;
   border: none;
   box-sizing: border-box;
   opacity: 0.92;
 }
+
 .hero .tile h2 {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   margin: 0;
   font-weight: 700;
   letter-spacing: -1px;
@@ -314,54 +326,38 @@ html, body {
   line-height: 1.1;
   font-family: "Courier New", Courier, monospace;
 }
+
 .tile-btn {
   color: #7fa46a;
   background: rgb(244, 228, 160);
   border: none;
-  border-radius: 8px;
-  font-size: 20px;
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 4px;
-  padding: 0 18px;
+  margin-top: 2px;
+  padding: 0 12px;
   transition: background 0.2s, transform 0.2s;
 }
-.tile-btn .arrow {
-  font-size: 3em;
-  color: #7fa46a;
-}
+
 .tile-btn:hover {
   background: #fffbe6;
   color: #7fa46a;
   transform: scale(1.05);
 }
-.credits-panel {
-  box-shadow: 0 0 0 1px #7fa46a, 0 2px 16px #0002;
-  background: rgb(244, 228, 160);
-  color: #222;
-  min-width: unset;
-  max-width: unset;
-  width: auto;
-  padding: 16px 28px 12px 28px;
-  font-size: 1rem;
-  z-index: 9999;
-  position: fixed;
-  top: 120px;
-  right: 30px;
-  display: block;
-  border-radius: 12px;
-  box-sizing: border-box;
-}
+
 .tile-icon {
   font-size: 1.4rem;
   margin-bottom: 4px;
   text-align: center;
   color: #E8D4A0;
 }
+
 .arrow {
   font-size: 3em;
   color: #E8D4A0;
 }
+
 .tile p {
   margin: 0 0 8px 0;
   color: #4a5568;

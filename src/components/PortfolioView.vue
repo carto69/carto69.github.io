@@ -4,8 +4,8 @@
 
     <div class="portfolio-container">
       <div class="maps-grid">
-        <div 
-          v-for="map in maps" 
+        <div
+          v-for="map in maps"
           :key="map.id"
           class="map-card"
           @click="handleCardClick($event, map)"
@@ -36,7 +36,6 @@
       </div>
     </div>
 
-    <!-- Modal plein écran -->
     <div v-if="fullscreenMap" class="fullscreen-modal" @click="closeFullscreen">
       <div class="fullscreen-content">
         <button class="close-btn" @click="closeFullscreen">✕</button>
@@ -61,7 +60,6 @@ export default {
     }
   },
   created() {
-    // Liste tous les fichiers PDF
     const files = [
       { name: "Poster police tue.pdf", path: "/Poster police tue.pdf" },
       { name: "Accéssibilité au campus PDA en TC.pdf", path: "/portfolio/Accéssibilité au campus PDA en TC.pdf" },
@@ -88,11 +86,10 @@ export default {
     handleCardClick(event, map) {
       event.stopPropagation()
       event.preventDefault()
-      
+
       if (!map.image) return
-      
+
       if (map.image.endsWith('.pdf')) {
-        // Créer un lien temporaire et le cliquer
         const link = document.createElement('a')
         link.href = map.image
         link.target = '_blank'

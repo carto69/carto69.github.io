@@ -35,6 +35,9 @@
       <div v-if="activeTab === 'sontla'" class="scene">
         <SontlaMap @back="goHome" />
       </div>
+      <div v-if="activeTab === 'abruler'" class="scene">
+        <CracarteView @back="goHome" />
+      </div>
     </main>
   </div>
 </template>
@@ -53,19 +56,18 @@ import PortfolioView from './components/PortfolioView.vue'
 import PloufMap from './components/PloufMap.vue'
 import DashboardRView from './components/DashboardRView.vue'
 import SontlaMap from './components/SontlaMap.vue'
+import CracarteView from './components/CracarteView.vue'
 import CopsKillView from './components/CopsKillView.vue'
 
 export default {
-  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CopsKillView },
+  components: { MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CracarteView, CopsKillView },
   data() {
     return {
       activeTab: 'home'
     }
   },
   mounted() {
-    // Gérer le bouton retour du navigateur
     window.addEventListener('popstate', this.handlePopState)
-    // Initialiser l'historique
     this.updateHistory()
   },
   beforeUnmount() {
@@ -75,7 +77,7 @@ export default {
     openTab(tab) {
       if ([
         'velov', 'velib', 'velo13', 'mapelia', 'xplore', 'sontla',
-        'femmes-quais', 'zonzon', 'copskill', 'portfolio', 'dashboard-r'
+        'femmes-quais', 'zonzon', 'abruler', 'copskill', 'portfolio', 'dashboard-r'
       ].includes(tab)) {
         this.activeTab = tab
         this.updateHistory()

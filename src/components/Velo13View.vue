@@ -66,7 +66,6 @@ export default {
       this.map.on('load', () => {})
     },
     toggleStations() {
-      // Données à venir
     },
     toggleHotspot() {
       if (!this.map) return
@@ -78,7 +77,7 @@ export default {
     },
     displayHeatmap() {
       if (!this.map) return
-      const heatFeatures = [] // Données à venir
+      const heatFeatures = []
       if (!this.map.getSource('velo13-heatmap')) {
         this.map.addSource('velo13-heatmap', {
           type: 'geojson',
@@ -142,7 +141,6 @@ export default {
   .back-button { padding: 8px 16px; font-size: 12px; }
 }
 
-/* Customiser les contrôles MapLibre - couleur cyan pour Vélo 13 */
 :deep(.maplibregl-ctrl-zoom-in),
 :deep(.maplibregl-ctrl-zoom-out),
 :deep(.maplibregl-ctrl-compass) {

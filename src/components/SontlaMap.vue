@@ -1,7 +1,7 @@
 <template>
   <div class="maplibre-wrapper">
     <div ref="mapContainer" class="maplibre-map"></div>
-    
+
     <div class="top-controls">
       <button class="back-btn" @click="$emit('back')">← Accueil</button>
       <div class="title-and-btn">
@@ -9,7 +9,7 @@
         <button class="add-pin-btn" @click="startPinSelection" title="Ajouter un pin">+</button>
       </div>
     </div>
-    
+
     <div v-if="isSelecting && selectionStep === 'location'" class="selecting-overlay"></div>
     <div v-if="showModal" class="modal-overlay" @click.self="closePinModal">
       <div class="modal">
@@ -17,8 +17,8 @@
         <div v-if="selectionStep === 'emoji'" class="emoji-selector">
           <label>symbole :</label>
           <div class="emoji-grid">
-            <button 
-              v-for="emoji in emojis" 
+            <button
+              v-for="emoji in emojis"
               :key="emoji"
               :class="['emoji-btn', { selected: selectedEmoji === emoji }]"
               @click="selectedEmoji = emoji"
@@ -27,22 +27,22 @@
             </button>
           </div>
         </div>
-        
+
         <div v-if="selectionStep === 'emoji'" class="text-input">
           <label>commentaire :</label>
-          <input 
-            v-model="pinText" 
-            type="text" 
+          <input
+            v-model="pinText"
+            type="text"
             placeholder="Ajouter un texte..."
             maxlength="100"
           >
         </div>
-        
+
         <div v-if="selectionStep === 'emoji'" class="modal-actions">
           <button class="btn-cancel" @click="closePinModal">Annuler</button>
           <button class="btn-confirm" @click="confirmPin">Confirmer</button>
         </div>
-        
+
         <div v-else class="modal-actions">
           <button class="btn-cancel" @click="closePinModal">Annuler</button>
         </div>
@@ -86,7 +86,7 @@ const startPinSelection = () => {
 
 const mapClickHandler = async (e) => {
   if (!isSelecting.value) return
-  
+
   pinnedCoordinates = e.lngLat
   selectionStep.value = 'emoji'
   selectedEmoji.value = '📍'
@@ -104,7 +104,7 @@ const closePinModal = () => {
 
 const confirmPin = async () => {
   if (!pinnedCoordinates) return
-  
+
   try {
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${pinnedCoordinates.lat}&lon=${pinnedCoordinates.lng}`
@@ -119,14 +119,14 @@ const confirmPin = async () => {
       address: address,
       timestamp: new Date().toLocaleString('fr-FR')
     }
-    
+
     pins.value.push(pin)
     savePins()
     addPinToMap(pin)
   } catch (error) {
     console.error('Erreur lors de la géolocalisation:', error)
   }
-  
+
   closePinModal()
 }
 
@@ -141,7 +141,7 @@ const addPinToMap = (pin) => {
   el.className = 'map-pin'
   el.innerHTML = pin.emoji
   el.style.cursor = 'pointer'
-  
+
   const popup = new maplibregl.Popup({ offset: 25 })
     .setHTML(`
       <div class="pin-popup">
@@ -152,7 +152,7 @@ const addPinToMap = (pin) => {
         <button class="pin-delete-btn" onclick="window.deletePinGlobal(${pin.id})">supprimer</button>
       </div>
     `)
-  
+
   new maplibregl.Marker({ element: el })
     .setLngLat(pin.coordinates)
     .setPopup(popup)
@@ -199,12 +199,12 @@ onMounted(() => {
     center: [2.3522, 48.8566],
     zoom: 5
   })
-  
+
   map.addControl(new maplibregl.ScaleControl({
     maxWidth: 200,
     unit: 'metric'
   }))
-  
+
   map.on('click', mapClickHandler)
 
   loadPins()

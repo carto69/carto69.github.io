@@ -3,12 +3,10 @@
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velib-map" class="map-canvas"></div>
     <div class="map-title">le 75 en vélib</div>
-    
-    <!-- Barre latérale des statistiques -->
+
     <div class="stats-sidebar">
       <h2>Mes trajets</h2>
-      
-      <!-- Stats globales -->
+
       <div class="stat-item">
         <span class="stat-label">Trajets</span>
         <span class="stat-value">{{ stats.countTrips }}</span>
@@ -33,8 +31,7 @@
         <span class="stat-label">Durée moyenne</span>
         <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
-      
-      <!-- Options de la carte + Sélecteur de trajet -->
+
       <hr class="sidebar-divider" />
       <div class="map-controls" style="display: flex; flex-direction: row; align-items: center; gap: 1em; flex-wrap: wrap;">
         <label>
@@ -55,8 +52,7 @@
           </select>
         </div>
       </div>
-      
-      <!-- Détails du trajet sélectionné -->
+
       <div v-if="selectedTripIndex >= 0" class="trip-details">
         <div class="detail-section">
           <h3>📍 Départ</h3>
@@ -73,7 +69,7 @@
             <span class="value small mono">{{ selectedTrip.depCoords }}</span>
           </div>
         </div>
-        
+
         <div class="detail-section">
           <h3>🎯 Arrivée</h3>
           <div class="detail-row">
@@ -89,7 +85,7 @@
             <span class="value small mono">{{ selectedTrip.arrCoords }}</span>
           </div>
         </div>
-        
+
         <div class="detail-section">
           <h3>📊 Trajet</h3>
           <div class="detail-row">
@@ -144,21 +140,17 @@ export default {
         toggleHotspot() {
           if (!this.map) return
           if (this.showHotspot) {
-            // Masquer segments et points
             if (this.map.getLayer('trips-layer')) {
               this.map.setLayoutProperty('trips-layer', 'visibility', 'none')
             }
             if (this.map.getLayer('stations-layer')) {
               this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
             }
-            // Afficher la heatmap
             this.displayHeatmap()
           } else {
-            // Masquer la heatmap
             if (this.map.getLayer('velib-heatmap')) {
               this.map.setLayoutProperty('velib-heatmap', 'visibility', 'none')
             }
-            // Réafficher segments/points selon options
             if (this.map.getLayer('trips-layer')) {
               this.map.setLayoutProperty('trips-layer', 'visibility', 'visible')
             }
@@ -170,17 +162,14 @@ export default {
 
         displayHeatmap() {
           if (!this.map) return
-          // Construire les points de heatmap à partir des départs/arrivées
           const heatFeatures = []
           this.displayedTrips.forEach(trip => {
-            // Départ
             const dep = trip.depCoords.split(',').map(Number)
             heatFeatures.push({
               type: 'Feature',
               geometry: { type: 'Point', coordinates: dep },
               properties: {}
             })
-            // Arrivée
             const arr = trip.arrCoords.split(',').map(Number)
             heatFeatures.push({
               type: 'Feature',
@@ -221,26 +210,23 @@ export default {
     resolveStation(id) {
       if (!id) return null
       const sId = String(id).trim()
-      
-      // Correspondances manuelles pour les IDs non standards
+
       const manualMapping = {
-        '5501': '516395829',          // Quai Des Célestins - Henri Iv (id court)
-        '20431005501': '516395829',   // Quai Des Célestins - Henri Iv (id long)
-        '20531346153': '218903767'    // René Boulanger - Lancry
+        '5501': '516395829',
+        '20431005501': '516395829',
+        '20531346153': '218903767'
       }
-      
+
       const mappedId = manualMapping[sId] || sId
-      
-      // UNIQUEMENT correspondance exacte - pas de logique de matching partiel
+
       if (this.stations[mappedId]) {
         return this.stations[mappedId]
       }
-      
-      // Debug pour les stations non trouvées
+
       if (!this.stations[mappedId]) {
         console.warn(`✗ Station ${sId} (mappé: ${mappedId}) NON TROUVÉE dans les ${Object.keys(this.stations).length} stations`)
       }
-      
+
       return null
     },
     async loadTrips() {
@@ -262,7 +248,6 @@ export default {
         }
         data = await response.json()
         console.log('📦 Données JSON reçues:', data)
-        // Le nouveau fichier /velib-tous-trajets.json est un tableau brut
         if (Array.isArray(data)) {
           this.trips = data
         } else if (Array.isArray(data.walletOperations)) {
@@ -271,8 +256,7 @@ export default {
           this.trips = []
         }
         console.log(`📍 ${this.trips.length} trajets chargés (source: ${response.url.split('/').pop()})`)
-        
-        // Extraire les IDs de stations uniques depuis les trajets
+
         const stationIds = new Set()
         this.trips.forEach(trip => {
           const depId = String(trip.parameter3?.departureStationId || '')
@@ -281,7 +265,7 @@ export default {
           if (arrId) stationIds.add(arrId)
         })
         console.log(`🏢 ${stationIds.size} stations uniques identifiées`)
-        
+
         await this.loadStations()
         this.initMap()
       } catch (error) {
@@ -292,13 +276,11 @@ export default {
     },
     async loadStations() {
       try {
-        // Charger la source principale complète (vraies coordonnées)
         let stationsComplete = {}
         try {
           const respComplete = await fetch('/velib-stations-complete.json', { cache: 'no-store' })
           if (respComplete.ok) {
             const dataComplete = await respComplete.json()
-            // Format: array de {id, coords: [lon, lat], name}
             if (Array.isArray(dataComplete)) {
               dataComplete.forEach(s => {
                 const id = String(s.id || '').trim()
@@ -306,33 +288,28 @@ export default {
                 if (id && coords.length === 2) {
                   const lon = coords[0]
                   const lat = coords[1]
-                  
-                  // 🔍 Vérifier si c'est Lambert 93 (grande valeurs ~680000-850000) ou lat/lon (~2.3 et 48.8)
+
                   let finalCoords = [lon, lat]
                   if (lon > 100 && lat > 100) {
-                    // Probablement Lambert 93 - convertir vers lat/lon
                     console.warn(`⚠️ Coords Lambert 93 détectées: [${lon}, ${lat}] pour ${s.name}`)
-                    // Conversion Lambert 93 → WGS84
                     const epsg2154to4326 = (lambertE, lambertN) => {
-                      // Approximation simple pour Paris région (TRÈS GROSSIÈRE)
                       const n = 0.7256077650532472
                       const c = 11603796.987734
                       const xs = 700000
                       const ys = 12655900
                       const e = 0.08248325676
-                      
+
                       const rho = Math.sqrt(Math.pow(lambertE - xs, 2) + Math.pow(lambertN - ys, 2))
                       const gamma = Math.atan((lambertE - xs) / (ys - lambertN))
                       const lon = gamma / n + 2.337229166
                       const lat = 2 * Math.atan(Math.pow(c / rho, 1 / n) * Math.exp(-e / 2 * Math.log((1 + e * Math.sin(lon)) / (1 - e * Math.sin(lon))))) - Math.PI / 2
-                      
+
                       return [lon * 180 / Math.PI, lat * 180 / Math.PI]
                     }
-                    // finalCoords = epsg2154to4326(lon, lat)
                   }
-                  
-                  stationsComplete[id] = { 
-                    name: s.name || `Station ${id}`, 
+
+                  stationsComplete[id] = {
+                    name: s.name || `Station ${id}`,
                     coords: finalCoords
                   }
                 }
@@ -344,7 +321,6 @@ export default {
           console.warn('Fichier stations complet inaccessible:', e.message)
         }
 
-        // Charger le fichier local généré (fallback)
         let stationsLocal = {}
         try {
           const respLocal = await fetch('/velib-emplacement-des-stations.json', { cache: 'no-store' })
@@ -366,10 +342,9 @@ export default {
           console.warn('Fichier local indisponible:', e.message)
         }
 
-        // Fusion: priorité à la source complète (ne pas écraser avec local)
         this.stations = { ...stationsLocal, ...stationsComplete }
         const count = Object.keys(this.stations).length
-        
+
         if (count === 0) {
           this.error = 'Aucune donnée de stations disponible.'
           console.error(this.error)
@@ -411,76 +386,72 @@ export default {
       let totalDuration = 0
       let totalSpeeds = []
       let validTripsCount = 0
-      
+
       this.trips.forEach(trip => {
         const depStation = this.resolveStation(trip.parameter3?.departureStationId)
         const arrStation = this.resolveStation(trip.parameter3?.arrivalStationId)
-        
-        // Compter seulement les trajets valides (avec stations trouvées)
+
         if (depStation && arrStation && trip.parameter3?.departureStationId !== trip.parameter3?.arrivalStationId) {
           validTripsCount++
           totalDistance += parseFloat(trip.parameter3?.DISTANCE) || 0
           totalCO2 += parseFloat(trip.parameter3?.SAVED_CARBON_DIOXIDE) || 0
           totalSpeeds.push(parseFloat(trip.parameter3?.AVERAGE_SPEED) || 0)
-          
+
           const start = new Date(trip.startDate)
           const end = new Date(trip.endDate)
           totalDuration += (end - start) / 1000
         }
       })
-      
-      const avgSpeed = totalSpeeds.length > 0 
+
+      const avgSpeed = totalSpeeds.length > 0
         ? (totalSpeeds.reduce((a, b) => a + b, 0) / totalSpeeds.length).toFixed(1)
         : 0
 
       const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0
       const avgDurationMin = Math.round(avgDurationSeconds / 60)
-      
-      // Collecte des IDs et stats de résolution
+
       const resolved = {}
       const unresolved = {}
-      
+
       this.trips.forEach(trip => {
         const depId = String(trip.parameter3?.departureStationId || '')
         const arrId = String(trip.parameter3?.arrivalStationId || '')
-        
+
         const depStation = this.resolveStation(depId)
         const arrStation = this.resolveStation(arrId)
-        
+
         if (depStation) resolved[depId] = true
         else if (depId) unresolved[depId] = true
-        
+
         if (arrStation) resolved[arrId] = true
         else if (arrId) unresolved[arrId] = true
       })
-      
+
       console.log(`✅ ${Object.keys(resolved).length} stations résolues | ⚠️ ${Object.keys(unresolved).length} non-résolues`)
 
-      // Crée SEULEMENT les lignes de trajets valides
       const features = []
       this.displayedTrips = []
-      
+
       console.group('🗺️ VELIB MAP DEBUG')
       console.log(`Nombre total de trajets: ${this.trips.length}`)
       console.log(`Nombre total de stations disponibles: ${Object.keys(this.stations).length}`)
-      
+
       this.trips.forEach((trip, idx) => {
         const depId = trip.parameter3?.departureStationId
         const arrId = trip.parameter3?.arrivalStationId
-        
+
         if (idx < 3) {
           console.log(`\n📍 Trajet ${idx + 1}: Départ=${depId}, Arrivée=${arrId}`)
         }
-        
+
         const depStation = this.resolveStation(depId)
         const arrStation = this.resolveStation(arrId)
-        
+
         if (idx < 3) {
           console.log(`  Départ résolue: ${depStation ? depStation.name + ' ' + depStation.coords : 'NON TROUVÉE'}`)
           console.log(`  Arrivée résolue: ${arrStation ? arrStation.name + ' ' + arrStation.coords : 'NON TROUVÉE'}`)
         }
-        
-        // IMPORTANT: ne créer le segment QUE si les deux stations sont trouvées
+
         if (depStation && arrStation && depId !== arrId) {
           const displayTrip = {
             idx: idx,
@@ -495,9 +466,9 @@ export default {
             date: trip.startDate,
             co2: trip.parameter3.SAVED_CARBON_DIOXIDE
           }
-          
+
           this.displayedTrips.push(displayTrip)
-          
+
           features.push({
             type: 'Feature',
             geometry: {
@@ -514,14 +485,13 @@ export default {
           })
         }
       })
-      
-      // Trier les trajets par ordre chronologique (ascendant = du plus ancien au plus récent)
+
       this.displayedTrips.sort((a, b) => {
         const dateA = new Date(a.date).getTime()
         const dateB = new Date(b.date).getTime()
         return dateA - dateB
       })
-      
+
       console.log(`\n✅ ${features.length} features créées`)
       if (features.length > 0) {
         console.log(`Premier segment GeoJSON:`, features[0])
@@ -559,7 +529,6 @@ export default {
           }
         })
 
-        // Masquer la heatmap si elle existe
         if (this.map.getLayer('velib-heatmap')) {
           this.map.setLayoutProperty('velib-heatmap', 'visibility', 'none')
         }
@@ -569,12 +538,11 @@ export default {
         console.warn('⚠️ Aucun segment valide')
       }
 
-      // Fit bounds
       const coords = []
       features.forEach(f => {
         f.geometry.coordinates.forEach(c => coords.push(c))
       })
-      
+
       if (coords.length > 0) {
         const lons = coords.map(c => c[0])
         const lats = coords.map(c => c[1])
@@ -587,15 +555,14 @@ export default {
     },
     displayStations() {
       if (!this.map || !this.showStations) return
-      
+
       const stationFeatures = []
       const addedCoords = new Set()
-      
-      // Créer des points pour chaque station unique utilisée
+
       this.displayedTrips.forEach(trip => {
         const depKey = trip.depCoords
         const arrKey = trip.arrCoords
-        
+
         if (!addedCoords.has(depKey)) {
           const [lon, lat] = trip.depCoords.split(', ').map(Number)
           stationFeatures.push({
@@ -605,7 +572,7 @@ export default {
           })
           addedCoords.add(depKey)
         }
-        
+
         if (!addedCoords.has(arrKey)) {
           const [lon, lat] = trip.arrCoords.split(', ').map(Number)
           stationFeatures.push({
@@ -616,16 +583,15 @@ export default {
           addedCoords.add(arrKey)
         }
       })
-      
+
       if (stationFeatures.length === 0) return
-      
-      // Ajouter la source et la couche
+
       if (!this.map.getSource('stations')) {
         this.map.addSource('stations', {
           type: 'geojson',
           data: { type: 'FeatureCollection', features: stationFeatures }
         })
-        
+
         this.map.addLayer({
           id: 'stations-layer',
           type: 'circle',
@@ -638,10 +604,9 @@ export default {
             'circle-stroke-color': '#fff'
           }
         })
-        
-        // Ajouter les popups au survol
+
         const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false })
-        
+
         this.map.on('mouseenter', 'stations-layer', (e) => {
           this.map.getCanvas().style.cursor = 'pointer'
           const props = e.features[0].properties
@@ -649,7 +614,7 @@ export default {
             .setHTML(`<div style="color: #EF4444; font-size: 12px; font-weight: 600;">${props.name}</div>`)
             .addTo(this.map)
         })
-        
+
         this.map.on('mouseleave', 'stations-layer', () => {
           this.map.getCanvas().style.cursor = ''
           popup.remove()
@@ -659,14 +624,12 @@ export default {
     toggleStations() {
       if (!this.map) return
       if (this.showStations) {
-        // Afficher les stations
         if (this.map.getLayer('stations-layer')) {
           this.map.setLayoutProperty('stations-layer', 'visibility', 'visible')
         } else {
           this.displayStations()
         }
       } else {
-        // Masquer les stations
         if (this.map.getLayer('stations-layer')) {
           this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
         }
@@ -674,11 +637,10 @@ export default {
     },
     addTripClickHandler() {
       if (!this.map || !this.map.getLayer('trips-layer')) return
-      
+
       this.map.on('click', 'trips-layer', (e) => {
         if (!e.features || e.features.length === 0) return
         const props = e.features[0].properties
-        // Recherche stricte sur depName, arrName ET distance (évite collisions)
         const tripIdx = this.displayedTrips.findIndex(
           trip => trip.depName === props.depName && trip.arrName === props.arrName && Math.abs(trip.distance - props.distance) < 2
         )
@@ -687,8 +649,7 @@ export default {
           this.onTripSelected()
         }
       })
-      
-      // Curseur au survol des trajets
+
       this.map.on('mouseenter', 'trips-layer', () => {
         this.map.getCanvas().style.cursor = 'pointer'
       })
@@ -698,17 +659,15 @@ export default {
     },
     onTripSelected() {
       if (!this.map || this.selectedTripIndex < 0) {
-        // Réinitialiser le surlignage
         if (this.map && this.map.getLayer('trips-highlight')) {
           this.map.setPaintProperty('trips-highlight', 'line-opacity', 0)
         }
         return
       }
-      
+
       const trip = this.selectedTrip
       if (!trip) return
-      
-      // Créer une couche de surlignage avec juste ce trajet
+
       const highlightFeature = {
         type: 'FeatureCollection',
         features: [{
@@ -722,14 +681,13 @@ export default {
           }
         }]
       }
-      
-      // Vérifier si la couche existe déjà
+
       if (!this.map.getSource('trips-highlight')) {
         this.map.addSource('trips-highlight', {
           type: 'geojson',
           data: highlightFeature
         })
-        
+
         this.map.addLayer({
           id: 'trips-highlight',
           type: 'line',
@@ -742,21 +700,19 @@ export default {
           }
         }, 'trips-layer')
       } else {
-        // Mettre à jour la source
         this.map.getSource('trips-highlight').setData(highlightFeature)
         this.map.setPaintProperty('trips-highlight', 'line-opacity', 0.9)
       }
-      
-      // Zoomer sur le trajet
+
       const depCoords = trip.depCoords.split(', ').map(Number)
       const arrCoords = trip.arrCoords.split(', ').map(Number)
       const bounds = [
         [Math.min(depCoords[0], arrCoords[0]), Math.min(depCoords[1], arrCoords[1])],
         [Math.max(depCoords[0], arrCoords[0]), Math.max(depCoords[1], arrCoords[1])]
       ]
-      
+
       this.map.fitBounds(bounds, { padding: 140, duration: 600, maxZoom: 13 })
-      
+
       console.log(`✨ Trajet sélectionné: ${trip.depName} → ${trip.arrName}`)
     }
   },
@@ -1016,7 +972,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .map-title {
     font-size: 16px;
     padding: 10px 16px;
@@ -1024,14 +980,13 @@ export default {
     top: 56px;
     transform: translateX(-50%);
   }
-  
+
   .back-button {
     padding: 8px 16px;
     font-size: 12px;
   }
 }
 
-/* Customiser les contrôles MapLibre - couleur rouge pour Vélib */
 :deep(.maplibregl-ctrl-zoom-in),
 :deep(.maplibregl-ctrl-zoom-out),
 :deep(.maplibregl-ctrl-compass) {

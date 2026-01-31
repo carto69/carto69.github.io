@@ -7,12 +7,10 @@
   </div>
 </template>
 
-
 <script>
 import * as turf from '@turf/turf';
 import maplibregl from 'maplibre-gl'
 
-// Fonction utilitaire pour créer un polygone cercle GeoJSON (centre [lon, lat], rayon en km)
 function createCircle(center, radiusKm, points = 64) {
   const coords = [];
   const [cx, cy] = center;
@@ -21,16 +19,13 @@ function createCircle(center, radiusKm, points = 64) {
     const angle = (i * 2 * Math.PI) / points;
     const dx = radiusKm * Math.cos(angle);
     const dy = radiusKm * Math.sin(angle);
-    // Conversion approximative degrés
     const lat = cy + (dy / earthRadius) * (180 / Math.PI);
     const lon = cx + (dx / earthRadius) * (180 / Math.PI) / Math.cos(cy * Math.PI / 180);
     coords.push([lon, lat]);
   }
-  // Sens horaire pour les trous (GeoJSON), déjà OK
   return coords;
 }
 
-// Fonction utilitaire pour créer un buffer corridor autour d'un segment [A,B]
 function createBufferCorridor(line, bufferKm, steps = 256) {
   const [A, B] = line;
   const left = [], right = [];
@@ -55,7 +50,6 @@ function createBufferCorridor(line, bufferKm, steps = 256) {
   return [...left, ...right, left[0]];
 }
 
-// Fonctions utilitaires pour Mapbox
 function addSourceIfNotExists(map, id, def) {
   if (!map.getSource(id)) map.addSource(id, def);
 }
@@ -77,9 +71,7 @@ export default {
       this.map.remove();
       this.map = null;
     }
-    // Génère un suffixe unique pour chaque montage
     const uniqueId = Date.now().toString();
-    // Déclare tous les IDs en haut pour éviter tout problème de portée
     const satelliteId = 'satellite-' + uniqueId;
     const satelliteLayerId = 'satellite-couche-' + uniqueId;
     const landId = 'land-' + uniqueId;
@@ -106,31 +98,25 @@ export default {
           }
         ]
       },
-      center: [5.3698, 43.2965], // Marseille
+      center: [5.3698, 43.2965],
       zoom: 8,
       attributionControl: false
     });
-    // Ajout de l'échelle cartographique
     this.map.addControl(new maplibregl.ScaleControl({ maxWidth: 200, unit: 'metric' }), 'bottom-left');
 
       this.map.on('load', async () => {
-        // Vérification de la disponibilité de turf
         const turf = window.turf;
         if (!turf) {
           alert('Turf.js non disponible (window.turf)');
           return;
         }
-        // --- Ajout d'un buffer satellite Marseille ---
-        // Centre du buffer sur Marseille directement
         const marseilleCenter = [5.3698, 43.2965];
-        const radius = 25; // km - rayon pour couvrir la ville
+        const radius = 25;
         const circle = turf.circle(marseilleCenter, radius, { steps: 128, units: 'kilometers' });
-        // Source GeoJSON du buffer
         addSourceIfNotExists(this.map, bufferId, {
           type: 'geojson',
           data: circle
         });
-        // Ajoute la couche océan (bleu) tout en bas
         addSourceIfNotExists(this.map, oceanId, {
           type: 'geojson',
           data: '/ne_ocean.geojson'
@@ -145,28 +131,23 @@ export default {
           }
         });
 
-        // Charge le trait de côte et génère dynamiquement un polygone terre AVEC trou au buffer
         const coastResp = await fetch('/ne_coastline.geojson');
         const coastData = await coastResp.json();
         let merged = turf.lineToPolygon(coastData);
-        
-        // Crée la terre avec un trou au centre du buffer
+
         let landWithHole = merged;
         if (merged.geometry.type === 'Polygon') {
-          // Polygon GeoJSON with hole: coordinates = [exterior ring, hole ring 1, hole ring 2...]
           const holeRing = circle.geometry.coordinates[0];
           const exterior = merged.geometry.coordinates[0];
           const otherHoles = merged.geometry.coordinates.slice(1);
           landWithHole.geometry.coordinates = [exterior, holeRing, ...otherHoles];
         } else if (merged.geometry.type === 'MultiPolygon') {
-          // Pour MultiPolygon, ajoute le trou au premier polygon
           const holeRing = circle.geometry.coordinates[0];
           const firstPolyExterior = merged.geometry.coordinates[0][0];
           const firstPolyHoles = merged.geometry.coordinates[0].slice(1);
           merged.geometry.coordinates[0] = [firstPolyExterior, holeRing, ...firstPolyHoles];
         }
-        
-        // Ajoute la source polygone terre avec trou
+
         if (!this.map.getSource(landId)) {
           this.map.addSource(landId, {
             type: 'geojson',
@@ -175,8 +156,7 @@ export default {
         } else {
           this.map.getSource(landId).setData(landWithHole);
         }
-        
-        // Ajoute la source du raster satellite
+
         addSourceIfNotExists(this.map, rasterId, {
           type: 'raster',
           tiles: [
@@ -185,7 +165,6 @@ export default {
           tileSize: 256
         });
 
-        // Ajoute la couche raster satellite 
         if (!this.map.getLayer(rasterId)) {
           this.map.addLayer({
             id: rasterId,
@@ -196,7 +175,6 @@ export default {
             }
           });
         }
-        // Ajoute la couche "land" (terre) blanche avec trou
         if (!this.map.getLayer(landLayerId)) {
           this.map.addLayer({
             id: landLayerId,
@@ -206,7 +184,7 @@ export default {
               'fill-color': '#fff',
               'fill-opacity': 1
             }
-          }, rasterId); // ajoute APRÈS le raster (donc au-dessus)
+          }, rasterId);
         }
       });
   }
@@ -229,7 +207,6 @@ export default {
   pointer-events: none;
   z-index: 20;
 }
-
 
 .xplore-map-container {
   background: #2196f3;

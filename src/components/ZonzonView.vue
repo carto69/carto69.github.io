@@ -2,9 +2,9 @@
   <div class="zonzon-container">
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="zonzon-map" class="map-canvas"></div>
-    
+
     <div class="map-title">Statitistiques carcérales sur les États</div>
-    
+
     <div class="legend" v-if="selectedIndicator">
       <div class="legend-title">{{ currentIndicatorName() }}</div>
       <div class="legend-scale" v-if="selectedIndicator !== 'population_prison'">
@@ -31,11 +31,11 @@
       </div>
       <div class="legend-source">Sources : World Prison Brief 2020 - 2023</div>
     </div>
-    
+
     <div class="indicator-selector" v-if="indicators.length > 0">
       <label for="indicator-select">Indicateur:</label>
-      <select 
-        id="indicator-select" 
+      <select
+        id="indicator-select"
         v-model="selectedIndicator"
         @change="onIndicatorChange"
       >
@@ -44,7 +44,7 @@
         </option>
       </select>
     </div>
-    
+
   </div>
 </template>
 
@@ -90,7 +90,7 @@ export default {
       this.map = new maplibregl.Map({
         container: 'zonzon-map',
         style: 'https://basemaps.cartocdn.com/gl/voyager-nolabels-gl-style/style.json',
-        projection: 'globe',
+        projection: { name: 'equalEarth' },
         center: [15, 30],
         zoom: 1.3,
         maxZoom: 8
@@ -102,10 +102,10 @@ export default {
 
       const navControl = new maplibregl.NavigationControl()
       this.map.addControl(navControl, 'top-right')
-      
-      const scaleControl = new maplibregl.ScaleControl({ 
+
+      const scaleControl = new maplibregl.ScaleControl({
         maxWidth: 200,
-        unit: 'metric' 
+        unit: 'metric'
       })
       this.map.addControl(scaleControl, 'bottom-left')
     },
@@ -275,16 +275,16 @@ export default {
             'France': 'FRA',
             'Norway': 'NOR'
           }
-          
+
           let iso3 = f.properties.ISO_A3
           const name = f.properties.name || f.properties.NAME || ''
-          
+
           if (iso3 === '-99' || !iso3) {
             iso3 = nameToISO3[name] || iso3
           }
-          
+
           let coords = this.capitalCoords[iso3] || this.computeCentroidOfFeature(f)
-          
+
           return {
             type: 'Feature',
             geometry: {
@@ -308,12 +308,12 @@ export default {
         'Netherlands': [4.90, 52.37],
         'Pays-Bas': [4.90, 52.37]
       }
-      
+
       const name = feature.properties.name || feature.properties.NAME || ''
       if (specialCentroids[name]) {
         return specialCentroids[name]
       }
-      
+
       try {
         const centroid = turf.centroid(feature)
         return centroid.geometry.coordinates
@@ -436,15 +436,15 @@ export default {
         .filter(f => f.properties.population_prison && f.properties.population_prison > 0)
         .map(f => f.properties.population_prison)
         .sort((a, b) => a - b)
-      
+
       if (values.length === 0) return []
-      
+
       const n = values.length
       const getQuantileValue = (q) => {
         const idx = Math.floor(q * (n - 1))
         return values[idx]
       }
-      
+
       const quantiles = [
         getQuantileValue(0),
         getQuantileValue(1/6),
@@ -453,14 +453,14 @@ export default {
         getQuantileValue(4/6),
         getQuantileValue(5/6)
       ]
-      
+
       const radii = [3, 6, 10, 15, 21, 28]
-      
+
       const legend = quantiles.map((val, i) => ({
         value: Math.round(val),
         radius: radii[i]
       }))
-      
+
       return legend
     },
 
@@ -481,20 +481,20 @@ export default {
         'France': 'FRA',
         'Norway': 'NOR'
       }
-      
+
       let iso3 = properties.ISO_A3
       const name = properties.name || properties.NAME || ''
-      
+
       if (iso3 === '-99' || !iso3) {
         iso3 = nameToISO3[name] || iso3
       }
-      
+
       const capital = this.capitals[iso3] || 'N/A'
       const indicatorVal = properties[this.selectedIndicator]
       const indicatorName = this.indicators.find(i => i.id === this.selectedIndicator)?.name || 'N/A'
-      
+
       const popFormatter = (num) => new Intl.NumberFormat('fr-FR').format(num)
-      
+
       let html = '<div style="font-family: Space Grotesk, sans-serif; font-size: 13px; color: #111; line-height: 1.5;">'
       html += '<div style="font-weight: 700; font-size: 14px; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 6px;">'
       html += (properties.name || properties.NAME || 'Pays inconnu') + '</div>'
@@ -579,11 +579,11 @@ export default {
   top: 18px;
   right: 85px;
   background: #fff;
-  padding: 12px 18px;
+  padding: 8px 12px;
   border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   z-index: 2;
   box-shadow: 0 3px 10px rgba(0,0,0,0.22);
   border: 1px solid #111;
@@ -591,7 +591,7 @@ export default {
 
 .indicator-selector label {
   color: #111;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -600,9 +600,9 @@ export default {
   background: #fff;
   color: #111;
   border: 1px solid #111;
-  padding: 9px 12px;
+  padding: 6px 8px;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 12px;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   cursor: pointer;
   transition: all 0.15s ease;

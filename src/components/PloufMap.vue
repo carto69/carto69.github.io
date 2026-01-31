@@ -26,8 +26,6 @@ export default {
 }
 </script>
 
-
-
 <style scoped>
   .plouf-map-wrapper {
     position: relative;

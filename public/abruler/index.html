@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRA et LRA français</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css">
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        #title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1;
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            background: rgba(50, 50, 50, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            border: 1px solid rgba(100, 100, 100, 0.5);
+            z-index: 1;
+            font-size: 14px;
+        }
+        .legend h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #ffffff;
+        }
+        .legend-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+        }
+        .legend-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .maplibregl-popup-content {
+            padding: 15px;
+            min-width: 250px;
+        }
+        .popup-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .popup-field {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .popup-label {
+            font-weight: bold;
+            color: #666;
+        }
+        .domtom-tabs {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .domtom-tabs.left {
+            left: 10px;
+        }
+        .domtom-tabs.right {
+            right: 10px;
+        }
+        .domtom-tab {
+            background: rgba(0, 0, 0, 0.9);
+            color: #8B0000;
+            padding: 12px 8px;
+            margin: 8px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            min-width: 100px;
+            max-width: 120px;
+            border: 1px solid rgba(139, 0, 0, 0.5);
+        }
+        .domtom-tab:hover {
+            background: rgba(30, 30, 30, 0.95);
+            transform: scale(1.05);
+            color: #B22222;
+        }
+        .domtom-tab.active {
+            background: rgba(50, 50, 50, 0.95);
+            color: #DC143C;
+            border: 2px solid #DC143C;
+        }
+        .maplibregl-ctrl-group {
+            background: rgba(50, 50, 50, 0.9) !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6) !important;
+        }
+        .maplibregl-ctrl-group button {
+            background-color: rgba(50, 50, 50, 0.9) !important;
+            border-bottom: 1px solid rgba(100, 100, 100, 0.5) !important;
+        }
+        .maplibregl-ctrl-group button:hover {
+            background-color: rgba(80, 80, 80, 0.9) !important;
+        }
+        .maplibregl-ctrl button .maplibregl-ctrl-icon {
+            filter: invert(1);
+        }
+        .maplibregl-ctrl-scale {
+            background-color: rgba(50, 50, 50, 0.8) !important;
+            color: #ffffff !important;
+            border: 2px solid rgba(100, 100, 100, 0.6) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">CRA et LRA français</div>
+    <div id="map"></div>
+
+    <div class="domtom-tabs left">
+        <div class="domtom-tab" data-territory="france">France<br>métropolitaine</div>
+        <div class="domtom-tab" data-territory="guadeloupe">Guadeloupe</div>
+        <div class="domtom-tab" data-territory="martinique">Martinique</div>
+        <div class="domtom-tab" data-territory="guyane">Guyane</div>
+    </div>
+
+    <div class="domtom-tabs right">
+        <div class="domtom-tab" data-territory="mayotte">Mayotte</div>
+        <div class="domtom-tab" data-territory="reunion">La Réunion</div>
+        <div class="domtom-tab" data-territory="polynesie">Polynésie<br>française</div>
+        <div class="domtom-tab" data-territory="nouvellecaledonie">Nouvelle-<br>Calédonie</div>
+    </div>
+
+    <div class="legend">
+        <h4>Légende</h4>
+        <div class="legend-item">
+            <div class="legend-circle" style="background-color: #000000; border: 2px solid #e74c3c;"></div>
+            <span>CRA</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-circle" style="background-color: #e74c3c; border: 2px solid rgba(0,0,0,0.3);"></div>
+            <span>LRA</span>
+        </div>
+    </div>
+
+    <script>
+        const etablissements = [
+            {type: "CRA", nom: "Centre de Rétention Administrative de Mesnil-Amelot", ouverture: "1988 (1995, 2011)", fermeture: "", lieu: "Mesnil-Amelot", adresse: "6 Rue de Paris, 77990 Le Mesnil-Amelot", x: 49.021732330322266, y: 2.592007875442505, capacite: "200h 24f 16fa", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Paris-Vincennes", ouverture: "1995 (2010, 2018)", fermeture: "", lieu: "Paris-Vincennes", adresse: "48 Av. de l'École de Joinville, 75012 Paris", x: 48.8310662, y: 2.4688277, capacite: "235", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Palaiseau", ouverture: "2005", fermeture: "", lieu: "Palaiseau", adresse: "13 Rue Emile Zola, 91120 Palaiseau", x: 48.7117478, y: 2.2515766, capacite: "40h", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Plaisir", ouverture: "2006", fermeture: "", lieu: "Plaisir", adresse: "889 Av. François Mitterrand, 78370 Plaisir", x: 48.8191275, y: 1.958148, capacite: "26", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Coquelles", ouverture: "2003", fermeture: "", lieu: "Coquelles", adresse: "1001 Bd du Kent, 62231 Coquelles", x: 50.931427, y: 1.809811, capacite: "104h", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Lille-Lesquin", ouverture: "1985 (2006)", fermeture: "", lieu: "Lille-Lesquin", adresse: "Rte de l'Aéroport, 59810 Lesquin", x: 50.5767263, y: 3.1020927, capacite: "116", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Rouen-Oissel", ouverture: "2004", fermeture: "", lieu: "Rouen-Oissel", adresse: "École nationale de police - Route des Essarts - BP 11 76350 Oissel", x: 49.0560842, y: 2.6503201, capacite: "53h 19f", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Rennes", ouverture: "2007", fermeture: "", lieu: "Rennes", adresse: "Rue Jules Vallès, 35136 Saint-Jacques-de-la-Lande", x: 48.1117611, y: -1.6802654, capacite: "36h 6f 4fa", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Toulouse-Cornebarrieu", ouverture: "2006", fermeture: "", lieu: "Toulouse-Cornebarrieu", adresse: "Av. Latécoère, 31700 Cornebarrieu", x: 43.642613, y: 1.3412664, capacite: "126", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Hendaye", ouverture: "2008", fermeture: "", lieu: "Hendaye", adresse: "1 Rue Joliot Curie, 64700 Hendaye", x: 43.351436113660, y: -1.781802134143, capacite: "30h", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Bordeaux", ouverture: "2003 (2011)", fermeture: "", lieu: "Bordeaux", adresse: "Commissariat central 23, rue François-de-Sourdis 33000 Bordeaux", x: 44.833471, y: -0.5882467, capacite: "20h", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Nîmes-Courbessac", ouverture: "2007", fermeture: "", lieu: "Nîmes", adresse: "162 Av. Clément Ader, 30000 Nîmes", x: 43.8582685, y: 4.4046328, capacite: "126", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Marseille", ouverture: "2006", fermeture: "", lieu: "Marseille", adresse: "11 Bd des Peintures, 13014 Marseille", x: 43.3317801, y: 5.378835, capacite: "136", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Nice", ouverture: "1986", fermeture: "", lieu: "Nice", adresse: "Caserne Auvare, 28 rue de Roquebillière 06300 Nice", x: 43.71198736031, y: 7.288342342379, capacite: "40", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Perpignan", ouverture: "2007", fermeture: "", lieu: "Perpignan", adresse: "Canton de Perpignan, 1, 66000 Perpignan", x: 42.7015739, y: 2.8941503, capacite: "60", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Sète", ouverture: "1993", fermeture: "", lieu: "Sète", adresse: "15 Quai François Maillol, 34200 Sète", x: 43.4098447, y: 3.7006368, capacite: "28", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Lyon-Saint-Exupéry 1", ouverture: "1995", fermeture: "", lieu: "Lyon-Saint-Exupéry 1", adresse: "Centre de rétention administrative B.P. 106, 69125 LYON - SAINT EXUPERY", x: 45.721552, y: 5.0802426, capacite: "140", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Lyon-Saint-Exupéry 2", ouverture: "2022", fermeture: "", lieu: "Lyon-Saint-Exupéry 2", adresse: "Aéroport Lyon Saint-Exupéry, 69124 Colombier-Saugnieu", x: 45.72986976566467, y: 5.073856381259162, capacite: "140", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Metz-Queuleu", ouverture: "2009", fermeture: "", lieu: "Metz-Queuleu", adresse: "Rue du Général Frère, 57070 Metz", x: 49.09997, y: 6.205397, capacite: "74h 24f", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Strasbourg-Geispolsheim", ouverture: "1991", fermeture: "", lieu: "Strasbourg-Geispolsheim", adresse: "Rue du Fort Lefebvre, 67118 Geispolsheim", x: 48.5252292, y: 7.6897368, capacite: "34h", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Pamandzi (Mayotte)", ouverture: "2015", fermeture: "", lieu: "Pamandzi (Mayotte)", adresse: "Route du lotissement Chanfi Sabili, le Petit Moya 97 610 PAMANDZI", x: -12.799349, y: 45.285755, capacite: "136", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Cayenne-Rochambeau (Cayenne)", ouverture: "1995 (2008)", fermeture: "", lieu: "Cayenne (Guyane)", adresse: "Route nationale 4 - 97351 Matoury", x: 3.842332, y: -53.184814, capacite: "33h 12f", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative des Abymes (Guadeloupe)", ouverture: "2005", fermeture: "", lieu: "Les Abymes (Guadeloupe)", adresse: "Site du Morne Vergain - 97139 Les Abymes", x: 16.25412, y: -61.52325, capacite: "40", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative du Chaudron (La Réunion)", ouverture: "2011", fermeture: "", lieu: "Le Chaudron (La Réunion)", adresse: "Rue Georges Brassens 97490 Sainte Clotilde", x: -20.901631, y: 55.497166, capacite: "8", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Nanterre", ouverture: "", fermeture: "2006, devenu LRA", lieu: "Nanterre", adresse: "167-177 avenue Joliot Curie - 92000 NANTERRE", x: 48.8926992, y: 2.2102765, capacite: "", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Saint-Louis", ouverture: "", fermeture: "2006, devenu LRA", lieu: "Saint-Louis", adresse: "Rue de Lys 3 - 68300 Saint-Louis", x: 47.5895753, y: 7.5600901, capacite: "", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Versailles", ouverture: "", fermeture: "2006", lieu: "Versailles", adresse: "Hôtel de police, 19, avenue de Paris, Versailles.", x: 48.79850387573242, y: 2.1439249515533447, capacite: "", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Paris-Dépot-Palais de Justice", ouverture: "1981", fermeture: "partie homme en 2006", lieu: "Paris-Dépot", adresse: "3 quai de l'Horloge 75023 PARIS", x: 48.8566647, y: 2.3446145, capacite: "40", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Bobigny", ouverture: "2003", fermeture: "", lieu: "Bobigny", adresse: "45 rue de Carency  93000 Bobigny", x: 48.9105321, y: 2.4488348, capacite: "53", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative de Rivesaltes", ouverture: "1984", fermeture: "", lieu: "Rivesaltes", adresse: "Camp Joffre route d'Opoul 66600 Rivesaltes", x: 42.803453, y: 2.879782, capacite: "50", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative d'Olivet", ouverture: "2024", fermeture: "", lieu: "Olivet", adresse: "167 rue de Châteauroux 45160 Olivet", x: 47.848519, y: 1.929242, capacite: "90", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de l'aéroport d'Ajaccio", ouverture: "2001", fermeture: "", lieu: "Ajaccio", adresse: "Rte de Campo Dell Oro, 20090 Ajaccio", x: 41.91768264770508, y: 8.802734375, capacite: "4h 2f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative d'Allones", ouverture: "2006", fermeture: "", lieu: "Allones", adresse: "Rue Claude Chappe 72700 Allonnes", x: 47.9695195, y: 0.1545355, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Bastia", ouverture: "2004", fermeture: "", lieu: "Bastia", adresse: "Hotel de police 6 Rue Luce de Casabianca 20200 Bastia", x: 42.7037403, y: 9.4529516, capacite: "7", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Bobigny", ouverture: "2021", fermeture: "", lieu: "Bobigny", adresse: "Hôtel de Police - 45 rue Carency - 93000 BOBIGNY", x: 48.90997314453125, y: 2.45119047164917, capacite: "12", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Brest", ouverture: "", fermeture: "", lieu: "Brest", adresse: "Commissariat de police 15 Rue Colbert 29200 Brest", x: 48.389048, y: -4.486748, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Cergy-Pontoise", ouverture: "2001 (2010)", fermeture: "", lieu: "Cergy-Pontoise", adresse: "Commissariat de Cergy-Pontoise - 4 rue de la Croix des Maheux - 95520 CERGY-PONTOISE", x: 49.037975, y: 2.0858754, capacite: "12h 4f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Cherbourg", ouverture: "2004", fermeture: "", lieu: "Cherbourg", adresse: "2 Rue du Val de Saire, 50100 Cherbourg-en-Cotentin", x: 49.63850402832031, y: -1.6121742725372314, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Choisy-Le-Roy", ouverture: "1990 (CRA d'origine)", fermeture: "", lieu: "Choisy-Le-Roy", adresse: "9 Avenue Léon Gourdault - 94600 CHOISY LE ROI", x: 48.7639243, y: 2.4062463, capacite: "12h 2f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Cenon", ouverture: "2021", fermeture: "", lieu: "Cenon", adresse: "chemin CAMPARIAN 33150 CENON", x: 44.8502957, y: -0.5238525, capacite: "12", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Forbach", ouverture: "1990", fermeture: "", lieu: "Forbach", adresse: "67260 route de Kalhausen BP 111 Oermingen", x: 49.0001069, y: 7.1329936, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de l'aéroport du Lamentin", ouverture: "", fermeture: "", lieu: "aéroport de Lamentin (Martinique)", adresse: "BP279, Le Lamentin 97285, Martinique", x: 14.614557, y: -61.0018145, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Lomme", ouverture: "temporaire", fermeture: "", lieu: "Lomme", adresse: "comissariat de Lomme, Rue de l'Hôtel de ville, 59160", x: 50.6399755, y: 3.011401, capacite: "4", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Modane", ouverture: "2003", fermeture: "", lieu: "Modane", adresse: "1 Place Sommeiller, 73500 Modane", x: 45.19367218017578, y: 6.658681392669678, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Nanterre", ouverture: "2005", fermeture: "", lieu: "Nanterre", adresse: "167-177 avenue Joliot Curie - 92000 NANTERRE", x: 48.8926992, y: 2.2102765, capacite: "20", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de l'aéroport Nice-Côte-d'Azur", ouverture: "temporaire dans le poste de la DCPAF du terminal 2", fermeture: "", lieu: "aéroport Nice-Côte-d'Azur", adresse: "Rue Costes et Bellonte, 06200 Nice", x: 43.6679037, y: 7.2115654, capacite: "2", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Pamandzi (Mayotte)", ouverture: "2023", fermeture: "", lieu: "Pamandzi (Mayotte)", adresse: "Route du lotissement Chanfi Sabili, le Petit Moya 97 610 PAMANDZI", x: -12.79674, y: 45.27938, capacite: "24", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Pontarlier", ouverture: "2024", fermeture: "", lieu: "Pontarlier", adresse: "16 Rocade Georges Pompidou, 25300 Pontarlier", x: 46.9012469, y: 6.3547012, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Ruaudin", ouverture: "2023", fermeture: "", lieu: "Ruaudin", adresse: "Hôtel Ashley, 27 Bd Robert Jarry, 72000 Le Mans", x: 47.9961921, y: 0.1925077, capacite: "2", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Rivesaltes", ouverture: "", fermeture: "déplacé en 2007-2009", lieu: "Rivesaltes", adresse: "2 Av. Gustave Eiffel, 66600 Rivesaltes", x: 42.7767, y: 2.8367, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de La Rochelle", ouverture: "2021", fermeture: "", lieu: "La Rochelle", adresse: "1 Rue de la Marne, 17000 La Rochelle", x: 46.1685726, y: -1.1469948, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Saint-Dizier", ouverture: "2022", fermeture: "", lieu: "Saint-Dizier", adresse: "5 rue du Brigadier-Albert 52100 Saint-Dizier", x: 48.639732360839844, y: 4.962185382843018, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Saint-Louis", ouverture: "2001", fermeture: "", lieu: "Saint-Louis", adresse: "Rue de Lys 3 - 68300 Saint-Louis", x: 47.5895753, y: 7.5600901, capacite: "6h 3f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Savigny-sur-Orge", ouverture: "2024", fermeture: "", lieu: "Savigny-sur-Orge", adresse: "1 Pl. Régis Ryckebush, 91600 Savigny-sur-Orge", x: 48.69228043752301, y: 2.3377128, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Soissons", ouverture: "2001", fermeture: "", lieu: "Soissons", adresse: "19 rue Paul-Deviolaine 02209 Soissons", x: 49.38569, y: 3.322992, capacite: "4", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Tourcoing", ouverture: "2019", fermeture: "", lieu: "Tourcoing", adresse: "Hôtel de police, 49 Avenue de la Fin de la Guerre, 59200 Tourcoing", x: 50.7270776, y: 3.1486185, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Tours", ouverture: "2004", fermeture: "", lieu: "Tours", adresse: "Commissariat Principal de Police de Tours, 70 rue Marceau - 37000 Tour", x: 50.72736, y: 3.14916, capacite: "4h 2f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Trégueux", ouverture: "non permanent", fermeture: "dans hôtels", lieu: "Trégueux", adresse: "Kyriad Direct Saint Brieuc - Parc des Expositions, 52 Rue du Gué Lambert, 22950 Trégueux", x: 48.4941283, y: -2.7646644, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Troyes", ouverture: "2023", fermeture: "", lieu: "Troyes", adresse: "18 Rue des Gayettes, 10000 Troyes", x: 48.2895505, y: 4.0732198, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Cayenne-Rochambeau", ouverture: "2007", fermeture: "", lieu: "Cayenne (Guyane)", adresse: "Route nationale 4 - 97351 Matoury", x: 3.842332, y: -53.184814, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Chessy", ouverture: "2002", fermeture: "", lieu: "Chessy", adresse: "Commissariat de Chessy, Rue du Grand Secours, 77700 Chessy", x: 48.8613084, y: 2.7854366, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative d'Amiens", ouverture: "non permanent", fermeture: "dans hôtels", lieu: "Amiens", adresse: "11 rue du Marché Lanselle 80000 Amiens France", x: 49.895736, y: 2.297742, capacite: "", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative d'Orléans-Cercottes", ouverture: "2005", fermeture: "", lieu: "Orléans-Cercottes", adresse: "23 route de Paris - 45520 Cercottes", x: 47.9765922, y: 1.8849385, capacite: "74h 24f", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Poitiers", ouverture: "2001", fermeture: "", lieu: "Poitiers", adresse: "38 Rue de la Marne, 86000 Poitiers", x: 46.581892, y: 0.338223, capacite: "2", precisions: ""},
+            {type: "LRA", nom: "Locaux de Rétention Administrative de Reims", ouverture: "2005", fermeture: "", lieu: "Reims", adresse: "Hôtel de police - 40, Boulevard Louis Roederer - 51100 REIMS", x: 49.256176, y: 4.021882, capacite: "2", precisions: ""}
+        ];
+
+        const geojson = {
+            type: 'FeatureCollection',
+            features: etablissements
+                .filter(e => e.x && e.y && !isNaN(e.x) && !isNaN(e.y))
+                .map(e => ({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [e.y, e.x]
+                    },
+                    properties: {
+                        type: e.type,
+                        nom: e.nom,
+                        lieu: e.lieu,
+                        ouverture: e.ouverture,
+                        fermeture: e.fermeture,
+                        adresse: e.adresse,
+                        capacite: e.capacite,
+                        precisions: e.precisions
+                    }
+                }))
+        };
+
+        function formatCapacite(capacite) {
+            if (!capacite) return '';
+            let result = [];
+            const hMatch = capacite.match(/(\d+)h/);
+            if (hMatch) result.push(`${hMatch[1]} hommes`);
+            const faMatch = capacite.match(/(\d+)fa/);
+            if (faMatch) result.push(`${faMatch[1]} familles`);
+            const fMatch = capacite.match(/(\d+)f(?!a)/);
+            if (fMatch) result.push(`${fMatch[1]} femmes`);
+            return result.length === 0 ? capacite : result.join(', ');
+        }
+
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: 'https://tiles.openfreemap.org/styles/dark',
+            center: [2.5, 46.5],
+            zoom: 5.5
+        });
+
+        map.addControl(new maplibregl.NavigationControl(), 'top-right');
+        map.addControl(new maplibregl.ScaleControl({maxWidth: 200, unit: 'metric'}), 'bottom-left');
+
+        map.on('load', () => {
+            map.addSource('etablissements', {
+                type: 'geojson',
+                data: geojson,
+                cluster: false
+            });
+
+            map.addLayer({
+                id: 'cra-points',
+                type: 'circle',
+                source: 'etablissements',
+                filter: ['==', ['get', 'type'], 'CRA'],
+                paint: {
+                    'circle-radius': 8,
+                    'circle-color': '#000000',
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#e74c3c',
+                    'circle-opacity': 0.85
+                }
+            });
+
+            map.addLayer({
+                id: 'lra-points',
+                type: 'circle',
+                source: 'etablissements',
+                filter: ['==', ['get', 'type'], 'LRA'],
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#e74c3c',
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#c0392b',
+                    'circle-opacity': 0.85
+                }
+            });
+
+            ['cra-points', 'lra-points'].forEach(layerId => {
+                map.on('mouseenter', layerId, () => {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+
+                map.on('mouseleave', layerId, () => {
+                    map.getCanvas().style.cursor = '';
+                });
+
+                map.on('click', layerId, (e) => {
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+                    let popupContent = `<div class="popup-title">${props.nom}</div>`;
+                    popupContent += `<div class="popup-field"><span class="popup-label">Lieu :</span> ${props.lieu}</div>`;
+                    popupContent += `<div class="popup-field"><span class="popup-label">Type :</span> ${props.type}</div>`;
+                    if (props.ouverture) popupContent += `<div class="popup-field"><span class="popup-label">Ouverture :</span> ${props.ouverture}</div>`;
+                    if (props.fermeture) popupContent += `<div class="popup-field"><span class="popup-label">Fermeture :</span> ${props.fermeture}</div>`;
+                    if (props.precisions) popupContent += `<div class="popup-field"><span class="popup-label">Précisions :</span> ${props.precisions}</div>`;
+                    if (props.capacite) popupContent += `<div class="popup-field"><span class="popup-label">Capacité :</span> ${formatCapacite(props.capacite)}</div>`;
+                    new maplibregl.Popup().setLngLat(coordinates).setHTML(popupContent).addTo(map);
+                });
+            });
+        });
+
+        const territoryViews = {
+            france: {center: [2.5, 46.5], zoom: 5.5},
+            guadeloupe: {center: [-61.55, 16.25], zoom: 10},
+            martinique: {center: [-61.0, 14.65], zoom: 10.5},
+            guyane: {center: [-53.1, 3.95], zoom: 6.5},
+            mayotte: {center: [45.14, -12.82], zoom: 11},
+            reunion: {center: [55.53, -21.11], zoom: 10},
+            polynesie: {center: [-149.57, -17.68], zoom: 9},
+            nouvellecaledonie: {center: [165.62, -21.26], zoom: 8.5}
+        };
+
+        document.querySelectorAll('.domtom-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const territory = tab.getAttribute('data-territory');
+                const view = territoryViews[territory];
+                if (view) {
+                    map.flyTo({center: view.center, zoom: view.zoom, duration: 2000, essential: true});
+                    document.querySelectorAll('.domtom-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelector('[data-territory="france"]').classList.add('active');
+    </script>
+</body>
+</html>

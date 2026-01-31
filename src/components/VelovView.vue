@@ -3,12 +3,9 @@
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div id="velov-map" class="map-canvas"></div>
     <div class="map-title">le 69 en vélo'v</div>
-    
-    <!-- Barre latérale des statistiques -->
     <div class="stats-sidebar">
       <h2>Mes trajets</h2>
-      
-      <!-- Stats globales -->
+
       <div class="stat-item">
         <span class="stat-label">Trajets</span>
         <span class="stat-value">{{ stats.countTrips }}</span>
@@ -33,8 +30,7 @@
         <span class="stat-label">Durée moyenne</span>
         <span class="stat-value">{{ stats.avgDuration }}</span>
       </div>
-      
-      <!-- Options de la carte -->
+
       <hr class="sidebar-divider" />
       <div class="map-controls" style="display: flex; flex-direction: row; align-items: center; gap: 1em; flex-wrap: wrap;">
         <label>
@@ -46,8 +42,7 @@
           Heatmap
         </label>
       </div>
-      
-      <!-- Sélecteur de trajet -->
+
       <hr class="sidebar-divider" />
       <div class="trajet-selector">
         <label>Analyser un trajet:</label>
@@ -58,8 +53,7 @@
           </option>
         </select>
       </div>
-      
-      <!-- Détails du trajet sélectionné -->
+
       <div v-if="selectedTripIndex >= 0" class="trip-details">
         <div class="detail-section">
           <h3>📍 Départ</h3>
@@ -76,7 +70,7 @@
             <span class="value small mono">{{ selectedTrip.depCoords }}</span>
           </div>
         </div>
-        
+
         <div class="detail-section">
           <h3>🎯 Arrivée</h3>
           <div class="detail-row">
@@ -92,7 +86,7 @@
             <span class="value small mono">{{ selectedTrip.arrCoords }}</span>
           </div>
         </div>
-        
+
         <div class="detail-section">
           <h3>📊 Trajet</h3>
           <div class="detail-row">
@@ -121,7 +115,7 @@ export default {
   data() {
     return {
       trips: [],
-      stations: {}, // mapping idstation -> { id, name, lng, lat, commune }
+      stations: {},
       displayedTrips: [],
       selectedTripIndex: -1,
       showStations: true,
@@ -146,21 +140,17 @@ export default {
         toggleHotspot() {
           if (!this.map) return
           if (this.showHotspot) {
-            // Masquer segments et points
             if (this.map.getLayer('trips-layer')) {
               this.map.setLayoutProperty('trips-layer', 'visibility', 'none')
             }
             if (this.map.getLayer('stations-layer')) {
               this.map.setLayoutProperty('stations-layer', 'visibility', 'none')
             }
-            // Afficher la heatmap
             this.displayHeatmap()
           } else {
-            // Masquer la heatmap
             if (this.map.getLayer('velov-heatmap')) {
               this.map.setLayoutProperty('velov-heatmap', 'visibility', 'none')
             }
-            // Réafficher segments/points selon options
             if (this.map.getLayer('trips-layer')) {
               this.map.setLayoutProperty('trips-layer', 'visibility', 'visible')
             }
@@ -172,17 +162,14 @@ export default {
 
         displayHeatmap() {
           if (!this.map) return
-          // Construire les points de heatmap à partir des départs/arrivées
           const heatFeatures = []
           this.displayedTrips.forEach(trip => {
-            // Départ
             const dep = trip.depCoords.split(',').map(Number)
             heatFeatures.push({
               type: 'Feature',
               geometry: { type: 'Point', coordinates: dep },
               properties: {}
             })
-            // Arrivée
             const arr = trip.arrCoords.split(',').map(Number)
             heatFeatures.push({
               type: 'Feature',
@@ -222,13 +209,11 @@ export default {
         },
     resolveStation(id) {
       if (!id) return null
-      // For Velov format, we don't use IDs - just pass through
       return null
     },
     formatDate(dateValue) {
       if (!dateValue) return 'N/A'
       try {
-        // Accepte les formats ISO (2026-01-07T11:22:24) et les timestamps
         const date = new Date(dateValue)
         if (isNaN(date.getTime())) return 'N/A'
         return date.toLocaleDateString('fr-FR')
@@ -243,7 +228,6 @@ export default {
     },
     async loadTrips() {
       try {
-        // 1. Charger les stations (mapping id -> infos)
         const stationsResp = await fetch('/stations_velov.json')
         const stationsData = await stationsResp.json()
         const stationsMap = {}
@@ -259,11 +243,9 @@ export default {
         }
         this.stations = stationsMap
 
-        // 2. Charger les trajets bruts
         const response = await fetch('/velov-elia.json')
         const data = await response.json()
         const rawTrips = Array.isArray(data) ? data : data.walletOperations || []
-        // 3. Enrichir chaque trajet avec infos station (si possible)
         this.trips = rawTrips.map(trip => {
           const start = this.stations[trip.startStation]
           const end = this.stations[trip.endStation]
@@ -283,13 +265,12 @@ export default {
       }
     },
     buildStationsFromTrips() {
-      // Build station map from embedded station data in trips
       const stationsMap = {}
-      
+
       this.trips.forEach(trip => {
         const startStation = trip.startStation
         const endStation = trip.endStation
-        
+
         if (startStation && startStation.name && startStation.lng != null && startStation.lat != null) {
           const key = `${startStation.lng},${startStation.lat}`
           if (!stationsMap[key]) {
@@ -299,7 +280,7 @@ export default {
             }
           }
         }
-        
+
         if (endStation && endStation.name && endStation.lng != null && endStation.lat != null) {
           const key = `${endStation.lng},${endStation.lat}`
           if (!stationsMap[key]) {
@@ -310,7 +291,7 @@ export default {
           }
         }
       })
-      
+
       this.stations = stationsMap
       const count = Object.keys(this.stations).length
       console.log(`✓ ${count} stations extraites des trajets`)
@@ -356,9 +337,9 @@ export default {
         const endStn = trip.endStation
         if (startStn && endStn && startStn.lng != null && startStn.lat != null && endStn.lng != null && endStn.lat != null) {
           validTripsCount++
-          totalDuration += trip.duration * 60 // Convert minutes to seconds
+          totalDuration += trip.duration * 60
           const dist = this.haversineDistance(startStn.lat, startStn.lng, endStn.lat, endStn.lng)
-          totalDistance += dist * 1000 // Convert to meters
+          totalDistance += dist * 1000
           const displayTrip = {
             idx: idx,
             depId: startStn.name,
@@ -367,7 +348,7 @@ export default {
             arrName: endStn.name,
             depCoords: `${startStn.lng}, ${startStn.lat}`,
             arrCoords: `${endStn.lng}, ${endStn.lat}`,
-            distance: dist * 1000, // meters
+            distance: dist * 1000,
             speed: trip.bikeType || 'classic',
             date: trip.startDateTime || trip.startTime,
             co2: 0
@@ -390,7 +371,6 @@ export default {
         }
       })
 
-      // Trier les trajets par ordre chronologique (ascendant = du plus ancien au plus récent)
       this.displayedTrips.sort((a, b) => {
         const dateA = new Date(a.date).getTime()
         const dateB = new Date(b.date).getTime()
@@ -437,7 +417,6 @@ export default {
           }
         })
 
-        // Masquer la heatmap si elle existe
         if (this.map.getLayer('velov-heatmap')) {
           this.map.setLayoutProperty('velov-heatmap', 'visibility', 'none')
         }
@@ -451,7 +430,7 @@ export default {
       features.forEach(f => {
         f.geometry.coordinates.forEach(c => coords.push(c))
       })
-      
+
       if (coords.length > 0) {
         const lons = coords.map(c => c[0])
         const lats = coords.map(c => c[1])
@@ -463,10 +442,10 @@ export default {
       }
     },
     haversineDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371 // Earth radius in km
+      const R = 6371
       const dLat = (lat2 - lat1) * Math.PI / 180
       const dLon = (lon2 - lon1) * Math.PI / 180
-      const a = 
+      const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2)
@@ -475,32 +454,31 @@ export default {
     },
     displayStations() {
       if (!this.map || !this.showStations) return
-      
+
       const stationFeatures = []
-      
-      // Create unique station points from trips
+
       this.displayedTrips.forEach(trip => {
         stationFeatures.push({
           type: 'Feature',
           geometry: { type: 'Point', coordinates: trip.depCoords.split(', ').map(Number) },
           properties: { name: trip.depName }
         })
-        
+
         stationFeatures.push({
           type: 'Feature',
           geometry: { type: 'Point', coordinates: trip.arrCoords.split(', ').map(Number) },
           properties: { name: trip.arrName }
         })
       })
-      
+
       if (stationFeatures.length === 0) return
-      
+
       if (!this.map.getSource('stations')) {
         this.map.addSource('stations', {
           type: 'geojson',
           data: { type: 'FeatureCollection', features: stationFeatures }
         })
-        
+
         this.map.addLayer({
           id: 'stations-layer',
           type: 'circle',
@@ -513,9 +491,9 @@ export default {
             'circle-stroke-color': '#fff'
           }
         })
-        
+
         const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false })
-        
+
         this.map.on('mouseenter', 'stations-layer', (e) => {
           this.map.getCanvas().style.cursor = 'pointer'
           const props = e.features[0].properties
@@ -523,7 +501,7 @@ export default {
             .setHTML(`<div style="color: #22C55E; font-size: 12px; font-weight: 600;">${props.name}</div>`)
             .addTo(this.map)
         })
-        
+
         this.map.on('mouseleave', 'stations-layer', () => {
           this.map.getCanvas().style.cursor = ''
           popup.remove()
@@ -546,11 +524,11 @@ export default {
     },
     addTripClickHandler() {
       if (!this.map || !this.map.getLayer('trips-layer')) return
-      
+
       this.map.on('click', 'trips-layer', (e) => {
         if (!e.features || e.features.length === 0) return
         const props = e.features[0].properties
-        // Recherche stricte sur depName, arrName ET distance (évite collisions)
+
         const tripIdx = this.displayedTrips.findIndex(
           trip => trip.depName === props.depName && trip.arrName === props.arrName && Math.abs(trip.distance - props.distance) < 2
         )
@@ -559,7 +537,7 @@ export default {
           this.onTripSelected()
         }
       })
-      
+
       this.map.on('mouseenter', 'trips-layer', () => {
         this.map.getCanvas().style.cursor = 'pointer'
       })
@@ -574,10 +552,10 @@ export default {
         }
         return
       }
-      
+
       const trip = this.selectedTrip
       if (!trip) return
-      
+
       const highlightFeature = {
         type: 'FeatureCollection',
         features: [{
@@ -591,13 +569,13 @@ export default {
           }
         }]
       }
-      
+
       if (!this.map.getSource('trips-highlight')) {
         this.map.addSource('trips-highlight', {
           type: 'geojson',
           data: highlightFeature
         })
-        
+
         this.map.addLayer({
           id: 'trips-highlight',
           type: 'line',
@@ -613,16 +591,16 @@ export default {
         this.map.getSource('trips-highlight').setData(highlightFeature)
         this.map.setPaintProperty('trips-highlight', 'line-opacity', 0.9)
       }
-      
+
       const depCoords = trip.depCoords.split(', ').map(Number)
       const arrCoords = trip.arrCoords.split(', ').map(Number)
       const bounds = [
         [Math.min(depCoords[0], arrCoords[0]), Math.min(depCoords[1], arrCoords[1])],
         [Math.max(depCoords[0], arrCoords[0]), Math.max(depCoords[1], arrCoords[1])]
       ]
-      
+
       this.map.fitBounds(bounds, { padding: 140, duration: 600, maxZoom: 13 })
-      
+
       console.log(`✨ Trajet sélectionné: ${trip.depName} → ${trip.arrName}`)
     }
   },
@@ -882,7 +860,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .map-title {
     font-size: 16px;
     padding: 10px 16px;
@@ -890,14 +868,13 @@ export default {
     top: 56px;
     transform: translateX(-50%);
   }
-  
+
   .back-button {
     padding: 8px 16px;
     font-size: 12px;
   }
 }
 
-/* Customiser les contrôles MapLibre - couleur verte pour Velov */
 :deep(.maplibregl-ctrl-zoom-in),
 :deep(.maplibregl-ctrl-zoom-out),
 :deep(.maplibregl-ctrl-compass) {

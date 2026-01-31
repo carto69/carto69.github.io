@@ -617,7 +617,6 @@ const initMobilitesMap = () => {
     }))
   }
 
-  // Build color match expression from amenagements
   const colorExpression = ['match', ['get', 'type']]
   const uniqueTypes = Array.from(new Set(state.amgCycl.map(a => a.type)))
   uniqueTypes.forEach(type => {
@@ -626,7 +625,7 @@ const initMobilitesMap = () => {
       colorExpression.push(type, item.color)
     }
   })
-  colorExpression.push('#2563eb') // fallback
+  colorExpression.push('#2563eb')
 
   mobilitesMap = new maplibregl.Map({
     container: mobilitesContainer.value,

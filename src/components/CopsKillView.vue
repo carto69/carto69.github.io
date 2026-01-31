@@ -12,12 +12,12 @@
       </div>
 
       <div class="top-bar">
-        <h1 class="map-title">Morts de la Police Française (1977-2024)</h1>
+        <h1 class="map-title">Morts de la Police Française (1977-2022)</h1>
         <button class="back-btn" @click="$emit('back')">← Retour</button>
       </div>
-      
+
       <div id="map" class="main-map"></div>
-      
+
       <div class="popup-info" v-if="selectedPerson">
         <div class="popup-header">
           <h3>{{ selectedPerson.prenom }} {{ selectedPerson.nom }}</h3>
@@ -104,11 +104,11 @@ export default {
       const lines = text.trim().split('\n')
       const headers = lines[0].split(',')
       const result = []
-      
+
       for (let i = 1; i < lines.length; i++) {
         const obj = {}
         const row = this.parseCSVLine(lines[i])
-        
+
         headers.forEach((header, index) => {
           obj[header] = row[index] || ''
         })
@@ -120,11 +120,11 @@ export default {
       const result = []
       let current = ''
       let inQuotes = false
-      
+
       for (let i = 0; i < line.length; i++) {
         const char = line[i]
         const nextChar = line[i + 1]
-        
+
         if (char === '"') {
           if (inQuotes && nextChar === '"') {
             current += '"'
@@ -156,12 +156,12 @@ export default {
       }).addTo(this.map)
 
       this.loadFranceGeometry()
-      
+
       this.addMarkers()
-      
+
       this.addLegend()
       this.addScale()
-      
+
       this.initDOMTOMMaps()
     },
     initDOMTOMMaps() {
@@ -225,8 +225,7 @@ export default {
     },
     addMarkers() {
       const cityDeaths = {}
-      
-      // Grouper les morts par ville
+
       this.data.forEach(person => {
         const city = person.ville
         if (!cityDeaths[city]) {
@@ -234,19 +233,17 @@ export default {
         }
         cityDeaths[city].push(person)
       })
-      
+
       const majorCities = new Set(['paris','lyon','marseille','toulouse','bordeaux','lille','nice','nantes','strasbourg','montpellier'])
 
-      // Ajouter marqueurs
       Object.entries(cityDeaths).forEach(([city, persons]) => {
         const baseCoords = this.cityCoordinates[city]
         if (!baseCoords) return
-        
+
         persons.forEach((person, index) => {
           let coords = baseCoords
           const cityKey = city ? city.toLowerCase() : ''
 
-          // Pour les grandes villes, dispersion aléatoire dans un rayon ~0.03°
           if (majorCities.has(cityKey)) {
             const r = 0.03 * Math.random()
             const angle = Math.random() * Math.PI * 2
@@ -255,7 +252,6 @@ export default {
               baseCoords[1] + Math.sin(angle) * r
             ]
           } else if (persons.length > 1) {
-            // Jitter si plusieurs personnes dans la même ville
             const jitterAmount = 0.01 * (index + 1) / persons.length
             const angle = (index / persons.length) * Math.PI * 2
             coords = [
@@ -263,7 +259,7 @@ export default {
               baseCoords[1] + Math.sin(angle) * jitterAmount
             ]
           }
-          
+
           const marker = L.circleMarker(coords, {
             radius: 5,
             fillColor: '#e74c3c',
@@ -272,18 +268,18 @@ export default {
             opacity: 1,
             fillOpacity: 0.7
           }).addTo(this.map)
-          
+
           marker.on('click', () => {
             this.selectedPerson = person
           })
-          
+
           this.markers.push(marker)
         })
       })
     },
     addLegend() {
       const legend = L.control({ position: 'bottomleft' })
-      
+
       legend.onAdd = () => {
         const div = L.DomUtil.create('div', 'legend')
         div.innerHTML = `
@@ -297,7 +293,7 @@ export default {
         `
         return div
       }
-      
+
       legend.addTo(this.map)
     },
     addScale() {
@@ -469,7 +465,6 @@ export default {
   font-size: 1.1rem;
 }
 
-
 .popup-header button {
   background: none;
   border: none;
@@ -487,7 +482,6 @@ export default {
 .popup-header button:hover {
   color: #333;
 }
-
 
 .popup-body {
   padding: 15px;

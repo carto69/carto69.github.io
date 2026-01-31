@@ -3,7 +3,7 @@
     <aside class="sidebar">
       <button class="back" @click="$emit('back')">← Retour</button>
       <h1>Genre et espace public</h1>
-      
+
       <div class="project-info">
         <p>Cartes sensibles produites dans le cadre d'une enquête de L2 sur le thème "Genre et Espace Public" où nous avons enquêté sur le ressenti des femmes sur les quais du Rhône à Lyon.</p>
       </div>
@@ -11,8 +11,8 @@
       <hr />
 
       <div class="tabs">
-        <button 
-          v-for="tab in tabs" 
+        <button
+          v-for="tab in tabs"
           :key="tab.id"
           class="tab-btn"
           :class="{ active: activeTab === tab.id }"
@@ -29,8 +29,8 @@
         <img src="/femmes-quais/source-4.png" alt="Démarche" style="max-width:45vw;max-height:80vh;border-radius:10px;box-shadow:0 2px 16px #0002;" />
       </div>
       <div v-else-if="activeContent" class="image-viewer">
-        <img 
-          :src="activeContent" 
+        <img
+          :src="activeContent"
           :alt="activeTabName"
           @click="toggleFullscreen"
           class="main-image"
@@ -39,13 +39,11 @@
       </div>
     </div>
 
-    <!-- Modal plein écran -->
     <div v-if="fullscreen" class="fullscreen-modal" @click="toggleFullscreen">
       <button class="close-btn" @click.stop="toggleFullscreen">✕</button>
       <img :src="activeContent" :alt="activeTabName" />
     </div>
-    
-    <!-- Onglet docs: deux pages côte à côte (déjà ci-dessus, doublon supprimé) -->
+
   </div>
 </template>
 
@@ -58,21 +56,21 @@ export default {
       fullscreen: false,
       docsPage: 'sources',
       tabs: [
-            { 
-              id: 'carte1', 
-              name: 'Jour', 
+            {
+              id: 'carte1',
+              name: 'Jour',
               icon: '☀️',
               content: '/femmes-quais/carte-1.png'
             },
-            { 
-              id: 'carte2', 
-              name: 'Nuit', 
+            {
+              id: 'carte2',
+              name: 'Nuit',
               icon: '🌙',
               content: '/femmes-quais/carte-2.png'
             },
-            { 
-              id: 'docs', 
-              name: 'Sources & Démarche', 
+            {
+              id: 'docs',
+              name: 'Sources & Démarche',
               icon: '📚',
               content: null
             }

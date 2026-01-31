@@ -20,7 +20,6 @@ export default {
       this.map = new maplibregl.Map({
         container: 'mapelia-map',
         style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-        // Centré sur France + Italie
         center: [7, 45],
         zoom: 4.5
       })
