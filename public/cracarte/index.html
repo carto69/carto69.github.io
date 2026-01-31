@@ -17,7 +17,7 @@
             top: 0;
             bottom: 0;
             width: 100%;
-            background: #ffffff !important;
+            background: #0f0f0f !important;
         }
         #title {
             position: absolute;
@@ -36,65 +36,34 @@
             letter-spacing: 2px;
         }
         .maplibregl-canvas {
-            background: #ffffff !important;
-        }
-        #sources-toggle {
-            position: absolute;
-            bottom: 100px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #e74c3c;
-            border: 2px solid #e74c3c;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-        #sources-toggle:hover {
-            background: rgba(0, 0, 0, 0.95);
-            transform: scale(1.05);
-        }
-        #sources-text {
-            position: absolute;
-            bottom: 30px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 0;
-            max-width: 200px;
-            display: none;
+            background: #0f0f0f !important;
         }
         .maplibregl-popup-content {
-            background: #f5f5f5 !important;
-            color: #333333 !important;
+            background: #141414 !important;
+            color: #f0f0f0 !important;
             padding: 12px !important;
             border-radius: 6px !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.6) !important;
             font-family: Arial, sans-serif !important;
+            min-width: 250px;
         }
         .maplibregl-popup-content strong {
             color: #e74c3c !important;
             font-size: 14px !important;
         }
         .maplibregl-popup-content em {
-            color: #666666 !important;
+            color: #bdbdbd !important;
             font-size: 12px !important;
         }
         .maplibregl-popup-anchor-top .maplibregl-popup-tip {
-            border-top-color: #f5f5f5 !important;
+            border-top-color: #141414 !important;
         }
         .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
-            border-bottom-color: #f5f5f5 !important;
+            border-bottom-color: #141414 !important;
         }
         .legend {
             position: absolute;
-            bottom: 30px;
+            bottom: 12px;
             right: 10px;
             background: rgba(50, 50, 50, 0.9);
             padding: 15px;
@@ -104,10 +73,8 @@
             z-index: 1;
             font-size: 14px;
         }
-        .legend h4 {
-            margin: 0 0 10px 0;
-            font-size: 16px;
-            color: #ffffff;
+        .maplibregl-ctrl-scale + .maplibregl-ctrl-attrib {
+            margin-top: 6px !important;
         }
         .legend-item {
             margin: 8px 0;
@@ -121,15 +88,11 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-        .maplibregl-popup-content {
-            padding: 15px;
-            min-width: 250px;
-        }
         .popup-title {
             font-weight: bold;
             font-size: 16px;
             margin-bottom: 10px;
-            color: #333;
+            color: #e74c3c;
         }
         .popup-field {
             margin: 5px 0;
@@ -137,7 +100,7 @@
         }
         .popup-label {
             font-weight: bold;
-            color: #666;
+            color: #d0d0d0;
         }
         .domtom-tabs {
             position: absolute;
@@ -199,15 +162,8 @@
     </style>
 </head>
 <body>
-    <div id="title">Accueil</div>
+    <div id="title">CRA et LRA français</div>
     <div id="map"></div>
-
-    <div id="sources-toggle">Sources</div>
-    <div id="sources-text">
-        <strong>Sources :</strong><br>
-        CRA/LRA : données publiques<br>
-        Fonds de carte : OpenFreeMap
-    </div>
 
     <div class="domtom-tabs left">
         <div class="domtom-tab" data-territory="france">France<br>métropolitaine</div>
@@ -224,18 +180,20 @@
     </div>
 
     <div class="legend">
-        <h4>Légende</h4>
         <div class="legend-item">
             <div class="legend-circle" style="background-color: #000000; border: 2px solid #e74c3c;"></div>
-            <span>CRA</span>
+            <span>Centres de Rétention Administrative (CRA)</span>
         </div>
         <div class="legend-item">
             <div class="legend-circle" style="background-color: #e74c3c; border: 2px solid rgba(0,0,0,0.3);"></div>
-            <span>LRA</span>
+            <span>Locaux de Rétention Administrative (LRA)</span>
         </div>
         <div class="legend-item">
             <div class="legend-circle" style="background-color: #ffffff; border: 3px solid #e74c3c;"></div>
-            <span>CRA en projet</span>
+            <span>Centres de Rétention Administrative en projet (CRA)</span>
+        </div>
+        <div class="legend-item" style="margin-top: 10px; align-items: flex-start;">
+            <span style="font-size: 12px; font-style: italic; color: #cfcfcf;">Sources : CIMADE, globaldetentionproject</span>
         </div>
     </div>
 
@@ -263,7 +221,7 @@
             {type: "CRA", nom: "Centre de Rétention Administrative de Strasbourg-Geispolsheim", ouverture: "1991", fermeture: "", lieu: "Strasbourg-Geispolsheim", adresse: "Rue du Fort Lefebvre, 67118 Geispolsheim", x: 48.5252292, y: 7.6897368, capacite: "34h", precisions: ""},
             {type: "CRA", nom: "Centre de Rétention Administrative de Pamandzi (Mayotte)", ouverture: "2015", fermeture: "", lieu: "Pamandzi (Mayotte)", adresse: "Route du lotissement Chanfi Sabili, le Petit Moya 97 610 PAMANDZI", x: -12.799349, y: 45.285755, capacite: "136", precisions: ""},
             {type: "CRA", nom: "Centre de Rétention Administrative de Cayenne-Rochambeau (Cayenne)", ouverture: "1995 (2008)", fermeture: "", lieu: "Cayenne (Guyane)", adresse: "Route nationale 4 - 97351 Matoury", x: 3.842332, y: -53.184814, capacite: "33h 12f", precisions: ""},
-            {type: "CRA", nom: "Centre de Rétention Administrative des Abymes (Guadeloupe)", ouverture: "2005", fermeture: "", lieu: "Les Abymes (Guadeloupe)", adresse: "Site du Morne Vergain - 97139 Les Abymes", x: 16.25412, y: -61.52325, capacite: "40", precisions: ""},
+            {type: "CRA", nom: "Centre de Rétention Administrative des Abymes (Guadeloupe)", ouverture: "2005", fermeture: "", lieu: "Les Abymes (Guadeloupe)", adresse: "Site du Morne Vergain - 97139 Les Abymes", x: 16.254765549427123, y: -61.52303284418176, capacite: "40", precisions: ""},
             {type: "CRA", nom: "Centre de Rétention Administrative du Chaudron (La Réunion)", ouverture: "2011", fermeture: "", lieu: "Le Chaudron (La Réunion)", adresse: "Rue Georges Brassens 97490 Sainte Clotilde", x: -20.901631, y: 55.497166, capacite: "8", precisions: ""},
             {type: "CRA", nom: "Centre de Rétention Administrative de Nanterre", ouverture: "", fermeture: "2006, devenu LRA", lieu: "Nanterre", adresse: "167-177 avenue Joliot Curie - 92000 NANTERRE", x: 48.8926992, y: 2.2102765, capacite: "", precisions: ""},
             {type: "CRA", nom: "Centre de Rétention Administrative de Saint-Louis", ouverture: "", fermeture: "2006, devenu LRA", lieu: "Saint-Louis", adresse: "Rue de Lys 3 - 68300 Saint-Louis", x: 47.5895753, y: 7.5600901, capacite: "", precisions: ""},
@@ -310,25 +268,7 @@
 
         const geojson = {
             type: 'FeatureCollection',
-            features: etablissements
-                .filter(e => e.x && e.y && !isNaN(e.x) && !isNaN(e.y))
-                .map(e => ({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [e.y, e.x]
-                    },
-                    properties: {
-                        type: e.type,
-                        nom: e.nom,
-                        lieu: e.lieu,
-                        ouverture: e.ouverture,
-                        fermeture: e.fermeture,
-                        adresse: e.adresse,
-                        capacite: e.capacite,
-                        precisions: e.precisions
-                    }
-                }))
+            features: []
         };
 
         function formatCapacite(capacite) {
@@ -345,15 +285,125 @@
 
         const map = new maplibregl.Map({
             container: 'map',
-            style: 'https://tiles.openfreemap.org/styles/positron',
+            style: 'https://tiles.openfreemap.org/styles/dark',
             center: [2.5, 46.5],
-            zoom: 5.5
+            zoom: 5.5,
+            attributionControl: false
         });
 
         map.addControl(new maplibregl.NavigationControl(), 'top-right');
         map.addControl(new maplibregl.ScaleControl({maxWidth: 200, unit: 'metric'}), 'bottom-left');
+        map.addControl(new maplibregl.AttributionControl({compact: true}), 'bottom-left');
+
+        function applyFrenchLabels() {
+            const style = map.getStyle();
+            if (!style || !style.layers) return;
+            style.layers.forEach(layer => {
+                if (layer.type === 'symbol' && layer.layout && layer.layout['text-field']) {
+                    map.setLayoutProperty(layer.id, 'text-field', [
+                        'coalesce',
+                        ['get', 'name:fr'],
+                        ['get', 'name:latin'],
+                        ['get', 'name']
+                    ]);
+                }
+            });
+        }
+
+        function parseCsvLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i += 1) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i += 1;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function normalizeType(type) {
+            const cleaned = (type || '').trim();
+            if (cleaned.toLowerCase().includes('projet')) return 'CRA_PROJET';
+            return cleaned.toUpperCase();
+        }
+
+        function formatTypeLabel(type) {
+            if (type === 'CRA_PROJET') return 'CRA en projet';
+            if (type === 'CRA') return 'CRA';
+            if (type === 'LRA') return 'LRA';
+            return type;
+        }
+
+        async function loadCsvAndUpdateSource() {
+            try {
+                const response = await fetch('./cra2.csv');
+                const csv = await response.text();
+                const lines = csv.split(/\r?\n/);
+                const features = [];
+
+                for (let i = 1; i < lines.length; i += 1) {
+                    const line = lines[i];
+                    if (!line || !line.trim()) continue;
+                    const cols = parseCsvLine(line);
+                    if (cols.length < 8) continue;
+
+                    const typeRaw = (cols[0] || '').trim();
+                    const nom = (cols[1] || '').trim();
+                    const ouverture = (cols[2] || '').trim();
+                    const fermeture = (cols[3] || '').trim();
+                    const lieu = (cols[4] || '').trim();
+                    const adresse = (cols[5] || '').trim();
+                    const x = parseFloat((cols[6] || '').trim());
+                    const y = parseFloat((cols[7] || '').trim());
+                    const capacite = (cols[8] || '').trim();
+
+                    if (Number.isNaN(x) || Number.isNaN(y)) continue;
+
+                    const type = normalizeType(typeRaw);
+
+                    features.push({
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [y, x]
+                        },
+                        properties: {
+                            type,
+                            nom,
+                            lieu,
+                            ouverture,
+                            fermeture,
+                            adresse,
+                            capacite,
+                            precisions: ''
+                        }
+                    });
+                }
+
+                const source = map.getSource('etablissements');
+                if (source) {
+                    source.setData({ type: 'FeatureCollection', features });
+                }
+            } catch (error) {
+                console.error('Erreur au chargement du CSV:', error);
+            }
+        }
 
         map.on('load', () => {
+            applyFrenchLabels();
             map.addSource('etablissements', {
                 type: 'geojson',
                 data: geojson,
@@ -366,7 +416,7 @@
                 source: 'etablissements',
                 filter: ['==', ['get', 'type'], 'CRA'],
                 paint: {
-                    'circle-radius': 8,
+                    'circle-radius': 7,
                     'circle-color': '#000000',
                     'circle-stroke-width': 2,
                     'circle-stroke-color': '#e74c3c',
@@ -382,13 +432,27 @@
                 paint: {
                     'circle-radius': 6,
                     'circle-color': '#e74c3c',
-                    'circle-stroke-width': 2,
-                    'circle-stroke-color': '#c0392b',
+                    'circle-stroke-width': 0,
+                    'circle-stroke-color': '#e74c3c',
                     'circle-opacity': 0.85
                 }
             });
 
-            ['cra-points', 'lra-points'].forEach(layerId => {
+            map.addLayer({
+                id: 'cra-projet-points',
+                type: 'circle',
+                source: 'etablissements',
+                filter: ['==', ['get', 'type'], 'CRA_PROJET'],
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#ffffff',
+                    'circle-stroke-width': 3,
+                    'circle-stroke-color': '#e74c3c',
+                    'circle-opacity': 0.95
+                }
+            });
+
+            ['cra-points', 'lra-points', 'cra-projet-points'].forEach(layerId => {
                 map.on('mouseenter', layerId, () => {
                     map.getCanvas().style.cursor = 'pointer';
                 });
@@ -401,8 +465,8 @@
                     const coordinates = e.features[0].geometry.coordinates.slice();
                     const props = e.features[0].properties;
                     let popupContent = `<div class="popup-title">${props.nom}</div>`;
-                    popupContent += `<div class="popup-field"><span class="popup-label">Lieu :</span> ${props.lieu}</div>`;
-                    popupContent += `<div class="popup-field"><span class="popup-label">Type :</span> ${props.type}</div>`;
+                    popupContent += `<div class="popup-field"><span class="popup-label">Lieu :</span> ${props.adresse || props.lieu}</div>`;
+                    popupContent += `<div class="popup-field"><span class="popup-label">Type :</span> ${formatTypeLabel(props.type)}</div>`;
                     if (props.ouverture) popupContent += `<div class="popup-field"><span class="popup-label">Ouverture :</span> ${props.ouverture}</div>`;
                     if (props.fermeture) popupContent += `<div class="popup-field"><span class="popup-label">Fermeture :</span> ${props.fermeture}</div>`;
                     if (props.precisions) popupContent += `<div class="popup-field"><span class="popup-label">Précisions :</span> ${props.precisions}</div>`;
@@ -410,7 +474,14 @@
                     new maplibregl.Popup().setLngLat(coordinates).setHTML(popupContent).addTo(map);
                 });
             });
+
+            loadCsvAndUpdateSource();
+
+            const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+            if (attrib) attrib.classList.remove('maplibregl-compact-show');
         });
+
+        map.on('styledata', applyFrenchLabels);
 
         const territoryViews = {
             france: {center: [2.5, 46.5], zoom: 5.5},
@@ -437,93 +508,6 @@
 
         document.querySelector('[data-territory="france"]').classList.add('active');
 
-        // Charger et afficher les marqueurs depuis le CSV avec 3 types distincts
-        async function loadMarkers() {
-            try {
-                const response = await fetch('./cra2.csv');
-                const csv = await response.text();
-                const lines = csv.split('\n');
-                
-                lines.forEach((line, index) => {
-                    if (index === 0 || !line.trim()) return; // skip header and empty lines
-                    
-                    const parts = line.split(',');
-                    if (parts.length < 8) return;
-                    
-                    const type = parts[0].trim();
-                    const nom = parts[1].trim();
-                    const ouverture = parts[2].trim();
-                    const fermeture = parts[3].trim();
-                    const lieu = parts[4].trim();
-                    const adresse = parts[5].trim();
-                    const x = parseFloat(parts[6].trim());
-                    const y = parseFloat(parts[7].trim());
-                    
-                    if (isNaN(x) || isNaN(y)) return;
-                    
-                    let markerSize = 10;
-                    let markerBg = '#000000';
-                    let markerBorder = '2px solid #e74c3c';
-                    let category = '';
-                    
-                    // Déterminer le type de marqueur
-                    if (type.includes('projet')) {
-                        // CRA en projet : blanc avec bordure rouge, GROS
-                        markerSize = 16;
-                        markerBg = '#ffffff';
-                        markerBorder = '3px solid #e74c3c';
-                        category = 'projet';
-                    } else if (type === 'CRA') {
-                        // CRA opérationnel : noir avec bordure rouge, MOYEN
-                        markerSize = 12;
-                        markerBg = '#000000';
-                        markerBorder = '2px solid #e74c3c';
-                        category = 'cra';
-                    } else if (type === 'LRA') {
-                        // LRA : petit point rouge PETIT
-                        markerSize = 6;
-                        markerBg = '#e74c3c';
-                        markerBorder = 'none';
-                        category = 'lra';
-                    }
-                    
-                    // Créer le marqueur
-                    const el = document.createElement('div');
-                    el.style.width = markerSize + 'px';
-                    el.style.height = markerSize + 'px';
-                    el.style.backgroundColor = markerBg;
-                    el.style.border = markerBorder;
-                    el.style.borderRadius = '50%';
-                    el.style.cursor = 'pointer';
-                    el.style.boxShadow = '0 0 0 1px rgba(0,0,0,0.2)';
-                    
-                    const popup = new maplibregl.Popup({offset: 25})
-                        .setHTML(`<strong>${nom}</strong><br><em>${category}</em><br>${lieu}<br>${adresse}`);
-                    
-                    new maplibregl.Marker(el)
-                        .setLngLat([y, x])
-                        .setPopup(popup)
-                        .addTo(map);
-                });
-            } catch (error) {
-                console.error('Erreur au chargement des marqueurs:', error);
-            }
-        }
-
-        // Charger les marqueurs après que la carte soit chargée
-        map.on('load', () => {
-            loadMarkers();
-        });
-
-        // Toggle sources affichage
-        document.getElementById('sources-toggle').addEventListener('click', () => {
-            const sourcesText = document.getElementById('sources-text');
-            if (sourcesText.style.display === 'none' || sourcesText.style.display === '') {
-                sourcesText.style.display = 'block';
-            } else {
-                sourcesText.style.display = 'none';
-            }
-        });
     </script>
 </body>
 </html>
