@@ -17,6 +17,7 @@
             top: 0;
             bottom: 0;
             width: 100%;
+            background: #ffffff !important;
         }
         #title {
             position: absolute;
@@ -34,11 +35,62 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        #map {
-            background: #1a1a1a !important;
-        }
         .maplibregl-canvas {
-            background: #1a1a1a !important;
+            background: #ffffff !important;
+        }
+        #sources-toggle {
+            position: absolute;
+            bottom: 100px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        #sources-toggle:hover {
+            background: rgba(0, 0, 0, 0.95);
+            transform: scale(1.05);
+        }
+        #sources-text {
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 0;
+            max-width: 200px;
+            display: none;
+        }
+        .maplibregl-popup-content {
+            background: #f5f5f5 !important;
+            color: #333333 !important;
+            padding: 12px !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15) !important;
+            font-family: Arial, sans-serif !important;
+        }
+        .maplibregl-popup-content strong {
+            color: #e74c3c !important;
+            font-size: 14px !important;
+        }
+        .maplibregl-popup-content em {
+            color: #666666 !important;
+            font-size: 12px !important;
+        }
+        .maplibregl-popup-anchor-top .maplibregl-popup-tip {
+            border-top-color: #f5f5f5 !important;
+        }
+        .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+            border-bottom-color: #f5f5f5 !important;
         }
         .legend {
             position: absolute;
@@ -149,6 +201,13 @@
 <body>
     <div id="title">Accueil</div>
     <div id="map"></div>
+
+    <div id="sources-toggle">Sources</div>
+    <div id="sources-text">
+        <strong>Sources :</strong><br>
+        CRA/LRA : données publiques<br>
+        Fonds de carte : OpenFreeMap
+    </div>
 
     <div class="domtom-tabs left">
         <div class="domtom-tab" data-territory="france">France<br>métropolitaine</div>
@@ -438,10 +497,10 @@
                     el.style.cursor = 'pointer';
                     el.style.boxShadow = '0 0 0 1px rgba(0,0,0,0.2)';
                     
-                    const popup = new mapboxgl.Popup({offset: 25})
+                    const popup = new maplibregl.Popup({offset: 25})
                         .setHTML(`<strong>${nom}</strong><br><em>${category}</em><br>${lieu}<br>${adresse}`);
                     
-                    new mapboxgl.Marker(el)
+                    new maplibregl.Marker(el)
                         .setLngLat([y, x])
                         .setPopup(popup)
                         .addTo(map);
@@ -454,6 +513,16 @@
         // Charger les marqueurs après que la carte soit chargée
         map.on('load', () => {
             loadMarkers();
+        });
+
+        // Toggle sources affichage
+        document.getElementById('sources-toggle').addEventListener('click', () => {
+            const sourcesText = document.getElementById('sources-text');
+            if (sourcesText.style.display === 'none' || sourcesText.style.display === '') {
+                sourcesText.style.display = 'block';
+            } else {
+                sourcesText.style.display = 'none';
+            }
         });
     </script>
 </body>
