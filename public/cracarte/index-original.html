@@ -166,10 +166,6 @@
             <div class="legend-circle" style="background-color: #e74c3c; border: 2px solid rgba(0,0,0,0.3);"></div>
             <span>LRA</span>
         </div>
-        <div class="legend-item">
-            <div class="legend-circle" style="background-color: #ffffff; border: 3px solid #e74c3c;"></div>
-            <span>CRA en projet</span>
-        </div>
     </div>
 
     <script>
@@ -369,62 +365,6 @@
         });
 
         document.querySelector('[data-territory="france"]').classList.add('active');
-
-        // Charger et afficher les CRA en projet depuis le CSV
-        async function loadProjectCRA() {
-            try {
-                const response = await fetch('./cra2.csv');
-                const csv = await response.text();
-                const lines = csv.split('\n');
-                
-                lines.forEach((line, index) => {
-                    if (index === 0 || !line.trim()) return; // skip header and empty lines
-                    
-                    const parts = line.split(',');
-                    if (parts.length < 8) return;
-                    
-                    const type = parts[0].trim();
-                    const nom = parts[1].trim();
-                    const ouverture = parts[2].trim();
-                    const fermeture = parts[3].trim();
-                    const lieu = parts[4].trim();
-                    const adresse = parts[5].trim();
-                    const x = parseFloat(parts[6].trim());
-                    const y = parseFloat(parts[7].trim());
-                    
-                    // Identifier les "CRA en projet" : fermeture contenant "projet" ou ouverture vide + type CRA
-                    if ((type === 'CRA' && fermeture.toLowerCase().includes('projet')) ||
-                        (type === 'CRA' && ouverture === '' && fermeture === '')) {
-                        
-                        if (!isNaN(x) && !isNaN(y)) {
-                            // Créer un marqueur blanc avec bordure rouge
-                            const el = document.createElement('div');
-                            el.style.width = '12px';
-                            el.style.height = '12px';
-                            el.style.backgroundColor = '#ffffff';
-                            el.style.border = '3px solid #e74c3c';
-                            el.style.borderRadius = '50%';
-                            el.style.cursor = 'pointer';
-                            
-                            const popup = new mapboxgl.Popup({offset: 25})
-                                .setHTML(`<strong>${nom}</strong><br>${lieu}<br>${adresse}`);
-                            
-                            new mapboxgl.Marker(el)
-                                .setLngLat([y, x])
-                                .setPopup(popup)
-                                .addTo(map);
-                        }
-                    }
-                });
-            } catch (error) {
-                console.error('Erreur au chargement du CSV:', error);
-            }
-        }
-
-        // Charger les CRA en projet après que la carte soit chargée
-        map.on('load', () => {
-            loadProjectCRA();
-        });
     </script>
 </body>
 </html>

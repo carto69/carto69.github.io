@@ -1,0 +1,72 @@
+type, ,ouverture,fermeture et précisions,lieu,adresse,x,y,capacité
+LRA,Locaux de Rétention Administrative de l’aéroport du Lamentin,,,aéroport de Lamentin (Martinique),"BP279, Le Lamentin 97285, Martinique",14.614557,-61.0018145,
+LRA,Locaux de Rétention Administrative de l’aéroport Nice-Côte-d’Azur,temporaire dans le poste de la DCPAF du terminal 2,,aéroport Nice-Côte-d’Azur,"Rue Costes et Bellonte, 06200 Nice",43.6679037,7.2115654,2
+LRA,Locaux de Rétention Administrative de l’aéroport d’Ajaccio,2001,,Ajaccio," Rte de Campo Dell Oro, 20090 Ajaccio",41.91768264770508,8.802734375,4h 2f
+LRA,Locaux de Rétention Administrative d’Allones,2006,,Allones,Rue Claude Chappe 72700 Allonnes,47.9695195,0.1545355,
+LRA,Locaux de Rétention Administrative d’Amiens,non permanent,dans hôtels,Amiens,11 rue du Marché Lanselle 80000 Amiens France,49.895736,2.297742,
+LRA,Locaux de Rétention Administrative de Bastia,2004,,Bastia,Hotel de police 6 Rue Luce de Casabianca 20200 Bastia,42.7037403,9.4529516,7
+CRA,Centre de Rétention Administrative de Bobigny,2003,,Bobigny,45 rue de Carency  93000 Bobigny,48.9105321,2.4488348,53
+LRA,Locaux de Rétention Administrative de Bobigny,2021,,Bobigny,Hôtel de Police - 45 rue Carency - 93000 BOBIGNY,48.90997314453125,2.45119047164917,12
+CRA,Centre de Rétention Administrative de Bordeaux,2003 (2011),,Bordeaux,"Commissariat central 23, rue François-de-Sourdis 33000 Bordeaux",44.833471, -0.5882467,20h
+LRA,Locaux de Rétention Administrative de Brest,,,Brest,Commissariat de police 15 Rue Colbert 29200 Brest,48.389048,-4.486748,
+CRA,Centre de Rétention Administrative de Cayenne-Rochambeau (Cayenne),1995 (2008),,Cayenne (Guyane),Route nationale 4 - 97351 Matoury,3.842332,-53.184814,33h 12f
+LRA,Locaux de Rétention Administrative de Cayenne-Rochambeau ,2007,,Cayenne (Guyane),Route nationale 4 - 97351 Matoury,3.842332,-53.184814,
+LRA,Locaux de Rétention Administrative de Cenon,2021,,Cenon,chemin CAMPARIAN 33150 CENON,44.8502957,-0.5238525,12
+LRA,Locaux de Rétention Administrative de Cergy-Pontoise,2001 (2010),,Cergy-Pontoise,Commissariat de Cergy-Pontoise - 4 rue de la Croix des Maheux - 95520 CERGY-PONTOISE,49.037975,2.0858754,12h 4f
+LRA,Locaux de Rétention Administrative de Cherbourg,2004,,Cherbourg,"2 Rue du Val de Saire, 50100 Cherbourg-en-Cotentin","49.63850402832031,",-1.6121742725372314,
+LRA,Locaux de Rétention Administrative de Chessy,2002,,Chessy,"Commissariat de Chessy, Rue du Grand Secours, 77700 Chessy",48.8613084,2.7854366,
+LRA,Locaux de Rétention Administrative de Choisy-Le-Roy,1990 (CRA d’origine),,Choisy-Le-Roy,9 Avenue Léon Gourdault - 94600 CHOISY LE ROI,48.7639243,2.4062463,12h 2f
+CRA,Centre de Rétention Administrative de Coquelles,2003,,Coquelles,"1001 Bd du Kent, 62231 Coquelles",50.931427,1.809811,104h
+LRA,Locaux de Rétention Administrative de Forbach,1990,,Forbach,67260 route de Kalhausen BP 111 Oermingen,49.0001069,7.1329936,
+CRA,Centre de Rétention Administrative de Hendaye,2008,,Hendaye,"1 Rue Joliot Curie, 64700 Hendaye",43.351436113660,-1.781802134143,30h
+LRA,Locaux de Rétention Administrative de La Rochelle,2021,,La Rochelle,"1 Rue de la Marne, 17000 La Rochelle",46.1685726,-1.1469948,
+CRA,Centre de Rétention Administrative du Chaudron (La Réunion),2011,,Le Chaudron (La Réunion),Rue Georges Brassens 97490 Sainte Clotilde,-20.901631,55.497166,8
+CRA,Centre de Rétention Administrative des Abymes (Guadeloupe),2005,,Les Abymes (Guadeloupe),Site du Morne Vergain - 97139 Les Abymes,16.995971,-62.067641,40
+CRA,Centre de Rétention Administrative de Lille-Lesquin,1985 (2006),,Lille-Lesquin,"Rte de l'Aéroport, 59810 Lesquin",50.5767263,3.1020927,116
+LRA,Locaux de Rétention Administrative de Lomme,temporaire,,Lomme,"comissariat de Lomme, Rue de l'Hôtel de ville, 59160",50.6399755,3.011401,4
+CRA,Centre de Rétention Administrative de Lyon-Saint-Exupéry 1,1995,,Lyon-Saint-Exupéry 1,"Centre de rétention administrative B.P. 106, 69125 LYON - SAINT EXUPERY",45.721552,5.0802426,140
+CRA,Centre de Rétention Administrative de Lyon-Saint-Exupéry 2,2022,,Lyon-Saint-Exupéry 2,"Aéroport Lyon Saint-Exupéry, 69124 Colombier-Saugnieu",45.72986976566467,5.073856381259162,140
+CRA,Centre de Rétention Administrative de Marseille,2006,,Marseille,"11 Bd des Peintures, 13014 Marseille",43.3317801,5.378835,136
+CRA,Centre de Rétention Administrative de Mesnil-Amelot,"1988 (1995, 2011)",,Mesnil-Amelot ,"6 Rue de Paris, 77990 Le Mesnil-Amelot",49.021732330322266,2.592007875442505,200h 24f 16fa
+CRA,Centre de Rétention Administrative de Metz-Queuleu,2009,,Metz-Queuleu,"Rue du Général Frère, 57070 Metz",49.09997,6.205397,74h 24f
+LRA,Locaux de Rétention Administrative de Modane,2003,,Modane,"1 Place Sommeiller, 73500 Modane",45.19367218017578,6.658681392669678,
+CRA,Centre de Rétention Administrative de Nanterre,,"2006, devenu LRA",Nanterre,167-177 avenue Joliot Curie - 92000 NANTERRE,48.8926992,2.2102765,
+LRA,Locaux de Rétention Administrative de Nanterre,2005,,Nanterre,167-177 avenue Joliot Curie - 92000 NANTERRE ,48.8926992,2.2102765,20
+CRA,Centre de Rétention Administrative de Nice,1986,,Nice,"Caserne Auvare, 28 rue de Roquebillière 06300 Nice",43.71198736031,7.288342342379,40
+CRA,Centre de Rétention Administrative de Nîmes-Courbessac,2006,,Nîmes,"162 Av. Clément Ader, 30000 Nîmes",43.8582685,4.4046328,126
+CRA,Centre de Rétention Administrative d’Olivet,2024,,Olivet,167 rue de Châteauroux 45160 Olivet,47.848519,1.929242,90
+LRA,Locaux de Rétention Administrative d’Orléans-Cercottes,2005,,Orléans-Cercottes,23 route de Paris - 45520 Cercottes,47.9765922,1.8849385,74h 24f
+CRA,Centre de Rétention Administrative de Palaiseau,2005,,Palaiseau,"13 Rue Emile Zola, 91120 Palaiseau",48.7117478,2.2515766,40h
+CRA,Centre de Rétention Administrative de Pamandzi (Mayotte),2015,,Pamandzi (Mayotte),"Route du lotissement Chanfi Sabili, le Petit Moya 97 610 PAMANDZI",-12.799349,45.285755,136
+LRA,Locaux de Rétention Administrative de Pamandzi (Mayotte),2023,,Pamandzi (Mayotte),"Route du lotissement Chanfi Sabili, le Petit Moya 97 610 PAMANDZI",-12.79674,45.27938,24
+CRA,Centre de Rétention Administrative de Paris-Dépot-Palais de Justice,1981,partie homme en 2006,Paris-Dépot,3 quai de l’Horloge 75023 PARIS ,48.8566647,2.3446145,40
+CRA,Centre de Rétention Administrative de Paris-Vincennes,"1995 (2010, 2018)",,Paris-Vincennes,"48 Av. de l'École de Joinville, 75012 Paris",48.8310662,2.4688277,235
+CRA,Centre de Rétention Administrative de Perpignan,2007,,Perpignan,"Canton de Perpignan, 1, 66000 Perpignan",42.7015739,2.8941503,60
+CRA,Centre de Rétention Administrative de Plaisir,2006,,Plaisir,"889 Av. François Mitterrand, 78370 Plaisir",48.8191275,1.958148,26
+LRA,Locaux de Rétention Administrative de Poitiers,2001,,Poitiers,"38 Rue de la Marne, 86000 Poitiers",46.581892,0.338223,2
+LRA,Locaux de Rétention Administrative de Pontarlier,2024,,Pontarlier,"16 Rocade Georges Pompidou, 25300 Pontarlier",46.9012469,6.3547012,
+LRA,Locaux de Rétention Administrative de Reims,2005,,Reims,"Hôtel de police - 40, Boulevard Louis Roederer - 51100 REIMS",49.256176,4.021882,2
+CRA,Centre de Rétention Administrative de Rennes,2007,,Rennes,"Rue Jules Vallès, 35136 Saint-Jacques-de-la-Lande",48.1117611,-1.6802654,36h 6f 4fa
+CRA,Centre de Rétention Administrative de Rivesaltes,1984,,Rivesaltes,Camp Joffre route d'Opoul 66600 Rivesaltes,42.803453,2.879782,50
+LRA,Locaux de Rétention Administrative de Rivesaltes,,déplacé en 2007-2009,Rivesaltes,"2 Av. Gustave Eiffel, 66600 Rivesaltes",42.7767,2.8367,
+CRA,Centre de Rétention Administrative de Rouen-Oissel,2004,,Rouen-Oissel,École nationale de police - Route des Essarts - BP 11 76350 Oissel ,49.0560842,2.6503201,53h 19f
+LRA,Locaux de Rétention Administrative de Ruaudin,2023,,Ruaudin," Hôtel Ashley, 27 Bd Robert Jarry, 72000 Le Mans",47.9961921,0.1925077,2
+LRA,Locaux de Rétention Administrative de Saint-Dizier,2022,,Saint-Dizier,5 rue du Brigadier-Albert 52100 Saint-Dizier,48.639732360839844, 4.962185382843018,
+CRA,Centre de Rétention Administrative de Saint-Louis,,"2006, devenu LRA",Saint-Louis,Rue de Lys 3 - 68300 Saint-Louis,47.5895753,7.5600901,
+LRA,Locaux de Rétention Administrative de Saint-Louis,2001,,Saint-Louis,Rue de Lys 3 - 68300 Saint-Louis,47.5895753,7.5600901,6h 3f
+LRA,Locaux de Rétention Administrative de Savigny-sur-Orge,2024,,Savigny-sur-Orge,"1 Pl. Régis Ryckebush, 91600 Savigny-sur-Orge",48.69228043752301,2.3377128,
+CRA,Centre de Rétention Administrative de Sète,1993,,Sète,"15 Quai François Maillol, 34200 Sète",43.4098447,3.7006368,28
+LRA,Locaux de Rétention Administrative de Soissons,2001,,Soissons,19 rue Paul-Deviolaine 02209 Soissons,49.38569,3.322992,4
+CRA,Centre de Rétention Administrative de Strasbourg-Geispolsheim,1991,,Strasbourg-Geispolsheim,"Rue du Fort Lefebvre, 67118 Geispolsheim",48.5252292,7.6897368,34h
+CRA,Centre de Rétention Administrative de Toulouse-Cornebarrieu,2006,,Toulouse-Cornebarrieu,"Av. Latécoère, 31700 Cornebarrieu",43.642613, 1.3412664,126
+LRA,Locaux de Rétention Administrative de Tourcoing,2019,,Tourcoing,"Hôtel de police, 49 Avenue de la Fin de la Guerre, 59200 Tourcoing",50.7270776,3.1486185,
+LRA,Locaux de Rétention Administrative de Tours,2004,,Tours,"Commissariat Principal de Police de Tours, 70 rue Marceau - 37000 Tour",50.72736,3.14916,4h 2f
+LRA,Locaux de Rétention Administrative de Trégueux,non permanent,dans hôtels,Trégueux,"Kyriad Direct Saint Brieuc - Parc des Expositions, 52 Rue du Gué Lambert, 22950 Trégueux",48.4941283,-2.7646644,
+LRA,Locaux de Rétention Administrative de Troyes,2023,,Troyes,"18 Rue des Gayettes, 10000 Troyes ",48.2895505,4.0732198,
+CRA,Centre de Rétention Administrative de Versailles,,2006,Versailles,"Hôtel de police, 19, avenue de Paris, Versailles.",48.79850387573242,2.1439249515533447,
+CRA en projet,Centre de Rétention Administrative à  Dijon-Longvic,projet,,Dijon,ancienne base aérienne BA 102,47.28093,5.06202,
+CRA en projet,Centre de Rétention Administrative à Aix/luynes,projet,,Aix/Luynes,Luynes,43.4811596,5.3982948,
+CRA en projet,Centre de Rétention Administrative à Béziers,projet,,Béziers,"Centre pénitentiaire de Béziers, 861 Route de Saint-Pons, 34500 Béziers, France",43.3396565,3.1803971,
+CRA en projet,Centre de Rétention Administrative  à Dunkerque,projet,,Dunkerque,Route du Pacifique  Loon-Plage,50.99817,2.22451,
+CRA en projet,Centre de Rétention Administrative à Nantes,projet,,Nantes,"Rue de la Mainguais, 44300 Nantes",47.2637418,-1.5070959,
+CRA en projet,Centre de Rétention Administrative à Goussainville,projet,,Goussainville,95190 Goussainville,49.0323168,2.4733628,
