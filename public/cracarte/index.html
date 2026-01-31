@@ -147,7 +147,7 @@
     </style>
 </head>
 <body>
-    <div id="title">CRA et LRA français</div>
+    <div id="title">Accueil</div>
     <div id="map"></div>
 
     <div class="domtom-tabs left">
@@ -286,7 +286,7 @@
 
         const map = new maplibregl.Map({
             container: 'map',
-            style: 'https://tiles.openfreemap.org/styles/dark',
+            style: 'https://tiles.openfreemap.org/styles/positron',
             center: [2.5, 46.5],
             zoom: 5.5
         });
@@ -408,7 +408,7 @@
                     let category = '';
                     
                     // Déterminer le type de marqueur
-                    if (type === 'CRA' && (fermeture.toLowerCase().includes('projet') || (ouverture === '' && fermeture === ''))) {
+                    if (type.includes('projet')) {
                         // CRA en projet : blanc avec bordure rouge, GROS
                         markerSize = 16;
                         markerBg = '#ffffff';
