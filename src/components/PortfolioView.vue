@@ -1,6 +1,6 @@
 <template>
   <div class="portfolio-page">
-    <button class="back-btn" @click="$emit('back')">← Retour</button>
+    <button class="home-btn" @click="$emit('back')">Accueil</button>
 
     <div class="portfolio-container">
       <div class="maps-grid">
@@ -117,25 +117,29 @@ export default {
   overflow: hidden;
 }
 
-.back-btn {
+.home-btn {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 1000;
-  padding: 10px 20px;
-  background: white;
-  border: 2px solid #0f172a;
+  padding: 10px 24px;
+  background: #111;
+  border: 2px solid #fff;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0f172a;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #fff;
   box-shadow: 0 4px 12px rgba(15,23,42,0.15);
-  transition: all 0.3s ease;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-
-.back-btn:hover {
-  transform: translateY(-2px);
+.home-btn:hover {
+  background: #222;
+  color: #fff;
+  border-color: #fff;
+  transform: scale(1.04);
   box-shadow: 0 6px 16px rgba(15,23,42,0.25);
 }
 

@@ -5,7 +5,7 @@
     <div class="top-controls">
       <button class="back-btn" @click="$emit('back')">← Accueil</button>
       <div class="title-and-btn">
-        <button class="title-btn">son la</button>
+        <button class="title-btn">sont là</button>
         <button class="add-pin-btn" @click="startPinSelection" title="Ajouter un pin">+</button>
       </div>
     </div>

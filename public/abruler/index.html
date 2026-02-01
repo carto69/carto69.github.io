@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRA et LRA français</title>
+    <title>France criminelle : espaces de la rétention administrative</title>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css">
     <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
     <style>
@@ -69,7 +69,7 @@
             font-weight: bold;
             font-size: 16px;
             margin-bottom: 10px;
-            color: #333;
+            color: #8B0000;
         }
         .popup-field {
             margin: 5px 0;
@@ -105,7 +105,7 @@
             transition: all 0.3s ease;
             min-width: 100px;
             max-width: 120px;
-            border: 1px solid rgba(139, 0, 0, 0.5);
+            border: 1px solid #8B0000;
         }
         .domtom-tab:hover {
             background: rgba(30, 30, 30, 0.95);
@@ -114,8 +114,8 @@
         }
         .domtom-tab.active {
             background: rgba(50, 50, 50, 0.95);
-            color: #DC143C;
-            border: 2px solid #DC143C;
+            color: #8B0000;
+            border: 2px solid #8B0000;
         }
         .maplibregl-ctrl-group {
             background: rgba(50, 50, 50, 0.9) !important;
@@ -139,7 +139,7 @@
     </style>
 </head>
 <body>
-    <div id="title">CRA et LRA français</div>
+    <div id="main-title" style="position:absolute;top:60px;left:50%;transform:translateX(-50%);background:#000;padding:8px 24px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:2;font-size:22px;font-weight:700;color:#8B0000;letter-spacing:2px;">France criminelle : espaces de la rétention administrative</div>
     <div id="map"></div>
 
     <div class="domtom-tabs left">
@@ -159,11 +159,11 @@
     <div class="legend">
         <h4>Légende</h4>
         <div class="legend-item">
-            <div class="legend-circle" style="background-color: #000000; border: 2px solid #e74c3c;"></div>
+            <div class="legend-circle" style="background-color: #000000; border: 2px solid #8B0000;"></div>
             <span>CRA</span>
         </div>
         <div class="legend-item">
-            <div class="legend-circle" style="background-color: #e74c3c; border: 2px solid rgba(0,0,0,0.3);"></div>
+            <div class="legend-circle" style="background-color: #8B0000; border: 2px solid #8B0000;"></div>
             <span>LRA</span>
         </div>
     </div>
@@ -276,7 +276,7 @@
             container: 'map',
             style: 'https://tiles.openfreemap.org/styles/dark',
             center: [2.5, 46.5],
-            zoom: 5.5
+            zoom: 4.5
         });
 
         map.addControl(new maplibregl.NavigationControl(), 'top-right');
@@ -298,7 +298,7 @@
                     'circle-radius': 8,
                     'circle-color': '#000000',
                     'circle-stroke-width': 2,
-                    'circle-stroke-color': '#e74c3c',
+                    'circle-stroke-color': '#8B0000',
                     'circle-opacity': 0.85
                 }
             });
@@ -310,9 +310,9 @@
                 filter: ['==', ['get', 'type'], 'LRA'],
                 paint: {
                     'circle-radius': 6,
-                    'circle-color': '#e74c3c',
+                    'circle-color': '#8B0000',
                     'circle-stroke-width': 2,
-                    'circle-stroke-color': '#c0392b',
+                    'circle-stroke-color': '#8B0000',
                     'circle-opacity': 0.85
                 }
             });

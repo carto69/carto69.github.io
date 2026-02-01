@@ -18,11 +18,11 @@
     </div>
 
     <transition name="fade">
-      <div v-if="showLoginForm" class="login-overlay" @click="closeIfOutside">
+      <div v-if="showLoginForm" class="login-overlay" @click="closeIfOutside" style="pointer-events: auto;">
         <div class="login-box" @click.stop>
           <button class="close-btn" @click="showLoginForm = false">×</button>
           <h2>Connexion</h2>
-          <form @submit.prevent="handleLogin">
+          <form @submit.prevent="handleLogin" style="margin: 0 32px 32px 0;">
             <div class="form-group">
               <label for="username">Identifiant</label>
               <input 
@@ -43,7 +43,7 @@
                 autocomplete="current-password"
               />
             </div>
-            <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+            <p v-if="errorMessage" class="error" style="color: #e63b3b;">{{ errorMessage }}</p>
             <button type="submit" class="submit-btn">Se connecter</button>
           </form>
         </div>
@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     dotZoneStyle() {
-      // Position du point jaune en bas à droite
+
       return {}
     }
   },
@@ -136,6 +136,8 @@ export default {
   max-height: 90vh;
   height: auto;
   width: auto;
+  transform: scale(1.08);
+  transition: transform 0.3s;
 }
 
 .yellow-dot-zone {
@@ -164,28 +166,33 @@ export default {
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; 
+  align-items: center;    
   z-index: 1000;
+  pointer-events: auto;
 }
 
 .login-box {
-  background: white;
+  background: #0a2a5e; 
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   min-width: 320px;
   position: relative;
+  margin: 0; 
+  border: 2px solid #111;
+  color: #fff; 
 }
+
 
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 10px;
   background: none;
   border: none;
   font-size: 32px;
-  color: #999;
+  color: #fff;
   cursor: pointer;
   line-height: 1;
   padding: 0;
@@ -194,13 +201,15 @@ export default {
   transition: color 0.2s;
 }
 
+
 .close-btn:hover {
-  color: #333;
+  color: #2196f3;
 }
+
 
 .login-box h2 {
   margin: 0 0 24px 0;
-  color: #333;
+  color: #fff;
   font-size: 24px;
   text-align: center;
 }
@@ -209,26 +218,31 @@ export default {
   margin-bottom: 20px;
 }
 
+
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: #fff;
   font-weight: 500;
 }
+
 
 .form-group input {
   width: 100%;
   padding: 12px;
-  border: 2px solid #ddd;
+  border: 2px solid #2196f3; 
   border-radius: 6px;
   font-size: 16px;
+  background: #fff;
+  color: #0a2a5e;
   transition: border-color 0.2s;
   box-sizing: border-box;
 }
 
+
 .form-group input:focus {
   outline: none;
-  border-color: #4a9f6d;
+  border-color: #111; 
 }
 
 .error {
@@ -238,21 +252,25 @@ export default {
   text-align: center;
 }
 
+
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background: #2d7d4d;
-  color: white;
+  background: #2196f3; 
+  color: #fff;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  letter-spacing: 1px;
 }
 
+
 .submit-btn:hover {
-  background: #4a9f6d;
+  background: #111;
+  color: #fff;
 }
 
 .fade-enter-active, .fade-leave-active {

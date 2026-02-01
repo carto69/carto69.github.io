@@ -1,7 +1,7 @@
 <template>
   <main class="menu home-bg">
-    <div class="credits-toggle top-right" @click="showCredits = !showCredits">crédit</div>
-    <div v-if="showCredits" class="credits-panel next-to-toggle">
+    <div class="credits-toggle bottom-right">crédit</div>
+    <div class="credits-panel next-to-toggle-bottom">
       <div class="credit-line"><a href="mailto:elia.terragni@proton.me">elia.terragni@proton.me</a></div>
       <div class="credit-line">Source carte : Kunyu Wanguo Quantu (Matteo Ricci, 1602)</div>
     </div>
@@ -9,57 +9,43 @@
     <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Fotos</button>
     <div class="hero">
       <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">carto69</h1>
-      <div class="tiles triple-row">
-        <div class="tiles-row">
+      <div class="tiles double-row-vertical">
+        <div class="tiles-row tiles-row-top">
           <article class="tile" @click="openMapelia">
-            <h2><span class="tile-title">mapelia</span></h2>
-            <button class="tile-btn">→</button>
+            <h2><span class="tile-title big-title centered">mapelia</span></h2>
           </article>
-          <article class="tile" @click="$emit('open', 'sontla')">
-            <h2>son la</h2>
-            <button class="tile-btn">→</button>
-          </article>
-          <article class="tile" @click="$emit('open', 'xplore')">
-            <h2>xplore</h2>
-            <button class="tile-btn">→</button>
-          </article>
-        </div>
-        <div class="tiles-row">
-          <article class="tile" @click="$emit('open', 'zonzon')">
-            <h2>zonzon</h2>
-            <button class="tile-btn">→</button>
-          </article>
-          <article class="tile" @click="$emit('open', 'abruler')">
-            <h2>à bruler</h2>
-            <button class="tile-btn">→</button>
-          </article>
-          <article class="tile" @click="$emit('open', 'copskill')">
-            <h2>cops kill</h2>
-            <button class="tile-btn">→</button>
-          </article>
-        </div>
-        <div class="tiles-row">
           <article class="tile" @click="$emit('open', 'velov')">
-            <h2>69 en velov</h2>
-            <button class="tile-btn">→</button>
+            <h2><span class="tile-title big-title centered">le 69<br>en velov</span></h2>
           </article>
           <article class="tile" @click="$emit('open', 'velo13')">
-            <h2>13 en vélo</h2>
-            <button class="tile-btn">→</button>
+            <h2><span class="tile-title big-title centered">le 13<br>en vélo</span></h2>
           </article>
           <article class="tile" @click="$emit('open', 'velib')">
-            <h2>75 en velib</h2>
-            <button class="tile-btn">→</button>
-          </article>
-        </div>
-        <div class="tiles-row">
-          <article class="tile" @click="$emit('open', 'dashboard-r')">
-            <h2>Dashboard<br>R Stras.</h2>
-            <button class="tile-btn">→</button>
+            <h2><span class="tile-title big-title centered">le 75<br>en velib</span></h2>
           </article>
           <article class="tile" @click="$emit('open', 'femmes-quais')">
-            <h2>genre &<br>espace pub</h2>
-            <button class="tile-btn">→</button>
+            <h2><span class="tile-title big-title centered">genre & espace public</span></h2>
+          </article>
+          <article class="tile" @click="$emit('open', 'dashboard-r')">
+            <h2><span class="tile-title big-title centered">dashboard COMOVE Strasbourg</span></h2>
+          </article>
+        </div>
+        <div class="tiles-row tiles-row-bottom">
+          <article class="tile" @click="$emit('open', 'zonzon')">
+            <h2><span class="tile-title big-title centered">zonzon</span></h2>
+          </article>
+
+          <article class="tile" @click="$emit('open', 'abruler')">
+            <h2><span class="tile-title big-title centered">à bruler</span></h2>
+          </article>
+          <article class="tile" @click="$emit('open', 'sontla')">
+            <h2><span class="tile-title big-title centered">sont là</span></h2>
+          </article>
+          <article class="tile" @click="$emit('open', 'copskill')">
+            <h2><span class="tile-title big-title centered">cops kill</span></h2>
+          </article>
+          <article class="tile" @click="$emit('open', 'xplore')">
+            <h2><span class="tile-title big-title centered">xplore</span></h2>
           </article>
         </div>
       </div>
@@ -68,6 +54,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'MenuView',
   emits: ['open'],
@@ -79,11 +66,6 @@ export default {
       } else if (code !== null) {
         alert('Code incorrect')
       }
-    }
-  },
-  data() {
-    return {
-      showCredits: false
     }
   }
 }
@@ -115,6 +97,7 @@ html, body {
   white-space: nowrap;
   cursor: pointer;
   font-family: "Courier New", Courier, monospace;
+  
   transition: background 0.2s, color 0.2s;
 }
 .photos-toggle.top-left:hover {
@@ -171,7 +154,7 @@ html, body {
 .portfolio-toggle.bottom-left:hover {
   background: #f3e0c7;
   border-color: #4a9f6d;
-  transform: scale(1.05);
+  transform: scale(1.12);
 }
 
 .home-bg {
@@ -182,8 +165,9 @@ html, body {
   min-width: 100vw;
   width: 100vw;
   height: 100vh;
-  background: #e6f0fa url('/vintage-map-compressed.jpg') center 0px no-repeat;
-  background-size: cover;
+  background: #e6f0fa url('/vintage-map-compressed.jpg') center -0px no-repeat;
+  background-size: 112.5% auto !important; 
+  background-position: center -20px !important;
   opacity: 1 !important;
   z-index: 0;
   margin: 0;
@@ -211,11 +195,12 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 130px; 
 }
 
-.credits-toggle.top-right {
+.credits-toggle.bottom-right {
   position: fixed;
-  top: 20px;
+  bottom: 24px;
   right: 30px;
   color: #7fa46a;
   font-size: 0.9rem;
@@ -231,11 +216,32 @@ html, body {
   font-family: "Courier New", Courier, monospace;
 }
 
-.credits-panel.next-to-toggle {
+.credits-panel.next-to-toggle-bottom {
   position: fixed;
-  top: 20px;
-  right: 170px;
-  margin-left: 0;
+  right: 110px;
+  bottom: 24px;
+  top: auto;
+  overflow: visible;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px #0003, 0 0 0 1px #7fa46a;
+  padding: 8px 14px;
+  background: rgb(244, 228, 160);
+  font-size: 1.05em;
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 101;
+  line-height: 1.5;
+  box-sizing: border-box;
+  height: auto !important;
+  transition: opacity 0.2s;
+}
+
+.credits-toggle.bottom-right:hover + .credits-panel.next-to-toggle-bottom,
+.credits-panel.next-to-toggle-bottom:hover {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto;
 }
 
 .credits-panel {
@@ -265,110 +271,150 @@ html, body {
   font-family: inherit;
 }
 
-.title {
-  font-size: 16rem;
+.tile-btn {
+  color: #4caf50; 
+  background: #ffe066; 
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
   font-weight: 700;
-  color: #7fa46a;
-  text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
-  margin: 0 0 40px 0;
-  font-family: "Courier New", Courier, monospace;
-  letter-spacing: 7px;
-  font-style: normal;
-  text-align: center;
+  cursor: pointer;
+  margin-top: 2px;
+  padding: 2px 16px;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 1px 4px #0001;
+}
+.tile-btn:hover {
+  background: #fffbe6;
+  color: #388e3c;
+  transform: scale(1.08);
 }
 
-.hero .tiles.triple-row {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
-  max-width: 520px;
-  width: 100%;
-  align-items: center;
-}
 
 .tiles-row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 16px;
+  border: none;
+  border-radius: 12px;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: - 60px; 
+}
+
+.tiles-row + .tiles-row {
+  margin-top: 32px;
+}
+
+.tile.break-after {
+  flex-basis: 100%;
   width: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
 }
 
 .hero .tile {
   background: rgba(127, 164, 106, 0.85);
   border-radius: 14px;
   box-shadow: 0 0 0 2px #E8D4A0, 0 2px 8px #E8D4A0;
-  padding: 10px 7px;
+  padding: 3px 3px 2px 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
-  width: 110px;
-  min-width: 95px;
-  max-width: 130px;
-  height: 75px;
+  transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), box-shadow 0.18s cubic-bezier(.4,1.5,.5,1);
+  width: 155px;
+  min-width: 155px;
+  max-width: 155px;
+  height: 80px;
   border: none;
   box-sizing: border-box;
   opacity: 0.92;
+  margin-bottom: 2px;
+  position: relative;
 }
-
 .hero .tile h2 {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   margin: 0;
-  font-weight: 700;
-  letter-spacing: -1px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   text-align: center;
   text-transform: none;
   color: rgb(244, 228, 160);
-  line-height: 1.1;
+  line-height: 1.2;
   font-family: "Courier New", Courier, monospace;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-.tile-btn {
+.hero .tile-btn {
+  display: none;
+}
+.hero .tile-btn:hover {
+  background: #fffbe6;
   color: #7fa46a;
-  background: rgb(244, 228, 160);
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 2px;
-  padding: 0 12px;
-  transition: background 0.2s, transform 0.2s;
+  transform: scale(1.08);
+}
+.hero .tile:hover {
+  transform: scale(1.07);
 }
 
+.tile-btn, .tile-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.double-row-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tiles-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  width: max-content;
+}
+.tiles-row-bottom {
+  margin-top: 32px;
+}
+
+  .tile-btn {
+    color: #7fa46a; 
+    background: #E8D4A0; 
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 16px;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 1px 4px #0001;
+  }
 .tile-btn:hover {
   background: #fffbe6;
   color: #7fa46a;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
-
-.tile-icon {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
-  text-align: center;
-  color: #E8D4A0;
-}
-
-.arrow {
-  font-size: 3em;
-  color: #E8D4A0;
-}
-
-.tile p {
-  margin: 0 0 8px 0;
-  color: #4a5568;
-  font-size: 10px;
-  line-height: 1.25;
+.title {
+  font-size: 8rem;
+  font-weight: 700;
+  color: #7fa46a;
+  text-shadow: -2px -2px 0 #E8D4A0, 2px -2px 0 #E8D4A0, -2px 2px 0 #E8D4A0, 2px 2px 0 #E8D4A0;
+  margin: 60px 0 24px 0; 
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 7px;
+  font-style: normal;
   text-align: center;
 }
 
 .sontla-btn {
-  position: relative;
-  padding: 6px 14px;
+  position: fixed;
+  bottom: 80px;
   background: #e5bb8cff;
   color: #2d7d4d;
   border: 2px solid #2d7d4d;
@@ -416,3 +462,27 @@ html, body {
   }
 }
 </style>
+
+/* Animation des boutons d’onglets */
+.tile-btn, .tile {
+  transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), box-shadow 0.18s cubic-bezier(.4,1.5,.5,1);
+}
+.tile-btn:hover, .tile:hover {
+  transform: scale(1.12) rotate(-2deg);
+  box-shadow: 0 8px 32px 0 #0003, 0 0 0 2px #7fa46a;
+  z-index: 2;
+}
+
+/* Crédit : popup au survol */
+.credits-toggle.bottom-right:hover + .credits-panel.next-to-toggle-bottom,
+.credits-panel.next-to-toggle-bottom:hover {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+.credits-panel.next-to-toggle-bottom {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}

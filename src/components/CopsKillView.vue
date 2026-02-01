@@ -202,7 +202,7 @@ export default {
             fillOpacity: 0.7
           }).addTo(domMap)
 
-          marker.on('click', () => {
+          marker.on('mouseenter', () => {
             this.selectedPerson = person
           })
         })
