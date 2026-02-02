@@ -1,15 +1,6 @@
 <template>
   <div class="copskill-view">
     <div class="map-wrapper">
-      <div class="domtom-container">
-        <h3>DOM-TOM</h3>
-        <div class="domtom-grid">
-          <div class="domtom-map" id="map-domtom-guyane"></div>
-          <div class="domtom-map" id="map-domtom-reunion"></div>
-          <div class="domtom-map" id="map-domtom-mayotte"></div>
-          <div class="domtom-map" id="map-domtom-antilles"></div>
-        </div>
-      </div>
 
       <div class="top-bar">
         <h1 class="map-title">Morts de la Police Française (1977-2022)</h1>
@@ -17,6 +8,36 @@
       </div>
 
       <div id="map" class="main-map"></div>
+
+      <!-- DOM-TOM cartes -->
+      <div class="domtom-container">
+        <div class="domtom-grid">
+          <div class="domtom-map">
+            <div class="map-label">Guadeloupe</div>
+            <div id="map-guadeloupe" class="map"></div>
+          </div>
+          <div class="domtom-map">
+            <div class="map-label">Martinique</div>
+            <div id="map-martinique" class="map"></div>
+          </div>
+          <div class="domtom-map">
+            <div class="map-label">Guyane</div>
+            <div id="map-guyane" class="map"></div>
+          </div>
+          <div class="domtom-map">
+            <div class="map-label">Mayotte</div>
+            <div id="map-mayotte" class="map"></div>
+          </div>
+          <div class="domtom-map">
+            <div class="map-label">La Réunion</div>
+            <div id="map-reunion" class="map"></div>
+          </div>
+          <div class="domtom-map">
+            <div class="map-label">Nouvelle-Calédonie</div>
+            <div id="map-nouvelle-caledonie" class="map"></div>
+          </div>
+        </div>
+      </div>
 
       <div class="popup-info" v-if="selectedPerson">
         <div class="popup-header">
@@ -96,6 +117,17 @@ export default {
         const response = await fetch('/actions-police-fatales.csv')
         const text = await response.text()
         this.data = this.parseCSV(text)
+        
+        // Log DOM-TOM records
+        const domtomRecords = this.data.filter(p => {
+          const dept = p.departement ? p.departement.trim() : ''
+          return dept === 'Guadeloupe' || dept === 'Martinique' || dept === 'Guyane' || 
+                 dept === 'Mayotte' || dept === 'La Réunion' || dept === 'Nouvelle-Calédonie'
+        })
+        console.log('DOM-TOM records found:', domtomRecords.length)
+        if (domtomRecords.length > 0) {
+          console.log('First DOM-TOM:', domtomRecords[0])
+        }
       } catch (error) {
         console.error('Erreur chargement CSV:', error)
       }
@@ -158,51 +190,151 @@ export default {
       this.loadFranceGeometry()
 
       this.addMarkers()
+      this.addDOMTOMMarkers()
+      this.initDOMTOMMaps()
 
       this.addLegend()
       this.addScale()
-
-      this.initDOMTOMMaps()
     },
-    initDOMTOMMaps() {
-      const domtomConfigs = [
-        { id: 'map-domtom-guyane', center: [3.9, -53.1], zoom: 6, match: ['guyane'] },
-        { id: 'map-domtom-reunion', center: [-21.13, 55.53], zoom: 8, match: ['réunion', 'la réunion', 'reunion'] },
-        { id: 'map-domtom-mayotte', center: [-12.76, 45.17], zoom: 8, match: ['mayotte'] },
-        { id: 'map-domtom-antilles', center: [15.25, -61.1], zoom: 6, match: ['guadeloupe', 'martinique'] }
-      ]
-
-      domtomConfigs.forEach(cfg => {
-        const domMap = L.map(cfg.id, {
-          zoom: cfg.zoom,
-          minZoom: cfg.zoom - 2,
-          maxZoom: cfg.zoom + 3,
-          attributionControl: false
-        })
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '© OpenStreetMap © CartoDB',
-          maxZoom: 19
-        }).addTo(domMap)
-
-        domMap.setView(cfg.center, cfg.zoom)
-
-        this.data.forEach(person => {
-          const dept = person.departement.toLowerCase()
-          const ville = person.ville.toLowerCase()
-          const matches = cfg.match.some(m => dept.includes(m) || ville.includes(m))
-          if (!matches) return
-
-          const marker = L.circleMarker(cfg.center, {
-            radius: 4,
+    addDOMTOMMarkers() {
+      // Ajouter les points DOM-TOM à la carte principale
+      let domtomCount = 0
+      const domtomByTerritory = {}
+      
+      // Grouper les points DOM-TOM par territoire
+      this.data.forEach(person => {
+        const dept = person.departement ? person.departement.trim() : ''
+        
+        let territory = null
+        if (dept === 'Guadeloupe') {
+          territory = 'Guadeloupe'
+        } else if (dept === 'Martinique') {
+          territory = 'Martinique'
+        } else if (dept === 'Guyane') {
+          territory = 'Guyane'
+        } else if (dept === 'Mayotte') {
+          territory = 'Mayotte'
+        } else if (dept === 'La Réunion') {
+          territory = 'La Réunion'
+        } else if (dept === 'Nouvelle-Calédonie') {
+          territory = 'Nouvelle-Calédonie'
+        }
+        
+        if (!territory) return
+        
+        if (!domtomByTerritory[territory]) {
+          domtomByTerritory[territory] = []
+        }
+        domtomByTerritory[territory].push(person)
+      })
+      
+      // Coordonnées de base pour chaque territoire
+      const territoryCoords = {
+        'Guadeloupe': [16.2415, -61.5331],
+        'Martinique': [14.6037, -61.0594],
+        'Guyane': [4.9333, -52.3333],
+        'Mayotte': [-12.7804, 45.2280],
+        'La Réunion': [-20.8823, 55.4504],
+        'Nouvelle-Calédonie': [-22.2758, 166.4580]
+      }
+      
+      // Créer les marqueurs avec jitter
+      Object.entries(domtomByTerritory).forEach(([territory, persons]) => {
+        const baseCoords = territoryCoords[territory]
+        
+        persons.forEach((person, index) => {
+          let coords = baseCoords
+          
+          // Appliquer du jitter si plusieurs points au même endroit
+          if (persons.length > 1) {
+            const jitterAmount = 0.05 * (index + 1) / persons.length
+            const angle = (index / persons.length) * Math.PI * 2
+            coords = [
+              baseCoords[0] + Math.cos(angle) * jitterAmount,
+              baseCoords[1] + Math.sin(angle) * jitterAmount
+            ]
+          }
+          
+          domtomCount++
+          const marker = L.circleMarker(coords, {
+            radius: 5,
             fillColor: '#e74c3c',
             color: '#c0392b',
-            weight: 1.5,
+            weight: 2,
             opacity: 1,
             fillOpacity: 0.7
-          }).addTo(domMap)
+          }).addTo(this.map)
 
-          marker.on('mouseenter', () => {
+          marker.on('click', () => {
+            this.selectedPerson = person
+          })
+        })
+      })
+      
+      console.log('DOM-TOM markers added (with jitter):', domtomCount)
+    },
+    initDOMTOMMaps() {
+      // Créer les petites cartes pour chaque DOM-TOM
+      const domtomConfig = [
+        { id: 'map-guadeloupe', territory: 'Guadeloupe', center: [16.2415, -61.5331], spread: 0.05 },
+        { id: 'map-martinique', territory: 'Martinique', center: [14.6037, -61.0594], spread: 0.04 },
+        { id: 'map-guyane', territory: 'Guyane', center: [4.9333, -52.3333], spread: 0.06 },
+        { id: 'map-mayotte', territory: 'Mayotte', center: [-12.7804, 45.2280], spread: 0.01 },
+        { id: 'map-reunion', territory: 'La Réunion', center: [-21.0, 55.4504], spread: 0.04 },
+        { id: 'map-nouvelle-caledonie', territory: 'Nouvelle-Calédonie', center: [-22.0, 166.4580], spread: 0.02 }
+      ]
+      
+      domtomConfig.forEach(config => {
+        // Créer la petite carte INTERACTIVE (sans zoom controls)
+        const miniMap = L.map(config.id, {
+          center: config.center,
+          zoom: 8,
+          zoomControl: false,
+          dragging: true,
+          touchZoom: true,
+          doubleClickZoom: true,
+          scrollWheelZoom: true,
+          attributionControl: false
+        })
+        
+        // Ajouter les tiles SANS attribution
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19,
+          attribution: ''
+        }).addTo(miniMap)
+        
+        // Regrouper les marqueurs par territoire
+        const territoryPoints = this.data.filter(p => {
+          const dept = p.departement ? p.departement.trim() : ''
+          return dept === config.territory
+        })
+        
+        // Ajouter les marqueurs avec distribution aléatoire sur le territoire
+        territoryPoints.forEach((person, index) => {
+          let coords = config.center
+          
+          // Distribution aléatoire autour du centre du territoire (zone plus compacte)
+          if (territoryPoints.length > 0) {
+            // Utiliser une distribution normale-like plutôt que circulaire
+            const spreadLat = (Math.random() - 0.5) * 2 * config.spread
+            const spreadLng = (Math.random() - 0.5) * 2 * config.spread
+            
+            coords = [
+              config.center[0] + spreadLat,
+              config.center[1] + spreadLng
+            ]
+          }
+          
+          const marker = L.circleMarker(coords, {
+            radius: 5,
+            fillColor: '#e74c3c',
+            color: '#c0392b',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.7
+          }).addTo(miniMap)
+          
+          marker.on('click', () => {
             this.selectedPerson = person
           })
         })
@@ -227,6 +359,13 @@ export default {
       const cityDeaths = {}
 
       this.data.forEach(person => {
+        // Exclure les DOM-TOM avec les noms exacts du CSV
+        const dept = person.departement ? person.departement.trim() : ''
+        if (dept === 'Guadeloupe' || dept === 'Martinique' || dept === 'Guyane' || 
+            dept === 'Mayotte' || dept === 'La Réunion' || dept === 'Nouvelle-Calédonie') {
+          return
+        }
+
         const city = person.ville
         if (!cityDeaths[city]) {
           cityDeaths[city] = []
@@ -282,13 +421,15 @@ export default {
 
       legend.onAdd = () => {
         const div = L.DomUtil.create('div', 'legend')
+        div.style.marginLeft = '280px'
         div.innerHTML = `
-          <div style="background: #0b0b0b; color: #e74c3c; padding: 12px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.35); border: 2px solid #e74c3c;">
+          <div style="background: #0b0b0b; color: #e74c3c; padding: 12px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.35); border: 2px solid #e74c3c; font-family: 'Courier New', Courier, monospace;">
             <p style="margin: 2px 0; font-size: 13px; display: flex; align-items: center; gap: 6px;">
               <span style="display: inline-block; width: 14px; height: 14px; background: #e74c3c; border: 1px solid #c0392b; border-radius: 50%;"></span>
               individu tué.e par la police française
             </p>
             <p style="margin: 2px 0; font-size: 13px; color: #e74c3c;">Total: ${this.data.length} morts</p>
+            <p style="margin: 6px 0 2px 0; font-size: 11px; color: #e74c3c; opacity: 0.85;">Source : basta.media</p>
           </div>
         `
         return div
@@ -333,46 +474,7 @@ export default {
   height: 100%;
 }
 
-.domtom-container {
-  width: 320px;
-  min-width: 220px;
-  max-width: 520px;
-  height: 100%;
-  background: #0b0b0b;
-  border-right: 3px solid #e74c3c;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  box-shadow: 8px 0 18px rgba(0, 0, 0, 0.35);
-  resize: horizontal;
-  overflow: auto;
-  cursor: col-resize;
-}
 
-.domtom-container h3 {
-  margin: 12px;
-  font-size: 1rem;
-  color: #e74c3c;
-  text-align: center;
-  border-bottom: 1px solid rgba(231, 76, 60, 0.4);
-  padding-bottom: 12px;
-}
-
-.domtom-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 8px;
-  padding: 12px;
-}
-
-.domtom-map {
-  background: #111;
-  border: 1px solid rgba(231, 76, 60, 0.35);
-  border-radius: 6px;
-  overflow: hidden;
-}
 
 .map-title {
   background: #0b0b0b;
@@ -528,6 +630,84 @@ export default {
 
 :deep(.leaflet-control-attribution a) {
   color: #e74c3c !important;
+}
+
+/* DOM-TOM Container */
+.domtom-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  width: 230px;
+  z-index: 500;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.domtom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 8px;
+  padding: 4px;
+  background: rgba(11, 11, 11, 0.9);
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  flex: 1;
+  min-height: calc(100vh - 100px);
+  width: 230px;
+  overflow: hidden;
+}
+
+.domtom-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.domtom-map .map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.map-label {
+  display: none;
+}
+
+:deep(.domtom-map .leaflet-container) {
+  background: #1a1a1a;
+}
+
+:deep(.domtom-map .leaflet-control-zoom) {
+  border: 1px solid #e74c3c !important;
+  background: #0b0b0b !important;
+  box-shadow: none !important;
+}
+
+:deep(.domtom-map .leaflet-control-zoom a) {
+  background: #0b0b0b !important;
+  color: #e74c3c !important;
+  border-bottom: 1px solid rgba(231, 76, 60, 0.4) !important;
+  width: 24px !important;
+  height: 24px !important;
+  line-height: 24px !important;
+  font-size: 0.8rem !important;
+}
+
+:deep(.domtom-map .leaflet-control-zoom a:hover) {
+  background: #1a1a1a !important;
+  color: #e74c3c !important;
+}
+
+:deep(.domtom-map .leaflet-control-attribution) {
+  display: none !important;
 }
 
 </style>
