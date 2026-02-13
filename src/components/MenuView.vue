@@ -8,7 +8,7 @@
     <button class="portfolio-toggle bottom-left" @click="$emit('open', 'portfolio')">Autres<br>cartes</button>
     <button class="photos-toggle bottom-left-above" @click="$emit('open', 'photos')">Fotos</button>
     <div class="hero">
-      <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">parpelo</h1>
+      <h1 class="title" style="font-size:6rem; letter-spacing: -2px;">Cartopelo</h1>
       <div class="tiles double-row-vertical">
         <div class="tiles-row tiles-row-top">
           <article class="tile" @click="openMapelia">

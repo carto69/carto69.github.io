@@ -147,7 +147,7 @@ export default {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  bottom: 6%;
+  bottom: 5%;
   right: 18%;
   z-index: 10;
 }
@@ -226,7 +226,6 @@ export default {
   font-weight: 500;
   
 }
-
 
 .form-group input {
   width: 100%;
