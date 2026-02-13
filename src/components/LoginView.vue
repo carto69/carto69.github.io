@@ -13,7 +13,6 @@
         class="yellow-dot-zone" 
         :style="dotZoneStyle"
         @click="showLoginForm = true"
-        title="Cliquer pour se connecter"
       ></div>
     </div>
 
@@ -147,7 +146,7 @@ export default {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  bottom: 5%;
+  bottom: 2%;
   right: 18%;
   z-index: 10;
 }
