@@ -9,7 +9,6 @@
 
       <div id="map" class="main-map"></div>
 
-      <!-- DOM-TOM cartes -->
       <div class="domtom-container">
         <div class="domtom-grid">
           <div class="domtom-map">
@@ -118,7 +117,6 @@ export default {
         const text = await response.text()
         this.data = this.parseCSV(text)
         
-        // Log DOM-TOM records
         const domtomRecords = this.data.filter(p => {
           const dept = p.departement ? p.departement.trim() : ''
           return dept === 'Guadeloupe' || dept === 'Martinique' || dept === 'Guyane' || 
@@ -197,11 +195,9 @@ export default {
       this.addScale()
     },
     addDOMTOMMarkers() {
-      // Ajouter les points DOM-TOM à la carte principale
       let domtomCount = 0
       const domtomByTerritory = {}
       
-      // Grouper les points DOM-TOM par territoire
       this.data.forEach(person => {
         const dept = person.departement ? person.departement.trim() : ''
         
@@ -228,7 +224,6 @@ export default {
         domtomByTerritory[territory].push(person)
       })
       
-      // Coordonnées de base pour chaque territoire
       const territoryCoords = {
         'Guadeloupe': [16.2415, -61.5331],
         'Martinique': [14.6037, -61.0594],
@@ -238,14 +233,12 @@ export default {
         'Nouvelle-Calédonie': [-22.2758, 166.4580]
       }
       
-      // Créer les marqueurs avec jitter
       Object.entries(domtomByTerritory).forEach(([territory, persons]) => {
         const baseCoords = territoryCoords[territory]
         
         persons.forEach((person, index) => {
           let coords = baseCoords
           
-          // Appliquer du jitter si plusieurs points au même endroit
           if (persons.length > 1) {
             const jitterAmount = 0.05 * (index + 1) / persons.length
             const angle = (index / persons.length) * Math.PI * 2
@@ -274,7 +267,6 @@ export default {
       console.log('DOM-TOM markers added (with jitter):', domtomCount)
     },
     initDOMTOMMaps() {
-      // Créer les petites cartes pour chaque DOM-TOM
       const domtomConfig = [
         { id: 'map-guadeloupe', territory: 'Guadeloupe', center: [16.2415, -61.5331], spread: 0.05 },
         { id: 'map-martinique', territory: 'Martinique', center: [14.6037, -61.0594], spread: 0.04 },
@@ -285,7 +277,6 @@ export default {
       ]
       
       domtomConfig.forEach(config => {
-        // Créer la petite carte INTERACTIVE (sans zoom controls)
         const miniMap = L.map(config.id, {
           center: config.center,
           zoom: 8,
@@ -297,25 +288,20 @@ export default {
           attributionControl: false
         })
         
-        // Ajouter les tiles SANS attribution
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
           maxZoom: 19,
           attribution: ''
         }).addTo(miniMap)
         
-        // Regrouper les marqueurs par territoire
         const territoryPoints = this.data.filter(p => {
           const dept = p.departement ? p.departement.trim() : ''
           return dept === config.territory
         })
         
-        // Ajouter les marqueurs avec distribution aléatoire sur le territoire
         territoryPoints.forEach((person, index) => {
           let coords = config.center
           
-          // Distribution aléatoire autour du centre du territoire (zone plus compacte)
           if (territoryPoints.length > 0) {
-            // Utiliser une distribution normale-like plutôt que circulaire
             const spreadLat = (Math.random() - 0.5) * 2 * config.spread
             const spreadLng = (Math.random() - 0.5) * 2 * config.spread
             
@@ -359,7 +345,6 @@ export default {
       const cityDeaths = {}
 
       this.data.forEach(person => {
-        // Exclure les DOM-TOM avec les noms exacts du CSV
         const dept = person.departement ? person.departement.trim() : ''
         if (dept === 'Guadeloupe' || dept === 'Martinique' || dept === 'Guyane' || 
             dept === 'Mayotte' || dept === 'La Réunion' || dept === 'Nouvelle-Calédonie') {
@@ -632,7 +617,6 @@ export default {
   color: #e74c3c !important;
 }
 
-/* DOM-TOM Container */
 .domtom-container {
   position: absolute;
   top: 10px;

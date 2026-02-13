@@ -91,7 +91,6 @@ export default {
   },
   methods: {
     async initMap() {
-      // Style de base : fond blanc
       const style = {
         version: 8,
         name: 'White with Littorals',
@@ -116,14 +115,12 @@ export default {
             type: 'background',
             paint: { 'background-color': '#ffffff' }
           },
-          // Couche satellite (masquée par défaut)
           {
             id: 'satellite',
             type: 'raster',
             source: 'satellite',
             layout: { visibility: 'none' }
           },
-          // Littoraux (traits noirs)
           {
             id: 'coastline',
             type: 'line',
@@ -145,9 +142,7 @@ export default {
       })
 
       this.map.on('load', async () => {
-        // add navigation controls
         this.map.addControl(new maplibregl.NavigationControl({ showCompass: true }))
-        // Essayez de charger map.json, mais n'empêchez pas l'affichage du fond si absent
         const candidates = ['/map.json', 'map.json', './map.json', '/public/map.json']
         let json = null
         for (const url of candidates) {
@@ -157,11 +152,9 @@ export default {
             const j = await r.json()
             if (j && Array.isArray(j.features)) { json = j; break }
           } catch (e) {
-            // ignore and try next
           }
         }
         if (json) {
-          // Si map.json trouvé, on continue comme avant
           this.rawData = json
           this.featuresCount = Array.isArray(json.features) ? json.features.length : 0
           this.loadError = null
@@ -171,7 +164,6 @@ export default {
           this.loadOverlaysFromStorage()
           this.fitToFeatures()
         } else {
-          // Si map.json absent, on centre sur la France et affiche le fond blanc + littoraux
           this.loadError = 'Aucun plan chargé, fond blanc + littoraux seulement.'
           try {
             this.map.setCenter([2, 47]);
@@ -180,7 +172,6 @@ export default {
             this.loadError += ' (Erreur centrage: ' + e + ')';
           }
         }
-        // Vérification du chargement de la carte Mapbox
         this.map.on('error', (e) => {
           if (e && e.error && e.error.message && e.error.message.includes('access token')) {
             this.loadError = 'Erreur Mapbox : problème de token ou de droits.';
@@ -188,7 +179,6 @@ export default {
         });
       })
     },
-    // called by floor button
     selectFloor(f) {
       this.selectedFloor = String(f)
       this.updateFloor()
@@ -215,13 +205,11 @@ export default {
           if (lat < minLat) minLat = lat
           if (lat > maxLat) maxLat = lat
         })
-        // add small padding
         const padLng = (maxLng - minLng) * 0.12 || 0.002
         const padLat = (maxLat - minLat) * 0.12 || 0.002
         const sw = [minLng - padLng, minLat - padLat]
         const ne = [maxLng + padLng, maxLat + padLat]
         try {
-          // Padding équilibré pour centrer la carte avec marges égales
           this.map.fitBounds([sw, ne], { padding: { top: 80, bottom: 80, left: 320, right: 80 }, maxZoom: 18, duration: 700 })
         } catch (e) {
           console.warn('fitBounds failed', e)
@@ -239,7 +227,6 @@ export default {
       this.floors = arr.length ? arr : ['0']
       this.selectedFloor = this.floors[0]
     },
-    // --- Overlay / floor plan manager ---
     addOverlayFromUrl() {
       const url = (this.newOverlayUrl || '').trim()
       if (!url) return
@@ -276,16 +263,14 @@ export default {
       this.saveOverlaysToStorage()
     },
     defaultBounds() {
-      // small box around current center
       const center = this.map ? this.map.getCenter() : { lng: 2.3522, lat: 48.8566 }
-      const delta = 0.0015 // ~150m
+      const delta = 0.0015
       return { minLng: center.lng - delta, minLat: center.lat - delta, maxLng: center.lng + delta, maxLat: center.lat + delta }
     },
     addImageOverlayToMap(overlay) {
       if (!this.map || !overlay) return
       const srcId = overlay.id
       const coords = this.boundsToCoordinates(overlay.bounds)
-      // remove existing if any
       if (this.map.getLayer(srcId + '-layer')) this.map.removeLayer(srcId + '-layer')
       if (this.map.getSource(srcId)) this.map.removeSource(srcId)
       try {
@@ -301,7 +286,6 @@ export default {
       }
     },
     boundsToCoordinates(b) {
-      // mapbox image source expects [tl, tr, br, bl]
       return [
         [b.minLng, b.maxLat],
         [b.maxLng, b.maxLat],
@@ -318,13 +302,11 @@ export default {
         if (this.map.getLayer(srcId + '-layer')) this.map.removeLayer(srcId + '-layer')
         if (this.map.getSource(srcId)) this.map.removeSource(srcId)
       }
-      // revoke object URL if it was created from a File
       try {
         if (overlay && overlay.url && String(overlay.url).startsWith('blob:')) {
           URL.revokeObjectURL(overlay.url)
         }
       } catch (e) {
-        // ignore
       }
       this.overlays.splice(idx, 1)
       this.saveOverlaysToStorage()
@@ -338,7 +320,6 @@ export default {
       this.saveOverlaysToStorage()
     },
     updateOverlaysForFloor() {
-      // show overlays that match selectedFloor, hide others
       this.overlays.forEach(o => {
         const layId = o.id + '-layer'
         if (!this.map || !this.map.getLayer(layId)) return
@@ -362,7 +343,6 @@ export default {
         const arr = JSON.parse(raw)
         if (!Array.isArray(arr)) return
         this.overlays = arr
-        // add to map
         this.overlays.forEach(o => this.addImageOverlayToMap(o))
         this.updateOverlaysForFloor()
       } catch (e) { console.warn('load overlays failed', e) }
@@ -388,16 +368,12 @@ export default {
       const visibility = this.showParkings ? 'visible' : 'none'
       if (this.map.getLayer('parking-layer')) this.map.setLayoutProperty('parking-layer', 'visibility', visibility)
     },
-    // Affiche la vue satellite sur une zone (ex: commune de Lyon)
-    // bbox = [minLng, minLat, maxLng, maxLat]
     showSatelliteOnBBox(bbox) {
       if (!this.map) return;
-      // Ajoute un masque polygonal blanc sur toute la carte sauf la bbox
       if (this.map.getLayer('satellite-mask')) {
         this.map.removeLayer('satellite-mask')
         this.map.removeSource('satellite-mask')
       }
-      // Polygone couvrant le monde entier, avec un trou sur la bbox
       const world = [
         [ [-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85] ]
       ]
@@ -431,7 +407,6 @@ export default {
         },
         layout: {}
       }, 'coastline')
-      // Affiche la couche satellite
       this.map.setLayoutProperty('satellite', 'visibility', 'visible')
     }
   }
@@ -448,7 +423,6 @@ export default {
 .dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px }
 .dot.floor { background:#6baed6 }
 .dot.parking { background:#fdae6b }
-/* floor selector styles */
 .floor-selector { margin-bottom:8px }
 .floor-buttons { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px }
 .floor-buttons button { padding:6px 8px; border:1px solid #ddd; background:#fff; cursor:pointer; border-radius:4px }

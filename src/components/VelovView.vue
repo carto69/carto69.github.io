@@ -374,7 +374,7 @@ export default {
       this.displayedTrips.sort((a, b) => {
         const dateA = new Date(a.date).getTime()
         const dateB = new Date(b.date).getTime()
-        return dateB - dateA // plus récent d'abord
+        return dateB - dateA
       })
 
       const avgDurationSeconds = validTripsCount > 0 ? totalDuration / validTripsCount : 0

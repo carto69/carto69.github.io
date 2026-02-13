@@ -462,27 +462,3 @@ html, body {
   }
 }
 </style>
-
-/* Animation des boutons d’onglets */
-.tile-btn, .tile {
-  transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), box-shadow 0.18s cubic-bezier(.4,1.5,.5,1);
-}
-.tile-btn:hover, .tile:hover {
-  transform: scale(1.12) rotate(-2deg);
-  box-shadow: 0 8px 32px 0 #0003, 0 0 0 2px #7fa46a;
-  z-index: 2;
-}
-
-/* Crédit : popup au survol */
-.credits-toggle.bottom-right:hover + .credits-panel.next-to-toggle-bottom,
-.credits-panel.next-to-toggle-bottom:hover {
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: auto;
-}
-.credits-panel.next-to-toggle-bottom {
-  display: none;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}

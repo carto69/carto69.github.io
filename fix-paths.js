@@ -4,7 +4,6 @@ import { resolve } from 'path';
 const indexPath = resolve('dist/index.html');
 let html = readFileSync(indexPath, 'utf-8');
 
-// Replace absolute paths with relative paths
 html = html.replace(/href="\/assets\//g, 'href="./assets/');
 html = html.replace(/src="\/assets\//g, 'src="./assets/');
 

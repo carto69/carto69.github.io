@@ -1,4 +1,16 @@
+.back-button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.legend-scale-circles {
+  line-height: 1.1;
+}
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import './maplibre-overrides.scss';
 
 :root {
   --bg: #f6f8fb;

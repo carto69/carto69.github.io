@@ -55,14 +55,13 @@ import MapeliaView from './components/MapeliaView.vue'
 import FemmesQuaisView from './components/FemmesQuaisView.vue'
 import ZonzonView from './components/ZonzonView.vue'
 import PortfolioView from './components/PortfolioView.vue'
-import PloufMap from './components/PloufMap.vue'
 import DashboardRView from './components/DashboardRView.vue'
 import SontlaMap from './components/SontlaMap.vue'
 import CracarteView from './components/CracarteView.vue'
 import CopsKillView from './components/CopsKillView.vue'
 
 export default {
-  components: { LoginView, MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, PloufMap, DashboardRView, SontlaMap, CracarteView, CopsKillView },
+  components: { LoginView, MenuView, XploreMap, MapView, VelovView, VelibView, Velo13View, MapeliaView, FemmesQuaisView, ZonzonView, PortfolioView, DashboardRView, SontlaMap, CracarteView, CopsKillView },
   data() {
     return {
       activeTab: 'home',
@@ -70,7 +69,6 @@ export default {
     }
   },
   mounted() {
-    // Supprimer l'authentification à chaque reload
     localStorage.removeItem('carto69_authenticated')
     localStorage.removeItem('carto69_user')
     this.checkAuthentication()

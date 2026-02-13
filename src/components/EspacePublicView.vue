@@ -3,7 +3,6 @@
     <button class="back-button" @click="$emit('back')" title="Retour à l'accueil">← Accueil</button>
     <div class="content">
       <h1>Espace Public</h1>
-      <p>À venir...</p>
     </div>
   </div>
 </template>
