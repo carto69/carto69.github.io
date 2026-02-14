@@ -61,9 +61,7 @@ export default {
   methods: {
     openZonzonExternal() {
       window.open('https://zonzon.vercel.app/', '_blank');
-    }
-  },
-  methods: {
+    },
     openMapelia() {
       const code = prompt('Code d\'accès requis :')
       if (code === '1612') {
