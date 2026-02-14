@@ -93,6 +93,13 @@
 			"type": "shell",
 			"command": "git add -A && git commit -m \"Fix: import mapbox-gl côté client (compatibilité SSR/Vercel)\" && git push",
 			"group": "build"
+		},
+		{
+			"label": "Vite dev server",
+			"type": "shell",
+			"command": "npm run dev",
+			"isBackground": true,
+			"group": "build"
 		}
 	]
 }

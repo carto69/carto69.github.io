@@ -7,27 +7,32 @@
 
     <div class="legend" v-if="selectedIndicator">
       <div class="legend-title">{{ currentIndicatorName() }}</div>
-      <div class="legend-scale" v-if="selectedIndicator !== 'population_prison'">
-        <div v-for="(color, i) in getLegendColors()" :key="i" class="legend-item">
-          <span class="legend-color" :style="{ backgroundColor: color }"></span>
-          <span class="legend-label">{{ getLegendLabel(i) }}</span> 
-        </div>
-        <div class="legend-item legend-nodata">
-          <span class="legend-color" style="background-color: #000" ></span>
-          <span class="legend-label">Pays sans données disponibles</span>
-        </div>
-      </div>
-      <div class="legend-scale legend-scale-circles" v-else>
-        <div v-for="item in getCircleLegendData()" :key="item.max" class="legend-circle-item">
-          <div class="legend-circle-wrapper">
-            <span class="legend-circle" :style="{ width: item.radius * 2 + 'px', height: item.radius * 2 + 'px' }"></span>
+      <div class="legend-scale">
+        <template v-if="['population_prison','nb_etablissements'].includes(selectedIndicator)">
+          <div v-for="item in getCircleLegendData()" :key="item.max" class="legend-circle-item">
+            <div class="legend-circle-wrapper">
+              <span class="legend-circle"
+                :style="{
+                  width: item.radius * 2 + 'px',
+                  height: item.radius * 2 + 'px',
+                  backgroundColor: selectedIndicator === 'nb_etablissements' ? '#b53c0a' : '#000',
+                  border: 'none'
+                }"
+              ></span>
+            </div>
+            <span class="legend-label-right">
+              {{ new Intl.NumberFormat('fr-FR').format(item.min) }} - {{ new Intl.NumberFormat('fr-FR').format(item.max) }}
+            </span>
           </div>
-          <span class="legend-label-right">
-            {{ new Intl.NumberFormat('fr-FR').format(item.min) }} - {{ new Intl.NumberFormat('fr-FR').format(item.max) }}
-          </span>
-        </div>
-        <div class="legend-item legend-nodata" style="margin-top: 8px;">
-          <span class="legend-color" style="background-color: #000"></span>
+        </template>
+        <template v-else>
+          <div v-for="(color, i) in getLegendColors()" :key="i" class="legend-item">
+            <span class="legend-color" :style="{ backgroundColor: color }"></span>
+            <span class="legend-label">{{ getLegendLabel(i) }}</span> 
+          </div>
+        </template>
+        <div class="legend-item legend-nodata" style="display: flex; align-items: center; margin-top: 8px;">
+          <span class="legend-color" style="background-color: #000; margin-right: 8px;"></span>
           <span class="legend-label">Pays sans données disponibles</span>
         </div>
       </div>
@@ -61,13 +66,16 @@ export default {
       selectedIndicator: 'population_prison',
       indicators: [
         { id: 'population_prison', name: 'Population carcérale', unit: 'détenus' },
-        { id: 'taux_pour_100k', name: 'Population carcérale pour 100 000 habitants', unit: '' },
+        { id: 'nb_etablissements', name: "Nombre d'établissements", unit: '' },
+        { id: 'taux_pour_100k', name: 'Population carcérale pour 100 000 habitant.es', unit: '' },
         { id: 'taux_occupation', name: 'Taux d\'occupation moyen', unit: '%' },
-        { id: 'attente_jugement', name: 'Part des détenus en attente de jugement', unit: '%' },
-        { id: 'femmes', name: 'Part des femmes détenues', unit: '%' },
-        { id: 'etrangers', name: 'Part des prisonniers étrangers', unit: '%' }
+        { id: 'attente_jugement', name: 'Part des détentions provisoires', unit: '%' },
+        { id: 'femmes', name: 'Part des détenues', unit: '%' },
+        { id: 'etrangers', name: 'Part des étranger.es ', unit: '%' },
+        { id: 'part_mineurs_detenus', name: 'Part des mineur.es', unit: '%' }
       ],
       colorSchemes: {
+          part_mineurs_detenus: ['#fbeee6', '#f5c6b8', '#e89c7a', '#d96f3a', '#b53c0a', '#7a1c00'],
         taux_pour_100k: ['#f3e5f5', '#e1bee7', '#ce93d8', '#ba68c8', '#9c27b0', '#6a1b9a'],
         taux_occupation: ['#ffeede', '#f9d6b3', '#f3b97c', '#eb9841', '#d96f00', '#9c4c00'],
         attente_jugement: ['#e7f0ff', '#c8dcff', '#9fc1ff', '#6fa0ff', '#3b7ae6', '#1f4fa3'],
@@ -191,7 +199,14 @@ export default {
               const indicator = this.selectedIndicator
               if (!this.geoData || !this.colorSchemes[indicator]) return '#222'
               const colors = this.colorSchemes[indicator]
-              const breaks = this.computeQuantileBreaks(indicator, 6)
+              const breaks = this.computeQuantileBreaks(indicator, colors.length)
+              if (!colors || colors.length < 2 || !breaks || breaks.length === 0) {
+                return [
+                  'case',
+                  ['==', ['get', 'has_data'], false], '#000',
+                  '#000'
+                ]
+              }
               const expr = ['step', ['get', indicator], colors[0]]
               for (let i = 0; i < breaks.length; i++) {
                 expr.push(breaks[i], colors[i+1] || colors[colors.length-1])
@@ -213,46 +228,58 @@ export default {
           if (!this.geoData) return ''
           const indicator = this.selectedIndicator
           const colors = this.colorSchemes[indicator]
-          const breaks = this.computeQuantileBreaks(indicator, colors.length)
-          const n = colors.length
-          const isPercent = ['taux_occupation', 'attente_jugement', 'femmes', 'etrangers'].includes(indicator)
+          const breaks = this.computeQuantileBreaks(indicator, colors ? colors.length : 6)
+          const n = colors ? colors.length : 6
+          const isPercent = ['taux_occupation', 'attente_jugement', 'femmes', 'etrangers', 'part_mineurs_detenus'].includes(indicator)
           const unit = isPercent ? ' %' : ''
+          if (!breaks || breaks.length === 0) return 'donnée manquante';
           if (index === 0) {
-            return `0 - ${breaks[0] ? breaks[0].toFixed(1) : 'N/A'}${unit}`
+            const val = breaks[0] !== undefined ? breaks[0].toFixed(1) : 'N/A';
+            return isPercent && val !== 'donnée manquante' && val !== 'N/A' ? `0 - ${val} %` : `0 - ${val}`;
           } else if (index < n - 1) {
-            const prev = breaks[index - 1]
-            const next = breaks[index]
-            return `${prev.toFixed(1)} - ${next.toFixed(1)}${unit}`
+            const prev = breaks[index - 1];
+            const next = breaks[index];
+            const prevVal = prev !== undefined ? prev.toFixed(1) : 'donnée manquante';
+            const nextVal = next !== undefined ? next.toFixed(1) : 'donnée manquante';
+            if (prev === undefined || next === undefined) return 'donnée manquante';
+            return isPercent && prevVal !== 'donnée manquante' && nextVal !== 'donnée manquante' ? `${prevVal} - ${nextVal} %` : `${prevVal} - ${nextVal}`;
           } else {
-            const prev = breaks[n - 2]
-            return `${prev.toFixed(1)}+${unit}`
+            const prev = breaks[n - 2];
+            const prevVal = prev !== undefined ? prev.toFixed(1) : 'donnée manquante';
+            if (prev === undefined) return 'donnée manquante';
+            return isPercent && prevVal !== 'donnée manquante' ? `${prevVal}+ %` : `${prevVal}+`;
           }
         },
         getCircleLegendData() {
-          if (!this.geoData || this.selectedIndicator !== 'population_prison') return []
-          const values = this.geoData.features
-            .filter(f => f.properties.population_prison && f.properties.population_prison > 0)
-            .map(f => f.properties.population_prison)
-            .sort((a, b) => a - b)
-          if (values.length === 0) return []
-          const n = values.length
-          const breaks = []
-          const classes = 6
-          for (let i = 0; i <= classes; i++) {
-            const p = i / classes
-            const idx = Math.floor(p * (n - 1))
-            breaks.push(values[idx])
+          if (!this.geoData) return []
+          let indicator = this.selectedIndicator
+          if (["population_prison","nb_etablissements"].includes(indicator)) {
+            const radii = [2.5, 5, 8, 11, 16, 25];
+            const values = this.geoData.features
+              .filter(f => f.properties[indicator] && f.properties[indicator] > 0)
+              .map(f => f.properties[indicator])
+              .sort((a, b) => a - b)
+            if (values.length === 0) return []
+            const n = values.length
+            const classes = 6
+            const breaks = []
+            for (let i = 0; i <= classes; i++) {
+              const p = i / classes
+              const idx = Math.floor(p * (n - 1))
+              breaks.push(values[idx])
+            }
+            const legend = []
+            for (let i = 0; i < classes; i++) {
+              legend.push({
+                min: Math.round(breaks[i]),
+                max: Math.round(breaks[i + 1]),
+                radius: radii[i]
+              })
+            }
+            return legend
+          } else {
+            return []
           }
-          const radii = [4, 6, 8, 10, 12, 14]
-          const legend = []
-          for (let i = 0; i < classes; i++) {
-            legend.push({
-              min: Math.round(breaks[i]),
-              max: Math.round(breaks[i + 1]),
-              radius: radii[i]
-            })
-          }
-          return legend
         },
         computeQuantileBreaks(indicator, classes = 6) {
           if (!this.geoData) return []
@@ -277,7 +304,7 @@ export default {
         const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true })
         const csvByIso = {}
         parsed.data.forEach(row => {
-          if (row['Code_ISO3']) csvByIso[row['Code_ISO3'].trim().toUpperCase()] = row
+          if (row['iso3']) csvByIso[row['iso3'].trim().toUpperCase()] = row
         })
 
         const geojsonResponse = await fetch('/world-boundaries.geojson')
@@ -303,23 +330,44 @@ export default {
           .map(f => {
             let iso = (f.properties.ISO_A3 || '').trim().toUpperCase()
             const csvRow = csvByIso[iso]
-            const num = v => (v === '' || v === 'N/A' || v == null) ? null : Number(v)
+            const num = v => {
+              if (v === '' || v === 'N/A' || v == null) return null;
+              if (typeof v === 'string') v = v.replace(',', '.');
+              const n = Number(v);
+              return isNaN(n) ? null : n;
+            }
+            let pdm_active = csvRow ? csvRow.pdm_active : null;
+            let pdm_active_date = null;
+            if (pdm_active && pdm_active.toLowerCase().startsWith('non')) {
+              const match = pdm_active.match(/\(([^)]+)\)/);
+              pdm_active_date = match ? match[1] : null;
+              pdm_active = 'Non';
+            } else if (pdm_active && pdm_active.toLowerCase() === 'oui') {
+              pdm_active = 'Oui';
+            }
             if (csvRow) {
-              const pop = num(csvRow['Population carcerale totale'])
+              const pop = num(csvRow['pop_carcerale']);
               f.properties = {
                 ...f.properties,
-                id: csvRow.ID,
-                name: csvRow['Pays / Nations'],
-                capitale: csvRow.capitale,
+                id: csvRow['id'],
+                name: csvRow['pays'],
+                capitale: csvRow['capitale'],
                 population_prison: pop,
-                taux_pour_100k: num(csvRow['Population carcerale pour 100 000 habitants']),
-                taux_occupation: num(csvRow["Taux d'occupation (%)"]),
-                attente_jugement: num(csvRow["Detenus en attente de jugement (%)"]),
-                femmes: num(csvRow["Femmes detenues (%)"]),
-                etrangers: num(csvRow["Prisonniers Eİtrangers (%)"]),
-                population: num(csvRow['Population_2023']),
-                ISO_A3: csvRow['Code_ISO3'],
-                ISO_A2: csvRow['Code_ISO2'],
+                taux_pour_100k: num(csvRow['pop_carcerale_100000hab']),
+                taux_occupation: num(csvRow['tx_occup']),
+                attente_jugement: num(csvRow['part_detenus_attente_jugement']),
+                femmes: num(csvRow['part_femmes_detenues']),
+                etrangers: num(csvRow['part_detenus_etrangers']),
+                population: num(csvRow['pop_nat_2023']),
+                idh: num(csvRow['idh']),
+                nb_etablissements: num(csvRow['nb_etablissements']),
+                part_mineurs_detenus: num(csvRow['part_mineurs_detenus']),
+                age_minimal: (csvRow['age_minimal'] && csvRow['age_minimal'] !== 'N/A') ? Number(csvRow['age_minimal']) : null,
+                stock_mineur_detenus: (csvRow['stock_mineur_detenus'] && csvRow['stock_mineur_detenus'] !== 'N/A') ? Number(csvRow['stock_mineur_detenus'].replace(',', '.')) : null,
+                pdm_active: pdm_active,
+                pdm_active_date: pdm_active_date,
+                ISO_A3: csvRow['iso3'],
+                ISO_A2: csvRow['iso2'],
                 has_data: pop > 0
               }
             } else {
@@ -353,13 +401,19 @@ export default {
         container: 'zonzon-map',
         style: 'https://basemaps.cartocdn.com/gl/voyager-nolabels-gl-style/style.json',
         projection: 'naturalEarth',
-        center: [15, 30],
-        zoom: 0.7,
-        maxZoom: 8
+        center: [20, 20],
+        zoom: 1.3,
+        maxZoom: 8,
+        attributionControl: true
       })
       this.map.on('load', () => {
         this.setupLayers()
         this.map.on('click', 'prison-fill', this.handlePolygonClick)
+        const observer = new MutationObserver(() => {
+          const attrib = document.querySelector('.maplibregl-ctrl-attrib.maplibregl-ctrl-attrib-expanded .maplibregl-ctrl-attrib-inner');
+          if (attrib) attrib.innerHTML = 'Carto ; MapLibre ; OSM';
+        });
+        observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
       })
       const scaleControl = new maplibregl.ScaleControl({
         maxWidth: 100,
@@ -420,18 +474,17 @@ export default {
           paint: {
             'circle-color': '#000',
             'circle-opacity': 0.7,
-            'circle-stroke-color': '#fff',
-            'circle-stroke-width': 1,
+            'circle-stroke-width': 0,
             'circle-radius': [
               'interpolate',
               ['linear'],
               ['get', 'population_prison'],
-              0, 0.5,
-              100, 1,
-              1000, 2,
-              5000, 3,
-              20000, 4.5,
-              100000, 6
+              0, 1,
+              500, 3,
+              1000, 6,
+              2500, 9,
+              10000, 12,
+              100000, 15,
             ]
           }
         })
@@ -442,12 +495,82 @@ export default {
     applyIndicatorStyles() {
       if (!this.map || !this.layerAdded) return
       const indicator = this.selectedIndicator
-      if (indicator === 'population_prison') {
+      if (indicator === 'population_prison' || indicator === 'nb_etablissements') {
         this.map.setPaintProperty('prison-fill', 'fill-color', [
           'case',
           ['==', ['get', 'has_data'], false], '#000',
           'rgba(0,0,0,0)'
         ])
+        if (indicator === 'nb_etablissements') {
+          this.map.setPaintProperty('prison-circles', 'circle-color', '#b53c0a')
+        } else {
+          this.map.setPaintProperty('prison-circles', 'circle-color', '#000')
+        }
+        const features = this.geoData.features.filter(f => f.properties[indicator] && f.properties[indicator] > 0)
+        const values = features.map(f => f.properties[indicator]).sort((a, b) => a - b)
+        const classes = 6
+        const radii = [2.5, 5, 8, 11, 16, 25]
+        let circleExpr = [
+          "case",
+          ["==", ["get", "has_data"], false], 0.1,
+          ["interpolate", ["linear"], ["zoom"],
+            0.7,
+            ["step", ["get", indicator], radii[0]*0.08,
+              ...(() => {
+                if (values.length === 0) return [];
+                const n = values.length;
+                const breaks = [];
+                for (let i = 1; i < classes; i++) {
+                  const p = i / classes;
+                  const idx = Math.floor(p * (n - 1));
+                  breaks.push(values[idx]);
+                }
+                let arr = [];
+                for (let i = 0; i < breaks.length; i++) {
+                  arr.push(breaks[i], radii[i + 1]*0.08);
+                }
+                return arr;
+              })()
+            ],
+            3,
+            ["step", ["get", indicator], radii[0],
+              ...(() => {
+                if (values.length === 0) return [];
+                const n = values.length;
+                const breaks = [];
+                for (let i = 1; i < classes; i++) {
+                  const p = i / classes;
+                  const idx = Math.floor(p * (n - 1));
+                  breaks.push(values[idx]);
+                }
+                let arr = [];
+                for (let i = 0; i < breaks.length; i++) {
+                  arr.push(breaks[i], radii[i + 1]);
+                }
+                return arr;
+              })()
+            ],
+            6,
+            ["step", ["get", indicator], radii[0]*6,
+              ...(() => {
+                if (values.length === 0) return [];
+                const n = values.length;
+                const breaks = [];
+                for (let i = 1; i < classes; i++) {
+                  const p = i / classes;
+                  const idx = Math.floor(p * (n - 1));
+                  breaks.push(values[idx]);
+                }
+                let arr = [];
+                for (let i = 0; i < breaks.length; i++) {
+                  arr.push(breaks[i], radii[i + 1]*6);
+                }
+                return arr;
+              })()
+            ]
+          ]
+        ];
+        this.map.setPaintProperty('prison-circles', 'circle-radius', circleExpr);
         if (this.map.getLayer('prison-circles')) {
           this.map.setLayoutProperty('prison-circles', 'visibility', 'visible')
         }
@@ -474,12 +597,20 @@ export default {
       const indicatorObj = this.indicators.find(i => i.id === indicator)
       const indicatorLabel = indicatorObj ? indicatorObj.name : indicator
       const indicatorUnit = indicatorObj ? indicatorObj.unit : ''
-      let html = `<div style="background:white;border:2.5px solid #111;border-radius:8px;padding:6px;width:350px;font-family:'Space Grotesk',sans-serif;color:#111;box-shadow:none;margin:0;white-space:nowrap;overflow-wrap:normal;">
-        <div style="font-weight:700;font-size:1.1em;white-space:nowrap;">${props.name || ''}</div>
-        <div style="margin-top:4px;white-space:nowrap;">Capitale : ${props.capitale && props.capitale !== 'N/A' ? props.capitale : 'Donnée inconnue'}</div>
-        <div style="margin-top:4px;white-space:nowrap;">Population : ${props.population && props.population !== 'N/A' ? new Intl.NumberFormat('fr-FR').format(props.population) + ' habitant.es' : 'Données inconnues'}</div>
-        <div style="margin-top:4px;white-space:nowrap;">Population carcérale : ${props.population_prison && props.population_prison !== 'N/A' ? new Intl.NumberFormat('fr-FR').format(props.population_prison) + ' détenu.es' : 'Données inconnues'}</div>
-        ${indicator !== 'population_prison' ? `<div style="margin-top:4px;white-space:nowrap;">${indicatorLabel} : ${(indicatorValue !== undefined && indicatorValue !== null && indicatorValue !== 'N/A') ? new Intl.NumberFormat('fr-FR').format(indicatorValue) : 'Données inconnues'}${indicatorUnit}</div>` : ''}
+      let html = `<div style="background:white;border:2.5px solid #111;border-radius:8px;padding:6px;min-width:380px;max-width:600px;font-family:'Space Grotesk',sans-serif;color:#111;box-shadow:none;margin:0;white-space:normal;overflow-wrap:break-word;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.1em;white-space:nowrap;margin-bottom:2px;">
+          <span style="text-align:left;font-weight:1000;">${props.name || ''}</span>
+          <span style="text-align:right;font-weight:600;margin-left:18px;">${props.capitale && props.capitale !== 'N/A' ? props.capitale : 'donnée manquante  '}</span>
+        </div>
+        <div style="margin-top:4px;white-space:nowrap;"><span style='color:#111;font-weight:bold;'>Population</span> : ${props.population && props.population !== 'N/A' ? new Intl.NumberFormat('fr-FR').format(props.population) + ' habitant.es' : 'donnée manquante'}</div>
+        <div style="margin-top:4px;white-space:nowrap;"><span style='color:#111;font-weight:bold;'>Population carcérale</span> : ${props.population_prison && props.population_prison !== 'N/A' ? new Intl.NumberFormat('fr-FR').format(props.population_prison) + ' détenu.es' : 'donnée manquante'}</div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;white-space:nowrap;">
+          <span style="text-align:left;"><span style='color:#111;font-weight:bold;'>Peine de mort</span> : ${props.pdm_active === 'Oui' ? 'active' : (props.pdm_active === 'Non' && props.pdm_active_date ? 'abolie en ' + props.pdm_active_date : (props.pdm_active === 'Non' ? 'abolie' : 'donnée manquante'))}</span>
+          <span style="text-align:right;"><span style='color:#111;font-weight:bold;'>IDH</span> : ${props.idh && props.idh !== 'N/A' ? props.idh : 'donnée manquante'}</span>
+        </div>
+        ${indicator !== 'population_prison' ? `<div style="margin-top:4px;white-space:nowrap;"><span style='color:#111;font-weight:bold;'>${indicatorLabel}</span> : ${(indicatorValue !== undefined && indicatorValue !== null && indicatorValue !== 'N/A') ? new Intl.NumberFormat('fr-FR').format(indicatorValue) + (indicatorUnit && indicatorValue !== 'donnée manquante' ? ' ' + indicatorUnit : '') : 'donnée manquante'}</div>` : ''}
+        ${indicator === 'part_mineurs_detenus' ? `<div style="margin-top:4px;white-space:nowrap;">Age minimal de détention : ${props.age_minimal && props.age_minimal !== 'N/A' ? props.age_minimal + ' ans' : 'donnée manquante'}</div>
+        <div style="margin-top:4px;white-space:nowrap;">Nombre de mineurs détenus : ${props.stock_mineur_detenus && props.stock_mineur_detenus !== 'N/A' ? new Intl.NumberFormat('fr-FR').format(props.stock_mineur_detenus) : 'donnée manquante'}</div>` : ''}
       </div>`
       if (this.popup) {
         this.popup.remove()
@@ -626,8 +757,8 @@ export default {
 
 .legend {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 15px;
+  left: 15px;
   background: #fff;
   border: 1px solid #111;
   border-radius: 8px;
@@ -684,14 +815,27 @@ export default {
   font-size: 12px;
   color: #333;
   font-family: 'Space Grotesk', 'Hermes-Grotesk', 'Hermes Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  height: 29px;
+  height: 40px;
 }
 
 .legend-circle-wrapper {
-  width: 30px;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.legend-label-right {
+  min-width: 80px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.legend-circle-wrapper {
+  width: 40px;
   flex-shrink: 0;
 }
 
@@ -707,11 +851,10 @@ export default {
   background-color: #000000;
   border-radius: 50%;
   flex-shrink: 0;
-  min-width: 12px;
-  min-height: 12px;
   display: inline-block;
   min-width: 8px;
   min-height: 8px;
+  border: none;
 }
 
 .legend-label {
@@ -752,9 +895,7 @@ export default {
   top: 10px;
 }
 
-:deep(.maplibregl-ctrl-top-right .maplibregl-ctrl-group) {
-  order: 1;
-}
+
 .zonzon-container, .zonzon-container * {
   font-family: 'Courier 10 Pitch', 'Courier New', Courier, monospace !important;
 }

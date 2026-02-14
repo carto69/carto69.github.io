@@ -1,221 +1,221 @@
-ID,capitale,Pays / Nations,Population carcerale totale,Population carcerale pour 100 000 habitants,Code_ISO3,Code_ISO2,Taux d'occupation (%),Detenus en attente de jugement (%),Femmes detenues (%),Prisonniers EÄ°trangers (%),Population_2023
-1,Kaboul,Afghanistan,23000,54,AFG,AF,179.9,52.2,4.3,0.7,41454761
-2,"Bloemfontein, Le Cap et Pretoria",Afrique du Sud,166008,260,ZAF,ZA,148.5,37.3,3.2,14.9,63212384
-3,Tirana,Albanie,4578,196,ALB,AL,93.6,58.0,1.4,2.4,2811655
-4,Alger,Algerie,94749,217,DZA,DZ,119.0,19.0,1.5,3.8,46164219
-5,Berlin,Allemagne,59413,71,DEU,DE,82.2,26.3,5.6,48.8,84548231
-6,Andorre-la-Vieille,Andorre,61,71,AND,AD,39.6,31.1,9.8,80.3,80856
-7,Londres,Royaume-Uni,96907,138,GBR,GB,107.3,20.2,3.9,12.7,68682962
-8,Luanda,Angola,24068,65,AGO,AO,106.7,48.5,2.5,3.1,36749906
-9,Saint John's,Antigua-et-Barbuda,400,400,ATG,AG,266.7,43.3,5.5,30.6,93316
-10,Riyad,Arabie Saoudite,48660,140,SAU,SA,N/A,48.3,1.9,51.4,33264292
-11,Buenos Aires,Argentine,133585,284,ARG,AR,122.9,38.8,4.3,4.6,45538401
-12,Erevan,Armenie,2469,83,ARM,AM,55.0,53.3,2.8,8.1,2943393
-13,Canberra,Australie,46998,170,AUS,AU,112.2,42.2,8.2,13.9,26451124
-14,Vienne,Autriche,9611,104,AUT,AT,115.3,19.1,7.0,52.7,9130429
-15,Bakou,Azerbaidjan,26894,264,AZE,AZ,102.8,24.3,2.9,2.0,10318207
-16,Nassau,Bahamas,1357,336,BHS,BS,161.7,37.0,7.4,9.3,399440
-17,Manama,Bahrein,3485,234,BHR,BH,110.2,25.7,4.7,23.7,1569666
-18,Dacca,Bangladesh,78894,46,BGD,BD,182.8,73.1,2.5,0.6,171466990
-19,Bridgetown,Barbade,692,240,BRB,BB,61.5,54.7,3.0,9.1,282336
-20,Bruxelles,Belgique,13483,113,BEL,BE,121.5,32.6,4.4,41.4,11712893
-21,Belmopan,Belize,1308,302,BLZ,BZ,65.4,36.4,1.8,5.9,411106
-22,Cotonou et Porto-Novo,Benin,19563,144,BEN,BJ,279.5,55.0,3.1,8.8,14111034
-23,Thimphou,Bhoutan,1119,145,BTN,BT,N/A,60.7,4.3,6.8,786385
-24,Minsk,Bielorussie,32556,345,BLR,BY,83.4,16.6,10.8,3.1,9115680
-25,La Paz et Sucre,Bolivie,31105,252,BOL,BO,274.1,N/A,6.6,3.5,12244159
-26,Sarajevo,Bosnie-Herzegovine,2200,72,BIH,BA,82.6,21.3,3.2,3.6,3185073
-27,Gaborone,Botswana,3971,161,BWA,BW,86.0,22.5,5.0,21.2,2480244
-28,Brasilia,Bresil,909067,416,BRA,BR,135.6,23.6,5.9,0.3,211140729
-29,Bandar Seri Begawan,Brunei,636,143,BRN,BN,143.8,7.1,11.9,29.2,458949
-30,Sofia,Bulgarie,6378,99,BGR,BG,68.7,21.5,3.6,3.9,6795803
-31,Ouagadougou,Burkina Faso,8799,37,BFA,BF,162.9,29.0,1.8,4.1,23025776
-32,Bujumbura et Gitega,Burundi,12524,90,BDI,BI,291.7,47.5,8.2,1.2,13689450
-33,Phnom Penh,Cambodge,57000,320,KHM,KH,409.1,26.6,6.1,6.5,17423880
-34,Yaoundé,Cameroun,34419,118,CMR,CM,164.3,55.5,2.6,4.6,28372687
-35,Ottawa,Canada,35485,90,CAN,CA,102.2,46.6,7.0,4.5,39299105
-36,Praia,Cap-Vert,2700,467,CPV,CV,109.4,31.7,1.8,33.7,522331
-37,N'Djaména,Tchad,9589,56,TCD,TD,133.4,28.8,1.5,1.3,19319064
-38,Santiago  et Valparaíso,Chili,63045,329,CHL,CL,91.3,35.7,8.2,14.2,19658835
-39,Pékin,Chine,1690000,119,CHN,CN,N/A,N/A,8.6,0.4,1422584933
-40,Bogota,Colombie,103952,199,COL,CO,128.1,19.1,5.7,1.2,52321152
-41,Moroni,Comores,422,46,COM,KM,161.7,43.6,1.6,7.7,850387
-42,SejongSejong,Coree du Nord,N/A,N/A,PRK,KP,N/A,N/A,N/A,N/A,26418204
-43,Sejong et Séoul,Coree du Sud,59088,115,KOR,KR,118.2,35.6,8.4,N/A,51748739
-44,San José,Costa Rica,18090,345,CRI,CR,120.4,17.5,4.4,15.2,5105525
-45,Yamoussoukro,Cote d'Ivoire,27149,94,CIV,CI,297.1,36.2,2.5,30.0,31165654
-46,Zagreb,Croatie,4445,115,HRV,HR,109.1,41.4,5.1,17.5,3896023
-47,La Havane,Cuba,90000,794,CUB,CU,N/A,N/A,N/A,N/A,11019931
-48,Copenhague,Danemark,4129,69,DNK,DK,93.9,35.5,5.3,27.0,5948136
-49,Djibouti,Djibouti,750,74,DJI,DJ,171.4,35.8,3.9,22.8,1152944
-50,Roseau,Dominique,260,356,DMA,DM,73.0,48.1,1.2,9.6,66510
-51,Le Caire,Egypte,120000,113,EGY,EG,207.3,33.3,3.7,1.0,114535772
-52,Abou Dabi,Emirats arabes unis,9826,104,ARE,AE,158.9,38.2,11.7,87.8,10642081
-53,Quito,Equateur,36980,196,ECU,EC,137.9,35.8,7.2,9.8,17980083
-54,Asmara,Erythree,N/A,N/A,ERI,ER,N/A,N/A,N/A,N/A,3470390
-55,Madrid,Espagne,59226,121,ESP,ES,73.6,17.7,7.0,32.7,47911579
-56,Tallinn,Estonie,1618,118,EST,EE,N/A,24.0,4.4,10.5,1367196
-57,Mbabane,Eswatini,4500,369,SWZ,SZ,64.9,24.5,2.9,6.0,1230506
-58,Washington,Etats-Unis,1833700,542,USA,US,86.1,25.5,9.8,6.6,343477335
-59,Addis-Abeba,Ethiopie,110000,99,ETH,ET,171.1,14.9,4.2,N/A,128691692
-60,Suva,Fidji,2276,248,FJI,FJ,103.5,20.6,3.1,1.7,924145
-61,Helsinki,Finlande,3041,54,FIN,FI,102.8,25.7,8.0,20.2,5601185
-62,Paris,France,86229,126,FRA,FR,135.6,31.5,3.5,24.6,66438822
-63,Libreville,Gabon,5501,226,GAB,GA,N/A,70.0,3.5,13.8,2484789
-64,Banjul,Gambie,543,22,GMB,GM,172.5,55.6,2.6,66.7,2697845
-65,Tbilissi,Georgie,11055,285,GEO,GE,89.6,23.2,4.8,13.8,3807492
-66,Accra,Ghana,14133,41,GHA,GH,137.7,11.4,1.6,7.1,33787914
-67,Athènes,Grece,10203,98,GRC,GR,94.7,27.6,4.9,54.1,10242908
-68,Saint-Georges,Grenade,370,324,GRD,GD,205.6,20.4,1.6,4.8,117081
-69,Nuuk,Groenland (Danemark),167,294,GRL,GL,109.2,22.8,13.8,0.9,55922
-70,Basse-Terre,Guadeloupe (France),985,247,GLP,GP,157.1,27.0,2.6,N/A,376517
-71,Hag?tña,Guam (Etats-Unis),928,530,GUM,GU,147.6,52.8,3.9,0.0,166506
-72,Guatemala,Guatemala,23361,123,GTM,GT,299.4,47.2,12.1,2.3,18124838
-73,Saint-Pierre-Port,Guernesey (Royaume-Uni),82,124,GGY,GG,65.7,26.8,7.3,9.7,64017
-74,Conakry,Guinee (Republique de),5549,38,GIN,GN,171.4,55.5,3.0,2.7,14405468
-75,Bissau,Guinee equatoriale,500,63,GNQ,GQ,N/A,N/A,5.0,N/A,1847549
-76,Ciudad de la Paz,Guinee-Bissau,596,31,GNB,GW,102.2,67.9,2.6,7.1,2153339
-77,Georgetown,Guyana,2300,288,GUY,GY,151.0,27.0,2.6,3.2,826353
-78,Cayenne,Guyane francaise (France),1087,321,GUF,GF,176.5,27.9,5.9,63.0,303402
-79,Port-au-Prince,Haiti,7163,59,HTI,HT,302.0,82.0,3.5,N/A,11637398
-80,Comayagüela et Tegucigalpa,Honduras,19481,188,HND,HN,150.0,49.2,6.1,0.6,10644851
-81,Hong Kong,Hong Kong (Chine),10520,139,HKG,HK,74.0,40.0,21.5,31.0,7442734
-82,Budapest,Hongrie,18729,196,HUN,HU,104.1,22.8,8.4,5.0,9686463
-83,Douglas,Ile de Man (Royaume-Uni),160,186,IMN,IM,95.8,20.2,7.6,1.1,84165
-84,Port-Louis,Ile Maurice,2754,215,MUS,MU,116.9,43.2,7.4,6.4,1233427
-85,George Town,Iles Caymans (Royaume-Uni),249,280,CYM,KY,122.8,29.6,9.5,N/A,73038
-86,Avarua,Iles Cook (Nouvelle-Zelande),28,156,COK,CK,50.0,14.6,8.3,0.0,14222
-87,Torshavn,Iles Feroye (Danemark),13,24,FRO,FO,92.9,38.5,0.0,N/A,54714
-88,Saipan,Iles Mariannes du Nord (Etats-Unis),170,304,MNP,MP,47.8,N/A,5.8,N/A,45143
-89,Majuro,Iles Marshall,35,66,MHL,MH,97.2,11.4,0.0,N/A,38827
-90,Honiara,Iles Salomon,556,74,SLB,SB,77.7,32.7,2.3,1.0,800005
-91,Charlotte-Amélie,Iles Vierges (Etats-Unis),261,251,VIR,VI,74.1,36.4,5.2,15.7,85701
-92,Road Town,Iles Vierges (Royaume-Uni),132,426,VGB,VG,155.3,37.0,4.5,N/A,38985
-93,New Delhi,Inde,530333,37,IND,IN,120.8,73.5,4.1,1.3,1438069596
-94,Jakarta et Nusantara,Indonesie,276136,96,IDN,ID,184.5,21.7,5.0,0.4,281190067
-95,Bagdad,Irak,73715,179,IRQ,IQ,139.2,29.8,2.6,N/A,45074049
-96,Téhéran,Iran,189000,228,IRN,IR,153.0,25.1,3.1,2.9,90608707
-97,Dublin,Irlande,5627,101,IRL,IE,119.3,19.4,5.5,15.8,5196630
-98,Reykjavik,Islande,140,35,ISL,IS,87.5,32.1,8.6,40.0,387558
-99,Tel Aviv ,Israel,19756,217,ISR,IL,136.2,25.2,1.0,38.9,9256314
-100,Rome,Italie,63499,108,ITA,IT,123.8,24.1,4.3,31.7,59499453
-101,Kingston,Jamaique,3720,124,JAM,JM,87.0,22.5,4.0,1.0,2839786
-102,Tokyo,Japon,40544,33,JPN,JP,47.3,15.2,9.1,6.9,124370947
-103,Saint-Hélier,Jersey (Royaume-Uni),176,169,JEY,JE,88.0,28.1,6.5,25.2,103674
-104,Amman,Jordanie,20000,194,JOR,JO,150.6,36.9,2.2,9.9,11439213
-105,Astana,Kazakhstan,32171,163,KAZ,KZ,62.4,20.3,8.2,3.7,20330104
-106,Nairobi,Kenya,59013,100,KEN,KE,176.5,42.9,4.7,1.5,55339003
-107,Bichkek,Kirghizistan,7728,112,KGZ,KG,61.7,20.5,2.9,5.1,7073516
-108,Tarawa-Sud,Kiribati,129,113,KIR,KI,112.8,5.4,0.8,0.0,132530
-109,Pristina,Kosovo,1830,99,XXK,XK,97.1,35.6,2.7,5.7,1700031
-110,Koweït,Koweit,4500,101,KWT,KW,126.2,14.6,5.8,13.5,4838782
-111,Vientiane,Laos,11885,166,LAO,LA,N/A,67.0,13.7,N/A,7664993
-112,Maseru,Lesotho,2600,117,LSO,LS,70.6,19.5,2.9,0.9,2311472
-113,Riga,Lettonie,3271,175,LVA,LV,67.8,23.7,7.6,3.5,1882396
-114,Beyrouth,Liban,9254,141,LBN,LB,194.4,87.1,2.9,36.0,5773493
-115,Monrovia,Liberia,3398,60,LBR,LR,251.7,66.2,2.8,6.6,5493031
-116,Tripoli,Libye,19103,269,LBY,LY,141.6,29.0,1.1,12.8,7305659
-117,Vaduz,Liechtenstein,8,20,LIE,LI,40.0,75.0,0.0,83.3,39598
-118,Vilnius,Lituanie,4551,156,LTU,LT,68.4,11.8,4.5,3.4,2854099
-119,Luxembourg,Luxembourg,613,91,LUX,LU,61.6,47.3,4.2,75.4,665098
-120,Macao,Macao (Chine),1267,185,MAC,MO,82.8,22.4,17.4,66.0,713912
-121,Skopje,Macedoine du Nord,2605,142,MKD,MK,101.2,12.1,3.8,7.1,1831802
-122,Antananarivo et Tananarive,Madagascar,29281,95,MDG,MG,277.5,39.6,5.5,0.2,31195932
-123,Putrajaya et Kuala Lumpur ,Malaisie,16536,78,MYS,MY,110.3,33.6,5.4,18.3,35126298
-124,Lilongwe,Malawi,84143,244,MWI,MW,236.2,17.6,1.1,0.2,21104482
-125,Malé,Maldives,1195,225,MDV,MV,125.0,24.4,4.0,8.8,525994
-126,Bamako,Mali,10773,48,MLI,ML,223.3,71.7,3.4,N/A,23769127
-127,La Valette,Malte,671,119,MLT,MT,82.8,41.6,6.3,51.9,532956
-128,Rabat,Maroc,102653,267,MAR,MA,158.8,37.6,2.5,1.5,37712505
-129,Fort-de-France,Martinique (France),1108,298,MTQ,MQ,150.1,37.0,3.9,17.0,346002
-130,Nouakchott,Mauritanie,2826,57,MRT,MR,101.8,50.0,2.0,13.4,5022441
-131,Mamoudzou,Mayotte (France),629,204,MYT,YT,226.3,56.5,0.8,N/A,316015
-132,Mexico,Mexique,255190,188,MEX,MX,112.5,41.1,6.2,1.4,129739759
-133,Palikir,Micronesie,132,127,FSM,FM,88.0,16.7,0.0,N/A,112630
-134,Chisinau,Moldavie,5892,255,MDA,MD,89.0,20.2,5.3,1.9,3067070
-135,Monaco,Monaco,31,81,MCO,MC,31.0,41.9,3.2,93.5,38956
-136,Oulan-Bator,Mongolie,5700,166,MNG,MN,124.4,24.3,4.5,0.4,3431932
-137,Cetin et Podgoricaje ,Montenegro,1047,168,MNE,ME,75.2,47.4,3.6,16.1,633552
-138,Maputo,Mozambique,22000,63,MOZ,MZ,247.9,28.1,3.9,3.3,33635160
-139,Naypyidaw,Myanmar,100324,183,MMR,MM,111.5,15.1,12.3,0.7,54133798
-140,Windhoek,Namibie,8900,318,NAM,NA,75.4,54.0,2.9,8.9,2963095
-141,Yaren,Nauru,38,345,NRU,NR,14.0,34.2,5.3,6.7,11875
-142,Katmandou,Nepal,29484,93,NPL,NP,184.3,53.0,5.4,5.1,29694614
-143,Managua,Nicaragua,20918,332,NIC,NI,177.6,21.4,5.4,1.0,6823613
-144,Niamey,Niger,15831,55,NER,NE,97.4,62.0,3.1,N/A,26159867
-145,Abuja,Nigeria,77438,33,NGA,NG,136.7,65.0,2.3,0.3,227882945
-146,Oslo,Norvege,3027,54,NOR,NO,83.1,30.6,4.8,28.7,5519167
-147,Noumea,Nouvelle-Caledonie (France),557,186,NCL,NC,142.8,12.1,1.6,N/A,289870
-148,Wellington,Nouvelle-Zelande,10860,199,NZL,NZ,93.8,40.4,7.7,3.0,5172836
-149,Mascate,Oman,1960,46,OMN,OM,N/A,5.6,4.5,30.3,5049269
-150,Kampala,Ouganda,79186,150,UGA,UG,341.6,45.8,4.9,1.8,48656601
-151,Tachkent,Ouzbekistan,29000,85,UZB,UZ,80.0,10.0,N/A,N/A,35652307
-152,Islamabad,Pakistan,108643,45,PAK,PK,163.1,73.4,1.5,1.1,247504495
-153,Melekeok,Palaos,66,367,PLW,PW,132.8,4.1,4.5,6.5,17727
-154,Jérusalem et Ramallah,Palestine,,N/A,PSE,PS,N/A,N/A,N/A,N/A,5409202
-155,Panama,Panama,24860,533,PAN,PA,169.2,35.1,4.3,7.0,4458759
-156,Port Moresby,Papouasie-Nouvelle-Guinee,5373,57,PNG,PG,116.5,42.9,4.4,0.4,10389635
-157,Asuncion,Paraguay,19674,259,PRY,PY,158.9,60.8,5.6,24.4,6844146
-158,Amsterdam et La Haye,Pays-Bas,11537,64,NLD,NL,78.0,29.2,4.7,25.2,18092524
-159,Lima,Perou,103478,299,PER,PE,247.8,36.6,5.3,5.6,33845617
-160,Manille,Philippines,171247,149,PHL,PH,362.0,65.2,9.8,0.2,114891199
-161,Varsovie,Pologne,69561,191,POL,PL,82.5,11.3,5.5,4.3,38762844
-162,Papeete,Polynesie francaise (France),575,575,PYF,PF,102.7,19.0,3.7,N/A,281118
-163,San Juan,Porto Rico (Etats-Unis),5798,177,PRI,PR,55.9,13.1,3.7,1.2,3242023
-164,Lisbonne,Portugal,13152,121,PRT,PT,103.4,24.3,7.1,18.1,10430738
-165,Doha,Qatar,2055,69,QAT,QA,N/A,24.7,2.9,84.8,2979082
-166,Bangui,Republique centrafricaine,2678,52,CAF,CF,190.5,65.3,3.9,N/A,5152421
-167,Nicosie,Republique de Chypre,1123,114,CYP,CY,123.3,26.0,7.3,57.6,1344976
-168,Kinshasa,Republique democratique du Congo,44536,46,COD,CD,322.8,70.0,2.3,N/A,105789731
-169,Saint-Domingue,Republique dominicaine,24801,219,DOM,DO,157.6,64.6,2.7,7.1,11331265
-170,Brazzaville,Republique du Congo,1388,27,COG,CG,616.9,60.0,3.7,N/A,6182885
-171,Prague,Republique tcheque,19553,179,CZE,CZ,98.6,8.8,8.7,8.7,10809716
-172,Saint-Denis,Reunion (France),1576,170,REU,RE,131.9,21.5,3.9,5.1,874883
-173,Bucarest,Roumanie,24628,129,ROU,RO,117.3,9.2,4.6,1.1,19118479
-174,Moscou,Russie,433006,300,RUS,RU,67.0,25.5,8.9,7.1,145440500
-175,Kigali,Rwanda,87621,620,RWA,RW,140.7,14.0,6.6,0.3,13954471
-176,"Laâyoune, Tifariti et Tindouf",République arabe sahraouie démocratique,N/A,N/A,ESH,EH,N/A,N/A,N/A,N/A,579729
-177,Basseterre,Saint-Kitts-et-Nevis,160,296,KNA,KN,144.0,30.5,3.6,8.0,46758
-178,Saint-Marin,Saint-Marin,15,44,SMR,SM,125.0,100.0,20.0,66.7,33733
-179,Marigot,Saint-Martin (Pays-Bas),87,196,SXM,SX,96.5,33.7,8.0,20.2,42749
-180,Kingstown,Saint-Vincent-et-les-Grenadines,404,361,VCT,VC,79.8,16.1,2.0,1.0,101323
-181,Castries,Sainte-Lucie,579,310,LCA,LC,102.8,64.4,2.7,1.7,11085
-182,San Salvador,Salvador,109519,1659,SLV,SV,162.8,23.1,7.4,1.3,6309624
-183,Apia,Samoa,358,179,WSM,WS,121.2,23.2,5.3,0.5,216663
-184,Pago Pago,Samoa americaines (Etats-Unis),301,538,ASM,AS,166.2,70.1,9.6,62.2,47521
-185,S?o Tomé,Sao Tome-et-Principe,300,129,STP,ST,333.3,20,4.0,0.8,230871
-186,Dakar,Senegal,14147,76,SEN,SN,329.5,48.0,2.6,9.6,18077573
-187,Belgrade,Serbie,11701,177,SRB,RS,97.9,21.5,4.1,6.3,6773201
-188,Victoria,Seychelles,482,392,SYC,SC,53.8,24.5,6.6,1.3,127951
-189,Freetown,Sierra Leone,4453,52,SLE,SL,178.5,51.1,3.5,0.4,8460512
-190,Singapour,Singapour,10792,178,SGP,SG,79.2,12.5,9.6,9.3,5789090
-191,Bratislava,Slovaquie,8063,149,SVK,SK,70.4,14.1,7.4,5.2,5518055
-192,Ljubljana,Slovenie,1470,69,SVN,SI,109.2,36.8,5.5,52.5,2118396
-193,Mogadiscio,Somalie,2799,16,SOM,SO,N/A,N/A,N/A,N/A,18358615
-194,Khartoum,Soudan,21000,52,SDN,SD,255.3,20.4,1.7,1.0,50042791
-195,Djouba,Soudan du Sud,8400,58,SSD,SS,N/A,28.9,10.9,N/A,11483374
-196,Colombo et Sri Jayawardenapura Kotte,Sri Lanka,39193,180,LKA,LK,215.6,72.4,4.7,1.4,22971617
-197,Stockholm,Suede,9748,92,SWE,SE,104.9,28.3,6.8,16.7,10551494
-198,Berne,Suisse,6994,77,CHE,CH,94.5,48.8,6.3,72.5,8870561
-199,Paramaribo,Suriname,808,134,SUR,SR,102.0,32.8,3.1,10.3,628886
-200,Damas,Syrie,10599,60,SYR,SY,65.6,50.5,7.4,7.3,23594623
-201,Douchanbé,Tadjikistan,14911,145,TJK,TJ,61.5,9.1,3.1,1.6,10389799
-202,Taipei,Taiwan,63157,270,TWN,TW,104.3,8.5,10.5,0.7,23317145
-203,Dar es Salam et Dodoma,Tanzanie,26802,41,TZA,TZ,109.0,31.4,2.7,5.9,66617606
-204,Bangkok,Thailande,277475,395,THA,TH,111.7,22.5,12.3,3.4,71702435
-205,Dili,Timor oriental,763,55,TLS,TL,173.4,23.2,4.1,3.8,1384286
-206,Lomé,Togo,N/A,N/A,TGO,TG,N/A,N/A,N/A,N/A,9304337
-207,Nuku?alofa,Tonga,557,516,TON,TO,81.5,33.0,3.8,0.0,104597
-208,Port-d'Espagne,Trinite-et-Tobago,3802,276,TTO,TT,81.8,59.7,2.9,3.7,1502932
-209,Tunis,Tunisie,33000,267,TUN,TN,194.1,54.9,3.1,2.5,12200431
-210,Achgabat,TurkmÃ©nistan,35000,576,TKM,TM,85.0,14.0,6.5,0.7,7364438
-211,Ankara,Turquie,402014,468,TUR,TR,132.9,15.9,4.8,4.2,87270501
-212,Funafuti,Tuvalu,11,110,TUV,TV,N/A,0.0,0.0,0.0,9816
-213,Kiev,Ukraine,44024,116,UKR,UA,53.9,36.5,5.6,1.9,37732836
-214,Montevideo,Uruguay,15767,449,URY,UY,130.1,12.7,7.9,2.3,3388081
-215,Port-Vila,Vanuatu,230,68,VUT,VU,106.7,16.1,0.0,2.5,320409
-216,Caracas,Venezuela,67200,199,VEN,VE,145.9,55.0,8.9,2.0,28300854
-217,Hanoï,Vietnam,133986,135,VNM,VN,N/A,11.5,12.1,0.4,100352192
-218,Sanaa et Aden ,Yemen,4268,14,YEM,YE,N/A,59.0,1.3,3.2,39390799
-219,Lusaka,Zambie,28225,137,ZMB,ZM,265.0,20.1,3.3,2.1,20723965
-220,Harare,Zimbabwe,24089,150,ZWE,ZW,130.1,18.1,3.3,2.5,16340822
+id,capitale,pays,pop_carcerale,pop_carcerale_100000hab,iso3,iso2,tx_occup,part_detenus_attente_jugement,part_femmes_detenues,part_detenus_etrangers,pop_nat_2023,idh,nb_etablissements,ï¿½,age_minimal,part_mineurs_detenus,stock_mineur_detenus,pdm_active
+1,Kaboul,Afghanistan,23000,54,AFG,AF,179.9,52.2,4.3,0.7,41454761,"0,462",251,Oui,N/A,4,N/A,Oui
+2,"Bloemfontein, Le Cap et Pretoria",Afrique du Sud,166008,260,ZAF,ZA,148.5,37.3,3.2,14.9,63212384,"0,741",246,Oui,14,"0,1",97,Non (1997)
+3,Tirana,Albanie,4578,196,ALB,AL,93.6,58.0,1.4,2.4,2811655,"0,796",23,Oui,14,"0,4",19,Non (2007)
+4,Alger,Algerie,94749,217,DZA,DZ,119.0,19.0,1.5,3.8,46164219,"0,745",162,Oui,N/A,"0,8",N/A,Oui
+5,Berlin,Allemagne,59413,71,DEU,DE,82.2,26.3,5.6,48.8,84548231,"0,959",179,Oui,14,"1,4",831,Non (1949  RFA et 1987  RDA)
+6,Andorre la Vieille,Andorre,61,71,AND,AD,39.6,31.1,9.8,80.3,80856,"0,868",1,Oui,12,0,0,Non (1990)
+8,Luanda,Angola,24068,65,AGO,AO,106.7,48.5,2.5,3.1,36749906,"0,591",40,Oui,N/A,N/A,N/A,Non (1992)
+9,Saint John's,Antigua et Barbuda,400,400,ATG,AG,266.7,43.3,5.5,30.6,93316,"0,826",1,Oui,N/A,"0,4",N/A,Oui
+10,Riyad,Arabie Saoudite,48660,140,SAU,SA,N/A,48.3,1.9,51.4,33264292,"0,875",110,Oui,N/A,"0,9",N/A,Oui
+11,Buenos Aires,Argentine,133585,284,ARG,AR,122.9,38.8,4.3,4.6,45538401,"0,849",330,Oui,N/A,N/A,N/A,Non (2008)
+12,Erevan,Armenie,2469,83,ARM,AM,55.0,53.3,2.8,8.1,2943393,"0,776",12,Oui,16,0,1,Non (2003)
+13,Canberra,Australie,46998,170,AUS,AU,112.2,42.2,8.2,13.9,26451124,"0,946",111,Oui,N/A,N/A,N/A,Non (1985)
+14,Vienne,Autriche,9611,104,AUT,AT,115.3,19.1,7.0,52.7,9130429,"0,922",27,Oui,14,1,92,Non (1950)
+15,Bakou,Azerbaidjan,26894,264,AZE,AZ,102.8,24.3,2.9,2.0,10318207,"0,756",53,Oui,14,"0,2",56,Non (1998)
+16,Nassau,Bahamas,1357,336,BHS,BS,161.7,37.0,7.4,9.3,399440,"0,82",1,Oui,N/A,N/A,N/A,Oui
+17,Manama,Bahrein,3485,234,BHR,BH,110.2,25.7,4.7,23.7,1569666,"0,888",4,Oui,N/A,"3,4",N/A,Oui
+18,Dacca,Bangladesh,78894,46,BGD,BD,182.8,73.1,2.5,0.6,171466990,"0,67",68,Oui,N/A,"0,7",N/A,Oui
+19,Bridgetown,Barbade,692,240,BRB,BB,61.5,54.7,3.0,9.1,282336,"0,809",1,Oui,N/A,"5,9",N/A,Oui
+20,Bruxelles,Belgique,13483,113,BEL,BE,121.5,32.6,4.4,41.4,11712893,"0,951",39,Non,N/A,0,0,Non (1996)
+21,Belmopan,Belize,1308,302,BLZ,BZ,65.4,36.4,1.8,5.9,411106,"0,7",1,Oui,N/A,"1,3",N/A,Oui
+22,Cotonou et Porto-Novo,Benin,19563,144,BEN,BJ,279.5,55.0,3.1,8.8,14111034,"0,504",11,Oui,N/A,"1,7",N/A,Non (2012)
+23,Thimphou,Bhoutan,1119,145,BTN,BT,N/A,60.7,4.3,6.8,786385,"0,681",7,Oui,N/A,"3,4",N/A,Non (2004)
+24,Minsk,Bielorussie,32556,345,BLR,BY,83.4,16.6,10.8,3.1,9115680,"0,801",67,Oui,N/A,"0,4",N/A,Oui
+25,La Paz et Sucre,Bolivie,31105,252,BOL,BO,274.1,N/A,6.6,3.5,12244159,"0,698",40,Oui,N/A,14,N/A,Non (2009)
+26,Sarajevo,Bosnie Herzegovine,2200,72,BIH,BA,82.6,21.3,3.2,3.6,3185073,"0,78",6,Oui,14,"0,9",N/A,Non (2001)
+27,Gaborone,Botswana,3971,161,BWA,BW,86.0,22.5,5.0,21.2,2480244,"0,708",23,Oui,N/A,"10,4",N/A,Oui
+28,Brasilia,Bresil,909067,416,BRA,BR,135.6,23.6,5.9,0.3,211140729,"0,76",1987,Oui,N/A,N/A,N/A,Non (1979)
+29,Bandar Seri Begawan,Brunei,636,143,BRN,BN,143.8,7.1,11.9,29.2,458949,"0,823",3,Oui,N/A,"0,4",N/A,Oui
+30,Sofia,Bulgarie,6378,99,BGR,BG,68.7,21.5,3.6,3.9,6795803,"0,816",55,Oui,14,"0,4",28,Oui
+31,Ouagadougou,Burkina Faso,8799,37,BFA,BF,162.9,29.0,1.8,4.1,23025776,"0,438",27,Oui,N/A,"2,3",N/A,Non (2018)
+32,Bujumbura et Gitega,Burundi,12524,90,BDI,BI,291.7,47.5,8.2,1.2,13689450,"0,42",13,Oui,N/A,"1,4",N/A,Non (2009)
+33,Phnom Penh,Cambodge,57000,320,KHM,KH,409.1,26.6,6.1,6.5,17423880,"0,6",29,Oui,N/A,"3,7",N/A,Non (1989)
+34,Yaounde,Cameroun,34419,118,CMR,CM,164.3,55.5,2.6,4.6,28372687,"0,587",79,Oui,N/A,"2,6",N/A,Oui
+35,Ottawa,Canada,35485,90,CAN,CA,102.2,46.6,7.0,4.5,39299105,"0,935",219,Oui,N/A,"1,5",N/A,Non (1998)
+36,Praia,Cap Vert,2700,467,CPV,CV,109.4,31.7,1.8,33.7,522331,"0,661",5,Oui,N/A,N/A,N/A,Non (1981)
+37,Santiago et Valparaiso,Chili,63045,329,CHL,CL,91.3,35.7,8.2,14.2,19658835,"0,86",113,Oui,N/A,"0,1",N/A,Non (2001)
+38,Pekin,Chine,1690000,119,CHN,CN,N/A,N/A,8.6,0.4,1422584933,"0,788",683,Oui,N/A,"0,8",N/A,Oui
+39,Bogota,Colombie,103952,199,COL,CO,128.1,19.1,5.7,1.2,52321152,"0,758",126,Oui,N/A,N/A,N/A,Non (1910)
+40,Moroni,Comores,422,46,COM,KM,161.7,43.6,1.6,7.7,850387,"0,586",3,Oui,N/A,"3,9",N/A,Oui
+41,Pyongyang,Coree du nord,N/A,N/A,PRK,KP,N/A,N/A,N/A,N/A,26418204,N/A,N/A,Oui,N/A,N/A,N/A,Oui
+42,Sejong et Seoul,Coree du Sud,59088,115,KOR,KR,118.2,35.6,8.4,N/A,51748739,"0,929",54,Oui,N/A,"0,7",N/A,Oui
+43,San Jose,Costa Rica,18090,345,CRI,CR,120.4,17.5,4.4,15.2,5105525,"0,806",32,Oui,N/A,"0,2",N/A,Non (1877)
+44,Yamoussoukro,Cote d Ivoire,27149,94,CIV,CI,297.1,36.2,2.5,30.0,31165654,"0,582",41,Oui,13,"1,1",324,Non (2000)
+45,Zagreb,Croatie,4445,115,HRV,HR,109.1,41.4,5.1,17.5,3896023,"0,851",23,Oui,14,"0,7",29,Non (1990)
+46,La Havane,Cuba,90000,794,CUB,CU,N/A,N/A,N/A,N/A,11019931,"0,764",200,Oui,N/A,N/A,N/A,Oui
+47,Copenhague,Danemark,4129,69,DNK,DK,93.9,35.5,5.3,27.0,5948136,"0,94",54,Oui,15,"0,3",11,Non (1978)
+48,Djibouti,Djibouti,750,74,DJI,DJ,171.4,35.8,3.9,22.8,1152944,"0,515",2,Oui,N/A,5,N/A,Non (1995)
+49,Roseau,Dominique,260,356,DMA,DM,73.0,48.1,1.2,9.6,66510,"0,74",1,Oui,N/A,0,N/A,Oui
+50,Le Caire,Egypte,120000,113,EGY,EG,207.3,33.3,3.7,1.0,114535772,"0,728",78,Oui,N/A,N/A,N/A,Oui
+181,San Salvador,El Salvador,109519,1659,SLV,SV,162.8,23.1,7.4,1.3,6309624,"0,674",25,Oui,N/A,N/A,N/A,Non (1983)
+51,Abou Dabi,Emirats arabes unis,9826,104,ARE,AE,158.9,38.2,11.7,87.8,10642081,"0,937",21,Oui,N/A,2,197,Oui
+52,Quito,Equateur,36980,196,ECU,EC,137.9,35.8,7.2,9.8,17980083,"0,765",52,Oui,N/A,"2,1",N/A,Non (1906)
+53,Asmara,Erythree,N/A,N/A,ERI,ER,N/A,N/A,N/A,N/A,3470390,"0,493",N/A,Oui,N/A,N/A,N/A,Oui
+54,Madrid,Espagne,59226,121,ESP,ES,73.6,17.7,7.0,32.7,47911579,"0,918",82,Non,N/A,0,0,Non (1995)
+55,Tallinn,Estonie,1618,118,EST,EE,N/A,24.0,4.4,10.5,1367196,"0,892",3,N/A,14,"0,1",3,Non (1998)
+56,Mbabane,Eswatini,4500,369,SWZ,SZ,64.9,24.5,2.9,6.0,1230506,"0,61",12,Oui,N/A,"0,7",N/A,Oui
+57,Washington,Etats Unis,1833700,542,USA,US,86.1,25.5,"8,8",6.6,343477335,"0,927",4455,Oui,N/A,"0,2",N/A,Oui
+58,Addis Abeba,Ethiopie,110000,99,ETH,ET,171.1,14.9,4.2,N/A,128691692,"0,485",126,Oui,N/A,N/A,N/A,Oui
+59,Suva,Fidji,2276,248,FJI,FJ,103.5,20.6,3.1,1.7,924145,"0,729",15,Oui,N/A,"0,7",N/A,Non (2015)
+60,Helsinki,Finlande,3041,54,FIN,FI,102.8,25.7,8.0,20.2,5601185,"0,938",26,Oui,15,"0,4",11,Non (1972)
+61,Paris,France,86229,126,FRA,FR,135.6,31.5,3.5,24.6,66438822,"0,92",186,Oui,16,1,829,Non (1981)
+62,Libreville,Gabon,5501,226,GAB,GA,N/A,70.0,3.5,13.8,2484789,"0,693",9,Oui,N/A,"2,9",N/A,Non (2010)
+63,Banjul,Gambie,543,22,GMB,GM,172.5,55.6,2.6,66.7,2697845,"0,495",3,Oui,N/A,9,N/A,Oui
+64,Tbilissi,Georgie,11055,285,GEO,GE,89.6,23.2,4.8,13.8,3807492,"0,812",14,Oui,15,"0,7",72,Non (1997)
+65,Accra,Ghana,14133,41,GHA,GH,137.7,11.4,1.6,7.1,33787914,"0,602",46,Oui,N/A,"1,4",N/A,Non (2023)
+66,Athenes,Grece,10203,98,GRC,GR,94.7,27.6,4.9,54.1,10242908,"0,888",34,Oui,15,"0,4",37,Non (2004)
+67,Saint Georges,Grenade,370,324,GRD,GD,205.6,20.4,1.6,4.8,117081,"0,793",1,Oui,N/A,"0,9",N/A,Oui 
+68,Nuuk,Groenland,167,294,GRL,GL,109.2,22.8,13.8,0.9,55922,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+69,Basse Terre,Guadeloupe,985,247,GLP,GP,157.1,27.0,2.6,N/A,376517,N/A,2,"0,915",16,6,14,Non (1981)
+70,Hagatna,Guam,928,530,GUM,GU,147.6,52.8,3.9,0.0,166506,N/A,N/A,Oui,N/A,N/A,N/A,Oui
+71,Guatemala,Guatemala,23361,123,GTM,GT,299.4,47.2,12.1,2.3,18124838,"0,629",21,Oui,N/A,"2,1",N/A,Non (2017)
+72,Saint Pierre Port,Guernesey ,82,124,GGY,GG,65.7,26.8,7.3,9.7,64017,N/A,1,N/A,N/A,N/A,N/A,Non (1998)
+73,Conakry,Guinee,5549,38,GIN,GN,171.4,55.5,3.0,2.7,14405468,"0,471",31,Oui,N/A,5,N/A,Non (2017)
+75,Ciudad de la Paz,Guinee Bissau,596,31,GNB,GW,102.2,67.9,2.6,7.1,2153339,"0,483",3,Oui,N/A,"2,6",N/A,Non (1993)
+74,Bissau,Guinee equatoriale,500,63,GNQ,GQ,N/A,N/A,5.0,N/A,1847549,"0,65",15,Oui,N/A,N/A,N/A,Non (2022)
+76,Georgetown,Guyana,2300,288,GUY,GY,151.0,27.0,2.6,3.2,826353,"0,742",7,Oui,N/A,"0,6",N/A,Oui
+77,Cayenne,Guyane ,1087,321,GUF,GF,176.5,27.9,5.9,63.0,303402,N/A,1,Oui,16,"7,7",23,Non (1981)
+78,Port au Prince,Haiti,7163,59,HTI,HT,302.0,82.0,3.5,N/A,11637398,"0,552",17,Oui,N/A,"2,3",N/A,Non (1987)
+79,Comayagela et Tegucigalpa,Honduras,19481,188,HND,HN,150.0,49.2,6.1,0.6,10644851,"0,624",26,Oui,N/A,3,N/A,Non (1956)
+80,Hong Kong,Hong Kong,10520,139,HKG,HK,74.0,40.0,21.5,31.0,7442734,N/A,N/A,Oui,N/A,N/A,N/A,Non
+81,Budapest,Hongrie,18729,196,HUN,HU,104.1,22.8,8.4,5.0,9686463,"0,854",30,Oui,14,"0,2",37,Non (1990)
+82,Douglas,Ile de Man,160,186,IMN,IM,95.8,20.2,7.6,1.1,84165,N/A,N/A,N/A,N/A,N/A,N/A,Non (1998)
+84,George Town,Iles Caymans,249,280,CYM,KY,122.8,29.6,9.5,N/A,73038,N/A,N/A,Oui,N/A,N/A,N/A,Oui (1991)
+85,Avarua,Iles Cook,28,156,COK,CK,50.0,14.6,8.3,0.0,14222,N/A,N/A,Oui,N/A,N/A,N/A,Non (2007)
+86,Torshavn,Iles Feroye,13,24,FRO,FO,92.9,38.5,0.0,N/A,54714,"0,94",1,Oui,N/A,N/A,N/A,Non (1978)
+87,Saipan,Iles Mariannes du Nord,170,304,MNP,MP,47.8,N/A,5.8,N/A,45143,N/A,N/A,Oui,N/A,N/A,N/A,Non
+88,Majuro,Iles Marshall,35,66,MHL,MH,97.2,11.4,0.0,N/A,38827,"0,731",2,Oui,N/A,N/A,N/A,Non (1986)
+89,Honiara,Iles Salomon,556,74,SLB,SB,77.7,32.7,2.3,1.0,800005,"0,562",6,Oui,N/A,"5,9",N/A,Non (1978)
+90,Charlotte Amelie,Iles Vierges americaines,261,251,VIR,VI,74.1,36.4,5.2,15.7,85701,N/A,N/A,Oui,N/A,N/A,N/A,Oui (1991)
+91,Road Town,Iles Vierges britanniques,132,426,VGB,VG,155.3,37.0,4.5,N/A,38985,N/A,N/A,Oui,N/A,N/A,N/A,Oui (1991)
+92,New Delhi,Inde,530333,37,IND,IN,120.8,73.5,4.1,1.3,1438069596,"0,644",1330,Oui,N/A,0,N/A,Oui
+93,Jakarta et Nusantara,Indonesie,276136,96,IDN,ID,184.5,21.7,5.0,0.4,281190067,"0,713",526,Oui,N/A,"0,7",N/A,Oui
+94,Bagdad,Irak,73715,179,IRQ,IQ,139.2,29.8,2.6,N/A,45074049,"0,673",24,Oui,N/A,"3,6",N/A,Oui
+95,Teheran,Iran,189000,228,IRN,IR,153.0,25.1,3.1,2.9,90608707,"0,78",253,Oui,N/A,"0,5",N/A,Oui
+96,Dublin,Irlande,5627,101,IRL,IE,119.3,19.4,5.5,15.8,5196630,"0,955",12,Oui,12,"0,8",34,Non (1990)
+97,Reykjavik,Islande,140,35,ISL,IS,87.5,32.1,8.6,40.0,387558,"0,949",5,Oui,15,0,N/A,Non (1928)
+98,Tel Aviv,Israel,19756,217,ISR,IL,136.2,25.2,1.0,38.9,9256314,"0,915",30,Oui,N/A,"2,3",N/A,Non (1954)
+99,Rome,Italie,63499,108,ITA,IT,123.8,24.1,4.3,31.7,59499453,"0,915",206,Oui,14,"0,6",349,Non (1994)
+100,Kingston,Jamaique,3720,124,JAM,JM,87.0,22.5,4.0,1.0,2839786,"0,706",11,Oui,N/A,"5,4",N/A,Oui
+101,Tokyo,Japon,40544,33,JPN,JP,47.3,15.2,9.1,6.9,124370947,"0,92",184,Oui,N/A,"0,04",N/A,Oui
+102,Saint Helier,Jersey,176,169,JEY,JE,88.0,28.1,6.5,25.2,103674,N/A,N/A,Oui,N/A,N/A,N/A,Non (1998)
+103,Amman,Jordanie,20000,194,JOR,JO,150.6,36.9,2.2,9.9,11439213,"0,736",17,Oui,N/A,N/A,N/A,Oui
+104,Astana,Kazakhstan,32171,163,KAZ,KZ,62.4,20.3,8.2,3.7,20330104,"0,802",80,Oui,N/A,"0,2",N/A,Non (2022)
+105,Nairobi,Kenya,59013,100,KEN,KE,176.5,42.9,4.7,1.5,55339003,"0,601",134,Oui,N/A,"0,6",N/A,Oui
+106,Bichkek,Kirghizistan,7728,112,KGZ,KG,61.7,20.5,2.9,5.1,7073516,"0,701",28,Oui,N/A,"0,2",N/A,Non (2007)
+107,Tarawa,Kiribati,129,113,KIR,KI,112.8,5.4,0.8,0.0,132530,"0,628",4,Oui,N/A,0,N/A,Non (1979)
+108,Pristina,Kosovo,1830,99,XXK,XK,97.1,35.6,2.7,5.7,1700031,N/A,N/A,N/A,N/A,N/A,N/A,Non (2008)
+109,Koweit,Koweit,4500,101,KWT,KW,126.2,14.6,5.8,13.5,4838782,"0,847",3,Oui,N/A,N/A,N/A,Oui
+171,Saint-Denis,la Reunion,1576,170,REU,RE,131.9,21.5,3.9,5.1,874883,N/A,3,Oui,16,"7,2",15,Non (1981)
+110,Vientiane,Laos,11885,166,LAO,LA,N/A,67.0,13.7,N/A,7664993,"0,62",19,Oui,N/A,N/A,N/A,Oui
+111,Maseru,Lesotho,2600,117,LSO,LS,70.6,19.5,2.9,0.9,2311472,"0,521",14,Oui,N/A,"2,2",N/A,Oui
+112,Riga,Lettonie,3271,175,LVA,LV,67.8,23.7,7.6,3.5,1882396,"0,866",9,Oui,14,"0,7",23,Non (2012)
+113,Beyrouth,Liban,9254,141,LBN,LB,194.4,87.1,2.9,36.0,5773493,"0,725",25,Oui,12,"0,2",N/A,Oui
+114,Monrovia,Liberia,3398,60,LBR,LR,251.7,66.2,2.8,6.6,5493031,"0,487",16,Oui,N/A,"1,9",N/A,Oui
+115,Tripoli,Libye,19103,269,LBY,LY,141.6,29.0,1.1,12.8,7305659,"0,746",26,Oui,N/A,N/A,N/A,Oui
+116,Vaduz,Liechtenstein,8,20,LIE,LI,40.0,75.0,0.0,83.3,39598,"0,919",1,Oui,14,0,0,Non (1989)
+117,Vilnius,Lituanie,4551,156,LTU,LT,68.4,11.8,4.5,3.4,2854099,"0,882",8,Oui,14,"0,2",9,Non (1998)
+118,Luxembourg,Luxembourg,613,91,LUX,LU,61.6,47.3,4.2,75.4,665098,"0,916",3,Oui,16,"1,1",8,Non (1979)
+119,Macao,Macao,1267,185,MAC,MO,82.8,22.4,17.4,66.0,713912,N/A,N/A,Oui,N/A,N/A,N/A,Non
+120,Skopje,Macedoine du nord,2605,142,MKD,MK,101.2,12.1,3.8,7.1,1831802,"0,774",N/A,Oui,16,"0,4",10,Non (1991)
+121,Antananarivo et Tananarive,Madagascar,29281,95,MDG,MG,277.5,39.6,5.5,0.2,31195932,"0,487",82,Oui,N/A,"3,1",N/A,Non (2015)
+122,Putrajaya et Kuala Lumpur,Malaisie,16536,78,MYS,MY,110.3,33.6,5.4,18.3,35126298,"0,807",42,Oui,N/A,"2,2",N/A,Oui
+123,Lilongwe,Malawi,84143,244,MWI,MW,236.2,17.6,1.1,0.2,21104482,"0,508",30,Oui,N/A,"7,7",N/A,Oui
+124,Male,Maldives,1195,225,MDV,MV,125.0,24.4,4.0,8.8,525994,"0,762",11,Oui,N/A,"1,3",N/A,Oui
+125,Bamako,Mali,10773,48,MLI,ML,223.3,71.7,3.4,N/A,23769127,"0,41",60,Oui,N/A,"1,3",N/A,Oui
+126,La Valette,Malte,671,119,MLT,MT,82.8,41.6,6.3,51.9,532956,"0,895",1,Oui,14,"0,5",3,Non (2000)
+127,Rabat,Maroc,102653,267,MAR,MA,158.8,37.6,2.5,1.5,37712505,"0,71",75,Oui,12,"1,2",1232,Oui
+128,Fort de France,Martinique,1108,298,MTQ,MQ,150.1,37.0,3.9,17.0,346002,N/A,1,Oui,16,4,7,Non (1981)
+83,Port Louis,Maurice,2754,215,MUS,MU,116.9,43.2,7.4,6.4,1233427,"0,796",11,Oui,N/A,"2,9",N/A,Non (1995)
+129,Nouakchott,Mauritanie,2826,57,MRT,MR,101.8,50.0,2.0,13.4,5022441,"0,54",23,Oui,N/A,"3,1",N/A,Oui
+130,Mamoudzou,Mayotte,629,204,MYT,YT,226.3,56.5,0.8,N/A,316015,N/A,1,Oui,16,"18,3",18,Non (1981)
+131,Mexico,Mexique,255190,188,MEX,MX,112.5,41.1,6.2,1.4,129739759,"0,781",278,Oui,N/A,"4,3",N/A,Non (2005)
+132,Palikir,Micronesie,132,127,FSM,FM,88.0,16.7,0.0,N/A,112630,"0,634",4,Oui,N/A,"0,9",N/A,Non (1986)
+133,Chisinau,Moldavie,5892,255,MDA,MD,89.0,20.2,5.3,1.9,3067070,"0,711",17,Oui,14,"0,6",35,Non (1995)
+134,Monaco,Monaco,31,81,MCO,MC,31.0,41.9,3.2,93.5,38956,N/A,2,Oui,13,0,0,Non (1962)
+135,Oulan Bator,Mongolie,5700,166,MNG,MN,124.4,24.3,4.5,0.4,3431932,"0,741",50,Oui,N/A,"1,5",N/A,Non (2012)
+136,Cetin et Podgoricaje,Montenegro,1047,168,MNE,ME,75.2,47.4,3.6,16.1,633552,"0,829",N/A,Oui,16,"0,8",8,Non (2002)
+137,Maputo,Mozambique,22000,63,MOZ,MZ,247.9,28.1,3.9,3.3,33635160,"0,461",157,Oui,N/A,"8,6",N/A,Non (1990)
+138,Naypyidaw,Myanmar,100324,183,MMR,MM,111.5,15.1,12.3,0.7,54133798,"0,608",96,Oui,N/A,"1,6",N/A,Oui
+139,Windhoek,Namibie,8900,318,NAM,NA,75.4,54.0,2.9,8.9,2963095,"0,61",13,Oui,N/A,"0,1",N/A,Non (1990)
+140,Yaren,Nauru,38,345,NRU,NR,14.0,34.2,5.3,6.7,11875,"0,696",1,Oui,N/A,0,N/A,Non (2016)
+141,Katmandou,Nepal,29484,93,NPL,NP,184.3,53.0,5.4,5.1,29694614,"0,601",74,Oui,N/A,"3,3",N/A,Non (1997)
+142,Managua,Nicaragua,20918,332,NIC,NI,177.6,21.4,5.4,1.0,6823613,"0,669",9,Oui,N/A,"0,6",N/A,Non (1979)
+143,Niamey,Niger,15831,55,NER,NE,97.4,62.0,3.1,N/A,26159867,"0,394",41,Oui,N/A,5,633,Oui
+144,Abuja,Nigeria,77438,33,NGA,NG,136.7,65.0,2.3,0.3,227882945,"0,548",240,Oui,N/A,"1,7",N/A,Oui
+145,Oslo,Norvege,3027,54,NOR,NO,83.1,30.6,4.8,28.7,5519167,"0,97",33,Oui,15,"0,4",N/A,Non (1979)
+146,Noumea,Nouvelle Caledonie,557,186,NCL,NC,142.8,12.1,1.6,N/A,289870,N/A,1,Oui,16,"9,2",4,Non (1981)
+147,Wellington,Nouvelle Zelande,10860,199,NZL,NZ,93.8,40.4,7.7,3.0,5172836,"0,939",18,Oui,N/A,"1,4",N/A,Non (1989)
+148,Mascate,Oman,1960,46,OMN,OM,N/A,5.6,4.5,30.3,5049269,"0,819",3,Oui,N/A,"3,8",N/A,Oui
+149,Kampala,Ouganda,79186,150,UGA,UG,341.6,45.8,4.9,1.8,48656601,"0,55",254,Oui,N/A,0,N/A,Oui
+150,Tachkent,Ouzbekistan,29000,85,UZB,UZ,80.0,10.0,N/A,N/A,35652307,"0,727",54,Oui,N/A,N/A,N/A,Non (2008)
+151,Islamabad,Pakistan,108643,45,PAK,PK,163.1,73.4,1.5,1.1,247504495,"0,54",116,Oui,N/A,"1,6",N/A,Oui
+152,Melekeok,Palaos,66,367,PLW,PW,132.8,4.1,4.5,6.5,17727,"0,797",1,Oui,N/A,"5,6",N/A,Non (1994)
+153,Jerusalem et Ramallah,Palestine,N/A,N/A,PSE,PS,N/A,N/A,N/A,N/A,5409202,N/A,N/A,Oui,N/A,N/A,N/A,Oui
+154,Panama,Panama,24860,533,PAN,PA,169.2,35.1,4.3,7.0,4458759,"0,82",23,Oui,N/A,0,0,Non (1916)
+155,Port Moresby,Papouasie Nouvelle Guinee,5373,57,PNG,PG,116.5,42.9,4.4,0.4,10389635,"0,568",18,Oui,N/A,"3,7",N/A,Non (2022)
+156,Asuncion,Paraguay,19674,259,PRY,PY,158.9,60.8,5.6,24.4,6844146,"0,731",18,Oui,N/A,"1,2",N/A,Non (1992)
+157,Amsterdam et La Haye,Pays Bas,11537,64,NLD,NL,78.0,29.2,4.7,25.2,18092524,"0,955",49,Oui,12,"1,6",153,Non (1952)
+158,Lima,Perou,103478,299,PER,PE,247.8,36.6,5.3,5.6,33845617,"0,762",68,Oui,N/A,0,N/A,Non (1979)
+159,Manille,Philippines,171247,149,PHL,PH,362.0,65.2,9.8,0.2,114891199,"0,71",440,Oui,N/A,1,N/A,Non (2006)
+160,Varsovie,Pologne,69561,191,POL,PL,82.5,11.3,5.5,4.3,38762844,"0,906",171,Oui,15,"1,4",1031,Non (1997)
+161,Papeete,Polynesie francaise,575,575,PYF,PF,102.7,19.0,3.7,N/A,281118,"0,92",3,Oui,16,0,0,Non (1981)
+162,San Juan,Porto Rico,5798,177,PRI,PR,55.9,13.1,3.7,1.2,3242023,N/A,N/A,Oui,N/A,N/A,N/A,Non (1929)
+163,Lisbonne,Portugal,13152,121,PRT,PT,103.4,24.3,7.1,18.1,10430738,"0,89",49,Oui,16,"0,2",26,Non (1976)
+164,Doha,Qatar,2055,69,QAT,QA,N/A,24.7,2.9,84.8,2979082,"0,875",1,Oui,N/A,0,N/A,Oui
+175,"Laayoune, Tifariti et Tindouf",Republique arabe sahraouie democratique,N/A,N/A,ESH,EH,N/A,N/A,N/A,N/A,579729,N/A,N/A,N/A,N/A,N/A,N/A,Oui
+165,Bangui,Republique centrafricaine,2678,52,CAF,CF,190.5,65.3,3.9,N/A,5152421,"0,387",15,Oui,N/A,"1,6",N/A,Non (2022)
+166,Nicosie,Republique de Chypre,1123,114,CYP,CY,123.3,26.0,7.3,57.6,1344976,"0,887",1,Oui,14,"4,3",44,Non (2002)
+167,Kinshasa,Republique democratique du Congo,44536,46,COD,CD,322.8,70.0,2.3,N/A,105789731,"0,481",142,Oui,N/A,N/A,N/A,Oui
+168,Saint Domingue,Republique dominicaine,24801,219,DOM,DO,157.6,64.6,2.7,7.1,11331265,"0,766",41,Oui,N/A,"1,2",N/A,Non (1966)
+169,Brazzaville,Republique du Congo,1388,27,COG,CG,616.9,60.0,3.7,N/A,6182885,"0,571",17,Oui,13,"4,2",67,Non (2015)
+170,Prague,Republique tcheque,19553,179,CZE,CZ,98.6,8.8,8.7,8.7,10809716,"0,9",35,Oui,15,"0,5",99,Non (1990)
+172,Bucarest,Roumanie,24628,129,ROU,RO,117.3,9.2,4.6,1.1,19118479,"0,845",45,Oui,14,"0,9",217,Non (1989)
+7,Londres,Royaume Uni,96907,138,GBR,GB,107.3,20.2,3.9,12.7,68682962,"0,946",121,Oui,15,"0,5",N/A,Non (1998)
+173,Moscou,Russie,433006,300,RUS,RU,67.0,25.5,8.9,7.1,145440500,"0,821",872,Oui,N/A,"0,2",N/A,Oui
+174,Kigali,Rwanda,87621,620,RWA,RW,140.7,14.0,6.6,0.3,13954471,"0,548",14,Oui,N/A,"0,9",N/A,Non (2007)
+176,Basseterre,Saint Kitts et Nevis,160,296,KNA,KN,144.0,30.5,3.6,8.0,46758,"0,777",N/A,N/A,N/A,N/A,N/A,Oui
+179,Kingstown,Saint Vincent et les Grenadines,404,361,VCT,VC,79.8,16.1,2.0,1.0,101323,"0,751",N/A,N/A,N/A,N/A,N/A,Oui
+177,Saint-Marin,Saint-Marin,15,44,SMR,SM,125.0,100.0,20.0,66.7,33733,"0,853",1,Oui,0,0,0,Non (1865)
+178,Marigot,Saint-Martin,87,196,SXM,SX,96.5,33.7,8.0,20.2,42749,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+180,Castries,Sainte Lucie,579,310,LCA,LC,102.8,64.4,2.7,1.7,11085,"0,715",N/A,N/A,N/A,N/A,N/A,Oui
+182,Apia,Samoa,358,179,WSM,WS,121.2,23.2,5.3,0.5,216663,"0,702",3,Oui,N/A,"0,3",N/A,Non (2004)
+183,Pago Pago,Samoa americaines ,301,538,ASM,AS,166.2,70.1,9.6,62.2,47521,N/A,N/A,N/A,N/A,N/A,N/A,Oui
+184,Sao Tome,Sao Tome et Principe,300,129,STP,ST,333.3,20,4.0,0.8,230871,"0,613",1,Oui,N/A,0,N/A,Non (1990)
+185,Dakar,Senegal,14147,76,SEN,SN,329.5,48.0,2.6,9.6,18077573,"0,517",37,Oui,N/A,1,N/A,Non (2004)
+186,Belgrade,Serbie,11701,177,SRB,RS,97.9,21.5,4.1,6.3,6773201,"0,806",30,Oui,14,"2,1",N/A,Non (2001)
+187,Victoria,Seychelles,482,392,SYC,SC,53.8,24.5,6.6,1.3,127951,"0,802",3,Oui,N/A,"0,2",N/A,Non (1993)
+188,Freetown,Sierra Leone,4453,52,SLE,SL,178.5,51.1,3.5,0.4,8460512,"0,458",N/A,Oui,N/A,N/A,N/A,Non (2021)
+189,Singapour,Singapour,10792,178,SGP,SG,79.2,12.5,9.6,9.3,5789090,"0,949",13,Oui,N/A,"1,8",N/A,Oui
+190,Bratislava,Slovaquie,8063,149,SVK,SK,70.4,14.1,7.4,5.2,5518055,"0,86",18,Oui,14,"0,4",N/A,Non (1999)
+191,Ljubljana,Slovenie,1470,69,SVN,SI,109.2,36.8,5.5,52.5,2118396,"0,917",7,Oui,16,"0,5",N/A,Non (1989)
+192,Mogadiscio,Somalie,2799,16,SOM,SO,N/A,N/A,N/A,N/A,18358615,"0,38",N/A,Oui,N/A,N/A,N/A,Oui
+193,Khartoum,Soudan,21000,52,SDN,SD,255.3,20.4,1.7,1.0,50042791,"0,516",125,Oui,N/A,2,N/A,Oui
+194,Djouba,Soudan du sud,8400,58,SSD,SS,N/A,28.9,10.9,N/A,11483374,"0,381",80,Oui,N/A,N/A,N/A,Oui
+195,Colombo et Sri Jayawardenapura Kotte,Sri Lanka,39193,180,LKA,LK,215.6,72.4,4.7,1.4,22971617,"0,78",60,Oui,N/A,"0,1",N/A,Oui
+196,Stockholm,Suede,9748,92,SWE,SE,104.9,28.3,6.8,16.7,10551494,"0,945",79,Oui,15,"0,5",44,Non (1972)
+197,Berne,Suisse,6994,77,CHE,CH,94.5,48.8,6.3,72.5,8870561,"0,967",88,Oui,15,"0,7",48,Non (1999)
+198,Paramaribo,Suriname,808,134,SUR,SR,102.0,32.8,3.1,10.3,628886,"0,69",21,Oui,N/A,"5,7",N/A,Non (2021)
+199,Damas,Syrie,10599,60,SYR,SY,65.6,50.5,7.4,7.3,23594623,"0,557",35,Oui,N/A,N/A,N/A,Oui
+200,Douchanbe,Tadjikistan,14911,145,TJK,TJ,61.5,9.1,3.1,1.6,10389799,"0,685",N/A,Oui,N/A,N/A,N/A,Oui
+201,Taipei,Taiwan,63157,270,TWN,TW,104.3,8.5,10.5,0.7,23317145,"0,926",49,Oui,N/A,"1,9",N/A,Oui
+202,Dar es Salam et Dodoma,Tanzanie,26802,41,TZA,TZ,109.0,31.4,2.7,5.9,66617606,"0,532",126,Oui,N/A,"3,9",N/A,Oui
+203,N Djamena,Tchad,9589,56,TCD,TD,133.4,28.8,1.5,1.3,19319064,"0,394",41,Oui,N/A,"4,5",91,Non (2020)
+204,Bangkok,Thailande,277475,395,THA,TH,111.7,22.5,12.3,3.4,71702435,"0,803",143,Oui,N/A,"0,1",N/A,Oui
+205,Dili,Timor oriental,763,55,TLS,TL,173.4,23.2,4.1,3.8,1384286,"0,566",3,Oui,N/A,"5,5",N/A,Non (1999)
+206,Lome,Togo,N/A,N/A,TGO,TG,N/A,N/A,N/A,N/A,9304337,"0,547",13,Oui,N/A,"1,3",N/A,Non (2009)
+207,Nuku alofa,Tonga,557,516,TON,TO,81.5,33.0,3.8,0.0,104597,"0,739",4,Oui,N/A,"9,7",N/A,Oui
+208,Port d Espagne,Trinite et Tobago,3802,276,TTO,TT,81.8,59.7,2.9,3.7,1502932,"0,814",9,Oui,N/A,"1,9",N/A,Oui
+209,Tunis,Tunisie,33000,267,TUN,TN,194.1,54.9,3.1,2.5,12200431,"0,746",30,Oui,13,"1,05",273,Oui
+210,Achgabat,Turkmenistan,35000,576,TKM,TM,85.0,14.0,6.5,0.7,7364438,"0,744",27,Oui,N/A,"0,7",N/A,Non (1999)
+211,Ankara,Turquie,402014,468,TUR,TR,132.9,15.9,4.8,4.2,87270501,"0,853",395,Oui,12,"1,1",2784,Non (2004)
+212,Funafuti,Tuvalu,11,110,TUV,TV,N/A,0.0,0.0,0.0,9816,"0,653",2,Oui,N/A,0,N/A,Non (1978)
+213,Kiev,Ukraine,44024,116,UKR,UA,53.9,36.5,5.6,1.9,37732836,"0,779",N/A,Oui,16,"0,2",87,Non (2000)
+214,Montevideo,Uruguay,15767,449,URY,UY,130.1,12.7,7.9,2.3,3388081,"0,83",27,Oui,N/A,0,N/A,Non (1907)
+215,Port Vila,Vanuatu,230,68,VUT,VU,106.7,16.1,0.0,2.5,320409,"0,614",4,Oui,N/A,"0,5",N/A,Non (1980)
+216,Caracas,Venezuela,67200,199,VEN,VE,145.9,55.0,8.9,2.0,28300854,"0,699",41,Oui,N/A,0,0,Non (1863)
+217,Hanoi,Vietnam,133986,135,VNM,VN,N/A,11.5,12.1,0.4,100352192,"0,726",54,Oui,N/A,N/A,N/A,Oui
+218,Sanaa et Aden ,Yemen,4268,14,YEM,YE,N/A,59.0,1.3,3.2,39390799,"0,424",43,Oui,N/A,"1,9",N/A,Oui
+219,Lusaka,Zambie,28225,137,ZMB,ZM,265.0,20.1,3.3,2.1,20723965,"0,569",90,Oui,N/A,"7,2",N/A,Non (2022)
+220,Harare,Zimbabwe,24089,150,ZWE,ZW,130.1,18.1,3.3,2.5,16340822,"0,55",72,Oui,N/A,"0,6",N/A,Non (2024)

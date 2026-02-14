@@ -1,0 +1,14 @@
+# Vercel configuration for carto69
+
+# Documentation: https://vercel.com/docs/project-configuration
+
+[build]
+  command = "npm run build"
+  output = "dist"
+
+[dev]
+  command = "npm run dev"
+
+[routes]
+  # Proxy API requests if needed
+  # { "src": "/api-proxy/(.*)", "dest": "https://api.cyclocity.fr/$1" }
