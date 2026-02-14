@@ -31,7 +31,7 @@
           </article>
         </div>
         <div class="tiles-row tiles-row-bottom">
-          <article class="tile" @click="$emit('open', 'zonzon')">
+          <article class="tile" @click="openZonzonExternal">
             <h2><span class="tile-title big-title centered">zonzon</span></h2>
           </article>
 
@@ -58,6 +58,11 @@
 export default {
   name: 'MenuView',
   emits: ['open'],
+  methods: {
+    openZonzonExternal() {
+      window.open('https://zonzon.vercel.app/', '_blank');
+    }
+  },
   methods: {
     openMapelia() {
       const code = prompt('Code d\'accès requis :')
